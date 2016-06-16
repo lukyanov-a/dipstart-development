@@ -260,13 +260,15 @@ class Emails extends CActiveRecord {
 //echo '<br>$subject(1)='.$subject; 
 //echo '<br>$body(1)='.$body; 
 //		};
+		$body = str_replace( "\n", "<br>\n", $body);
+
 		if (strlen($this->support) < 2) $this->support = 'no-reply@'.$_SERVER['SERVER_NAME'];
 
 		$subject='=?UTF-8?B?'.base64_encode(Yii::t('site', $subject)).'?=';
 		$from = '=?UTF-8?B?'.base64_encode($this->company).'?= <'.$this->support.'>';
 		$headers =
 			"MIME-Version: 1.0\r\n".
-			"Content-Type: text/plain; charset=UTF-8\r\n".
+			"Content-Type: text/html; charset=UTF-8\r\n".
 			"From: $from\r\n";
 			
 //echo "\n".'mail to:'.$to;
