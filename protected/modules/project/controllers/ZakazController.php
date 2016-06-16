@@ -221,6 +221,7 @@ class ZakazController extends Controller {
 	}
 	 
 	public function actionCreate() {
+		if (User::model()->isAuthor()) $this->redirect('/');
         if(isset($_GET['iframe']) and $_GET['iframe']=='yes') $iframe = true; else $iframe = false;
 		$model = new Zakaz();
 
