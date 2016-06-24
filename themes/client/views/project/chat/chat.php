@@ -10,7 +10,7 @@ if(!Yii::app()->user->isGuest)
 $criteria->addCondition(
 	'(
 		moderated=1 OR 
-		sender IN (SELECT userid FROM '.Campaign::getId().'_AuthAssignment WHERE itemname IN ("Admin","Manager")) OR 
+		sender IN (SELECT userid FROM '.Company::getId().'_AuthAssignment WHERE itemname IN ("Admin","Manager")) OR 
 		sender='.Yii::app()->user->id.'
 	) 
 	AND 
