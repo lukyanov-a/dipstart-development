@@ -74,7 +74,7 @@ class EventsCommand extends CConsoleCommand {
 	//Создает событие у менеджера когда наступило время
 	public function manager() {
 		// Дата информирования менеджера
-		$projectsModel = Zakaz::model()->findAll();
+		$projectsModel = Zakaz::model()->findAll('status<>:status', array(':status'=>5));
 		foreach ($projectsModel as $project) {
 			$dateStart = strtotime(date('Y-m-d H:i',time())) - (self::INTERVAL * 60);
 			//echo 'order #'.$project->id.' '.$project->title.': '.$project->manager_informed."\n";
