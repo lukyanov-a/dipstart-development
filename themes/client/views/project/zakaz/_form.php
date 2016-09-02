@@ -42,7 +42,7 @@ Yii::app()->clientScript->registerScriptFile('/js/worktypes.js');
 	));
 	echo '<img src="/images/date_1398.png" style="margin-top: -3px;">';
 	echo '</div>';
-	$projectFields = $model->getFields('Customer');
+	$projectFields = $model->getFields(User::model()->isCorrector()?'Author':'Customer');
 	if ($projectFields) {
 		foreach($projectFields as $field) {
 			$work_types = '';
