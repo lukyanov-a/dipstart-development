@@ -180,7 +180,11 @@ return array(
     'Parent order' => 'Вышестоящий заказ',
 	'Order childrens' => 'Подзаказы',
     'Tips' => 'Советы',
-
+	'Recipients' => 'Получатели',
+	'to executors' => 'исполнителям',
+	'to customers' => 'заказчикам',
+	'Your message is sending...' => 'Ваше сообщение отправляется...',
+	'Something wrong...' => 'Что-то не так...',
     'List ZakazParts' => 'Список этапов проекта',
     'Manage Zakaz Parts' => 'Работа с этапами проекта',
     'Additionally send:' => 'Дополнительно отправить:',

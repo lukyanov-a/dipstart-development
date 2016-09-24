@@ -221,6 +221,7 @@ return array(
 	'Body' => 'Тело',
 	'Type' => 'Тип',
 	'Date' => 'Дата',
+	'Delivery' => 'Рассылка',
 	// Emails
 	'Notification' => 'Уведомление',
 	
