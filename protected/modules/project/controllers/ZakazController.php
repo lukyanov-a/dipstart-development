@@ -844,7 +844,7 @@ class ZakazController extends Controller {
 				$email->specialization	= $specials->cat_name;
 				$email->name_order		= $order->title;		
 				$email->subject_order	= $order->title;		
-				$email->sendTo( $user->email, $rec[0]->title, $rec[0]->text, $typeId);
+				$email->sendTo( $user->email, $rec[0]->title, $rec[0]->text, $typeId, true);
 			}	
         } else {
              echo json_encode(array('error'=>'Нет авторов'));
@@ -900,7 +900,7 @@ class ZakazController extends Controller {
 					//if (!in_array($order->specials, $specials)) continue;
 					
 					$email = new Emails;
-					$email->to_id = $user->id;
+					$email->to_id = $user->id; // to rm ??
 					$email->name = $user->full_name;
 					if (strlen($email->name) < 2) $email->name = $user->username;
 					$email->login= $user->username;

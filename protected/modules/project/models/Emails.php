@@ -1,8 +1,8 @@
 <?php
 /*
  * @property integer $id
- * @property integer $from
- * @property integer $to
+ * @property string $to
+ * @property string $subject
  * @property string  $body
  * @property integer $type
  * @property integer $dt
@@ -83,8 +83,8 @@ class Emails extends CActiveRecord {
     
     public function rules() {
         return array(
-            array('from,to,body,type,dt', 'required'),
-            array('id,from,to,body,type,dt', 'safe'),
+            array('to,subject,body,type,dt', 'required'),
+            array('id,to,subject,body,type,dt', 'safe'),
         );
     }
     
@@ -95,13 +95,22 @@ class Emails extends CActiveRecord {
 		return array(
 		);
 	}
+	
+	public function sending_round($limit=100) {
+		$this->getDbCriteria()->mergeWith(array(
+			'order'=>'id ASC',
+			'limit'=>$limit,
+		));
+		return $this;
+	}
         
     public function attributeLabels()
 	{
 		return array(
 			'id' => 'ID',
-			'from' => Yii::t('site','From'),
+			//'from' => Yii::t('site','From'),
 			'to' => Yii::t('site','To'),
+            'subject' => Yii::t('site','Subject'),
 			'body' => Yii::t('site','Body'),
 			'type' => Yii::t('site','Type'),
 			'dt' => Yii::t('site','Date'),
@@ -140,8 +149,8 @@ class Emails extends CActiveRecord {
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('from',$this->from);
 		$criteria->compare('to',$this->to,true);
+        $criteria->compare('subject',$this->subject,true);
 		$criteria->compare('body',$this->body,true);
 		$criteria->compare('type',$this->type,true);
 		$criteria->compare('dt',$this->dt,true);
@@ -156,35 +165,47 @@ class Emails extends CActiveRecord {
 		return parent::model($className);
 	}
 	
-    public function sendTo($to, $subject, $body, $type_id = 0)
+	public function send(){
+		$subject='=?UTF-8?B?'.base64_encode($this->subject).'?=';
+		$support = Company::getSupportEmail();
+		if (strlen($support) < 2) $support = 'no-reply@admintrix.com';
+		$from = '=?UTF-8?B?'.base64_encode(Company::getName()).'?= <'.$support.'>';
+		$headers =
+			"MIME-Version: 1.0\r\n".
+			"Content-Type: text/html; charset=UTF-8\r\n".
+			"From: $from\r\n";
+		return mail( $this->to, $subject, $this->body,$headers);
+	}
+	
+    public function sendTo($to, $subject, $body, $type_id = 0, $deffer = false)
 	{
 		$dictionary = array(
-	'%site%',
-	'%the link to the password change page%',
-	'%support%',
-	'%company%',
-	'%name%',
-	'%Name%',
-	'%login%',
-	'%password%',
-	'%the link to the personal account page%',
-	'%Order link%',
-	'%order link%',
-	'%Job title%',
-	'%order no%',
-	'%the order number%',
-	'%Job title%',
-	'%job title%',
-	'%Title%',
-	'%title%',
-	'%from the cost field%',
-	'%the amount of charged%',
-	'%the amount to be paid%',
-	'%message body%',
-	'%the link to the payment page%',
-	'%specialization%',
-	'%the name of the stage%',
-	'%new order%',
+            '%site%',
+            '%the link to the password change page%',
+            '%support%',
+            '%company%',
+            '%name%',
+            '%Name%',
+            '%login%',
+            '%password%',
+            '%the link to the personal account page%',
+            '%Order link%',
+            '%order link%',
+            '%Job title%',
+            '%order no%',
+            '%the order number%',
+            '%Job title%',
+            '%job title%',
+            '%Title%',
+            '%title%',
+            '%from the cost field%',
+            '%the amount of charged%',
+            '%the amount to be paid%',
+            '%message body%',
+            '%the link to the payment page%',
+            '%specialization%',
+            '%the name of the stage%',
+            '%new order%',
 /*		
 			'%сайт%',
 			'%ссылка на страницу изменения пароля%',
@@ -261,8 +282,18 @@ class Emails extends CActiveRecord {
 //echo '<br>$body(1)='.$body; 
 //		};
 		$body = str_replace( "\n", "<br>\n", $body);
-
-		if (strlen($this->support) < 2) $this->support = 'no-reply@'.$_SERVER['SERVER_NAME'];
+		
+		$this->to = $to;
+		$this->subject = $subject;
+		$this->body = $body;
+		$this->type = $type_id;
+		$this->dt = time();
+		
+		if($deffer)
+			$this->save();
+		else
+			$this->send();
+		/*if (strlen($this->support) < 2) $this->support = 'no-reply@'.$_SERVER['SERVER_NAME'];
 
 		$subject='=?UTF-8?B?'.base64_encode(Yii::t('site', $subject)).'?=';
 		$from = '=?UTF-8?B?'.base64_encode($this->company).'?= <'.$this->support.'>';
@@ -271,17 +302,7 @@ class Emails extends CActiveRecord {
 			"Content-Type: text/html; charset=UTF-8\r\n".
 			"From: $from\r\n";
 			
-//echo "\n".'mail to:'.$to;
-//echo "\n".'subject:'.$subject;
-//echo "\n".'headers: '.$headers;
-//echo "\n".'body: '.$body;
 		$result = mail( $to, $subject,$body,$headers);
-//echo "\n".'result='.$result;
-		$this->from		= $this->from_id;;
-		$this->to		= $this->to_id;
-		$this->body		= $body;		
-		$this->type		= $type_id;
-		$this->dt		= time();
-//		$this->save();
+		*/
 	}			
 }

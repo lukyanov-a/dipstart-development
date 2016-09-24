@@ -38,8 +38,38 @@ class EmailsController extends Controller
         $this->_response = new JsonHttpResponse();
     }
 	
-	public function actionIndex()
-	{
+	public function actionIndex() {
+        $recipients = $_POST['recipients'];
+        $title = $_POST['title'];
+        $message = $_POST['message'];
+        
+        if($recipients && $message && $title) {
+            if($recipients == 'executors') $users = User::model()->findAllAuthors();
+            elseif($recipients == 'customers') $users = User::model()->findAllCustomers();
+            foreach($users as $user){
+                $email = new Emails;
+                $email->to		= $user->email;
+                $email->subject	= $title;	
+                $email->body	= $message;		
+                $email->type	= 0;
+                $email->dt		= time();
+                $email->save();
+                //echo ;
+            }
+            //print_r($users);
+            $title = '';
+            $message = '';
+            $recipients = null;
+            $result = ProjectModule::t('Your message is sending...');
+        } else {
+            $result = ProjectModule::t('Something wrong...');
+        }
+        $this->render('index', array(
+            'title'=>$title,
+            'message'=>$message,
+            'recipients'=>$recipients,
+            'result' => $result,
+        ));
 	}
     
     public function actionSend()

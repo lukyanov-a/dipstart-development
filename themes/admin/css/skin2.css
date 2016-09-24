@@ -139,3 +139,12 @@ div.events input[type="button"]:hover {
 div.events input[type="button"] + a:hover {
     background-color: #C5CCD8;
 }
+.emails-form .row {
+	margin: 10px;
+}
+.emails-form label {
+	margin-right: 10px;
+}
+.emails-form span.result {
+	margin-left: 10px;
+}

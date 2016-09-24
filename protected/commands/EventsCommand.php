@@ -2,6 +2,7 @@
 class EventsCommand extends CConsoleCommand {
 	
 	const INTERVAL = 5; // Интервал запуска скрипта в минутах
+	const EMAILS_COUNT = 100; // Отправляем 100 писем за раз
 	
     public function run($args) {
 		$companies = Company::model()->findAll('frozen=:p',array(':p'=>'0'));
@@ -17,8 +18,10 @@ class EventsCommand extends CConsoleCommand {
 			ZakazParts::model()->refreshMetaData();
 			Events::model()->refreshMetaData();
 			Templates::model()->refreshMetaData();
+			Emails::model()->refreshMetaData();
 			self::executor();
 			self::manager();
+			self::send_deffered_emails();
 		}
     }
 			
@@ -93,6 +96,14 @@ class EventsCommand extends CConsoleCommand {
 				Yii::import('application.modules.project.components.EventHelper');
 				EventHelper::stageExpired($projectStage->proj_id);
 			}
+		}
+	}
+	
+	//Отправляет n писем из списка для рассылки
+	public function send_deffered_emails(){
+		$emails = Emails::model()->sending_round(self::EMAILS_COUNT)->findAll();
+		foreach($emails as $email){
+			if($email->send()) $email->delete();
 		}
 	}
 }
