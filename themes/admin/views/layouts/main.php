@@ -29,7 +29,6 @@ switch ($role){
 		  $logs[] = array('label'=>Yii::t('site','Managers logs'), 'url'=>array('/logs'));
 		  if(Yii::app()->cdr->app_id) $logs[] = array('label'=>Yii::t('site','Calls'), 'url'=>array('/call/index'));
 		$items[] = array('label'=>Yii::t('site','Logs'), 'url'=>array('/logs'), 'items' => $logs);
-		$items[] = array('label'=>Yii::t('site','Delivery'), 'url'=>array('/project/emails'));
 		$items[] = array('label'=>Yii::t('site','Company settings'), 'url'=>array('#'), 'items' => array(
 			array('label'=>Yii::t('site','Base settings'), 'url'=>array('/company/edit')),
 			array('label'=>Yii::t('site','Templates'), 'url'=>array('/templates/admin')),
@@ -39,6 +38,7 @@ switch ($role){
 			array('label'=>Yii::t('site','Profile fields settings'), 'url'=>array('/user/profileField/admin')),
 			array('label'=>Yii::t('site','Rights'), 'url'=>array('/rights')),
 			array('label'=>Yii::t('site','Fields lists'), 'url'=>array('/catalog/admin')),
+			array('label'=>Yii::t('site','Delivery'), 'url'=>array('/project/emails')),
 		));
 		$items[] = array('label'=>Yii::t('site','Logout'). ' ('.Yii::app()->user->name.')', 'url'=>array('/user/logout'));
 		break;
