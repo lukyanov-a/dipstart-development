@@ -297,11 +297,24 @@ class User extends CActiveRecord
 		$this->lastvisit_at=date('Y-m-d H:i:s',$value);
 	}
 
-	public function findAllAuthors(){
+    
+    public function Role($role){
+        $this->getDbCriteria()->with=array(
+            'AuthAssignment'=>array(
+                // записи нам не нужны
+                'select'=>false,
+                // но нужно выбрать только пользователей с опубликованными записями
+                'joinType'=>'INNER JOIN',
+                'condition'=>'AuthAssignment.itemname="'.$role.'"',
+            ),
+        );
+        return $this;
+    }
+	public function findAllAuthors(){ // Возможно удалить?
 		$sql = ('SELECT DISTINCT `id`, `email` FROM '.$this->tableName().' WHERE `id` IN (SELECT `userid` FROM '.Company::getId().'_AuthAssignment WHERE `itemname` = "Author")');
 	   return $this->findAllBySql($sql);
 	}
-	public function findAllCustomers(){
+	public function findAllCustomers(){ // Возможно удалить?
 		$sql = ('SELECT DISTINCT `id`, `email` FROM '.$this->tableName().' WHERE `id` IN (SELECT `userid` FROM '.Company::getId().'_AuthAssignment WHERE `itemname` = "Customer")');
 	   return $this->findAllBySql($sql);
 	}

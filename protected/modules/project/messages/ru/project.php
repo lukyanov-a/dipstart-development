@@ -319,4 +319,6 @@ return array(
 	'Please select template' => 'Пожалуйста выберите шаблон',
 	'Select a template' => 'Выбрать шаблон',
 	'Executor is not assigned' => 'Исполнитель не назначен',
+    
+    'You can unsubscribe...' => 'Вы можете отказаться от подписки в настройках профиля',
 );

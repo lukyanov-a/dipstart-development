@@ -54,6 +54,7 @@ class Profile extends CActiveRecord
 			$rules = array();
 			
 			array_push($numerical,'mailing_for_executors');
+            array_push($numerical,'general_mailing');
 
 			$model=$this->getFields();
 
@@ -138,6 +139,7 @@ class Profile extends CActiveRecord
 		$labels = array(
 			'user_id' => UserModule::t('User ID'),
 			'rating' => UserModule::t('Rating'),
+            'general_mailing' => UserModule::t('Recive general mailing'),
 			'mailing_for_executors' => UserModule::t('Recive new projects notifications'),
 			'notification' => UserModule::t('Receive notification of the occurrence of terms'),
 			'notification_time' => UserModule::t('Time notification'),

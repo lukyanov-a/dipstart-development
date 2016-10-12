@@ -43,10 +43,16 @@ class EmailsController extends Controller
         $title = $_POST['title'];
         $message = $_POST['message'];
         
+        $profile_url = 'http://'.$_SERVER['SERVER_NAME'].'/user/profile/edit';
+        $message .= '<br><br>'.ProjectModule::t('You can unsubscribe...').':';
+        $message .= '<br><a href="'.$profile_url.'">'.$profile_url.'</a>';
+        
         if($recipients && $message && $title) {
-            if($recipients == 'executors') $users = User::model()->findAllAuthors();
-            elseif($recipients == 'customers') $users = User::model()->findAllCustomers();
-            foreach($users as $user){
+            if($recipients == 'executors') $role = 'Author';
+            elseif($recipients == 'customers') $role = 'Customer'; //$users = User::model()->findAllCustomers(); 
+            $users = User::model()->resetScope()->Role($role)->with(array('profile'=>array('select'=>array('profile.general_mailing'))))->findAll();
+            
+            foreach($users as $user) if(!($user->profile) || $user->profile->general_mailing == 1){
                 $email = new Emails;
                 $email->to		= $user->email;
                 $email->subject	= $title;	
@@ -54,7 +60,9 @@ class EmailsController extends Controller
                 $email->type	= 0;
                 $email->dt		= time();
                 $email->save();
-                //echo ;
+                //print_r( $user );
+                //echo $email->body;
+                //echo '<br>';
             }
             //print_r($users);
             $title = '';
