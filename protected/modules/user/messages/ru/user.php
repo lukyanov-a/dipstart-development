@@ -253,5 +253,6 @@ return array(
 	'Recive new projects notifications' => 'Получать уведомления о новых проектах',
 	'Receive notification of the occurrence of terms' => 'Получать уведомление о наступлении сроков',
 	'Time notification' => 'Время за которое необходимо уведомить',
+    'Recive general mailing' => 'Подписаться на общую рассылку компании',
 );
 

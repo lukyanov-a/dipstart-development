@@ -46,6 +46,15 @@ $form=$this->beginWidget('UActiveForm', array(
 	<p class="note"><?php echo UserModule::t('Fields with <span class="required">*</span> are required.'); ?></p>
 
 	<?php echo $form->errorSummary(array($model,$profile)); ?>
+        
+        <div class="form-group">
+            <?php echo $form->labelEx($profile,'general_mailing',array('class'=>'col-md-4 control-label')); ?>
+            <div class="col-md-8">
+                <?php if($profile->general_mailing) $attr = array('checked'=>'checked'); else $attr = array();
+				echo $form->checkBox($profile,'general_mailing', $attr ); ?>
+            </div>
+            <?php echo $form->error($profile,'general_mailing'); ?>
+        </div>
 
 		<?php if(User::model()->isAuthor()) { ?>
 		<div class="form-group">
