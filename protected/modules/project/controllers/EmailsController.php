@@ -44,8 +44,8 @@ class EmailsController extends Controller
         $message = $_POST['message'];
         
         $profile_url = 'http://'.$_SERVER['SERVER_NAME'].'/user/profile/edit';
-        $message .= '<br><br>'.ProjectModule::t('You can unsubscribe...').':';
-        $message .= '<br><a href="'.$profile_url.'">'.$profile_url.'</a>';
+        $message_ps = '<br><br>'.ProjectModule::t('You can unsubscribe...').':';
+        $message_ps .= '<br><a href="'.$profile_url.'">'.$profile_url.'</a>';
         
         if($recipients && $message && $title) {
             if($recipients == 'executors') $role = 'Author';
@@ -56,7 +56,7 @@ class EmailsController extends Controller
                 $email = new Emails;
                 $email->to		= $user->email;
                 $email->subject	= $title;	
-                $email->body	= $message;		
+                $email->body	= $message.$message_ps;		
                 $email->type	= 0;
                 $email->dt		= time();
                 $email->save();
