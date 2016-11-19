@@ -138,7 +138,7 @@ $form=$this->beginWidget('CActiveForm',array(
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">Paper format:
-                    &nbsp;&nbsp;&nbsp;<!--<a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="Lorem ipsum dolor sit amet"></a>-->
+                    &nbsp;&nbsp;&nbsp;<!--<a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="In developing..."></a>-->
                 </label>
 
                 <div class="col-sm-9">
@@ -172,7 +172,7 @@ $form=$this->beginWidget('CActiveForm',array(
             </div>
             <div class="form-group">
                 <label for="sources" class="col-sm-3 control-label">Sources:
-                    &nbsp;&nbsp;&nbsp;<!--<a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="Lorem ipsum dolor sit amet"></a>-->
+                    &nbsp;&nbsp;&nbsp;<!--<a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="In developing..."></a>-->
                 </label>
                 <div class="col-sm-9">
                     <div class="input-group spinner">
@@ -200,7 +200,7 @@ $form=$this->beginWidget('CActiveForm',array(
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">Additional Materials:
-                    &nbsp;&nbsp;&nbsp;<!--<a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="Lorem ipsum dolor sit amet"></a>-->
+                    &nbsp;&nbsp;&nbsp;<!--<a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="In developing..."></a>-->
                 </label>
                 <div class="col-sm-9">
                     <?php
@@ -242,7 +242,7 @@ $form=$this->beginWidget('CActiveForm',array(
         <div class="panel-body form-container tab-pane" id="tab-2">
             <div class="form-group">
                 <label class="col-sm-3 control-label">Type of service:
-                    <a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="Lorem ipsum dolor sit amet"></a>
+                    <a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="In developing..."></a>
                 </label>
                 <div class="col-sm-9">
                     <div id="tos" class="btn-group calc_elem" data-toggle="buttons">
@@ -281,14 +281,14 @@ $form=$this->beginWidget('CActiveForm',array(
                     <div class="checkbox">
                         <label>
                             <input type="checkbox" name="Project[VIPcustomer]" value="1"> I want to order VIP customer service
-                            <a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="Lorem ipsum dolor sit amet"></a>
+                            <a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="In developing..."></a>
                         </label>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="pages_number" class="col-sm-3 control-label">Number of pages:
-                    <a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="Lorem ipsum dolor sit amet"></a>
+                    <a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="In developing..."></a>
                 </label>
                 <div class="col-sm-3">
                     <div class="input-group spinner">
@@ -298,7 +298,7 @@ $form=$this->beginWidget('CActiveForm',array(
                     </div>
                 </div>
                 <label for="slides_number" class="col-sm-3 control-label">Number of slides:
-                    <a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="Lorem ipsum dolor sit amet"></a>
+                    <a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="In developing..."></a>
                 </label>
                 <div class="col-sm-3">
                     <div class="input-group spinner">
@@ -324,7 +324,7 @@ $form=$this->beginWidget('CActiveForm',array(
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">First Draft Deadline:
-                    <a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="Lorem ipsum dolor sit amet"></a>
+                    <a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="In developing..."></a>
                 </label>
                     <div id="hours" class="col-sm-7 btn-group calc_elem" data-toggle="buttons">
                         <label class="btn btn-primary btn-deadline active">
@@ -374,16 +374,16 @@ $form=$this->beginWidget('CActiveForm',array(
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-9">
                     The deadline for the first draft is <strong>25 Jun 12 AM</strong>.
-                    <a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="Lorem ipsum dolor sit amet"></a>
+                    <a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="In developing..."></a>
                 </div>
                 <div class="col-sm-offset-3 col-sm-9">
                     We estimate that your final submission deadline is <strong>26 Jun 07 PM</strong>.
-                    <a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="Lorem ipsum dolor sit amet"></a>
+                    <a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="In developing..."></a>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">Preferred writer:
-                    <a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="Lorem ipsum dolor sit amet"></a>
+                    <a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="In developing..."></a>
                 </label>
                 <div class="col-sm-9">
                     <div class="btn-group" data-toggle="buttons">
@@ -405,12 +405,12 @@ $form=$this->beginWidget('CActiveForm',array(
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-9">
                     <a href="#">Have a discount?</a> (optional)
-                    <a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="Lorem ipsum dolor sit amet"></a>
+                    <a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="In developing..."></a>
                 </div>
             </div>
             <!--<div class="form-group">
                 <label class="col-sm-3 control-label">Preferred payment system:
-                    <a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="Lorem ipsum dolor sit amet"></a>
+                    <a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="In developing..."></a>
                 </label>
                 <div class="col-sm-9">
                     <div class="btn-group" data-toggle="buttons">
@@ -481,7 +481,7 @@ $form=$this->beginWidget('CActiveForm',array(
                     </div>
                     <div class="form-group">
                         <label for="pass" class="col-sm-3 control-label">Password:
-                            <a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="Lorem ipsum dolor sit amet"></a>
+                            <a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="In developing..."></a>
                         </label>
                         <div class="col-sm-9">
                             <input id="pass" name="User[password]" type="password" class="form-control">
@@ -507,7 +507,7 @@ $form=$this->beginWidget('CActiveForm',array(
                     </div>
                     <div class="form-group">
                         <label for="cellphone" class="col-sm-3 control-label">Cell phone:
-                            <a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="Lorem ipsum dolor sit amet"></a>
+                            <a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="In developing..."></a>
                         </label>
                         <div class="col-sm-9">
                             <div class="input-group">
@@ -520,19 +520,19 @@ $form=$this->beginWidget('CActiveForm',array(
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-9">
-                            <i class="clearfix">
+                            <!--<i class="clearfix">
                                 By proceeding to the next step, you are accepting our <a href="#">Terms of Use</a>, <a href="#">Privacy Policy</a> and <a href="#">Money Back Guarantee</a>.
                             </i>
                             <i class="clearfix">
                                 By proceeding to the next step, you express your prior affirmative consent to receive emails and sms from us.
-                            </i>
+                            </i>-->
                         </div>
                     </div>
                 </div>
                 <div class="tab-pane form-container" id="sign-in">
                     <div class="form-group">
                         <label for="Login[username]" class="col-sm-3 control-label">Email:
-                            <a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="Lorem ipsum dolor sit amet"></a>
+                            <a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="In developing..."></a>
                         </label>
 
                         <div class="col-sm-9">
@@ -541,7 +541,7 @@ $form=$this->beginWidget('CActiveForm',array(
                     </div>
                     <div class="form-group">
                         <label for="Login[password]" name="have_password" class="col-sm-3 control-label">Password:
-                            <a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="Lorem ipsum dolor sit amet"></a>
+                            <a class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="In developing..."></a>
                         </label>
                         <div class="col-sm-9">
                             <input id="have_password" name="Login[password]" type="password" class="form-control">
@@ -549,12 +549,12 @@ $form=$this->beginWidget('CActiveForm',array(
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-9">
-                            <i class="clearfix">
+                            <!--<i class="clearfix">
                                 By proceeding to the next step, you are accepting our <a href="#">Terms of Use</a>, <a href="#">Privacy Policy</a> and <a href="#">Money Back Guarantee</a>.
                             </i>
                             <i class="clearfix">
                                 By proceeding to the next step, you express your prior affirmative consent to receive emails and sms from us.
-                            </i>
+                            </i>-->
                         </div>
                     </div>
                 </div>

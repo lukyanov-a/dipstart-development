@@ -3,7 +3,7 @@
     <p>Please refer to our frequently asked questions below to find answers to common questions regarding our services.</p>
     <ul class="spec-list-faq">
         <li><span>How can I place an order on your website for professional writing services?</span><br>
-        <p>To place an order, simply navigate over to the <a href="order.html">order page</a> and fill in the order information. Alternatively, you can place your order over the phone or using the Live Chat feature at the top right of the website.</p></li>
+        <p>To place an order, simply navigate over to the <a href="http://perfect-paper.com/site/page?view=order">order page</a> and fill in the order information. Alternatively, you can place your order over the phone or using the Live Chat feature at the top right of the website.</p></li>
         <li><span>I have to submit extra files for the writer, where can I do that?</span><br>
         <p>To submit extra files for the writer to use in your order, please view your order by logging into your account then upload the files manually.</p></li>
         <li><span>My order requires me to use a specific source that I do not have, can your guys find it?</span><br>

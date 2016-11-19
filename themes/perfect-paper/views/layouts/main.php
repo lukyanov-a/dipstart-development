@@ -13,7 +13,8 @@ Yii::app()->language='en';
 <html>
 <meta charset="utf-8">
 <head>
-    <title>Paperhelper</title>
+    <title>Perfect-paper</title>
+	<link rel="shortcut icon" href="<?= Yii::app()->theme->baseUrl ?>/img/favicon.ico" type="image/x-icon">
     <!-- Bootstrap -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700,700italic&subset=cyrillic,latin' rel='stylesheet' type='text/css'>
 </head>
@@ -32,7 +33,7 @@ Yii::app()->language='en';
 
             <div class="col-xs-10 col-sm-10 col-md-9 contact">
                 <address style="margin-left: 50px; margin-top: 5px;">
-                    E-mail:	<a href="mailto:#">perfect-paper.com@gmail.com</a><br>
+                    E-mail:	<a href="mailto:#">perfectpaper.com@gmail.com</a><br>
                     Skype: perfect-paper<br>
 					+1 (323) 984 75 11<br>
 					<!--<a href="http://perfect-paper.com/site/page?view=contacts">Contact information</a><br>-->
@@ -63,7 +64,7 @@ Yii::app()->language='en';
                     <li><a href="<?php echo Yii::app()->createUrl('site/page',array('view'=>'price'));?>">Prices</a></li>
                     <li><a href="<?php echo Yii::app()->createUrl('site/page',array('view'=>'term'));?>">How to make an order</a></li>
                     <li><a href="<?php echo Yii::app()->createUrl('site/page',array('view'=>'comments'));?>">Testimonials</a></li>
-                    <li><a href="<?php echo Yii::app()->createUrl('site/page',array('view'=>'why'));?>">Why choose Paperhelper?</a></li>
+                    <li><a href="<?php echo Yii::app()->createUrl('site/page',array('view'=>'why'));?>">Why choose perfect-paper?</a></li>
                 </ul>
                 <a class="button4 notmobileOrder" href="<?php echo Yii::app()->createUrl('site/page',array('view'=>'order'));?>">Order now</a>
             </div>
@@ -80,25 +81,25 @@ Yii::app()->language='en';
     <div id="footer" class="row" style="margin-top:4em;">
         <div class="col-xs-12 col-md-12" style="background-color: #c3c9cc; height: 1px; margin-bottom: 1em;"></div>
         <div class="col-xs-12 col-sm-12 col-md-2 copyright" style="padding-bottom:10px; margin-right:10px;"><span>Perfect-paper</span><br>
-            @ 2010-2015. All rights reserved</div
+            @ 2010-2016. All rights reserved</div
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-2" style="padding-bottom:10px;">
-                <button type="button" class="btn btn-default col-xs-12 col-md-12 btn-lg alternative">To place an order</button>
+                <a href="http://perfect-paper.com/site/page?view=order"><button type="button" class="btn btn-default col-xs-12 col-md-12 btn-lg alternative">To place an order</button></a>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-2" style="padding-bottom:10px;">
-                <button type="button" class="btn btn-primary btn-lg col-xs-12 col-md-12 alternative">Callback</button>
+                <a href="http://perfect-paper.com/site/page?view=order"><button type="button" class="btn btn-primary btn-lg col-xs-12 col-md-12 alternative">Callback</button></a>
             </div
         </div>
         <div class="col-xs-12 col-sm-12 col-md-3 center" style="margin-bottom:1em;">
-            <p style="font-size: 1em; margin-top:5px;">E-mail: <a href="mailto:#">perfect-paper.com@gmail.com</a><br>
+            <p style="font-size: 1em; margin-top:5px;">E-mail: <a href="mailto:#">perfectpaper.com@gmail.com</a><br>
                 Skype: perfect-paper</p>
 
         </div>
         <div class="col-xs-12 col-sm-12 col-md-3 center" style="width:210px;">
-            <a href="#"><img src="<?php echo Yii::app()->theme->baseUrl;?>/img/g-plus.png"></a>
-            <a href="#"><img src="<?php echo Yii::app()->theme->baseUrl;?>/img/facebook.png"></a>
-            <a href="#"><img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fbico.png"></a>
-            <a href="#"><img src="<?php echo Yii::app()->theme->baseUrl;?>/img/linkedin.png"></a>
+            <a href="https://plus.google.com/u/2/108384397516634127351"><img src="<?php echo Yii::app()->theme->baseUrl;?>/img/g-plus.png"></a>
+            <a href="https://www.facebook.com/groups/perfectpaper/"><img src="<?php echo Yii::app()->theme->baseUrl;?>/img/facebook.png"></a>
+            <a href="https://twitter.com/perfectpapercom"><img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fbico.png"></a>
+            <!--<a href="#"><img src="<?php echo Yii::app()->theme->baseUrl;?>/img/linkedin.png"></a>-->
         </div>
     </div>
 
