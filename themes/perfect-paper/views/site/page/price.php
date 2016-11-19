@@ -43,9 +43,9 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->theme->baseUrl.'/css/
                   <p>3. Number of pages</p>
 		            <div class="col-sm-9">
                         <div class="input-group spinner">
-                            <button class="btn btn-primary pull-left" type="button" onclick="plus()">+</button>
+							<button class="btn btn-primary pull-left" type="button" onclick="minus()">-</button>
                             <input name="sources" id="sources" type="text" class="form-control pull-left" value="1" onchange="calculateTotalHs()">
-                            <button class="btn btn-primary pull-left" type="button" onclick="minus()">-</button>
+                            <button class="btn btn-primary pull-left" type="button" onclick="plus()">+</button>
                         </div>
                     </div>
               </div>

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Created by PhpStorm.
  * User: coolfire
@@ -127,7 +127,7 @@
 <div class="row privilege" style="margin-top:3em;">
     <div class="col-xs-12 col-md-3 center">
         <h4><span>1.</span>EASY</h4>
-        <p>All you need to do is to fill in a small form with the paper details and contacts</p>
+        <p>All you need to do is to fill your details and contacts in a small form on a paper</p>
     </div>
     <div class="col-xs-12 col-md-3 center">
         <h4><span>2.</span>QUICKLY</h4>
@@ -176,7 +176,7 @@
 <div class="row" style="margin-top:2em;">
     <div class="col-xs-12 col-md-12 center"><h3>Independent reviews in social networks</h3></div>
     <div class="col-xs-12 col-md-12 center" style="margin-top:2em; padding-bottom:2em;">
-        <button type="button" class="btn btn-default btn-lg alternative">Reviews</button>
+        <a href="http://perfect-paper.com/site/page?view=comments"><button type="button" class="btn btn-default btn-lg alternative">Reviews</button></a>
     </div>
     <div class="col-xs-12 col-sm-6 col-md-4 center">
         <div class="comment">
@@ -212,10 +212,10 @@
 <div class="row" style="margin-top:2em;">
     <span class="col-xs-12 col-sm-6 col-md-3 col-md-offset-1"><img class="fastorder" src="<?php echo Yii::app()->theme->baseUrl;?>/img/fastorder.png"></span>
     <div class="">
-        <button type="button" class="btn btn-danger btn-lg col-xs-12 col-sm-3 col-md-3 col-md-offset-1 alternative show-price-button" style="margin-bottom:5px;">To place a new inquiry</button>
+        <a href="http://perfect-paper.com/site/page?view=order"><button type="button" class="btn btn-danger btn-lg col-xs-12 col-sm-3 col-md-3 col-md-offset-1 alternative show-price-button" style="margin-bottom:5px;">To place a new inquiry</button></a>
     </div>
     <div class="">
-        <button type="button" class="btn btn-default btn-lg col-xs-12 col-sm-3 col-md-3 col-md-offset-1 alternative show-price-button">To order a callback</button>
+        <a href="http://perfect-paper.com/site/page?view=order"><button type="button" class="btn btn-default btn-lg col-xs-12 col-sm-3 col-md-3 col-md-offset-1 alternative show-price-button">To order a callback</button></a>
     </div>
 </div>
 
