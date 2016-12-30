@@ -104,16 +104,19 @@ class RegistrationController extends Controller
 			else
 				$this->redirect(Yii::app()->controller->module->profileUrl);
 		} else {
-			if (isset($_POST['RegistrationForm'])) {
-				if (self::register($model, $_POST['RegistrationForm'], $role)){
+			$registrationForm = isset($_POST['RegistrationForm'])?$_POST['RegistrationForm']:(isset($_GET['RegistrationForm'])?$_GET['RegistrationForm']:null);
+			if (isset($registrationForm)) {
+				if (self::register($model, $registrationForm, $role)){
 					Yii::import('project.components.EventHelper');
 					if($role == 'Customer') EventHelper::newCustomer();
 					Yii::app()->user->setFlash('reg_success',UserModule::t("Thank you for your registration. Password has been sent to your e-mail. Please check your e-mail ({{email}}) before start.", ['{{email}}'=>$model->email]));
 					$this->refresh();
 				} else {
-					$message = UserModule::t("Sorry, something wrong... :(");
+					//$message = UserModule::t("Sorry, something wrong... :(");
 					$errors = $model->errors;
 					if(isset($errors['email'])) $message = $errors['email'][0];
+					if(isset($errors['full_name'])) $message = $errors['full_name'][0];
+					if(isset($errors['phone'])) $message = $errors['phone'][0];
 					//Yii::app()->end();
 					Yii::app()->user->setFlash('reg_failed',$message);
 					//$this->refresh();
