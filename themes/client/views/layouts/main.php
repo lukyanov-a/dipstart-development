@@ -34,6 +34,7 @@
     <!--[if lte IE 8]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+	<script src="<?php echo Yii::app()->theme->baseUrl;?>/js/main.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/jquery.placeholder.js"></script>
     <link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl;?>/css/main.css" />
     <link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl;?>/css/skin.css" />
@@ -65,18 +66,14 @@ if ($_SERVER['SERVER_NAME']=='adco.obshya.com') {
 <!--[if lt IE 7]>
 <p class="browsehappy">Вы используете <strong>устаревший</strong> браузер. Пожалуйста, <a href="http://browsehappy.com/">обновите ваш браузер</a>.</p>
 <![endif]-->
-<div class="container">
-    <header class="header clearfix">
-	<?php $this->renderPartial('//layouts/header');?>
-    </header>
 
-	<!-- Menu Dipstart -->
-	<?php //$this->renderPartial('//layouts/menu-dipstart');?>
+<!--<div class="container">-->
+<?php $this->renderPartial('//layouts/header');?>
 
-    <div class="content-clearfix">
-       <?php echo $content; ?>
-    </div>
+<div id="layout" class="content-clearfix" >
+   <?php echo $content; ?>
 </div>
+<!--</div>-->
    
    <!-- FOOTER -->
 <div class="modal hide" id="restorePass" style="z-index:99999999">
