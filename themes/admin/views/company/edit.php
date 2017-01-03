@@ -64,7 +64,8 @@
 		<?php echo $form->error($model,'iconupload'); ?>
 	</div>
 	<div class="row">
-		<?php echo CHtml::image(Yii::app()->getBaseUrl(/*true*/) . '/' . $model->getFilesPath() . '/' . $model->logo, 'logo'); ?><br />
+		<?php echo Tools::printLogo($model); ?>
+		<br />
 		<?php echo CHtml::label(ProjectModule::t('Attach file'), 'fileupload'); ?>
 		<?php echo CHtml::fileField('Company[fileupload]', '', array('class' => 'col-xs-12 btn btn-user')); ?>
 		<?php echo $form->error($model,'fileupload'); ?>
