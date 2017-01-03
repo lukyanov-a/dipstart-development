@@ -22,14 +22,14 @@
             </a>
         </div>
 		<?php } ?>
-		<div class="logo col-xs-12 col-sm-12 col-md-3 main-menu-button-container">
+		<div class="col-xs-12 col-sm-12 col-md-3 main-menu-button-container">
 			<button id="main-menu-button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 				<span class="icon-bar">&nbsp;</span>
 				<span class="icon-bar">&nbsp;</span>
 				<span class="icon-bar">&nbsp;</span>
 			</button>
 		</div>
-		<?php if(false && $company->header) { ?>
+		<?php if($company->header) { ?>
         <div class="col-xs-12 col-sm-12 col-md-9 header-text">
 			<?php echo $company->header;?>
         </div>
