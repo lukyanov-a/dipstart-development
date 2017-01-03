@@ -4,7 +4,7 @@ a:hover { color:#551a8b; }
 
 ul li, ol li {
   padding:0 0 0.4em 0;
-}*/
+}
 
 .btn, div.qq-upload-button {
 	font-size: 15px;
@@ -1473,11 +1473,14 @@ ul.files-list {
     overflow: hidden;
   }
 }
+
+.main-menu-button-container {
+	display: none;
+	width: 25%;
+	float: right;
+}
+
 @media (max-width: 979px) {
-header .logo {
-	width: 75%;
-}
-}
 span.logo {
 	line-height: 57px;
 }
@@ -1487,14 +1490,53 @@ span.logo {
     float: right;
 }
 .main-menu-button-container {
-	display: none;
-	width: 25%;
-	float: right;
-}
-@media (max-width: 979px) {
-.main-menu-button-container {
 	display: block;
 }
+header .header-text {
+	display: none;
+    width: auto;
+    padding: 21px 33px 21px 33px;
+    -webkit-border-radius: 108px;
+    -moz-border-radius: 108px;
+    border-radius: 108px;
+    position: relative;
+    text-align: center;
+    margin: 0 30px;
+    background-color: #fff;
+    border: 8px solid #666;
+    -webkit-box-shadow: 2px 2px 4px #888;
+    -moz-box-shadow: 2px 2px 4px #888;
+    box-shadow: 2px 2px 4px #888;
+}
+header .header-text span{
+	padding: 0 !important;
+	position: relative;
+}
+header .header-text:before, header .header-text:after {
+    left: -15px;
+    top: -30px;
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    border: 8px solid #666;
+    -webkit-border-radius: 28px;
+    -moz-border-radius: 28px;
+    border-radius: 28px;
+    content: ' ';
+    position: absolute;
+	opacity: 0.55;
+}
+header .header-text:after {
+    width: 20px;
+    height: 20px;
+    left: 5px;
+    top: -47px;
+    -webkit-border-radius: 18px;
+    -moz-border-radius: 18px;
+    border-radius: 18px;
+	opacity: 0.2;
+}
+
 header .userMenu, header #control-menu {
     height: 0;
     overflow: hidden;
