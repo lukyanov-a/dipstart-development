@@ -609,7 +609,7 @@ float: left;
 @media (min-width: 769px) {
 header .row {/*margin-bottom: 20px;*/}
 .logo {/*margin-bottom: 20px; width:100%;*/}
-.logo a {width: 275px; margin:0 auto; display:block;}
+.logo a {margin:0 auto; display:block;}
 /*.login {clear:both;}
 .login, .header-contacts, .header-adress {width: 33%; float: left; font-size: 14px;}*/
 }
@@ -1473,7 +1473,14 @@ ul.files-list {
     overflow: hidden;
   }
 }
-
+@media (max-width: 979px) {
+header .logo {
+	width: 75%;
+}
+}
+span.logo {
+	line-height: 57px;
+}
 #main-menu-button {
     width: 55px;
     background-color: transparent;
@@ -1481,6 +1488,8 @@ ul.files-list {
 }
 .main-menu-button-container {
 	display: none;
+	width: 25%;
+	float: right;
 }
 @media (max-width: 979px) {
 .main-menu-button-container {
