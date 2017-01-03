@@ -20,7 +20,7 @@ class Company extends CActiveRecord {
 			array('organization, Payment2Chekout', 'numerical', 'integerOnly' => true),
 			array('language','in','range'=>array('en','ru'),'allowEmpty'=>false),
 			array('frozen, PaymentCash, module_tree', 'in', 'range' => array(0, 1),'allowEmpty'=>false),
-			array('fileupload', 'file', 'types'=>'jpg,jpeg,gif,png', 'maxSize'=>'204800', 'allowEmpty'=>true),
+			array('fileupload', 'file', 'types'=>'jpg,jpeg,gif,png,woff', 'maxSize'=>'409600', 'allowEmpty'=>true),
 			array('iconupload', 'file', 'types'=>'ico', 'maxSize'=>'204800', 'allowEmpty'=>true),
 			array('header, text4guests, text4customers, agreement4customers, agreement4executors', 'length', 'max'=>65535),
 			array('WebmasterFirstOrderRate, WebmasterSecondOrderRate', 'type', 'type'=>'float'),

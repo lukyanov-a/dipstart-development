@@ -15,23 +15,26 @@
 
 <header class="header clearfix">
     <div class="row">
-		<?php if(($company->logo) or ($company->header)) {?>
+		<?php if($company->logo) { ?>
         <div class="logo col-xs-12 col-sm-12 col-md-3">
             <a href="/">
-                <?php if($company->logo) echo CHtml::image(Yii::app()->getBaseUrl(/*true*/).'/'.$company->getFilesPath().'/'.$company->logo, 'logo');?>
+                <?php echo Tools::printLogo($company);?>
             </a>
         </div>
-		<div class="logo col-xs-12 col-sm-12 col-md-3">
+		<?php } ?>
+		<div class="logo col-xs-12 col-sm-12 col-md-3 main-menu-button-container">
 			<button id="main-menu-button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 				<span class="icon-bar">&nbsp;</span>
 				<span class="icon-bar">&nbsp;</span>
 				<span class="icon-bar">&nbsp;</span>
 			</button>
 		</div>
+		<?php if(false && $company->header) { ?>
         <div class="col-xs-12 col-sm-12 col-md-9 header-text">
-			<?php if($company->header) echo $company->header;?>
+			<?php echo $company->header;?>
         </div>
 		<?php } ?>
+		<div class="clear"></div>
 		<div id="control-menu">
 			<? $this->widget('application.extensions.booster.widgets.TbMenu',array(
 				'items'=> $this->menu,

@@ -132,6 +132,7 @@ body {
 	-moz-background-size: cover;
 	background-position: center;
 	background-color: rgba(0, 0, 0, 0.5) !important;
+	background-repeat: no-repeat;
 }
 body.bg0 {
 	background-image: url('../images/background0.jpg');

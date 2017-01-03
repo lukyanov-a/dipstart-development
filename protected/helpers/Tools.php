@@ -72,5 +72,25 @@ class Tools {
 		</div>
 		<?php }
 	}
+	
+	static public function woff($name, $font_family, $f2, $fontpath){
+		return '<style>
+@font-face {
+	font-family: "'.$font_family.'"; /* Имя шрифта */
+	src: url('. $fontpath .'); /* Путь к файлу со шрифтом */
+}
+span.logo {
+	font-family: "'.$font_family.'", '.$f2.';
+}
+</style>
+<span class="logo" style="">'.$name.'</span>';
+	}
+	static public function printLogo($model){
+		if($model->logo == 'beer_money.woff') {
+			return Tools::woff($model->name, 'Beer money', 'chicago', Yii::app()->getBaseUrl(/*true*/) . '/' . $model->getFilesPath() . '/' . $model->logo);
+		} else {
+			return CHtml::image(Yii::app()->getBaseUrl(/*true*/) . '/' . $model->getFilesPath() . '/' . $model->logo, $model->name);
+		} 
+	}
 }
 ?>

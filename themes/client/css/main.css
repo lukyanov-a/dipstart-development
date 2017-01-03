@@ -54,6 +54,15 @@ header .logo {
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
+span.logo {
+    font-size: 36px;
+	margin-left: 11px;
+}
+@media (max-width: 979px) {
+span.logo {
+    font-size: 24px;
+}
+}
 .header .header-text {
 	text-align: center;
 }
