@@ -2,7 +2,7 @@
 if (User::model()->isCustomer()) {
 	$to_recive = ProjectPayments::model()->findByAttributes(array('order_id'=>$order->id))->to_receive;
 	if ($to_recive>0) {
-		if(Campaign::getPaymentCash()==1) {
+		if(Company::getPaymentCash()==1) {
 			echo '<div class="col-xs-12 block-for-upload-chek">';
 			?>
 			<div class="to-pay">
@@ -37,7 +37,7 @@ if (User::model()->isCustomer()) {
 			echo '</div>';
 		}
 		
-		if(Campaign::getPayment2Chekout()!=0) {
+		if(Company::getPayment2Chekout()!=0) {
 			$user = User::model()->with('profile')->findByPk($order->user_id);
 		// 2Checkout form
 		?>
