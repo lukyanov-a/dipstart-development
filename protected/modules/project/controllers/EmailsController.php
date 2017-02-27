@@ -118,7 +118,7 @@ class EmailsController extends Controller
 		$rec   = Templates::model()->findAll("`type_id`='$typeId'");
 		
 		$title = $rec[0]->title;
-		$email->name = $profle->full_name;
+		$email->name = $profile->full_name;
 		if (strlen($email->name) < 2) $email->name = $user->username;
 		$email->login= $user->username;
 		
@@ -128,7 +128,11 @@ class EmailsController extends Controller
 		$email->price_order = $cost;
 		$email->sum_order  = $cost;
 		
-		$specials = Catalog::model()->findByPk($order->specials);
+		if (isset($order->specials)) {
+            $specials = Catalog::model()->findByPk($order->specials);
+        } elseif (isset($order->specials2)) {
+            $specials = Catalog::model()->findByPk($order->specials2);
+        }
 		$email->specialization	= $specials->cat_name;
 		$email->name_order		= $order->title;		
 		$email->subject_order	= $order->title;		
