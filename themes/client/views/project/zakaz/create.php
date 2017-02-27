@@ -47,7 +47,7 @@ $this->renderPartial('/zakaz/_form', array(	'model' => $model,
 		<h4><?= Yii::t('site','User Agreement') ?></h4>
 	</div>
 
-	<div class="modal-body">
+	<div class="modal-body modal-agreement">
 		<?php echo Company::getAgreement(); ?>
 	</div>
 
