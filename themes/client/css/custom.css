@@ -953,6 +953,12 @@ div.stage-second-column {
     padding: 0px;
 }
 
+    .modal-agreement {
+        height: 400px;
+        overflow-y: scroll;
+    }
+
+
 @media screen and (max-width: 600px){
     table.detail-view
     {
