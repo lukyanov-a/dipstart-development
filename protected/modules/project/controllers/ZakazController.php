@@ -246,6 +246,9 @@ class ZakazController extends Controller {
 			if (User::model()->isManager()) {
 				$this->redirect(Yii::app()->createUrl('/project/zakaz/update', array('id'=>$model->id)));
 			} else {
+				if (Company::getAgreement()=='' || Company::getAgreement()==null) {
+					$this->redirect(Yii::app()->createUrl('/project/chat', array('orderId'=>$model->id)));
+				}
 				$new = false;
 				$agreementNotAccepted = Templates::model()->getTemplate(Templates::TYPE_FOR_MANAGER_AGREEMENT_NOT_ACCEPTED);;
 				$messageForCustomer = Templates::model()->getTemplate(Templates::TYPE_FOR_CUSTOMER_AGREEMENT_NOT_ACCEPTED);
