@@ -40,7 +40,7 @@ $form=$this->beginWidget('UActiveForm', array(
       echo '<p style="color: #D9534F;">'.Yii::app()->user->getFlash('profileMessage').'</p>';
   ?>
   <p style="font-weight: bold;">
-    <?php if(User::model()->isAuthor()) echo ProjectModule::t('Profile message for Authors');?>
+    <?php if(User::model()->isAuthor() && (isset($profile->specials) || isset($profile->specials2)) && (empty($profile->specials) && empty($profile->specials2))) echo ProjectModule::t('Profile message for Authors');?>
   </p>
 
 	<p class="note"><?php echo UserModule::t('Fields with <span class="required">*</span> are required.'); ?></p>
