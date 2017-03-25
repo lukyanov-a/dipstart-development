@@ -1,7 +1,7 @@
 function work_types() {
 	var work_type = $("#Zakaz_specials2 option:selected").val();
 	$('[data-worktypes]').hide();
-	if(work_type) $('[data-worktypes^='+work_type+']').show();
+	if(work_type) $('[data-worktypes~='+work_type+']').show();
 	masonry();
 	return false;
 }
