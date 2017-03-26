@@ -8,7 +8,7 @@ $projectFields = $model->getFields();
 if ($projectFields) {
 	foreach($projectFields as $field) {
 		$work_types = '';
-		if ($field->work_types) $work_types = ' data-worktypes="'.$field->work_types.'"';
+		if ($field->work_types) $work_types = ' data-worktypes="'.str_replace(',',' ',$field->work_types).'"';
 		echo '<div class="form-item"'.$work_types.'>';
 		echo $form->labelEx($model,$field->varname).'<br/>';
 		if ($field->field_type=="BOOL"){
