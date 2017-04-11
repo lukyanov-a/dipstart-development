@@ -205,7 +205,7 @@ var YiiChat = function (options) {
 				tmp_html += "<button data-index=\"" + post.id + "\" class=\"chtpl0-delete\">Удалить</button>";
 				if (options.identity != post.sender.superuser.userid) {
                     if (post.moderated == 0 && (post.sender.superuser.itemname == 'Author' || post.sender.superuser.itemname == 'Customer'))
-                        if (post.recipient == 0 || post.recipient == -2 || post.recipient != 0 && (post.recipient.superuser.itemname == 'Author' || post.recipient.superuser.itemname == 'Customer'))
+                        if (post.recipient == 0 || post.recipient == -2 || post.recipient != 0 && (post.recipient.superuser && (post.recipient.superuser.itemname == 'Author' || post.recipient.superuser.itemname == 'Customer')))
 							tmp_html += "<button data-index=\"" + post.id + "\"class=\"chtpl0-accept\">Одобрить</button>";
                     
                 }
