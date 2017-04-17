@@ -85,7 +85,7 @@ class YiiChatWidget extends CWidget {
 
 	public function _prepareAssets(){
 		$localAssetsDir = dirname(__FILE__) . '/assets';
-		$this->_baseUrl = Yii::app()->getAssetManager()->publish($localAssetsDir,false,-1,1);
+		$this->_baseUrl = Yii::app()->getAssetManager()->publish($localAssetsDir,false,-1,false); //last attribute - force copy
         $cs = Yii::app()->getClientScript();
         $cs->registerCoreScript('jquery');
 		foreach(scandir($localAssetsDir) as $f){

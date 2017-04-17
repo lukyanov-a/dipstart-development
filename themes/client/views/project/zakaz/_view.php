@@ -25,20 +25,24 @@ if ($projectFields) {
 				$tmp = $model->$tmp;
 				if($tmp) $tmp=ProjectModule::t('Yes'); else $tmp=ProjectModule::t('No');
 				$attr[] = [
-					'name' => $field->title,
+                    'name' => $field->varname,
+                    'label' => $field->title,
 					'value' => $tmp
 				];
 			} elseif ($field->field_type=="LIST"){
 				$tmp = $field->varname;
 				$attr[] = [
-					'name' => $field->title,
+                    'name' => $field->varname,
+                    'label' => $field->title,
 					'type' => 'raw',
 					'value' => Catalog::model()->findByPk($model->$tmp)->cat_name,
 				];
 			} else {
+			    //var_dump($field->title);
 				$tmp = $field->varname;
 				$attr[] = [
-					'name' => $field->title,
+					'name' => $field->varname,
+					'label' => $field->title,
 					'value' => $model->$tmp
 				];
 			}
@@ -55,14 +59,16 @@ if(isset(Zakaz::$files_folder)){
 $html_string = $model->generateMaterialsList($url, false, $cant_remove_files);
 // ---
 $attr[] = [
-	'name' => ProjectModule::t('Attached materials'),
+	'name' => 'attached_materials',
+    'label' => ProjectModule::t('Attached materials'),
 	'type'=>'raw',
 	'value' => '<ul class="materials-files">'.$html_string.'</ul>'
 ];
 
 if(!User::model()->isCustomer() && $model->getAttribute('author_notes')) {
 	$attr[] = [
-		'name' => ProjectModule::t('Comments to the work'),
+		'name' => 'comments_to_the_work',
+        'label' => ProjectModule::t('Comments to the work'),
 		'value' => $model->getAttribute('author_notes')
 	];
 }
