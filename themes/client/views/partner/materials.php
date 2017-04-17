@@ -1,4 +1,4 @@
 <br>
-<p>Front page: <a href="/partner/redirect?pid=<?=$pid?>">Front page</a></p>
-<p>Registaration: <a href="/partner/redirect?pid=<?=$pid?>&url=/user/registration">reg</a></p>
-<p>Order: <a href="/partner/redirect?pid=<?=$pid?>&url=/project/zakaz/create">order now</a></p>
+<p><?php echo Yii::t('partner','Link to the front page'); ?>: <code>&lt;a href="http://<?=$_SERVER['HTTP_HOST']?>/partner/redirect?pid=<?=$pid?>"&gt;<?php echo Company::getName();?>&lt;/a&gt;</code></p>
+<p><?php echo Yii::t('partner','Link to the registation page'); ?>: <code>&lt;a href="http://<?=$_SERVER['HTTP_HOST']?>/partner/redirect?pid=<?=$pid?>&url=/user/registration"&gt;<?php echo Company::getName();?>&lt;/a&gt;</code></p>
+<p><?php echo Yii::t('partner','Link to the order page'); ?>: <code>&lt;a href="http://<?=$_SERVER['HTTP_HOST']?>/partner/redirect?pid=<?=$pid?>&url=/project/zakaz/create"&gt;<?php echo Company::getName();?>&lt;/a&gt;</code></p>

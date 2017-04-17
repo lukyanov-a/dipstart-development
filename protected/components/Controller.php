@@ -83,8 +83,8 @@ class Controller extends RController
                     break;
                 case ('Webmaster'):
                     $this->menu = array(
-						array('label'=>Yii::t('site','Stats'), 'url'=>array('/partner/stats')),
-						array('label'=>Yii::t('site','Promo materials'), 'url'=>array('/partner/materials')),
+						array('label'=>Yii::t('partner','Stats'), 'url'=>array('/partner/stats')),
+						array('label'=>Yii::t('partner','Promo materials'), 'url'=>array('/partner/materials')),
 						array('label'=>Yii::t('site','Logout'), 'url'=>array('/user/logout')),// Даллее выводится в обратном порядке
 						array('label'=>Yii::t('site','Profile'), 'url'=>array('/user/profile/edit')),
                     );

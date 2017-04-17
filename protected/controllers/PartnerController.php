@@ -3,6 +3,9 @@
 class PartnerController extends Controller {
 
 	public function actionRedirect($pid, $url = null) {
+        if (User::model()->getUserRole() == 'Webmaster') {
+            $this->redirect($this->createUrl('partner/materials'));
+        }
 		setcookie('partner', $pid, time()+60*60*24*30*3, '/');
 		$model = new WebmasterLog();
 		$model->pid = $pid;
