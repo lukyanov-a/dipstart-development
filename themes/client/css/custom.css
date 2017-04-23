@@ -1012,3 +1012,11 @@ div.stage-second-column {
         padding: 10px;
     }
 }
+
+.error-exception {
+	width: 100%;
+	text-align: center;
+	margin-top: 30px;
+	color: red;
+	font-style: italic;
+}

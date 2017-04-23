@@ -76,7 +76,8 @@ return array(
             'class' => 'CClientScript',
             'scriptMap' => array
             (
-                'jquery.js' => '/js/jquery-1.11.2.js',
+				'jquery.js'=>'http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.js',
+				'jquery.min.js'=>'http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js',
             ),
         ),
         'user'=>array(

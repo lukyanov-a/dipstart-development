@@ -111,6 +111,9 @@ class Catalog extends CActiveRecord {
 				$tree[$item->id] = $item->cat_name;
 			}
 		}
+		if (count($tree) == 0) {
+			throw new Exception('Error: one of lists is empty.');
+		}
 		return $tree;
     }
 	public function getGroupedList($field_varname) {
