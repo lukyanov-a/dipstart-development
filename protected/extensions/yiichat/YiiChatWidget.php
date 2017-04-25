@@ -26,7 +26,7 @@ class YiiChatWidget extends CWidget {
 	public	$minPostLen=2;
 	public	$maxPostLen=140;
 	public  $model; // a model instance, it must implements IYiiChat
-	public  $timerMs = 5000;
+	public  $timerMs = 50000;
 	public  $data;	// public data passed to the model instance
 
 	public	$myOwnPostCssStyle;		// css style names

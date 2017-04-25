@@ -69,7 +69,7 @@ class Controller extends RController
                     break;
                 case ('Customer'):
 						$menu[] = array('label'=>Yii::t('site','My orders'), 'url'=>array('/project/zakaz/customerOrderList'));
-						if (Company::getCompany()->module_tree) $menu[] = array('label'=>Yii::t('site','Tree structure'), 'url'=>array('/project/zakaz/tree'));
+						if (Company::getCompany()->module_tree) $menu[] = array('label'=>Yii::t('site','Orders treeview'), 'url'=>array('/project/zakaz/tree'));
 						$menu[] = array('label'=>Yii::t('site','Create order'), 'url'=>array('/project/zakaz/create'));
                         //$menu[] = array('label'=>Yii::t('site','Personal account'), 'url'=>array('/user/profile/account'));
 						if (Company::getCompany()->agreement4customers && Company::getCompany()->agreement4customers != '') $menu[] = array('label'=>Yii::t('site','User Agreement'), 'url'=>array('/site/agreement'));

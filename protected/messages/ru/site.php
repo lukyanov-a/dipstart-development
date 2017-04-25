@@ -205,6 +205,7 @@ return array(
 	'UnCheck All' => 'Сбросить все',
 	'Link is absent' => 'Ссылка отсутствует',
 	'Tree structure' => 'Древовидная структура',
+	'Orders treeview' => 'Мои заказы в виде дерева',
 	//sms
     'Invalid parameters' => 'Ошибка в параметрах',
     'Invalid login or password' => 'Неверный логин или пароль',
