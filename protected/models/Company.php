@@ -24,10 +24,10 @@ class Company extends CActiveRecord {
 			array('iconupload', 'file', 'types'=>'ico', 'maxSize'=>'204800', 'allowEmpty'=>true),
 			array('header, text4guests, text4customers, agreement4customers, agreement4executors', 'length', 'max'=>65535),
 			array('WebmasterFirstOrderRate, WebmasterSecondOrderRate', 'type', 'type'=>'float'),
-			array('telfin_id, telfin_secret', 'length', 'max'=>32),
+			array('telfin_id, telfin_secret, smsc_login, smsc_passwd', 'length', 'max'=>32),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, frozen, organization, name, domains, language, supportEmail, PaymentCash, Payment2Chekout, Payment2ChekoutHash, FrontPage, icon, logo, header, text4guests, text4customers, agreement4customers, agreement4executors, WebmasterFirstOrderRate, WebmasterSecondOrderRate, telfin_id, telfin_secret, module_tree', 'safe', 'on'=>'search'),
+			array('id, frozen, organization, name, domains, language, supportEmail, PaymentCash, Payment2Chekout, Payment2ChekoutHash, FrontPage, icon, logo, header, text4guests, text4customers, agreement4customers, agreement4executors, WebmasterFirstOrderRate, WebmasterSecondOrderRate, telfin_id, telfin_secret, smsc_login, smsc_passwd, module_tree', 'safe', 'on'=>'search'),
 		);
 	}
 	public function attributeLabels() {
@@ -54,6 +54,8 @@ class Company extends CActiveRecord {
 			'WebmasterSecondOrderRate' => Yii::t('site','webmaster second order rate'),
 			'telfin_id'                => Yii::t('site','telfin id'),
 			'telfin_secret'            => Yii::t('site','telfin secret'),
+			'smsc_login'               => Yii::t('site','smsc.ru api login'),
+			'smsc_passwd'              => Yii::t('site','smsc.ru api password'),
 			'module_tree'              => Yii::t('site','Tree structure'),
 		);
 	}

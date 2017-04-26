@@ -70,7 +70,9 @@ function send_sms($phones, $message, $translit = 0, $time = 0, $id = 0, $format 
 
 function send_sms_mail($phones, $message, $translit = 0, $time = 0, $id = 0, $format = 0, $sender = "")
 {
-    return mail("send@send.smsc.ru", "", SMSC_LOGIN.":".SMSC_PASSWORD.":$id:$time:$translit,$format,$sender:$phones:$message", "From: ".SMTP_FROM."\nContent-Type: text/plain; charset=".SMSC_CHARSET."\n");
+	$smsc_login = Company::getCompany()->smsc_login;
+	$smsc_password = Company::getCompany()->smsc_passwd;
+    return mail("send@send.smsc.ru", "", $smsc_login.":".$smsc_password.":$id:$time:$translit,$format,$sender:$phones:$message", "From: ".SMTP_FROM."\nContent-Type: text/plain; charset=".SMSC_CHARSET."\n");
 }
 
 // Функция получения стоимости SMS
@@ -190,7 +192,9 @@ function get_balance()
 
 function _smsc_send_cmd($cmd, $arg = "", $files = array())
 {
-    $url = (SMSC_HTTPS ? "https" : "http")."://smsc.ru/sys/$cmd.php?login=".urlencode(SMSC_LOGIN)."&psw=".urlencode(SMSC_PASSWORD)."&fmt=1&charset=".SMSC_CHARSET."&".$arg;
+	$smsc_login = Company::getCompany()->smsc_login;
+	$smsc_password = Company::getCompany()->smsc_passwd;
+    $url = (SMSC_HTTPS ? "https" : "http")."://smsc.ru/sys/$cmd.php?login=".urlencode($smsc_login)."&psw=".urlencode($smsc_password)."&fmt=1&charset=".SMSC_CHARSET."&".$arg;
 //echo '<br>url='.$url;
     $i = 0;
     do {
