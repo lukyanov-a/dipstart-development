@@ -115,6 +115,16 @@
 		<?php echo $form->textField($model,'telfin_secret',array('size'=>60,'maxlength'=>32)); ?>
 		<?php echo $form->error($model,'telfin_secret'); ?>
 	</div>
+		<div class="row">
+		<?php echo $form->labelEx($model,'smsc_login'); ?>
+		<?php echo $form->textField($model,'smsc_login',array('size'=>60,'maxlength'=>32)); ?>
+		<?php echo $form->error($model,'smsc_login'); ?>
+	</div>
+	<div class="row">
+		<?php echo $form->labelEx($model,'smsc_passwd'); ?>
+		<?php echo $form->textField($model,'smsc_passwd',array('size'=>60,'maxlength'=>32)); ?>
+		<?php echo $form->error($model,'smsc_passwd'); ?>
+	</div>
 	<div class="row">
 		<?php echo $form->labelEx($model,'module_tree'); ?>
 		<?php echo $form->checkBox($model,'module_tree'); ?>

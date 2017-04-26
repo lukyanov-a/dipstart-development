@@ -206,6 +206,8 @@ return array(
 	'Link is absent' => 'Ссылка отсутствует',
 	'Tree structure' => 'Древовидная структура',
 	'Orders treeview' => 'Мои заказы в виде дерева',
+	'smsc.ru api login' => 'smsc.ru (сервис для отправки смс) api логин',
+	'smsc.ru api password' => 'smsc.ru (сервис для отправки смс) api пароль',
 	//sms
     'Invalid parameters' => 'Ошибка в параметрах',
     'Invalid login or password' => 'Неверный логин или пароль',
