@@ -41,8 +41,12 @@ class RegistrationController extends Controller
 				$webmasterlog = new WebmasterLog();
 				$webmasterlog->pid = $model->pid;
 				$webmasterlog->uid = $model->id;
-				$webmasterlog->date = date("Y-m-d"); 
-				$webmasterlog->action =  WebmasterLog::REG;
+				$webmasterlog->date = date("Y-m-d");
+				if ($role == 'Author') {
+					$webmasterlog->action =  WebmasterLog::REG_EXECUTOR;
+				} elseif ($role == 'Customer') {
+					$webmasterlog->action =  WebmasterLog::REG_CUSTOMER;
+				}
 				$webmasterlog->save();
 
 				// новая служба системных сообщений
