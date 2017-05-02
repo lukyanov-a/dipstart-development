@@ -25,6 +25,7 @@ class Payment extends CActiveRecord {
 	const OUTCOMING_EXECUTOR  = 1;
 	const OUTCOMING_WEBMASTER = 2;
 	const OUTCOMING_CUSTOMER  = 3; // Refound
+	const OUTCOMING_PARTNER_FOR_EXECUTOR = 4;
 	
 	// Payment statuses
 	const FREE = 0;
@@ -47,7 +48,7 @@ class Payment extends CActiveRecord {
 			array('summ, details_type', 'numerical'),
 			array('theme, , details_number', 'length', 'max'=>255),
 			array('manager, user, method', 'length', 'max'=>100),
-                        array('user', 'email'),
+            array('user', 'email'),
 			array('receive_date, pay_date, details_number, payment_type', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -183,9 +184,11 @@ class Payment extends CActiveRecord {
 
 		$criteria=new CDbCriteria;
 		
-		$criteria->condition = 'payment_type IN (:type)';
-		$criteria->params = array(':type'=>$type);
-
+		//$criteria->condition = 'payment_type IN (:type)';
+		//$criteria->params = array(':type'=>$type);
+		if (is_array($type)) {
+			$criteria->addInCondition('payment_type',$type);
+		}
 		$criteria->compare('id',$this->id);
 		$criteria->compare('order_id',$this->order_id);
 		$criteria->compare('receive_date',$this->receive_date,true);

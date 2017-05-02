@@ -105,6 +105,16 @@
 		<?php echo $form->textField($model,'WebmasterSecondOrderRate',array('size'=>60,'maxlength'=>32)); ?>
 		<?php echo $form->error($model,'WebmasterSecondOrderRate'); ?>
 	</div>
+		<div class="row">
+		<?php echo $form->labelEx($model,'WebmasterFirstExecutorOrderRate'); ?>
+		<?php echo $form->textField($model,'WebmasterFirstExecutorOrderRate',array('size'=>60,'maxlength'=>32)); ?>
+		<?php echo $form->error($model,'WebmasterFirstExecutorOrderRate'); ?>
+	</div>
+	<div class="row">
+		<?php echo $form->labelEx($model,'WebmasterSecondExecutorOrderRate'); ?>
+		<?php echo $form->textField($model,'WebmasterSecondExecutorOrderRate',array('size'=>60,'maxlength'=>32)); ?>
+		<?php echo $form->error($model,'WebmasterSecondExecutorOrderRate'); ?>
+	</div>
 	<div class="row">
 		<?php echo $form->labelEx($model,'telfin_id'); ?>
 		<?php echo $form->textField($model,'telfin_id',array('size'=>60,'maxlength'=>32)); ?>

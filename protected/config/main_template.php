@@ -71,15 +71,16 @@ return array(
 	),
 	// application components
 	'components'=>array(
-        'clientScript' => array
-        (
+        'clientScript' => array(
             'class' => 'CClientScript',
-            'scriptMap' => array
-            (
+            'scriptMap' => array(
 				'jquery.js'=>'http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.js',
 				'jquery.min.js'=>'http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js',
             ),
         ),
+		'cache'=>array(
+			'class'=>'system.caching.CDummyCache',
+		),
         'user'=>array(
             'class' => 'RWebUser',
             'loginUrl'=>array('user/login'),
