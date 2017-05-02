@@ -292,17 +292,19 @@ class PaymentController extends Controller {
 					} else {
 						$paying_to_partner = $paying * Company::getWebmasterFirstExecutorOrderRate();
 					}
-					$partner = User::model()->findByPk($user->pid);
-					$buh = new Payment;
-					$buh->approve = 0;
-					$buh->order_id = $orderId;
-					$buh->receive_date = date('Y-m-d H:i:s');
-					$buh->theme = $order->title;
-					$buh->user = $partner->email;
-					$buh->summ = $paying_to_partner;
-					$buh->payment_type = Payment::OUTCOMING_PARTNER_FOR_EXECUTOR;
-					$buh->manager = $manag->email;
-					$buh->save();
+					if ($paying_to_partner) {
+						$partner = User::model()->findByPk($user->pid);
+						$buh = new Payment;
+						$buh->approve = 0;
+						$buh->order_id = $orderId;
+						$buh->receive_date = date('Y-m-d H:i:s');
+						$buh->theme = $order->title;
+						$buh->user = $partner->email;
+						$buh->summ = $paying_to_partner;
+						$buh->payment_type = Payment::OUTCOMING_PARTNER_FOR_EXECUTOR;
+						$buh->manager = $manag->email;
+						$buh->save();
+					}
 				}
             }
             
