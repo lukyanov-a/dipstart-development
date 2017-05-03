@@ -11,13 +11,7 @@ return array(
 
     // application components
     'components' => array(
-        'db' => array(
-            'connectionString' => 'mysql:host=localhost;dbname=project',
-            'emulatePrepare' => true,
-            'username' => 'garry',
-            'password' => '158358',
-            'charset' => 'utf8',
-        ),
+		'db'=>include 'db.php',
         'log' => array(
             'class' => 'CLogRouter',
             'routes' => array(
