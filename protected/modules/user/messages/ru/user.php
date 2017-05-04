@@ -254,5 +254,7 @@ return array(
 	'Receive notification of the occurrence of terms' => 'Получать уведомление о наступлении сроков',
 	'Time notification' => 'Время за которое необходимо уведомить',
     'Recive general mailing' => 'Подписаться на общую рассылку компании',
+
+	'Автор' => 'Исполнитель',
 );
 

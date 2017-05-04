@@ -207,6 +207,14 @@ return array(
 	'fullname' => 'Full Name',
 	'recoveryMessage' => 'Please check your email. An instructions was sent to your email address.',
 	'Incorrect password (minimal length 6 symbols).'=>'Incorrect password (minimal length 6 symbols).',
+
+	//assignments
+	'Администратор' => 'Administrator',
+	'Заказчик' => 'Customer',
+	'Менеджер' => 'Manager',
+	'Гость' => 'Guest',
+	'Автор' => 'Executor',
+	'Вэбмастер' => 'Webmaster',
 );
 
 
