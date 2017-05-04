@@ -289,6 +289,7 @@ return array(
 	'Method of payment' => 'Метод оплаты',
 	'Value' => 'Значение',
 	'The amount of payments' => 'Сумма платежей',
+	'The amount in accordance with the filter criteria' => 'Сумма в соответствии с критериями фильтров',
 	
 	'Events' => 'События',
 	'EVENTS' => 'События',

@@ -152,6 +152,9 @@ class AssignmentController extends RController
 				Rights::t('core', 'Permission :name revoked.', array(':name'=>$item->getNameText()))
 			);
 
+			if(isset($_GET['return'])) {
+				$this->redirect(array('//user/admin/update', 'id'=>$_GET['id']));
+			}
 			// if AJAX request, we should not redirect the browser
 			if( isset($_POST['ajax'])===false )
 				$this->redirect(array('assignment/user', 'id'=>$_GET['id']));

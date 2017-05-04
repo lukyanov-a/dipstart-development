@@ -72,10 +72,10 @@ $customer = $model->user;
                                     ));
                                     echo $form->errorSummary($model); ?>
 
-									<div class="form-item notesBlockArea">
+									<!--<div class="form-item notesBlockArea">
 										<?php echo $form->labelEx($model, 'author_notes'); ?>
 										<?php echo $form->textArea($model, 'author_notes', array('rows' => 3, 'class' => 'notesBlockTextarea')); ?>
-									</div>
+									</div>-->
 
 									<div class="form-item">
 									<?php

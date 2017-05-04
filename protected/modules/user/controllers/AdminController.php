@@ -122,6 +122,9 @@ class AdminController extends Controller {
 		$manager = !User::model()->isAuthor();
 		$admin	 = User::model()->isAdmin();
 
+		$formModel = new AssignmentForm();
+		$authorizer = Rights::module()->getAuthorizer();
+
 		if(isset($_POST['User'])) {
 			$model->attributes=$_POST['User'];
 			$profile->setAttributes($_POST['Profile'], false);
@@ -136,15 +139,41 @@ class AdminController extends Controller {
 				$profile->save();
 				$this->redirect(array('update','id'=>$model->id));
 			} else $profile->validate();
+		} elseif( isset($_POST['AssignmentForm'])===true ) {
+			$formModel->attributes = $_POST['AssignmentForm'];
+			if( $formModel->validate()===true )
+			{
+				// Update and redirect
+				$authorizer->authManager->assign($formModel->itemname, $model->id);
+				$item = $authorizer->authManager->getAuthItem($formModel->itemname);
+				$item = $authorizer->attachAuthItemBehavior($item);
+
+				Yii::app()->user->setFlash('success',
+					Rights::t('core', 'Permission :name assigned.', array(':name'=>$item->getNameText()))
+				);
+
+				$this->redirect(array('update','id'=>$model->id));
+			}
 		};
 
 		$fields = ProfileField::model()->findAll();
+
+		$assignedItems = $authorizer->getAuthItems(null, $model->id);
+		$assignments = array_keys($assignedItems);
+		$assignSelectOptions = Rights::getAuthItemSelectOptions(2, $assignments);
+		$dataProvider = new RAuthItemDataProvider('assignments', array(
+			'userId'=>$model->id,
+		));
+
 		$this->render('update',array(
 			'model'		=> $model,
 			'profile'	=> $profile,
 			'manager'	=> $manager,
 			'admin'		=> $admin,
 			'fields'	=> $fields,
+			'dataProvider' => $dataProvider,
+			'formModel'=>$formModel,
+			'assignSelectOptions'=>$assignSelectOptions,
 		));	
 	}
 	/**

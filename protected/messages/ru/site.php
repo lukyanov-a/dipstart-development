@@ -229,6 +229,13 @@ return array(
 	'Delivery' => 'Рассылка',
 	// Emails
 	'Notification' => 'Уведомление',
+
+	//Logs
+	'Date and time' => 'Дата и время',
+	'Manager' => 'Менеджер',
+	'Action' => 'Действие',
+	'Order number' => 'Номер заказа',
+	'Number of user actions: {start} - {end} from {count}' => 'Количество действий пользователя: {start}-{end} из {count}',
 	
 	'%site%' => '%сайт%',
 	'%the link to the password change page%' => '%ссылка на страницу изменения пароля%',

@@ -141,7 +141,7 @@ return array(
 	'Admin' => 'Администратор',
 	'Manager' => 'Менеджер',
 	'Webmaster' => 'Вэбмастер',
-	'Corrector' => 'Корректор',
+	'Corrector' => 'Технический руководитель',
 	'Roles' => 'Роли',
     'Hello, please fill an anket for authorsAuthor' => 'Здравствуйте, заполните, пожалуйста, Вашу анкету автора научных работ... ',
     'Hello, please fill an anket for authorsCustomer' => 'Здравствуйте, заполните Вашу анкету ',

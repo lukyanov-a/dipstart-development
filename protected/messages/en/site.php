@@ -184,6 +184,13 @@ return array(
 
 	'Notification' => 'notification',
 
+	//Logs
+	'Date and time' => 'Date and time',
+	'Manager' => 'Manager',
+	'Action' => 'Action',
+	'Order number' => 'Order number',
+	'Number of user actions: {start} - {end} from {count}' => 'Number of user actions: {start} - {end} from {count}',
+
 	'%site%' =>		'%site%',
 	'%the link to the password change page%' =>	'%the link to the password change page%',
 	'%support%' =>	'%support%',
