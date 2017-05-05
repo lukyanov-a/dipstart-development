@@ -32,6 +32,16 @@ class Events extends CActiveRecord {
 			'status' => 'Статус',
 		);
 	}
+	
+	public function getKey()
+	{
+		return Company::getId().'-events';
+	}
+	
+	protected function afterSave() {
+		Yii::app()->cache->delete($this->getKey());
+        return parent::afterSave();
+    } 
         
     public function search()
 	{
