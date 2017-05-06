@@ -42,6 +42,14 @@ return array(
                 ),
             ),
         ),
+		
+		'cache'=>array(
+			//'class'=>'system.caching.CDummyCache',
+            'class'=>'system.caching.CMemCache',
+            'servers'=>array(
+                array('host'=>'localhost', 'port'=>11211, 'weight'=>100),
+            ),
+        ),
  
         // Соединение с СУБД
 		'db'=>include 'db.php',
