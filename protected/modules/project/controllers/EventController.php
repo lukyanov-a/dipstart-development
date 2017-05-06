@@ -41,7 +41,7 @@ class EventController extends Controller {
 	
 	public function actionRefresh() {
 	    if (Yii::app()->request->isAjaxRequest) {
-			$key = Events::model()->getKey();
+			$key = Events::getCacheKey();
 			$html = Yii::app()->cache->get($key);
 			if (empty($html)) {
 				$events = Events::model()->findAll(array(
@@ -56,12 +56,10 @@ class EventController extends Controller {
 	}
 	
     public function actionDelete() {
-		Yii::app()->cache->delete(Events::model()->getKey());
 		$id  = Yii::app()->request->getParam('id');
         if (Yii::app()->request->isAjaxRequest){
-			
+			Yii::app()->cache->delete(Events::getCacheKey());
             header('Content-Type: application/json');
-			
 			if (Events::model()->deleteByPk($id))
 				echo CJSON::encode(array('success'=>true));
 			else
