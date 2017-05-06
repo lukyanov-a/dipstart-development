@@ -62,7 +62,7 @@ function update_events(){
 				$('#is-new-event')[0].play();
 			}
 			if (!intervalTimer)
-				intervalTimer = setInterval(titleSignal, 500);
+				intervalTimer = setInterval(titleSignal, 5000); //5s
 		}
 	});
 };
