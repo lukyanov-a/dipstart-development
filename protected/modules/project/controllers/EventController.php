@@ -43,7 +43,7 @@ class EventController extends Controller {
 	    if (Yii::app()->request->isAjaxRequest) {
 			$key = Events::getCacheKey();
 			$html = Yii::app()->cache->get($key);
-			if (empty($html)) {
+			if ($html === false) {
 				$events = Events::model()->findAll(array(
 					'condition' => '',
 					'order' => 'timestamp DESC'
