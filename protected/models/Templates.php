@@ -36,7 +36,7 @@ class Templates extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, title, text, type_id', 'required'),
+			array('title, text, type_id', 'required'),
 			array('name, title', 'length', 'max'=>255),
 			array('type_id', 'length', 'max'=>18),
 			// The following rule is used by search().
@@ -98,6 +98,37 @@ class Templates extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+	public function searchByCategory($id_category)
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('id',$this->id,true);
+		$criteria->compare('name',$this->name,true);
+		$criteria->compare('title',$this->title,true);
+		$criteria->compare('text',$this->text,true);
+		$criteria->compare('type_id',$this->type_id,true);
+		$criteria->addInCondition('type_id', $this->categoryes($id_category));
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
+
+	public function typesByCategory($type_category) {
+		$result = array();
+		$types = $this->types();
+		$categoryes = $this->categoryes($type_category);
+		foreach ($types as $key=>$type) {
+			if(in_array($key, $categoryes)) {
+				$result[$key] = $type;
+			}
+		}
+		return $result;
+	}
+
 	public function types()
 	{
 		return array(
@@ -130,6 +161,49 @@ class Templates extends CActiveRecord
 			31 => Yii::t('site','Hint for customer when he sending a message'), // Шаблон для кнопок в заказе гостя
 			32 => Yii::t('site','Notification for executor about the occurrence timing of the completion of the order'), // Шаблон уведовления о сроках завершения заказа
 			33 => Yii::t('site','Notification for executor about the occurrence timing of the completion of the completion point'), // Шаблон уведовления о сроках завершения этапа заказа
+		);
+	}
+
+	public function categoryes($id_category = 0)
+	{
+		$categoryes = array(
+			1 => [1, 2],
+			2 => [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28],
+			3 => [4],
+			4 => [29, 30, 31],
+			0 => [3, 5, 32, 33],
+		);
+		return $categoryes[$id_category];
+	}
+	
+	public function getVariables() {
+		return array(
+			Yii::t('site','%site%'),
+			Yii::t('site','%the link to the password change page%'),
+			Yii::t('site','%support%'),
+			Yii::t('site','%company%'),
+			Yii::t('site','%name%'),
+			Yii::t('site','%Name%'),
+			Yii::t('site','%login%'),
+			Yii::t('site','%password%'),
+			Yii::t('site','%the link to the personal account page%'),
+			Yii::t('site','%Order link%'),
+			Yii::t('site','%order link%'),
+			Yii::t('site','%Job title%'),
+			Yii::t('site','%order no%'),
+			Yii::t('site','%the order number%'),
+			Yii::t('site','%Job title%'),
+			Yii::t('site','%job title%'),
+			Yii::t('site','%Title%'),
+			Yii::t('site','%title%'),
+			Yii::t('site','%from the cost field%'),
+			Yii::t('site','%the amount of charged%'),
+			Yii::t('site','%the amount to be paid%'),
+			Yii::t('site','%message body%'),
+			Yii::t('site','%the link to the payment page%'),
+			Yii::t('site','%specialization%'),
+			Yii::t('site','%the name of the stage%'),
+			Yii::t('site','%new order%'),
 		);
 	}
 	

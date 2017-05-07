@@ -393,18 +393,18 @@ table.payment-table td button {
 }
 
 label[for="Templates_name"] {
-    width: 200px;
+    width: 400px;
     margin-bottom: 18px;
 }
 
 label[for="Templates_title"] {
-    width: 200px;
+    width: 400px;
     margin-top: 5px;
     margin-bottom: 20px;
 }
 
 label[for="Templates_text"] {
-    width: 200px;
+    width: 400px;
     margin-top: 5px;
 }
 

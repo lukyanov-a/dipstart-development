@@ -126,7 +126,16 @@ return array(
     // admin menu
     'Accounts department' => 'Accounts department',
 
-	// работа с этапами 
+	//Company
+	'domains' => 'Domain names of the company (for example, company.admintrix.com; if there are several of them, we write through a space)',
+	'language' => 'Interface language',
+	'2checkout hash' => 'If you connect a payment system 2checkout - a unique identifier; Hash 2checkout',
+	'icon' => 'Favicon',
+	'text for guests' => 'Text in the cap, which is shown to non-registered performers',
+	'webmaster first customer order rate' => 'The percentage that is paid to the partner who brought the client (webmaster)',
+	'telfin id' => 'Identifier in the system telfin (when connecting telephony from telfin.ru - specify your key in your personal account telfin.ru)',
+	'Tree structure company' => 'Will the structure of projects in the form of a tree (sub-orders)',
+	// работа с этапами
 
     'StepStatuses' => 'Step Statuses',
     'Part Statuses' =>  'Part Statuses',

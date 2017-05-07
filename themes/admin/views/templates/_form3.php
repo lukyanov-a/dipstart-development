@@ -2,6 +2,8 @@
 /* @var $this TemplatesController */
 /* @var $model Templates */
 /* @var $form CActiveForm */
+Yii::app()->getClientScript()->registerScriptFile('/js/tinymce/tinymce.min.js');
+
 ?>
 
 <div class="form">
@@ -20,7 +22,7 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'name'); ?>
+		<label for="Templates_title" class="required"><?=Yii::t('site','Field name')?> <span class="required">*</span></label>
 		<?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'name'); ?>
 	</div>
@@ -39,7 +41,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'type_id');
-		$list = $model->types();
+		$list = $model->typesByCategory($type);
         echo $form->dropDownList($model, 'type_id', $list, array('empty' => Yii::t('site','Select')));
 	    ?>
 	</div>
@@ -53,3 +55,28 @@
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+
+<script>
+	tinymce.init({
+		selector:'textarea',
+		menubar: false,
+		plugins: [
+			'advlist autolink lists link image charmap print preview anchor',
+			'searchreplace visualblocks code fullscreen',
+			'insertdatetime media table contextmenu paste code'
+		],
+		toolbar: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | mybutton',
+		setup: function(editor) {
+			editor.addButton('mybutton', {
+				type: 'menubutton',
+				text: '<?php echo Yii::t("site", "Variables"); ?>',
+				icon: false,
+				menu: [
+					<?php foreach ($model->getVariables() as $variable) {
+					echo "{	text: '".$variable."', onclick: function() { editor.insertContent('&nbsp;".$variable."&nbsp;'); } },";
+				} ?>
+				]
+			});
+		},
+	});
+</script>
