@@ -63,7 +63,7 @@ $('.search-form form').submit(function(){
 		),
 		array(
 			'name'=> UserModule::t('field_type'),
-			'value'=>'$data->field_type',
+			'value'=> 'UserModule::t($data->field_type)',
 			'filter'=>ProfileField::itemAlias("field_type"),
 		),
 		'field_size',
@@ -86,12 +86,25 @@ $('.search-form form').submit(function(){
 			'filter'=>ProfileField::itemAlias("visible"),
 		),
         array(
+			'header' => UserModule::t('paymentPropsShort'),
 			'name'=>'paymentProps',
-			'value'=> '$data->paymentProps',
+			'value'=> '$data->paymentProps ? UserModule::t("Yes") : UserModule::t("No")',
 		),            
 		//*/
 		array(
 			'class'=>'CButtonColumn',
+			'template'=> '{view} {viewlist} {update} {delete}',
+			'buttons'=>array(
+				'viewlist'=>array(
+					'url'=>'Yii::app()->controller->createUrl("//catalog/admin/?field_varname=".$data->varname)',
+					'visible'=>'$data->field_type == "LIST"',
+					'imageUrl'=>Yii::app()->controller->createUrl("//").'/images/list.png',
+					'label'=>UserModule::t('View list'),
+				),
+				'update'=>array(
+					'url'=>'$data->varname=="specials2" ? Yii::app()->controller->createUrl("profileField/updatespecials2/id/".$data->id."/") : Yii::app()->controller->createUrl("profileField/update/id/".$data->id."/")',
+				),
+			),
 		),
 	),
 )); ?>

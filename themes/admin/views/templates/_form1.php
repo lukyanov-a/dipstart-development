@@ -33,6 +33,7 @@ Yii::app()->getClientScript()->registerScriptFile('/js/tinymce/tinymce.min.js');
 	</div>
 
 	<div class="row">
+		<label for="Templates_title" class="required"><?=Yii::t('site','The text of the answer is above in the upper left of the field for input')?> <span class="required">*</span></label>
 		<?php echo $form->labelEx($model,'text'); ?>
 		<?php echo $form->textArea($model,'text',array('rows'=>6, 'cols'=>50)); ?>
 		<?php echo $form->error($model,'text'); ?>

@@ -11,6 +11,167 @@ $this->menu=array(
 	array('label'=>Yii::t('site','Different service messages'), 'url'=>array('templates/admin/', 'type'=>0)),
 	array('label'=>Yii::t('site','Create Templates'), 'url'=>array('create', 'type'=>$type)),
 );
+$columns = array(
+	'id',
+	'name',
+	'title',
+	'text',
+	array(
+		'name' => 'type_id',
+		'type' => 'raw',
+		'value' => function($data) {
+			return Templates::model()->performType($data->type_id);
+		},
+	),
+	array(
+		'class'=>'CButtonColumn',
+		'template'=>'{view} {update} {delete}',
+		'buttons'=>array(
+			'update'=>array(
+				'url'=>'Yii::app()->controller->createUrl("templates/update/".$data->id."/?type='.$type.'")',
+			),
+			'view'=>array(
+				'url'=>'Yii::app()->controller->createUrl("templates/".$data->id."/?type='.$type.'")',
+			),
+		),
+	),
+);
+switch ($type){
+	case 1:
+		$columns = array(
+			'id',
+			array(
+				'header' => Yii::t("site","Category question"),
+				'name' => 'title'
+			),
+			array(
+				'header' => Yii::t('site','The text of the answer is above in the upper left of the field for input'),
+				'name' => 'text'
+			),
+			array(
+				'name' => 'type_id',
+				'type' => 'raw',
+				'value' => function($data) {
+					return Templates::model()->performType($data->type_id);
+				},
+				'filter'=>$model->typesByCategory($type),
+			),
+			array(
+				'class'=>'CButtonColumn',
+				'template'=>'{view} {update} {delete}',
+				'buttons'=>array(
+					'update'=>array(
+						'url'=>'Yii::app()->controller->createUrl("templates/update/".$data->id."/?type='.$type.'")',
+					),
+					'view'=>array(
+						'url'=>'Yii::app()->controller->createUrl("templates/".$data->id."/?type='.$type.'")',
+					),
+				),
+			),
+		);
+	break;
+	case 2:
+		$columns = array(
+			'id',
+			array(
+				'header' => Yii::t("site","Letter subject"),
+				'name' => 'title'
+			),
+			array(
+				'header' => Yii::t("site","message"),
+				'name' => 'text'
+			),
+			array(
+				'name' => 'type_id',
+				'type' => 'raw',
+				'value' => function($data) {
+					return Templates::model()->performType($data->type_id);
+				},
+				'filter'=>$model->typesByCategory($type),
+			),
+			array(
+				'class'=>'CButtonColumn',
+				'template'=>'{view} {update} {delete}',
+				'buttons'=>array(
+					'update'=>array(
+						'url'=>'Yii::app()->controller->createUrl("templates/update/".$data->id."/?type='.$type.'")',
+					),
+					'view'=>array(
+						'url'=>'Yii::app()->controller->createUrl("templates/".$data->id."/?type='.$type.'")',
+					),
+				),
+			),
+		);
+	break;
+	case 3:
+		$columns = array(
+			'id',
+			array(
+				'header' => Yii::t("site","Field name"),
+				'name' => 'name',
+				'filter'=>$model->nameHintFild(),
+			),
+			array(
+				'name' => 'title',
+				'filter'=>$model->nameHintName(),
+			),
+			'text',
+			array(
+				'name' => 'type_id',
+				'type' => 'raw',
+				'value' => function($data) {
+					return Templates::model()->performType($data->type_id);
+				},
+				'filter'=>$model->typesByCategory($type),
+			),
+			array(
+				'class'=>'CButtonColumn',
+				'template'=>'{view} {update} {delete}',
+				'buttons'=>array(
+					'update'=>array(
+						'url'=>'Yii::app()->controller->createUrl("templates/update/".$data->id."/?type='.$type.'")',
+					),
+					'view'=>array(
+						'url'=>'Yii::app()->controller->createUrl("templates/".$data->id."/?type='.$type.'")',
+					),
+				),
+			),
+		);
+	break;
+	case 4:
+		$columns = array(
+			'id',
+			array(
+				'header' => Yii::t("site","Button label"),
+				'name' => 'title',
+			),
+			array(
+				'header' => Yii::t("site","Message text"),
+				'name' => 'text',
+			),
+			array(
+				'name' => 'type_id',
+				'type' => 'raw',
+				'value' => function($data) {
+					return Templates::model()->performType($data->type_id);
+				},
+				'filter'=>$model->typesByCategory($type),
+			),
+			array(
+				'class'=>'CButtonColumn',
+				'template'=>'{view} {update} {delete}',
+				'buttons'=>array(
+					'update'=>array(
+						'url'=>'Yii::app()->controller->createUrl("templates/update/".$data->id."/?type='.$type.'")',
+					),
+					'view'=>array(
+						'url'=>'Yii::app()->controller->createUrl("templates/".$data->id."/?type='.$type.'")',
+					),
+				),
+			),
+		);
+		break;
+}
 ?>
 
 <h1><?=Yii::t('site','Manage Templates')?></h1>
@@ -20,29 +181,5 @@ $this->menu=array(
 	'id'=>'templates-grid',
 	'dataProvider'=>$model->searchByCategory($type),
 	'filter'=>$model,
-	'columns'=>array(
-		'id',
-		'name',
-		'title',
-		'text',
-		 array(
-            'name' => 'type_id',
-            'type' => 'raw',
-            'value' => function($data) {
-				return Templates::model()->performType($data->type_id);
-			},
-        ),
-		array(
-			'class'=>'CButtonColumn',
-			'template'=>'{view} {update} {delete}',
-			'buttons'=>array(
-				'update'=>array(
-					'url'=>'Yii::app()->controller->createUrl("templates/update/".$data->id."/?type=".$data->type_id)',
-				),
-				'view'=>array(
-					'url'=>'Yii::app()->controller->createUrl("templates/".$data->id."/?type='.$type.'")',
-				),
-			),
-		),
-	),
+	'columns'=> $columns,
 )); ?>

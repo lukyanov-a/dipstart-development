@@ -129,6 +129,22 @@ class Templates extends CActiveRecord
 		return $result;
 	}
 
+	public function nameHintFild() {
+		$res = array();
+		$names = $this->findAllByAttributes(array('type_id'=>4));
+		foreach ($names as $key=>$name)
+			$res[$name->name]=$name->name;
+		return $res;
+	}
+
+	public function nameHintName() {
+		$res = array();
+		$names = $this->findAllByAttributes(array('type_id'=>4));
+		foreach ($names as $key=>$name)
+			$res[$name->title]=$name->title;
+		return $res;
+	}
+
 	public function types()
 	{
 		return array(

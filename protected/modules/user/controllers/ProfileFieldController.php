@@ -28,7 +28,7 @@ class ProfileFieldController extends Controller
 	public function accessRules() {
 		return array(
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('create','update','view','admin','delete'),
+				'actions'=>array('create','update', 'updatespecials2','view','admin','delete'),
 				'users'=>UserModule::getAdmins(),
 			),
 			array('deny',  // deny all users
@@ -386,6 +386,23 @@ class ProfileFieldController extends Controller
 		$this->registerScript();
 
 		$this->render('update',array(
+			'model'=>$model,
+		));
+	}
+
+	public function actionUpdatespecials2()
+	{
+		$model=$this->loadModel();
+		if(isset($_POST['ProfileField']))
+		{
+			$model->attributes=$_POST['ProfileField'];
+			if($model->save()){
+				$this->redirect(array('view','id'=>$model->id));
+			};
+		}
+		$this->registerScript();
+
+		$this->render('updatespecials2',array(
 			'model'=>$model,
 		));
 	}

@@ -393,6 +393,26 @@ class ProjectFieldController extends Controller
 		));
 	}
 
+	public function actionUpdatespecials2()
+	{
+		$model=$this->loadModel();
+		if(isset($_POST['ProjectField'])) {
+			$model->attributes=$_POST['ProjectField'];
+			if(is_array($model->work_types)) {
+				$work_types = $model->work_types;
+				if($work_types[0]=='') $model->work_types = null;
+				else $model->work_types = implode(',',$work_types);
+			}
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id));
+		}
+		//$this->registerScript();
+
+		$this->render('updatespecials2',array(
+			'model'=>$model,
+		));
+	}
+
 	/**
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'index' page.

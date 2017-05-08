@@ -117,8 +117,8 @@ return array(
 	'Widget'=>'Widget',
 	'Widget parametrs'=>'Widget parametrs',
 	'Widget name.'=>'Widget name.',
-	'Allowed lowercase letters and digits.' => 'Allowed lowercase letters and digits.',
-	'Field name on the language of "sourceLanguage".' => 'Field name on the language of "sourceLanguage".',
+	'Allowed lowercase letters and digits.' => 'Lowercase letters and numbers are allowed. > "Any field name in Latin letters and / or numbers. (This is an internal name, only visible to the user)"',
+	'Field name on the language of "sourceLanguage".' => 'Field name.',
 	'Field type column in the database.' => 'Field type column in the database.',
 	'Field size column in the database.' => 'Field size column in the database.',
 	'The minimum value of the field (form validator).' => 'The minimum value of the field (form validator).',
@@ -126,7 +126,7 @@ return array(
 	"Regular expression (example: '/^[A-Za-z0-9\s,]+$/u')." => "Regular expression (example: '/^[A-Za-z0-9\s,]+$/u').",
 	'Predefined values (example: 1;2;3;4;5 or 1==One;2==Two;3==Three;4==Four;5==Five).' => 'Predefined values (example: 1;2;3;4;5 or 1==One;2==Two;3==Three;4==Four;5==Five).',
 	'Error message when you validate the form.' => 'Error message when you validate the form.',
-	'The value of the default field (database).' => 'The value of the default field (database).',
+	'The value of the default field (database).' => 'The value of the default field.',
 	'Display order of fields.' => 'Display order of fields.',
 	'Not visited' => 'Not visited',
 	'Search' => 'Search',
@@ -172,7 +172,8 @@ return array(
 	'CurrentProjects' => 'Current Projects',
 	'DoneProjects' => 'Done Projects',
 
-	'PaymentProps'=>'Payment Props',
+	'PaymentProps'=>'Is this field a payment requisite (eg account number, etc.)',
+	'paymentPropsShort'=>'Payment requisite',
 	// специализации
 	
 	'UseCtrlForMultiselect' => 'Use Ctrl For Multiselect',

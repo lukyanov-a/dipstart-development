@@ -24,4 +24,4 @@ $this->widget('zii.widgets.CMenu', array(
 ?>
 
 <h1><?php echo UserModule::t('Update Profile Field').' '.$model->id; ?></h1>
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_formspecial2', array('model'=>$model)); ?>
