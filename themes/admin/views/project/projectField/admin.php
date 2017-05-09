@@ -90,7 +90,19 @@ $('.search-form form').submit(function(){
 					'label'=>UserModule::t('View list'),
 				),
 				'update'=>array(
-					'url'=>'$data->varname=="specials2" ? Yii::app()->controller->createUrl("projectField/updatespecials2/id/".$data->id."/") : Yii::app()->controller->createUrl("projectField/update/id/".$data->id."/")',
+					'url'=> function($data) {
+						switch ($data->varname) {
+							case "specials2":
+								return Yii::app()->controller->createUrl("projectField/updatespecials2/id/".$data->id."/");
+							break;
+							case "title":
+								return Yii::app()->controller->createUrl("projectField/updatetitle/id/".$data->id."/");
+							break;
+							default:
+								return Yii::app()->controller->createUrl("projectField/update/id/".$data->id."/");
+							break;
+						}
+					},
 				),
 			),
 		),

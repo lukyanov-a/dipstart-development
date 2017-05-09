@@ -267,5 +267,6 @@ return array(
 
 	'An inscription on the field with a choice of services: for example "Choose a service" or "Type of service", etc.' => 'Надпись на поле с выбором услуг: например “Выберите услугу” или “Тип услуги” и тд',
 	'Error message (for example, "you did not select any of the categories")' => 'Сообщение об ошибке (например, “вы не выбрали ниодну из категорий”)',
+	'An inscription on the field with the choice of the name: for example "project name"' => 'Надпись на поле с выбором названия: например “название проекта”',
 );
 

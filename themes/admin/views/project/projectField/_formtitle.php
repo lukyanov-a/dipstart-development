@@ -17,7 +17,7 @@
 		<?php echo CHtml::activeLabelEx($model,'title'); ?>
 		<?php echo CHtml::activeTextField($model,'title',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo CHtml::error($model,'title'); ?>
-		<p class="hint"><?php echo UserModule::t('An inscription on the field with the choice of the name: for example "project name"'); ?></p>
+		<p class="hint"><?php echo UserModule::t('An inscription on the field with a choice of services: for example "Choose a service" or "Type of service", etc.'); ?></p>
 	</div>
 
 	<div class="form-item field_type">
@@ -63,9 +63,7 @@
 	</div>
 
 	<div class="form-item visible">
-		<?php echo CHtml::activeLabelEx($model,'visible'); ?>
-		<?php echo CHtml::activeDropDownList($model,'visible',ProjectField::itemAlias('visible')); ?>
-		<?php echo CHtml::error($model,'visible'); ?>
+		<?php echo CHtml::hiddenField('ProjectField[visible]','1'); ?>
 	</div>
 
 	<div class="form-save">

@@ -93,18 +93,6 @@ $('.search-form form').submit(function(){
 		//*/
 		array(
 			'class'=>'CButtonColumn',
-			'template'=> '{view} {viewlist} {update} {delete}',
-			'buttons'=>array(
-				'viewlist'=>array(
-					'url'=>'Yii::app()->controller->createUrl("//catalog/admin/?field_varname=".$data->varname)',
-					'visible'=>'$data->field_type == "LIST"',
-					'imageUrl'=>Yii::app()->controller->createUrl("//").'/images/list.png',
-					'label'=>UserModule::t('View list'),
-				),
-				'update'=>array(
-					'url'=>'$data->varname=="specials2" ? Yii::app()->controller->createUrl("profileField/updatespecials2/id/".$data->id."/") : Yii::app()->controller->createUrl("profileField/update/id/".$data->id."/")',
-				),
-			),
 		),
 	),
 )); ?>

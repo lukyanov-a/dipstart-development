@@ -46,7 +46,8 @@ class EmailsController extends Controller
         $profile_url = 'http://'.$_SERVER['SERVER_NAME'].'/user/profile/edit';
         $message_ps = '<br><br>'.ProjectModule::t('You can unsubscribe...').':';
         $message_ps .= '<br><a href="'.$profile_url.'">'.$profile_url.'</a>';
-        
+		$result = '';
+		
         if($recipients && $message && $title && isset($_POST['submit'])) {
             if($recipients == 'executors') $role = 'Author';
             elseif($recipients == 'customers') $role = 'Customer'; //$users = User::model()->findAllCustomers(); 
@@ -69,7 +70,7 @@ class EmailsController extends Controller
             $message = '';
             $recipients = null;
             $result = '<span class="result">'.ProjectModule::t('Your message is sending...').'</span>';
-        } else {
+        } elseif(isset($_POST['submit'])) {
             $result = '<span class="result" style="color: red;">'.ProjectModule::t('Something wrong...').'</span>';
         }
         $this->render('index', array(

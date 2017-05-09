@@ -390,23 +390,6 @@ class ProfileFieldController extends Controller
 		));
 	}
 
-	public function actionUpdatespecials2()
-	{
-		$model=$this->loadModel();
-		if(isset($_POST['ProfileField']))
-		{
-			$model->attributes=$_POST['ProfileField'];
-			if($model->save()){
-				$this->redirect(array('view','id'=>$model->id));
-			};
-		}
-		$this->registerScript();
-
-		$this->render('updatespecials2',array(
-			'model'=>$model,
-		));
-	}
-
 	/**
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'index' page.
