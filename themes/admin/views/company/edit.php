@@ -165,11 +165,6 @@ Yii::app()->getClientScript()->registerScriptFile('/js/tinymce/tinymce.min.js');
 <div class="form create-zakaz-block">
 	<div class="form-container">
 		<h3> <?=Yii::t('site', 'Paste these links on your site')?> </h3>
-		<?php
-		$domeins = $model->domains;
-		$domeins = explode(' ', $domeins);
-		foreach ($domeins as $domein) {
-		?>
 		<div class="form-item">
 			<table class="table table-striped" style="font-size: 12px;">
 				<tr>
@@ -177,7 +172,7 @@ Yii::app()->getClientScript()->registerScriptFile('/js/tinymce/tinymce.min.js');
 						<?=Yii::t('site', 'Creation of the application by the customer with the completion of the brief')?>:
 					</td>
 					<td>
-						<a href="//<?php echo $domein; ?>/project/zakaz/create"><?php echo $domein; ?>/project/zakaz/create</a>
+						<a href="http://<?php echo $_SERVER['SERVER_NAME']; ?>/project/zakaz/create">http://<?php echo $_SERVER['SERVER_NAME']; ?>/project/zakaz/create</a>
 					</td>
 				</tr>
 				<tr>
@@ -185,7 +180,7 @@ Yii::app()->getClientScript()->registerScriptFile('/js/tinymce/tinymce.min.js');
 						<?=Yii::t('site', 'Personal cabinet (authorization; for any type of user)')?>:
 					</td>
 					<td>
-						<a href="//<?php echo $domein; ?>/user/login"><?php echo $domein; ?>/user/login</a>
+						<a href="http://<?php echo $_SERVER['SERVER_NAME']; ?>/user/login">http://<?php echo $_SERVER['SERVER_NAME']; ?>/user/login</a>
 					</td>
 				</tr>
 				<tr>
@@ -193,7 +188,7 @@ Yii::app()->getClientScript()->registerScriptFile('/js/tinymce/tinymce.min.js');
 						<?=Yii::t('site', 'Quick registration (or, also, registration of the customer)')?>:
 					</td>
 					<td>
-						<a href="//<?php echo $domein; ?>/user/registration"><?php echo $domein; ?>/user/registration</a>
+						<a href="http://<?php echo $_SERVER['SERVER_NAME']; ?>/user/registration">http://<?php echo $_SERVER['SERVER_NAME']; ?>/user/registration</a>
 					</td>
 				</tr>
 				<tr>
@@ -201,7 +196,7 @@ Yii::app()->getClientScript()->registerScriptFile('/js/tinymce/tinymce.min.js');
 						<?=Yii::t('site', 'Registering the company as WEB MASTER (Partner, leading clients)')?>:
 					</td>
 					<td>
-						<a href="//<?php echo $domein; ?>/user/registration?role=Webmaster"><?php echo $domein; ?>/user/registration?role=Webmaster</a>
+						<a href="http://<?php echo $_SERVER['SERVER_NAME']; ?>/user/registration?role=Webmaster">http://<?php echo $_SERVER['SERVER_NAME']; ?>/user/registration?role=Webmaster</a>
 					</td>
 				</tr>
 				<tr>
@@ -209,7 +204,7 @@ Yii::app()->getClientScript()->registerScriptFile('/js/tinymce/tinymce.min.js');
 						<?=Yii::t('site', 'List of orders for freelancers (not yet registered potential performers)')?>:
 					</td>
 					<td>
-						<a href="//<?php echo $domein; ?>/project/zakaz/list"><?php echo $domein; ?>/project/zakaz/list</a>
+						<a href="http://<?php echo $_SERVER['SERVER_NAME']; ?>/project/zakaz/list">http://<?php echo $_SERVER['SERVER_NAME']; ?>/project/zakaz/list</a>
 					</td>
 				</tr>
 				<tr>
@@ -217,12 +212,11 @@ Yii::app()->getClientScript()->registerScriptFile('/js/tinymce/tinymce.min.js');
 						<?=Yii::t('site', 'Quick order')?>:
 					</td>
 					<td>
-						<?php echo $domein; ?>/user/registration?RegistrationForm[email]=<%= email %>&RegistrationForm[phone_number]=<%= phone %>
+						http://<?php echo $_SERVER['SERVER_NAME']; ?>/user/registration?RegistrationForm[email]=<%= email %>&RegistrationForm[phone_number]=<%= phone %>
 					</td>
 				</tr>
 			</table>
 		</div>
-		<?php } ?>
 		<div style="clear: both"></div>
 	</div>
 </div>

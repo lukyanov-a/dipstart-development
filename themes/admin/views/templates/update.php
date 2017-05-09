@@ -18,5 +18,7 @@ $this->menu=array(
 ?>
 
 <h1><?= Yii::t('site','Update Templates').' '.$model->id; ?></h1>
+<h1 style="font-size: 16px"><?=isset($type) ? Templates::model()->getCategoryesName($type) : ''?></h1>
+
 
 <?php $this->renderPartial('_form'.$type, array('model'=>$model, 'type'=>$type)); ?>

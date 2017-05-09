@@ -14,5 +14,7 @@ $this->menu=array(
 ?>
 
 <h1><?=Yii::t('site','Create Templates')?></h1>
+<h1 style="font-size: 16px"><?=isset($type) ? Templates::model()->getCategoryesName($type) : ''?></h1>
+
 
 <?php $this->renderPartial('_form'.$type, array('model'=>$model, 'type'=>$type)); ?>

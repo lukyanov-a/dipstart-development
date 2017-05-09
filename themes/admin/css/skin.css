@@ -269,10 +269,12 @@ top: 0;
 }
 
 .operations li {
-border-right: 1px dotted #CEDFED;
-display: table-cell;
-width: 1%;
-padding:0;
+	background: hsla(213, 100%, 87%, 0.16);
+	border-right: 1px dotted #CEDFED;
+	display: table-cell;
+	width: 1%;
+	padding:0;
+	vertical-align: middle;
 }
 
 .operations li:hover{
@@ -284,7 +286,6 @@ background:#EBF6FF;
 }
 
 .operations li a{
-background:hsla(213, 100%, 87%, 0.16);
 display: block;
 padding: 5px;
 text-align: center;

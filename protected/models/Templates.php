@@ -192,6 +192,17 @@ class Templates extends CActiveRecord
 		return $categoryes[$id_category];
 	}
 	
+	public function getCategoryesName($id) {
+		$result =  array(
+			1 => Yii::t('site','For answers via chat'),
+			2 => Yii::t('site','Service messages sent automatically to email'),
+			3 => Yii::t('site','Tips for managers'),
+			4 => Yii::t('site','Button templates'),
+			0 => Yii::t('site','Different service messages'),
+		);
+		return  $result[$id];
+	}
+	
 	public function getVariables() {
 		return array(
 			Yii::t('site','%site%'),

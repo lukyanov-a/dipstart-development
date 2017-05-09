@@ -4,11 +4,11 @@
 
 $this->menu=array(
 	//array('label'=>Yii::t('site','List Templates'), 'url'=>array('index')),
-	array('label'=>Yii::t('site','For answers via chat'), 'url'=>array('templates/admin/', 'type'=>1)),
-	array('label'=>Yii::t('site','Service messages sent automatically to email'), 'url'=>array('templates/admin/', 'type'=>2)),
-	array('label'=>Yii::t('site','Tips for managers'), 'url'=>array('templates/admin/', 'type'=>3)),
-	array('label'=>Yii::t('site','Button templates'), 'url'=>array('templates/admin/', 'type'=>4)),
-	array('label'=>Yii::t('site','Different service messages'), 'url'=>array('templates/admin/', 'type'=>0)),
+	array('label'=>Templates::model()->getCategoryesName(1), 'url'=>array('templates/admin/', 'type'=>1)),
+	array('label'=>Templates::model()->getCategoryesName(2), 'url'=>array('templates/admin/', 'type'=>2)),
+	array('label'=>Templates::model()->getCategoryesName(3), 'url'=>array('templates/admin/', 'type'=>3)),
+	array('label'=>Templates::model()->getCategoryesName(4), 'url'=>array('templates/admin/', 'type'=>4)),
+	array('label'=>Templates::model()->getCategoryesName(0), 'url'=>array('templates/admin/', 'type'=>0)),
 	array('label'=>Yii::t('site','Create Templates'), 'url'=>array('create', 'type'=>$type)),
 );
 $columns = array(
@@ -45,7 +45,7 @@ switch ($type){
 				'name' => 'title'
 			),
 			array(
-				'header' => Yii::t('site','The text of the answer is above in the upper left of the field for input'),
+				'header' => Yii::t('site','For answers via chat'),
 				'name' => 'text'
 			),
 			array(
@@ -175,6 +175,7 @@ switch ($type){
 ?>
 
 <h1><?=Yii::t('site','Manage Templates')?></h1>
+<h1 style="font-size: 16px"><?=isset($type) ? Templates::model()->getCategoryesName($type) : ''?></h1>
 
 <?php
     $this->widget('zii.widgets.grid.CGridView', array(
