@@ -25,17 +25,7 @@ class EventController extends Controller {
         );
     }*/
     public function actionIndex() {
-        if (Yii::app()->request->isAjaxRequest){
-            if (Yii::app()->request->getParam('update'))
-            {
-                $events = Events::model()->findAll(array(
-                    'condition' => '',
-                    'order' => 'timestamp DESC'
-                ));
-                $this->renderPartial('list',array('events'=>$events));
-                Yii::app()->end();
-            }
-
+        if (Yii::app()->request->isAjaxRequest){ // Используется?
             header('Content-Type: application/json');
             echo CJSON::encode(array('success'=>true,'msg'=>ProjectMessages::model()->findByPk(Events::model()->findByPk(Yii::app()->request->getParam('id'))->event_id)->message));
             Yii::app()->end();
@@ -49,13 +39,27 @@ class EventController extends Controller {
         ));
     }
 	
+	public function actionRefresh() {
+	    if (Yii::app()->request->isAjaxRequest) {
+			$key = Events::getCacheKey();
+			$html = Yii::app()->cache->get($key);
+			if ($html === false) {
+				$events = Events::model()->findAll(array(
+					'condition' => '',
+					'order' => 'timestamp DESC'
+				));
+				$html = $this->renderPartial('list',array('events'=>$events), true);
+				Yii::app()->cache->set($key, $html, 5*60); //5 min
+			}
+			echo $html;
+		}
+	}
+	
     public function actionDelete() {
-		
 		$id  = Yii::app()->request->getParam('id');
         if (Yii::app()->request->isAjaxRequest){
-			
+			Yii::app()->cache->delete(Events::getCacheKey());
             header('Content-Type: application/json');
-			
 			if (Events::model()->deleteByPk($id))
 				echo CJSON::encode(array('success'=>true));
 			else

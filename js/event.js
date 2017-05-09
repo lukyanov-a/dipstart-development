@@ -46,7 +46,7 @@ function titleSignal(){
 }
 
 function update_events(){
-    $.post('/project/event/', {update: 1}, function(data){
+    $.post('/project/event/refresh', {}, function(data){
 		var newEvent = checkNewEvent(data);
 		$('.events-list').html(data);
 		if (newEvent)
@@ -62,7 +62,7 @@ function update_events(){
 				$('#is-new-event')[0].play();
 			}
 			if (!intervalTimer)
-				intervalTimer = setInterval(titleSignal, 5000);
+				intervalTimer = setInterval(titleSignal, 500);
 		}
 	});
 };
