@@ -17,7 +17,7 @@
 		<?php echo CHtml::activeLabelEx($model,'title'); ?>
 		<?php echo CHtml::activeTextField($model,'title',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo CHtml::error($model,'title'); ?>
-		<p class="hint"><?php echo UserModule::t('An inscription on the field with the choice of the name: for example "project name"'); ?></p>
+		<p class="hint"><?php echo UserModule::t('An inscription on the field with a choice of services: for example "Choose a service" or "Type of service", etc.'); ?></p>
 	</div>
 
 	<div class="form-item field_type">
