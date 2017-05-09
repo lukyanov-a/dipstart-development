@@ -102,7 +102,8 @@ $(document).ready(function () {
 			),*/
 			array(
 				'name' => 'summ',
-				'footer'=>$model->pageTotal($provider),
+				'footer'=>ProjectModule::t('The amount in accordance with the filter criteria').': <b>'.$model->pageTotal($provider).'</b>',
+				'footerHtmlOptions'=>array('colspan'=>'4'),
 			),
 			array(
 				'header' => Yii::t('site','Payment method'),
@@ -279,7 +280,8 @@ $(document).ready(function () {
 			),
 			array(
 				'name' => 'summ',
-				'footer'=>$model->pageTotal($provider),
+				'footer'=>ProjectModule::t('The amount in accordance with the filter criteria').': <b>'.$model->pageTotal($provider).'</b>',
+				'footerHtmlOptions'=>array('colspan'=>'4'),
 			),
 			array(
 				'header' => Yii::t('site','Payment method'),

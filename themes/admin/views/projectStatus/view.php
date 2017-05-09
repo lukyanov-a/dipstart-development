@@ -8,7 +8,6 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>Yii::t('site','List ProjectStatus'), 'url'=>array('index')),
 	array('label'=>Yii::t('site','Create ProjectStatus'), 'url'=>array('create')),
 	array('label'=>Yii::t('site','Update ProjectStatus'), 'url'=>array('update', 'id'=>$model->id)),
 	array('label'=>Yii::t('site','Delete ProjectStatus'), 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>Yii::t('site','Are you sure you want to delete this item?'))),

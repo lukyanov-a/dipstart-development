@@ -9,7 +9,6 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>Yii::t('site','List ProjectStatus'), 'url'=>array('index')),
 	array('label'=>Yii::t('site','Create ProjectStatus'), 'url'=>array('create')),
 	array('label'=>Yii::t('site','View ProjectStatus'), 'url'=>array('view', 'id'=>$model->id)),
 	array('label'=>Yii::t('site','Manage ProjectStatus'), 'url'=>array('admin')),

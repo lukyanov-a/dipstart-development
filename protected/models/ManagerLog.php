@@ -53,7 +53,7 @@ class ManagerLog extends CActiveRecord
 			'id' => Yii::t('site','ID'),
 			'uid' => Yii::t('site','Manager'),
 			'datetime' => Yii::t('site','Date and time'),
-			'oreder_id' => Yii::t('site','Order number'),
+			'order_id' => Yii::t('site','Order number'),
 			'action' => Yii::t('site','Action'),
 			'action_1' => Yii::t('site','Order page view'),
 		);

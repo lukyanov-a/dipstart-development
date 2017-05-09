@@ -13,13 +13,16 @@ Yii::app()->getClientScript()->registerScriptFile('/js/tinymce/tinymce.min.js');
         </select>
     </div>
     <div class="row">
-        <label><?=ProjectModule::t('Topic')?>:</label><input type="text" id="emails-title" name="title" value="<?= $title ?>">
+        <label><?=ProjectModule::t('Topic')?>:</label><input type="text" id="emails-title" name="title" value="<?= $title ?>" style="width: 50%">
     </div>
     <div class="row">
         <textarea id="emails-message" name="message"><?= $message ?></textarea>
     </div>
     <div class="row emails-subm">
-        <button class="emails-submit1"><?=ProjectModule::t('Send message')?></button><span class="result"><?php echo $result; ?></span>
+        <button class="emails-submit1" name="submit">
+            <?=ProjectModule::t('Send message')?>
+        </button>
+        <?php echo $result; ?>
     </div>
     <?php echo CHtml::endForm(); ?>
     

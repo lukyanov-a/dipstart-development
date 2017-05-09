@@ -1,4 +1,9 @@
 <?php
+Yii::app()->getClientScript()->registerCssFile(Yii::app()->theme->baseUrl.'/css/manager.css');
+Yii::app()->clientScript->registerScriptFile('/js/masonry.min.js', CClientScript::POS_END);
+Yii::app()->clientScript->registerScriptFile('/js/common-masonry.js', CClientScript::POS_END);
+Yii::app()->clientScript->registerScriptFile('/js/worktypes.js');
+
 $this->menu=array(
     array('label'=>ProjectModule::t('Create Project Field'), 'url'=>array('create')),
     array('label'=>ProjectModule::t('View Project Field'), 'url'=>array('view','id'=>$model->id)),

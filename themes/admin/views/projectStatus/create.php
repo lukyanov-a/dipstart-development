@@ -8,7 +8,6 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>Yii::t('site','List ProjectStatus'), 'url'=>array('index')),
 	array('label'=>Yii::t('site','Manage ProjectStatus'), 'url'=>array('admin')),
 );
 ?>

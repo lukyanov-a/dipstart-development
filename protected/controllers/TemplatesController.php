@@ -41,10 +41,11 @@ class TemplatesController extends Controller
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-	public function actionView($id)
+	public function actionView($id, $type = 0)
 	{
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
+			'type' => $type
 		));
 	}
 
@@ -52,7 +53,7 @@ class TemplatesController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($type = 0)
 	{
 		$model=new Templates;
 
@@ -61,13 +62,16 @@ class TemplatesController extends Controller
 
 		if(isset($_POST['Templates']))
 		{
+			/*var_dump($_POST['Templates']);
+			exit;*/
 			$model->attributes=$_POST['Templates'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('view','id'=>$model->id, 'type' => $type));
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
+			'type' => $type
 		));
 	}
 
@@ -76,7 +80,7 @@ class TemplatesController extends Controller
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
-	public function actionUpdate($id)
+	public function actionUpdate($id, $type = 0)
 	{
 		$model=$this->loadModel($id);
 
@@ -87,11 +91,12 @@ class TemplatesController extends Controller
 		{
 			$model->attributes=$_POST['Templates'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('view','id'=>$model->id, 'type' => $type));
 		}
 
 		$this->render('update',array(
 			'model'=>$model,
+			'type' => $type
 		));
 	}
 
@@ -100,13 +105,13 @@ class TemplatesController extends Controller
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
 	 * @param integer $id the ID of the model to be deleted
 	 */
-	public function actionDelete($id)
+	public function actionDelete($id, $type = 0)
 	{
 		$this->loadModel($id)->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin', 'type' => $type));
 	}
 
 	/**
@@ -123,15 +128,16 @@ class TemplatesController extends Controller
 	/**
 	 * Manages all models.
 	 */
-	public function actionAdmin()
+	public function actionAdmin($type = 1)
 	{
 		$model=new Templates('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Templates']))
 			$model->attributes=$_GET['Templates'];
-
+		
 		$this->render('admin',array(
 			'model'=>$model,
+			'type' => $type
 		));
 	}
 

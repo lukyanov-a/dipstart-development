@@ -209,7 +209,7 @@ class ProfileField extends CActiveRecord
 				self::REQUIRED_NO => UserModule::t('No'),
 				self::REQUIRED_NO_SHOW_REG => UserModule::t('No, but show on registration form'),
 				self::REQUIRED_YES_SHOW_REG => UserModule::t('Yes and show on registration form'),
-				self::REQUIRED_YES_NOT_SHOW_REG => UserModule::t('Yes'),
+				//self::REQUIRED_YES_NOT_SHOW_REG => UserModule::t('Yes'),
 			),
 			'visible' => array(
 				self::VISIBLE_ALL => UserModule::t('For all'),

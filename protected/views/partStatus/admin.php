@@ -7,7 +7,6 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>Yii::t('site','List PartStatus'), 'url'=>array('index')),
 	array('label'=>Yii::t('site','Create PartStatus'), 'url'=>array('create')),
 );
 

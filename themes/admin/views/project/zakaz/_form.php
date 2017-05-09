@@ -14,8 +14,7 @@ if ($projectFields) {
 		if ($field->field_type=="BOOL"){
 			echo $form->checkBox($model,$field->varname);
 		} elseif ($field->field_type=="LIST"){
-			$models = Catalog::model()->findAllByAttributes(array('field_varname'=>$field->varname));
-			$list = CHtml::listData($models, 'id', 'cat_name');
+			$list = Catalog::model()->performCatsTree($field->varname);
 			echo $form->dropDownList($model, $field->varname, $list, array('empty' => ProjectModule::t('Select a category'),'class'=>'form-control'));
 			echo $form->error($model,$field->varname);
 		} elseif ($field->field_type=="TEXT") {
