@@ -3,12 +3,11 @@
 /* @var $model ProjectStatus */
 
 $this->breadcrumbs=array(
-	Yii::t('site','Project Statuses')=>array('index'),
+	//Yii::t('site','Project Statuses')=>array('index'),
 	Yii::t('site','Manage'),
 );
 
 $this->menu=array(
-	array('label'=>Yii::t('site','List ProjectStatus'), 'url'=>array('index')),
 	array('label'=>Yii::t('site','Create ProjectStatus'), 'url'=>array('create')),
 );
 

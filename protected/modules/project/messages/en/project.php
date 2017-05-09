@@ -216,6 +216,7 @@ return array(
 	'Method of payment' => 'Method of payment',
 	'Value' => 'Value',
 	'The amount of payments' => 'The amount of payments',
+	'The amount in accordance with the filter criteria' => 'The amount in accordance with the filter criteria',
 	
 	'Please, write that you are ready to take this order or ask a question.' => 'Please, write that you are ready to take this order or ask a question.',
 	'Here is your correspondence' => 'Here is your correspondence',

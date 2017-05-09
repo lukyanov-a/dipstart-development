@@ -24,6 +24,7 @@ $columns = array('datetime',
     'columns'=>$columns,
     'ajaxType'=>'POST',
     'rowHtmlOptionsExpression'=>'array("style" => "cursor:pointer")',
+	'summaryText' => Yii::t('site','Number of user actions: {start} - {end} from {count}')
     /*'selectionChanged'=>"js:function(id){
         document.location.href=$('.selected').find('td').find('a.update').attr('href');
     }",*/

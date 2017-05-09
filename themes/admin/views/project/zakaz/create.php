@@ -23,6 +23,29 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->theme->baseUrl.'/css/
             'enableAjaxValidation'=>false,
         )); ?>
 
+		<?php
+		$url = '/uploads/'.$model->id.'/'.$model->unixtime.'/';
+		$uploaded_files = $model->generateMaterialsList($url, true);
+		$upload_params = array('unixtime' => $model->unixtime);
+		?>
+		<div class="form-item" style="min-height: 162px;">
+			<?php
+			$this->widget('ext.EAjaxUpload.EAjaxUpload',
+				array(
+					'id' => 'justFileUpload',
+					'config' => array(
+						'action' => $this->createUrl('/project/zakaz/upload', $upload_params),
+						'template' => '<div class="qq-uploader"><div class="qq-upload-drop-area"><span>'. ProjectModule::t('Drag and drop files here') .'</span><div class="qq-upload-button">'. ProjectModule::t('Attach materials to the order') .'</div><ul class="qq-upload-list">'.$uploaded_files.'</ul></div></div>',
+						'disAllowedExtensions' => array('exe','scr'),
+						'sizeLimit' => Tools::maxFileSize(), // maximum file size in bytes
+						'minSizeLimit' => 1,// minimum file size in bytes
+						'onComplete' => "js:function(id, fileName, responseJSON){masonry();}",
+					)
+				)
+			);
+			?>
+		</div>
+
 		<?php $this->renderPartial('_form', array('model' => $model, 'form' => $form)); ?>
 
 		<div class="form-item create-terms">

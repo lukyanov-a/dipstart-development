@@ -35,7 +35,7 @@
 	
 	<div class="form-group">
 		<!--<?php echo CHtml::activeLabelEx($model,'password'); ?> <br />-->
-		<?php echo CHtml::activePasswordField($model,'password',array('placeholder'=>'Пароль', 'class'=>'placeholder')) ?>
+		<?php echo CHtml::activePasswordField($model,'password',array('placeholder'=>$model->getAttributeLabel( 'password' ), 'class'=>'placeholder')) ?>
 	</div>
 	
 	<div>

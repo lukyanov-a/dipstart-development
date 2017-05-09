@@ -4,7 +4,7 @@
 
 $this->menu=array(
 	//array('label'=>Yii::t('site','List Catalog'), 'url'=>array('index')),
-	array('label'=>Yii::t('site','Create Categories'), 'url'=>array('create')),
+	array('label'=>Yii::t('site','Create Categories'), 'url'=>array('create', 'field_varname'=>$field_varname)),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -33,25 +33,85 @@ $('.search-form form').submit(function(){
 	'model'=>$model,
 )); ?>
 </div><!-- search-form -->
+<div class="childs" <?php echo $dataProviderChild->itemCount ? '' : 'style="display: none"'; ?>>
+	<ul class="operations">
+		<li>
+			<?php echo CHtml::link(Yii::t('site','Parent management'),'#',array('id' => 'open_parents')); ?>
+		</li>
+	</ul>
+	<?php $this->widget('zii.widgets.grid.CGridView', array(
+		'id'=>'categories-grid-child',
+		'dataProvider'=>$dataProviderChild,
+		'filter'=>$model,
+		'columns'=>array(
+			'id',
+			array(
+				'name' => 'field_varname',
+				'filter' => Catalog::getAllVarnames(),
+			),
+			'cat_name',
+			array(
+				'name' => 'parent_id',
+				'type' => 'raw',
+				'value' => 'Catalog::model()->performParent($data->parent_id)',
+			),
+			array(
+				'class'=>'CButtonColumn',
+				'template'=> '{view} {update} {delete}',
+				'buttons'=>array(
+					'update'=>array(
+						'url'=>'Yii::app()->controller->createUrl("catalog/update/".$data->id."/?field_varname='.$field_varname.'")',
+					),
+				),
+			),
+		),
+	)); ?>
+</div>
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'categories-grid',
-	'dataProvider'=>$model->search(),
-	'filter'=>$model,
-	'columns'=>array(
-		'id',
-		array(
-			'name' => 'field_varname',
-			'filter' => Catalog::getAllVarnames(),
+<div class="parents" <?php echo $dataProviderChild->itemCount ? 'style="display: none"' : ''; ?>>
+	<ul class="operations">
+		<li>
+			<?php echo CHtml::link(Yii::t('site','Childs management'),'#',array('id' => 'open_childs')); ?>
+		</li>
+		<li>
+			<?php echo CHtml::link(Yii::t('site','Create Parents Categories'),array('create', 'field_varname'=>$field_varname, 'parent'=>1)); ?>
+		</li>
+	</ul>
+	<?php $this->widget('zii.widgets.grid.CGridView', array(
+		'id'=>'categories-grid-parent',
+		'dataProvider'=>$dataProviderParent,
+		'filter'=>$model,
+		'columns'=>array(
+			'id',
+			array(
+				'name' => 'field_varname',
+				'filter' => Catalog::getAllVarnames(),
+			),
+			'cat_name',
+			array(
+				'class'=>'CButtonColumn',
+				'template'=> '{view} {update} {delete}',
+				'buttons'=>array(
+					'update'=>array(
+						'url'=>'Yii::app()->controller->createUrl("catalog/update/".$data->id."/?field_varname='.$field_varname.'")',
+					),
+				),
+			),
 		),
-		'cat_name',
-		array(
-            'name' => 'parent_id',
-            'type' => 'raw',
-            'value' => 'Catalog::model()->performParent($data->parent_id)',
-        ),
-		array(
-			'class'=>'CButtonColumn',
-		),
-	),
-)); ?>
+	)); ?>
+</div>
+
+<script>
+	$( document ).ready( function() {
+		$('#open_parents').click(function (e) {
+			e.preventDefault();
+			$('.childs').hide();
+			$('.parents').show();
+		});
+		$('#open_childs').click(function (e) {
+			e.preventDefault();
+			$('.parents').hide();
+			$('.childs').show();
+		});
+	});
+</script>

@@ -9,10 +9,10 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	//array('label'=>Yii::t('site','List Categories'), 'url'=>array('index')),
-	array('label'=>Yii::t('site','Manage Categories'), 'url'=>array('admin')),
+	array('label'=>Yii::t('site','Manage Categories'), 'url'=>array('admin', 'field_varname'=>$field_varname)),
 );
 ?>
 
 <h1><?=Yii::t('site','Create Categories')?></h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php $this->renderPartial('_form', array('model'=>$model, 'field_varname'=>$field_varname, 'parent'=>$parent)); ?>

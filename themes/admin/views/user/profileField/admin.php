@@ -63,7 +63,7 @@ $('.search-form form').submit(function(){
 		),
 		array(
 			'name'=> UserModule::t('field_type'),
-			'value'=>'$data->field_type',
+			'value'=> 'UserModule::t($data->field_type)',
 			'filter'=>ProfileField::itemAlias("field_type"),
 		),
 		'field_size',
@@ -86,8 +86,9 @@ $('.search-form form').submit(function(){
 			'filter'=>ProfileField::itemAlias("visible"),
 		),
         array(
+			'header' => UserModule::t('paymentPropsShort'),
 			'name'=>'paymentProps',
-			'value'=> '$data->paymentProps',
+			'value'=> '$data->paymentProps ? UserModule::t("Yes") : UserModule::t("No")',
 		),            
 		//*/
 		array(

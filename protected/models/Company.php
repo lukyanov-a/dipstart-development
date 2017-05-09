@@ -13,7 +13,7 @@ class Company extends CActiveRecord {
 		// will receive user inputs.
 		return array(
 			array('name, domains, language, supportEmail', 'required'),
-			array('name, domains, FrontPage, icon, logo', 'length', 'max'=>255),
+			array('name, domains, FrontPage, icon, logo, contacts', 'length', 'max'=>255),
 			array('supportEmail', 'email'),
 			array('supportEmail', 'length', 'min' => 6, 'max'=>64,'message' => UserModule::t("Incorrect password (minimal length 6 symbols, maximum 30).")),
 			array('Payment2ChekoutHash', 'length', 'max'=>64),
@@ -58,7 +58,8 @@ class Company extends CActiveRecord {
 			'telfin_secret'                    => Yii::t('site','telfin secret'),
 			'smsc_login'                       => Yii::t('site','smsc.ru api login'),
 			'smsc_passwd'                      => Yii::t('site','smsc.ru api password'),
-			'module_tree'                      => Yii::t('site','Tree structure'),
+			'module_tree'                      => Yii::t('site','Tree structure company'),
+			'contacts'                      => Yii::t('site','Contact details'),
 		);
 	}
 	public static function search_by_domain($domain) {

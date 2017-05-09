@@ -46,8 +46,9 @@ class EmailsController extends Controller
         $profile_url = 'http://'.$_SERVER['SERVER_NAME'].'/user/profile/edit';
         $message_ps = '<br><br>'.ProjectModule::t('You can unsubscribe...').':';
         $message_ps .= '<br><a href="'.$profile_url.'">'.$profile_url.'</a>';
-        
-        if($recipients && $message && $title) {
+		$result = '';
+		
+        if($recipients && $message && $title && isset($_POST['submit'])) {
             if($recipients == 'executors') $role = 'Author';
             elseif($recipients == 'customers') $role = 'Customer'; //$users = User::model()->findAllCustomers(); 
             $users = User::model()->resetScope()->Role($role)->with(array('profile'=>array('select'=>array('profile.general_mailing'))))->findAll();
@@ -68,9 +69,9 @@ class EmailsController extends Controller
             $title = '';
             $message = '';
             $recipients = null;
-            $result = ProjectModule::t('Your message is sending...');
-        } else {
-            $result = ProjectModule::t('Something wrong...');
+            $result = '<span class="result">'.ProjectModule::t('Your message is sending...').'</span>';
+        } elseif(isset($_POST['submit'])) {
+            $result = '<span class="result" style="color: red;">'.ProjectModule::t('Something wrong...').'</span>';
         }
         $this->render('index', array(
             'title'=>$title,
