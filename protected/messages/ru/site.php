@@ -172,7 +172,7 @@ return array(
 	'Creation of the application by the customer with the completion of the brief' => 'Создание заявки заказчиком с заполнением брифа',
 	'Personal cabinet (authorization; for any type of user)' => 'Личный кабинет (авторизация; для любого типа пользователя)',
 	'Quick registration (or, also, registration of the customer)' => 'Быстрая регистрация (или, так же регистрация Заказчика)',
-	'Registering the company as WEB MASTER (Partner, leading clients)' => 'Регистрацыя в компании как WEB MASTER (Партнер, приводящий клиентов)',
+	'Registering the company as WEB MASTER (Partner, leading clients)' => 'Регистрация в компании как WEB MASTER (Партнер, приводящий клиентов)',
 	'List of orders for freelancers (not yet registered potential performers)' => 'Список заказов для фрилансеров (ещё не зарегистрированных потенциальных исполнителей)',
 	'Quick order' => 'Быстрый заказ',
 	'Contact details' => 'контактные данные',
