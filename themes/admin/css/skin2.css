@@ -148,3 +148,7 @@ div.events input[type="button"] + a:hover {
 .emails-form span.result {
 	margin-left: 10px;
 }
+
+.create-zakaz-block #showAll {
+	display: none;
+}
