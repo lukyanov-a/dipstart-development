@@ -105,6 +105,7 @@ return array(
     'Personal area'=>'Личный кабинет',
     'Personal account'=>'Личный счет',
     'Profile'=>'Профиль',
+	'My profile' => 'Мой профиль',
     'Orders'=>'Заказы',
     'New projects'=>'Новые проекты',
     'New projects for technical'=>'Проекты для технических руководителей',

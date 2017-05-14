@@ -226,6 +226,10 @@ class User extends CActiveRecord
 		$role =  array_keys($roles);
 		foreach ($role as $item)
 			if (in_array($item, $this->PRIORITY_ROLES)) $priority = $item;
+		if(isset(Yii::app()->request->cookies['authmeneger']) && !$userId) {
+			$is_cookie_maneger = Yii::app()->request->cookies['authmeneger'];
+			if(in_array($is_cookie_maneger, $this->getUserRoleArr())) return $is_cookie_maneger;
+		}
 		return  $priority ? $priority : $role[0];
 	}
 	public function getUserRoleArr($userId = false) {

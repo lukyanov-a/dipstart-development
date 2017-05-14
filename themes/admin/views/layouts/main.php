@@ -7,6 +7,15 @@
  */
 $items = array();
 $role = User::model()->getUserRole();
+$menuprofile = array('label'=>Yii::t('site','Logout'). ' ('.Yii::app()->user->name.')', 'url'=>array('/user/logout'));
+if(count($user_roles = User::model()->getUserRoleArr())>1) {
+	$itemprofile = array();
+	foreach ($user_roles as $user_role) {
+		$itemprofile[] = array('label'=>Yii::t('site',$user_role), 'url'=>array('/site/setrole/', 'role' => $user_role));
+	}
+	$itemprofile[] = array('label'=>Yii::t('site','Logout'). ' ('.Yii::app()->user->name.')', 'url'=>array('/user/logout'));
+	$menuprofile = array('label'=>Yii::t('site','My profile'), 'url'=>array('#'), 'items' => $itemprofile);
+}
 switch ($role){
 	case 'root':
 		$items[] = array('label'=>Yii::t('site','SQL'), 'url'=>array('/company/sql'));
@@ -40,7 +49,7 @@ switch ($role){
 			array('label'=>Yii::t('site','Fields lists'), 'url'=>array('/catalog/admin')),
 			array('label'=>Yii::t('site','Delivery'), 'url'=>array('/project/emails')),
 		));
-		$items[] = array('label'=>Yii::t('site','Logout'). ' ('.Yii::app()->user->name.')', 'url'=>array('/user/logout'));
+		$items[] = $menuprofile;
 		break;
     case 'Manager':
         $items[] = array('label'=>Yii::t('site','Users'), 'url'=>array('/user/admin'));
@@ -48,8 +57,9 @@ switch ($role){
 		$items[] = array('label'=>Yii::t('site','Create order'), 'url'=>array('/project/zakaz/create'));
         $items[] = array('label'=>Yii::t('site','Events'), 'url'=>array('/project/event'));
 		$items[] = array('label'=>Yii::t('site','Delivery'), 'url'=>array('/project/emails'));
-        $items[] = array('label'=>Yii::app()->user->fullName(), 'url'=>array('#'));
-		$items[] = array('label'=>Yii::t('site','Logout'), 'url'=>array('/user/logout'));
+        //$items[] = array('label'=>Yii::app()->user->fullName(), 'url'=>array('#'));
+		//$items[] = array('label'=>Yii::t('site','Logout'), 'url'=>array('/user/logout'));
+		$items[] = $menuprofile;
 
         break;
 }
