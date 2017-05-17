@@ -210,12 +210,12 @@ return array(
 	'Incorrect password (minimal length 6 symbols).'=>'Incorrect password (minimal length 6 symbols).',
 
 	//assignments
-	'Администратор' => 'Administrator',
+	/*'Администратор' => 'Administrator',
 	'Заказчик' => 'Customer',
 	'Менеджер' => 'Manager',
 	'Гость' => 'Guest',
 	'Автор' => 'Executor',
-	'Вэбмастер' => 'Webmaster',
+	'Вэбмастер' => 'Webmaster',*/
 );
 
 

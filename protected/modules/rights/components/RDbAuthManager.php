@@ -20,7 +20,7 @@ class RDbAuthManager extends CDbAuthManager
     public function init() {
 		//'itemTable'=>'AuthItem',
 		//'itemChildTable'=>'AuthItemChild',
-		$this->assignmentTable = Campaign::getId().'_AuthAssignment';
+		$this->assignmentTable = Company::getId().'_AuthAssignment';
 		parent::init();
 	}
 	

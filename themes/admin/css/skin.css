@@ -629,3 +629,8 @@ ul.qq-upload-list li.qq-upload-success span.qq-upload-size {
 	width: auto;
 }
 /*	END-Upload	*/
+
+.hasDatepicker {
+    width: 125px!important;
+    padding: 2px 5px!important;
+}

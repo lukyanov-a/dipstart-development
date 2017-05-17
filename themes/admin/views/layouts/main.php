@@ -18,7 +18,10 @@ switch ($role){
 		break;
     case 'Admin':
 		//$items[] = array('label'=>Yii::t('site','Home'), 'url'=>Yii::app()->getBaseUrl(true));
-		$items[] = array('label'=>Yii::t('site','Events'), 'url'=>array('/project/event'));
+		$items[] = array('label'=>Yii::t('site','Events'), 'url'=>array('/project/event'), 'items' => array(
+			array('label'=>Yii::t('site','Events for manager'), 'url'=>array('/project/event')),
+			array('label'=>Yii::t('site','Events for sales-manager'), 'url'=>array('/project/event/salesManagerIndex')),
+		));
 		$items[] = array('label'=>Yii::t('site','Orders'), 'url'=>array('/project/zakaz'), 'items' => array(
 			array('label'=>Yii::t('site','All orders'), 'url'=>array('/project/zakaz')),
 			array('label'=>Yii::t('site','Create order'), 'url'=>array('/project/zakaz/create')),
@@ -46,7 +49,14 @@ switch ($role){
         $items[] = array('label'=>Yii::t('site','Users'), 'url'=>array('/user/admin'));
 		$items[] = array('label'=>Yii::t('site','All orders'), 'url'=>array('/project/zakaz'));
 		$items[] = array('label'=>Yii::t('site','Create order'), 'url'=>array('/project/zakaz/create'));
-        $items[] = array('label'=>Yii::t('site','Events'), 'url'=>array('/project/event'));
+		if (User::model()->isSalesManager()) {
+			$items[] = array('label'=>Yii::t('site','Events'), 'url'=>array('/project/event'), 'items' => array(
+				array('label'=>Yii::t('site','Events for manager'), 'url'=>array('/project/event')),
+				array('label'=>Yii::t('site','Events for sales-manager'), 'url'=>array('/project/event/salesManagerIndex')),
+			));
+		} else {
+			$items[] = array('label'=>Yii::t('site','Events'), 'url'=>array('/project/event'));
+		}
 		$items[] = array('label'=>Yii::t('site','Delivery'), 'url'=>array('/project/emails'));
         $items[] = array('label'=>Yii::app()->user->fullName(), 'url'=>array('#'));
 		$items[] = array('label'=>Yii::t('site','Logout'), 'url'=>array('/user/logout'));
