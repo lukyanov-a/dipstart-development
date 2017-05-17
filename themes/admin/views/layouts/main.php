@@ -11,7 +11,9 @@ $menuprofile = array('label'=>Yii::t('site','Logout'). ' ('.Yii::app()->user->na
 if(count($user_roles = User::model()->getUserRoleArr())>1) {
 	$itemprofile = array();
 	foreach ($user_roles as $user_role) {
-		$itemprofile[] = array('label'=>Yii::t('site',$user_role), 'url'=>array('/site/setrole/', 'role' => $user_role));
+		if(in_array($user_role, User::model()->PRIORITY_ROLES)) {
+			$itemprofile[] = array('label' => Yii::t('site', $user_role), 'url' => array('/site/setrole/', 'role' => $user_role));
+		}
 	}
 	$itemprofile[] = array('label'=>Yii::t('site','Logout'). ' ('.Yii::app()->user->name.')', 'url'=>array('/user/logout'));
 	$menuprofile = array('label'=>Yii::t('site','My profile'), 'url'=>array('#'), 'items' => $itemprofile);
