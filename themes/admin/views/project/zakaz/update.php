@@ -285,6 +285,17 @@ $customer = $model->user;
 				'hints'=>$hints,
             ));
             ?>
+			<div class="row zero-edge">
+				<?php
+				if($template = TemplatesSteps::model()->findAll()) { ?>
+					<p><?=Yii::t('site','Load from template')?>: 
+					<?php foreach (TemplatesSteps::model()->findAll() as $item) { ?>
+						<a class="add-templete-steps" onclick="add_part_templete(<?= $model->id; ?>,<?= $item->id ?>);"
+						   href="#"><?= $item->name ?></a>,
+					<?php } ?>
+					</p>
+				<?php }?>
+			</div>
             <div class="row zero-edge">
                 <div class="col-xs-12 btn btn-primary addPart" onclick="add_part(<?php echo $model->id;?>,'<?=ProjectModule::t('New stage')?>');">
                 	<?=ProjectModule::t('Add a stage')?>

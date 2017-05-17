@@ -251,6 +251,40 @@ class ZakazPartsController extends Controller {
 			$this->_response->send();
 		}
 	}
+
+	/*Создание новой части на основе шаблона*/
+	public function actionApiCreateTemplate() {
+		$this->_prepairJson();
+		$zakazId = $this->_request->getParam('orderId');
+		$zakaz = Zakaz::model()->findByPk($zakazId);
+
+		$templateId = $this->_request->getParam('templete_id');
+		$template = TemplatesSteps::model()->findByPk($templateId);
+		$parts = unserialize($template->steps);
+		$timepart = 0;
+		foreach ($parts as $part) {
+			$model = new ZakazParts;
+			$model->proj_id = $zakaz->id;
+			$model->title = $part['name'];
+
+			/* пересчет времени завершения этапа в процентном соотношении */
+			$date_max = strtotime($zakaz->getDbmax_exec_date());
+			$date_min = strtotime($zakaz->getDbdate());
+			$date = (int)(($date_max - $date_min)*($part['time']/100));
+			$timepart += $date;
+			$date = $date_min + $timepart;
+			$date = date('Y-m-d H:m:s', $date);
+
+			$model->date = $date;
+			$model->author_id = $zakaz->executor;
+			$model->save();
+		}
+
+		$this->_response->setData(array(
+			'result'=>true
+		));
+		$this->_response->send();
+	}
 	
 	/*Удаление части по ИД*/
 	public function actionApiDelete() {

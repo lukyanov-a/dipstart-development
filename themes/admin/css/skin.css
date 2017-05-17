@@ -536,3 +536,29 @@ textarea#code {
 	min-width: 100%;
 	min-height: 300px;
 }
+
+.step-all .form-item.step {
+	border: 1px dotted #ddd;
+	padding: 15px;
+	margin: 10px 0px;
+	width: 45%;
+}
+
+.step-all .form-item.step:last-child {
+	margin-bottom: 50px;
+}
+
+.step-all .form-item.step label {
+	width: 100%;
+}
+
+.step-all .form-item.step .num {
+	position: absolute;
+	left: 100%;
+	margin-left: -40px;
+	opacity: 0.5;
+}
+
+.add-templete-steps {
+	border-bottom: 1px dashed;
+}

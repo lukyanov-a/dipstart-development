@@ -67,6 +67,16 @@ function add_part(orderid, title){
         }
     }, 'json');
 }
+function add_part_templete(orderid, templete_id){
+    $.post('/project/zakazParts/apiCreateTemplate', JSON.stringify({
+        'orderId': orderid,
+        'templete_id': templete_id
+    }), function (response) {
+        if (response.data) {
+            reload();
+        }
+    }, 'json');
+}
 function delete_part(orderid) {
     $.post('/project/zakazParts/apiDelete', JSON.stringify({
         'id': orderid
