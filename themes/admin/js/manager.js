@@ -247,6 +247,16 @@ $( window ).load( function() {
 			console.log(response);
         });
     });
+	$('#Profile_dbmanager_informed').on('change',function(event){
+        var data = $(this).val();
+        var elid = $(this).attr('id');
+        var id = $('#user_id').html();
+        $.post('/user/admin/update?id='+id,
+            {'data': data,'id':id,'elid': elid},
+        function (response) {
+			console.log(response);
+        });
+    });
     $('#select_template').on('click',function(event){
         $.post('/templates/apiGetTemplate?id='+$('#templates').val(),function (response){
             tinymce.get('chat_message').setContent(response.data.text);

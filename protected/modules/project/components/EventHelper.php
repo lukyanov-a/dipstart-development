@@ -16,9 +16,10 @@ class EventHelper {
 	const TYPE_STAGE_DONE_BY_EXECUTOR = 12;
 	const TYPE_STAGE_DONE_BY_CUSTOMER = 13;
 	const TYPE_CUSTOMER_REGISTRED = 14;      // Пользователь %..% зарегистрировался
-	const TYPE_ORDER_MANAGER_INFORMED = 15;  // Напоминание
+	const TYPE_ORDER_MANAGER_INFORMED = 15;  // Напоминание для администратора
 	const TYPE_ORDER_STAGE_EXPIRED = 16;     // Срок сдачи этапа
 	const TYPE_ACCEPTED_ORDER = 17;          // Заказ проверен тех. руком
+	const TYPE_ORDER_SALES_MANAGER_INFORMED = 18;  // Напоминание для менеджера
     const STATUS_ACTIVE = 0;
     const STATUS_DONE = 1;
 
@@ -119,6 +120,11 @@ class EventHelper {
 		$text = UserModule::t('Order reminder');
         self::sendEvent($creator, self::TYPE_ORDER_MANAGER_INFORMED, $text);
     }
+	public static function salesManagerInformed($creator) {
+		$text = UserModule::t('User reminder');
+        self::sendEvent($creator, self::TYPE_ORDER_SALES_MANAGER_INFORMED, $text);
+    }
+	
 	public static function stageExpired($creator) {
 		$text = UserModule::t('Stage expired');
         self::sendEvent($creator, self::TYPE_ORDER_STAGE_EXPIRED, $text);
