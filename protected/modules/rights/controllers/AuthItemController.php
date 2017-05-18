@@ -101,7 +101,7 @@ class AuthItemController extends RController
     	{
     		$columns[] = array(
 				'name'=>strtolower($roleName),
-    			'header'=>$role->getNameText(),
+    			'header'=>User::itemAlias('roles', $role->getName()),
     			'type'=>'raw',
     			'htmlOptions'=>array(
     				'class'=>'role-column',

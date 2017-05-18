@@ -2,11 +2,17 @@ var intervalTimer = null;
 var titleStar = '***************';
 var titleMessage = 'Новое событие';
 var defaultTitle = document.title;
+var refreshUrl;
 
 $(document).ready(function(){
 	setInterval(update_events, 5000);
 	$(window).focus(removeTitleSignal);
 	$(window).mousemove(removeTitleSignal);
+	if (window.location.pathname == '/project/event/salesManagerIndex') {
+		refreshUrl = '/project/event/refreshForSalesManager';
+	} else {
+		refreshUrl = '/project/event/refresh';
+	}
 });
 
 function removeTitleSignal(){
@@ -46,7 +52,7 @@ function titleSignal(){
 }
 
 function update_events(){
-    $.post('/project/event/refresh', {}, function(data){
+    $.post(refreshUrl, {}, function(data){
 		var newEvent = checkNewEvent(data);
 		$('.events-list').html(data);
 		if (newEvent)

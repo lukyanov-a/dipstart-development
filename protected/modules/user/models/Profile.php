@@ -123,7 +123,6 @@ class Profile extends CActiveRecord
 		// class name for the relations automatically generated below.
 		$relations = array(
 			'user'=>array(self::HAS_ONE, 'User', 'id'),
-			//'categories'=>array(self::HAS_MANY, 'Categories', array('id'=>'discipline')),
 			'AuthAssignment' => array(self::HAS_ONE, 'AuthAssignment', 'userid'),
 		);
 		if (isset(Yii::app()->getModule('user')->profileRelations))
@@ -143,6 +142,7 @@ class Profile extends CActiveRecord
 			'mailing_for_executors' => UserModule::t('Recive new projects notifications'),
 			'notification' => UserModule::t('Receive notification of the occurrence of terms'),
 			'notification_time' => UserModule::t('Time notification'),
+			'manager_informed' => ProjectModule::t('Reminder'),
 		);
 		$model=$this->getFields();
 
@@ -216,8 +216,12 @@ class Profile extends CActiveRecord
 				} elseif (User::model()->isAuthor()) {
 					$criteria->addInCondition('visible',array(2,3));
 					$this->_model=ProfileField::model()->findAll($criteria);
-				} elseif (User::model()->isManager()) {
+				} elseif (User::model()->isAdmin()) {
 					$this->_model=ProfileField::model()->findAll();
+				} elseif (User::model()->isSalesManager()) {
+					$this->_model=ProfileField::model()->forSalesManager()->findAll();
+				} elseif (User::model()->isManager()) {
+					$this->_model=ProfileField::model()->forManager()->findAll();
 				} else {
 					$this->_model=ProfileField::model()->forAll()->findAll();
 				}
@@ -318,6 +322,20 @@ class Profile extends CActiveRecord
             ]
         ];
     }*/
+	public function getDbmanager_informed() {
+		return $this->getTimestamp('manager_informed');
+	}
+	public function setDbmanager_informed($datetime) {
+		$this->setTimestamp('manager_informed', $datetime);
+	}
+	
+	public function behaviors() {
+        return [
+			'TimepickBehavior' => [
+                'class' => 'TimepickBehavior'
+            ]
+        ];
+    }
 	
 	public function getTime($type) {
 		$time = array('0' => '0');

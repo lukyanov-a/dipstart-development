@@ -499,7 +499,7 @@ class ZakazController extends Controller {
             throw new CHttpException(404, "Событие не найдено");
         }
         
-        if ($event->type == EventHelper::TYPE_CUSTOMER_REGISTRED) {
+        if ($event->type == EventHelper::TYPE_CUSTOMER_REGISTRED || $event->type == EventHelper::TYPE_ORDER_SALES_MANAGER_INFORMED) {
             $rid=$event->event_id;
             $event->delete();
             $this->redirect(['/user/admin/update', 'id' => $rid]);

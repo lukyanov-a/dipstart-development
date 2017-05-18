@@ -15,12 +15,6 @@
         echo $form->errorSummary($model); ?>
     </div>
     <div class="row">
-        <!--<div class="col-xs-6"><h4><?=ProjectModule::t('Deadlines')?></h4></div>
-        <div class="col-xs-6" style="float:right;">
-     		<?php //$attr = array ('class' => 'btn btn-primary terms-save-btn'); ?>
-			<?php //if(Yii::app()->user->isGuest) $attr['disabled'] = 'disabled'; ?>
-            <?php //echo CHtml::submitButton(ProjectModule::t('Save'), array('class' => 'btn btn-primary terms-save-btn')); ?>
-        </div>-->
         <div class="col-xs-4 terms-columns terms-column-1">
             <span>
                 <?php echo $form->labelEx($model, 'max_exec_date'); ?>

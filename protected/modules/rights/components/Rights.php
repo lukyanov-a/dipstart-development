@@ -199,7 +199,8 @@ class Rights
 		else
 		{
 			foreach( $items as $itemName=>$item )
-        		$selectOptions[ $itemName ] = $item->getNameText();
+				$selectOptions[ $itemName ] = User::itemAlias('roles', $itemName);
+        		//$selectOptions[ $itemName ] = $item->getNameText();
 		}
 
 		return $selectOptions;
