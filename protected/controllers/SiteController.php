@@ -602,4 +602,11 @@ class SiteController extends Controller {
 			'Japan'											=> 81,
 		);
 	}
+
+	public function actionSetrole($role) {
+		$cookie = new CHttpCookie('authmeneger', $role);
+		$cookie->expire = time()+60*60*24*180;
+		Yii::app()->request->cookies['authmeneger'] = $cookie;
+		$this->redirect('/');
+	}
 }
