@@ -231,11 +231,17 @@ abstract class YiiChatDbHandlerBase extends CComponent implements IYiiChat {
 //                            list($sms_id, $sms_cnt, $cost, $balance) = send_sms(str_replace(['+','-'],'',$obj['recipient']->profile->attributes['mob_tel']), $obj['message']);
                             break;
                         case 'send_email':
-							if (User::model()->getUserRole($obj['recipient']->id)=='Customer') {
+							/*if (User::model()->getUserRole($obj['recipient']->id)=='Customer') {
 								$type_id = Emails::TYPE_16;
 							} else if (User::model()->getUserRole($obj['recipient']->id)=='Author') {
 								$type_id = Emails::TYPE_20;
+							}*/
+							if(in_array('Customer', User::model()->getUserRoleArr($obj['recipient']->id))) {
+								$type_id = Emails::TYPE_16;
+							} elseif (in_array('Author', User::model()->getUserRoleArr($obj['recipient']->id))) {
+								$type_id = Emails::TYPE_20;
 							}
+
 							$email = new Emails;
 							$rec   = Templates::model()->findAll("`type_id`='$type_id'");
 							$email->name = $obj['recipient']->full_name;
