@@ -379,7 +379,8 @@ margin-left:0;
 padding: 15px 10px;
 }
 
-.col-xs-12 h1, .col-md-4 h3, .col-md-12 h3, .content-clearfix h1 {display:none;} 
+/*.col-xs-12 h1, .col-md-4 h3, .col-md-12 h3,*/
+#layout.content-clearfix h1 {display:none;} 
 
 #zakaz-grid {padding:0;}
 
