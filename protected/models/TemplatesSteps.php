@@ -14,7 +14,7 @@ class TemplatesSteps extends CActiveRecord
 	 * @return string the associated database table name
 	 */
 	public function tableName() {
-		return Company::getId().'_Templatessteps';
+		return Company::getId().'_TemplatesSteps';
 	}
 
 	/**
