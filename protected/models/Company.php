@@ -13,7 +13,7 @@ class Company extends CActiveRecord {
 		// will receive user inputs.
 		return array(
 			array('name, domains, language, supportEmail', 'required'),
-			array('name, domains, FrontPage, icon, logo', 'length', 'max'=>255),
+			array('name, domains, FrontPage, icon, logo, contacts', 'length', 'max'=>255),
 			array('supportEmail', 'email'),
 			array('supportEmail', 'length', 'min' => 6, 'max'=>64,'message' => UserModule::t("Incorrect password (minimal length 6 symbols, maximum 30).")),
 			array('Payment2ChekoutHash', 'length', 'max'=>64),
@@ -23,38 +23,43 @@ class Company extends CActiveRecord {
 			array('fileupload', 'file', 'types'=>'jpg,jpeg,gif,png,woff', 'maxSize'=>'409600', 'allowEmpty'=>true),
 			array('iconupload', 'file', 'types'=>'ico', 'maxSize'=>'204800', 'allowEmpty'=>true),
 			array('header, text4guests, text4customers, agreement4customers, agreement4executors', 'length', 'max'=>65535),
-			array('WebmasterFirstOrderRate, WebmasterSecondOrderRate', 'type', 'type'=>'float'),
-			array('telfin_id, telfin_secret', 'length', 'max'=>32),
+			array('WebmasterFirstOrderRate, WebmasterSecondOrderRate, WebmasterFirstExecutorOrderRate, WebmasterSecondExecutorOrderRate', 'type', 'type'=>'float'),
+			array('telfin_id, telfin_secret, smsc_login, smsc_passwd', 'length', 'max'=>32),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, frozen, organization, name, domains, language, supportEmail, PaymentCash, Payment2Chekout, Payment2ChekoutHash, FrontPage, icon, logo, header, text4guests, text4customers, agreement4customers, agreement4executors, WebmasterFirstOrderRate, WebmasterSecondOrderRate, telfin_id, telfin_secret, module_tree', 'safe', 'on'=>'search'),
+			array('id, frozen, organization, name, domains, language, supportEmail, PaymentCash, Payment2Chekout, Payment2ChekoutHash, FrontPage, icon, logo, header, text4guests, text4customers, agreement4customers, agreement4executors, WebmasterFirstOrderRate, WebmasterSecondOrderRate, WebmasterFirstExecutorOrderRate, WebmasterSecondExecutorOrderRate, telfin_id, telfin_secret, smsc_login, smsc_passwd, module_tree', 'safe', 'on'=>'search'),
 		);
 	}
 	public function attributeLabels() {
 		return array(
-			'id'                       => Yii::t('site','ID'),
-			'frozen'                   => Yii::t('site','frozen'),
-			//'organization'           => Yii::t('site','organization'), 
-			'name'                     => Yii::t('site','company name'),
-			'domains'                  => Yii::t('site','domains'),
-			'language'                 => Yii::t('site','language'),
-			'supportEmail'             => Yii::t('site','support email'),
-			'PaymentCash'              => Yii::t('site','cash'),
-			'Payment2Chekout'          => Yii::t('site','2Checkout id'),
-			'Payment2ChekoutHash'      => Yii::t('site','2checkout hash'),
-			'FrontPage'                => Yii::t('site','front page url'),
-			'icon'                     => Yii::t('site','icon'),
-			'logo'                     => Yii::t('site','logo'),
-			'header'                   => Yii::t('site','header text'),
-			'text4guests'              => Yii::t('site','text for guests'),
-			'text4customers'           => Yii::t('site','text for customers'),
-			'agreement4customers'      => Yii::t('site','agreement for customers'),
-			'agreement4executors'      => Yii::t('site','agreement for executors'),
-			'WebmasterFirstOrderRate'  => Yii::t('site','webmaster first order rate'),
-			'WebmasterSecondOrderRate' => Yii::t('site','webmaster second order rate'),
-			'telfin_id'                => Yii::t('site','telfin id'),
-			'telfin_secret'            => Yii::t('site','telfin secret'),
-			'module_tree'              => Yii::t('site','Tree structure'),
+			'id'                               => Yii::t('site','ID'),
+			'frozen'                           => Yii::t('site','frozen'),
+			//'organization'                   => Yii::t('site','organization'), 
+			'name'                             => Yii::t('site','company name'),
+			'domains'                          => Yii::t('site','domains'),
+			'language'                         => Yii::t('site','language'),
+			'supportEmail'                     => Yii::t('site','support email'),
+			'PaymentCash'                      => Yii::t('site','cash'),
+			'Payment2Chekout'                  => Yii::t('site','2Checkout id'),
+			'Payment2ChekoutHash'              => Yii::t('site','2checkout hash'),
+			'FrontPage'                        => Yii::t('site','front page url'),
+			'icon'                             => Yii::t('site','icon'),
+			'logo'                             => Yii::t('site','logo'),
+			'header'                           => Yii::t('site','header text'),
+			'text4guests'                      => Yii::t('site','text for guests'),
+			'text4customers'                   => Yii::t('site','text for customers'),
+			'agreement4customers'              => Yii::t('site','agreement for customers'),
+			'agreement4executors'              => Yii::t('site','agreement for executors'),
+			'WebmasterFirstOrderRate'          => Yii::t('site','webmaster first customer order rate'),
+			'WebmasterSecondOrderRate'         => Yii::t('site','webmaster second customer order rate'),
+			'WebmasterFirstExecutorOrderRate'  => Yii::t('site','webmaster first executor order rate'),
+			'WebmasterSecondExecutorOrderRate' => Yii::t('site','webmaster second executor order rate'),
+			'telfin_id'                        => Yii::t('site','telfin id'),
+			'telfin_secret'                    => Yii::t('site','telfin secret'),
+			'smsc_login'                       => Yii::t('site','smsc.ru api login'),
+			'smsc_passwd'                      => Yii::t('site','smsc.ru api password'),
+			'module_tree'                      => Yii::t('site','Tree structure company'),
+			'contacts'                      => Yii::t('site','Contact details'),
 		);
 	}
 	public static function search_by_domain($domain) {
@@ -110,6 +115,14 @@ class Company extends CActiveRecord {
 	public static function getWebmasterSecondOrderRate() {
 		if(!self::$orgz) self::getCompany();
 		return self::$orgz->WebmasterSecondOrderRate;
+	}
+	public static function getWebmasterFirstExecutorOrderRate() {
+		if(!self::$orgz) self::getCompany();
+		return self::$orgz->WebmasterFirstExecutorOrderRate;
+	}
+	public static function getWebmasterSecondExecutorOrderRate() {
+		if(!self::$orgz) self::getCompany();
+		return self::$orgz->WebmasterSecondExecutorOrderRate;
 	}
 	public static function filesPath() {
 		return 'uploads/c'.self::getId().'/company';

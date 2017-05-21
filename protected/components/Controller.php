@@ -24,6 +24,14 @@ class Controller extends RController
 	public $breadcrumbs=array();
 
     public function init(){
+		if(isset($_GET['authmeneger'])) {
+			$role = $_GET['authmeneger'];
+			if(in_array($role, User::model()->getUserRoleArr())) {
+				$cookie = new CHttpCookie('authmeneger', $role);
+				$cookie->expire = time() + 60 * 60 * 24 * 180;
+				Yii::app()->request->cookies['authmeneger'] = $cookie;
+			}
+		}
 		// --- Организации
 		$c_id = Company::getId();
 		if ($c_id) {
@@ -46,6 +54,17 @@ class Controller extends RController
 		}
 		// ---
         if (!Yii::app()->user->isGuest)
+			$menuprofile = array('label'=>Yii::t('site','Profile'), 'url'=>array('/user/profile/edit'));
+			if(count($user_roles = User::model()->getUserRoleArr())>1) {
+				$itemprofile = array();
+				foreach ($user_roles as $user_role) {
+					if(in_array($user_role, User::model()->PRIORITY_ROLES)) {
+						$itemprofile[] = array('label' => Yii::t('site', $user_role), 'url' => array('/site/setrole/', 'role' => $user_role));
+					}
+				}
+				$itemprofile[] = array('label'=>Yii::t('site','Profile'), 'url'=>array('/user/profile/edit'));
+				$menuprofile = array('label'=>Yii::t('site','My profile'), 'url'=>array('#'), 'items' => $itemprofile);
+			}
             switch (User::model()->getUserRole()) {
                 case ('Manager'):
                 case ('Admin'):
@@ -62,19 +81,21 @@ class Controller extends RController
 					if (Company::getCompany()->agreement4executors && Company::getCompany()->agreement4executors != '') $menu[] = array('label'=>Yii::t('site','User Agreement'), 'url'=>array('/site/agreement'));
 					//$menu[] = array('label'=>Yii::t('site','Personal account'), 'url'=>array('/user/profile/account'));
 					$menu[] = array('label'=>Yii::t('site','Logout'), 'url'=>array('/user/logout'));// Далее выводится в обратном порядке
-					$menu[] = array('label'=>Yii::t('site','Profile'), 'url'=>array('/user/profile/edit'));
+					//$menu[] = array('label'=>Yii::t('site','Profile'), 'url'=>array('/user/profile/edit'));
+					$menu[] = $menuprofile;
 					$this->menu = $menu;
 
                     Yii::app()->theme='client';
                     break;
                 case ('Customer'):
 						$menu[] = array('label'=>Yii::t('site','My orders'), 'url'=>array('/project/zakaz/customerOrderList'));
-						if (Company::getCompany()->module_tree) $menu[] = array('label'=>Yii::t('site','Tree structure'), 'url'=>array('/project/zakaz/tree'));
+						if (Company::getCompany()->module_tree) $menu[] = array('label'=>Yii::t('site','Orders treeview'), 'url'=>array('/project/zakaz/tree'));
 						$menu[] = array('label'=>Yii::t('site','Create order'), 'url'=>array('/project/zakaz/create'));
                         //$menu[] = array('label'=>Yii::t('site','Personal account'), 'url'=>array('/user/profile/account'));
 						if (Company::getCompany()->agreement4customers && Company::getCompany()->agreement4customers != '') $menu[] = array('label'=>Yii::t('site','User Agreement'), 'url'=>array('/site/agreement'));
 						$menu[] = array('label'=>Yii::t('site','Logout'), 'url'=>array('/user/logout'));// Даллее выводится в обратном порядке
-						$menu[] = array('label'=>Yii::t('site','Profile'), 'url'=>array('/user/profile/edit'));
+						//$menu[] = array('label'=>Yii::t('site','Profile'), 'url'=>array('/user/profile/edit'));
+					$menu[] = $menuprofile;
                     $this->menu = $menu;
 					/*$this->authMenu = array(
 					    array('label'=>Yii::t('site','Logout'), 'url'=>array('/user/logout')),
@@ -83,10 +104,11 @@ class Controller extends RController
                     break;
                 case ('Webmaster'):
                     $this->menu = array(
-						array('label'=>Yii::t('site','Stats'), 'url'=>array('/partner/stats')),
-						array('label'=>Yii::t('site','Promo materials'), 'url'=>array('/partner/materials')),
+						array('label'=>Yii::t('partner','Stats for customers'), 'url'=>array('/partner/stats')),
+						array('label'=>Yii::t('partner','Stats for executors'), 'url'=>array('/partner/statsForExecutors')),
+						array('label'=>Yii::t('partner','Promo materials'), 'url'=>array('/partner/materials')),
 						array('label'=>Yii::t('site','Logout'), 'url'=>array('/user/logout')),// Даллее выводится в обратном порядке
-						array('label'=>Yii::t('site','Profile'), 'url'=>array('/user/profile/edit')),
+						$menuprofile,
                     );
 					$this->authMenu = array(
 					    array('label'=>Yii::t('site','Logout'), 'url'=>array('/user/logout')),

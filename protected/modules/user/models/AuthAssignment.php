@@ -16,7 +16,6 @@ class AuthAssignment extends CActiveRecord
 	 */
 	public function tableName() {
         return Company::getId().'_AuthAssignment';
-		//return 'AuthAssignment';
 	}
 
 	/**

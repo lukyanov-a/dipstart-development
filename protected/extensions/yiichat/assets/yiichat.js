@@ -184,8 +184,12 @@ var YiiChat = function (options) {
 
                 var tmp_html = "<div class='owner chtpl0-nickname' data-ownerid='" + post.sender.superuser.userid + "'><a data-toggle='tooltip' title='" + post.sender.fullusername + "' class='ownerref' href='/user/admin/update?id=" + post.sender.superuser.userid + "'>" + post.sender.username + "</a>";
                 if (typeof post.recipient === 'object') {
-                    tmp_html += " ответил " + "<a data-toggle='tooltip' title='" + post.recipient.fullusername + "' class='ownerref' href='/user/admin/update?id=" + post.recipient.superuser.userid + "'>" + post.recipient.username + "</a>";
-                } else if (post.recipient == -1) 
+					if (post.recipient.superuser) {
+						tmp_html += " ответил " + "<a data-toggle='tooltip' title='" + post.recipient.fullusername + "' class='ownerref' href='/user/admin/update?id=" + post.recipient.superuser.userid + "'>" + post.recipient.username + "</a>";
+					} else {
+						console.warn("Что-то не так с получателем сообщения: post.id=="+post.id);
+					}
+				} else if (post.recipient == -1) 
                     tmp_html += " написал авторам";
                 else if (post.recipient == -2)
                     tmp_html += " написал техническим руководителям";
@@ -205,7 +209,7 @@ var YiiChat = function (options) {
 				tmp_html += "<button data-index=\"" + post.id + "\" class=\"chtpl0-delete\">Удалить</button>";
 				if (options.identity != post.sender.superuser.userid) {
                     if (post.moderated == 0 && (post.sender.superuser.itemname == 'Author' || post.sender.superuser.itemname == 'Customer'))
-                        if (post.recipient == 0 || post.recipient == -2 || post.recipient != 0 && (post.recipient.superuser.itemname == 'Author' || post.recipient.superuser.itemname == 'Customer'))
+                        if (post.recipient == 0 || post.recipient == -2 || post.recipient != 0 && (post.recipient.superuser && (post.recipient.superuser.itemname == 'Author' || post.recipient.superuser.itemname == 'Customer')))
 							tmp_html += "<button data-index=\"" + post.id + "\"class=\"chtpl0-accept\">Одобрить</button>";
                     
                 }

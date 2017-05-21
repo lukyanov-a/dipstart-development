@@ -228,7 +228,7 @@ class PaymentController extends Controller {
 
     }*/
 
-    public function actionSavePayments() { // Changes in payment block in order managment      // Не лишняя ли это функция?
+    public function actionSavePayments() { // Changes in payment block in order managment
         $this->_prepairJson();
         $orderId = $this->_request->getParam('order_id');
         $payment = ProjectPayments::model()->find('order_id = :ORDER_ID', array(
@@ -265,7 +265,7 @@ class PaymentController extends Controller {
 			//(To Author)
             //$order = Zakaz::model()->findByPk($orderId);
             
-            if ($paying>0) {
+            if ($paying>0) { // Если платим исполнителю
                 
                 $user = User::model()->with('profile')->findByPk($order->executor);
                 $manag = User::model()->findByPk(Yii::app()->user->id);
@@ -279,10 +279,33 @@ class PaymentController extends Controller {
                 $buh->summ = $paying;
                 $buh->payment_type = Payment::OUTCOMING_EXECUTOR;
                 $buh->manager = $manag->email;
-                /*$buh->details_ya = $user->profile->yandex;
-                $buh->details_wm = $user->profile->wmr;
-                $buh->details_bank = $user->profile->bank_account;*/
                 $buh->save();
+				
+				if ($user->pid) {  // Если его привёл партнёр
+					$count_orders = Yii::app()->db->createCommand()
+						->select('count(*) AS count')
+						->from(Zakaz::model()->tableName())
+						->where('executor=:executor', array(':executor'=>$order->executor))
+						->queryRow();
+					if ($count_orders['count'] > 1) {
+						$paying_to_partner = $paying * Company::getWebmasterSecondExecutorOrderRate();
+					} else {
+						$paying_to_partner = $paying * Company::getWebmasterFirstExecutorOrderRate();
+					}
+					if ($paying_to_partner) {
+						$partner = User::model()->findByPk($user->pid);
+						$buh = new Payment;
+						$buh->approve = 0;
+						$buh->order_id = $orderId;
+						$buh->receive_date = date('Y-m-d H:i:s');
+						$buh->theme = $order->title;
+						$buh->user = $partner->email;
+						$buh->summ = $paying_to_partner;
+						$buh->payment_type = Payment::OUTCOMING_PARTNER_FOR_EXECUTOR;
+						$buh->manager = $manag->email;
+						$buh->save();
+					}
+				}
             }
             
             $this->_response->setData(
@@ -306,8 +329,8 @@ class PaymentController extends Controller {
 	public function actionAffiliatePayment(){
 		//print_r($_REQUEST);
 		//Yii::app()->end();
-		$hashSecretWord = Campaign::getPayment2ChekoutHash(); //2Checkout Secret Word
-		$hashSid = Campaign::getPayment2Chekout(); //2Checkout account number
+		$hashSecretWord = Company::getPayment2ChekoutHash(); //2Checkout Secret Word
+		$hashSid = Company::getPayment2Chekout(); //2Checkout account number
 		$hashTotal = $_REQUEST['total']; //Sale total to validate against
 		$hashOrder = $_REQUEST['order_number']; //2Checkout Order Number   ---- =1 for test!!
 		$StringToHash = strtoupper(md5($hashSecretWord . $hashSid . $hashOrder . $hashTotal));

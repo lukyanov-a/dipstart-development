@@ -3,6 +3,9 @@
 class PartnerController extends Controller {
 
 	public function actionRedirect($pid, $url = null) {
+        if (User::model()->getUserRole() == 'Webmaster') {
+            $this->redirect($this->createUrl('partner/materials'));
+        }
 		setcookie('partner', $pid, time()+60*60*24*30*3, '/');
 		$model = new WebmasterLog();
 		$model->pid = $pid;
@@ -41,7 +44,7 @@ class PartnerController extends Controller {
 			if($year == $registration_year) $first_month = $registration_month;
 			if($year == $current_year) $last_month = $current_month;
 			for ($month = $first_month; $month <= $last_month; $month++) {
-				if($month < 10) $month = '0'.$month;
+				if($month < 10) $month = '0'.intval($month);
 				$months[$year.'-'.$month] = $year.'-'.$month;
 			}
 		}
@@ -62,6 +65,27 @@ class PartnerController extends Controller {
 			'chosen_month' => $chosen_month,
 		));
 		
+	}
+	
+	public function actionStatsForExecutors() {
+		$count_executors = Yii::app()->db->createCommand()
+			->select('count(*) AS count')
+			->from(User::model()->tableName().' u')
+			->join(AuthAssignment::model()->tableName().' a', 'u.id=a.userid')
+			->where('pid=:pid AND itemname=:itemname', array(':pid'=>Yii::app()->user->id, ':itemname'=>'Author'))
+			->queryRow();
+		$executors = $count_executors['count'];
+		$sum_money = Yii::app()->db->createCommand()
+			->select('sum(summ) AS sum')
+			->from(Payment::model()->tableName().' p')
+			->join(User::model()->tableName().' u', 'u.email=p.user')
+			->where('u.id=:id', array(':id'=>Yii::app()->user->id))
+			->queryRow();
+		$money = $sum_money['sum'];
+		$this->render('statsForExecutors', array(
+			'executors'=>$executors,
+			'money' => $money,
+		));
 	}
 	
 }

@@ -379,7 +379,8 @@ margin-left:0;
 padding: 15px 10px;
 }
 
-.col-xs-12 h1, .col-md-4 h3, .col-md-12 h3, .content-clearfix h1 {display:none;} 
+/*.col-xs-12 h1, .col-md-4 h3, .col-md-12 h3,*/
+#layout.content-clearfix h1 {display:none;} 
 
 #zakaz-grid {padding:0;}
 
@@ -1246,6 +1247,19 @@ header div#control-menu li a {
     background-color: #6a7488;
 }*/
 
+header div#control-menu .dropdown-menu li:last-child a,
+header div#control-menu .dropdown-menu li:nth-last-child(2) a  {
+    border-radius: 0px;
+}
+
+header div#control-menu .dropdown-menu li,
+header div#control-menu .dropdown-menu li:last-child,
+header div#control-menu .dropdown-menu li:nth-last-child(2)
+{
+    float: none;
+    width: auto;
+}
+
 header div#control-menu li:nth-last-child(2){
     float: right;
     width: 100px;
@@ -1627,6 +1641,10 @@ body.pushed #layout, body.pushed header {
     overflow-y: hidden;
 }
 
+.header {
+    z-index: 99;
+}
+
 #layout, header {
     -webkit-transition: all .1s 0s ease-in-out;
     -moz-transition: all .1s 0s ease-in-out;
@@ -1636,4 +1654,5 @@ body.pushed #layout, body.pushed header {
     min-height: 100%;
     clear: both;
     position: relative;
+    z-index: 98;
 }

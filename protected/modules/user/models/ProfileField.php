@@ -7,6 +7,7 @@ class ProfileField extends CActiveRecord
 	const VISIBLE_CUSTOMER=1;
     const VISIBLE_ONLY_OWNER=4;
 	const VISIBLE_NO=0;
+	const VISIBLE_ONLY_SALES_MANAGER = 5;
 	
 	const REQUIRED_NO = 0;
 	const REQUIRED_YES_SHOW_REG = 1;
@@ -35,7 +36,7 @@ class ProfileField extends CActiveRecord
 	public static $table_prefix;
 	
 	public function tableName() {
-		$c_id = Campaign::getId();
+		$c_id = Company::getId();
 		if ($c_id)
 			return $c_id.'_'.Yii::app()->getModule('user')->tableProfileFields;
 		else
@@ -139,6 +140,14 @@ class ProfileField extends CActiveRecord
                 'condition'=>'visible='.self::VISIBLE_ONLY_OWNER,
                 'order'=>'position',
             ),
+			'forManager'=>array(
+                'condition'=>'visible='.self::VISIBLE_AUTHOR.' OR visible='.self::VISIBLE_CUSTOMER.' OR visible='.self::VISIBLE_ALL,
+                'order'=>'position',
+            ),
+			'forSalesManager'=>array(
+                'condition'=>'visible='.self::VISIBLE_AUTHOR.' OR visible='.self::VISIBLE_CUSTOMER.' OR visible='.self::VISIBLE_ALL.' OR visible='.self::VISIBLE_ONLY_SALES_MANAGER,
+                'order'=>'position',
+            ),
             'sort'=>array(
                 'order'=>'position',
             ),
@@ -209,13 +218,14 @@ class ProfileField extends CActiveRecord
 				self::REQUIRED_NO => UserModule::t('No'),
 				self::REQUIRED_NO_SHOW_REG => UserModule::t('No, but show on registration form'),
 				self::REQUIRED_YES_SHOW_REG => UserModule::t('Yes and show on registration form'),
-				self::REQUIRED_YES_NOT_SHOW_REG => UserModule::t('Yes'),
+				//self::REQUIRED_YES_NOT_SHOW_REG => UserModule::t('Yes'),
 			),
 			'visible' => array(
 				self::VISIBLE_ALL => UserModule::t('For all'),
 				self::VISIBLE_CUSTOMER => UserModule::t('Customer'),
 				self::VISIBLE_AUTHOR => UserModule::t('Author'),
 				self::VISIBLE_NO => UserModule::t('Hidden'),
+				self::VISIBLE_ONLY_SALES_MANAGER => UserModule::t('Sales manager'),
 			),
 		);
 		if (isset($code))

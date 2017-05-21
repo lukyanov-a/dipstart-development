@@ -80,7 +80,9 @@ class User extends CActiveRecord
 			//array('username', 'length', 'max'=>20, 'min' => 3,'message' => UserModule::t("Incorrect username (length between 3 and 20 characters).")),
 			//array('username', 'match', 'pattern' => '/^[-A-Za-z0-9_]+$/u','message' => UserModule::t("Incorrect symbols (A-z0-9)."),'except'=>'social_network'),
 			array('id, identity, network, email, full_name, state, pid, phone_number, roles', 'safe', 'on'=>'search')
-		):array()));
+		):array(
+			array('id, username, email, create_at, lastvisit_at, superuser, status, roles', 'safe', 'on'=>'search'),
+		)));
 	}
 
 	/**
@@ -163,12 +165,14 @@ class User extends CActiveRecord
 				'1' => UserModule::t('Yes'),
 			),
 			'roles' => array(
+				'Guest' => UserModule::t('Guest'),
 				'Admin' => UserModule::t('Admin'),
 				'Manager' => UserModule::t('Manager'),
 				'Customer' => UserModule::t('Customer'),
 				'Author' =>  UserModule::t('Executor'),
 				'Corrector' =>  UserModule::t('Corrector'),
 				'Webmaster'=>  UserModule::t('Webmaster'),
+				'Sales-manager'=>  UserModule::t('Sales manager'),
 			),
 		);
 		if (isset($code))
@@ -215,10 +219,11 @@ class User extends CActiveRecord
 	}
 	public function getUserRole($userId = false) {
 		$authorizer = Rights::module()->getAuthorizer();
-		if($userId) {
+		if ($userId === true) {
+			$roles = $authorizer->getAuthItems(2, $this->id);
+		} elseif($userId) {
 			$roles = $authorizer->getAuthItems(2, $userId);
-		}
-		elseif (Yii::app()->user->id == 0) {
+		} elseif (Yii::app()->user->id == 0) {
 			return 'root';
 		} else {
 			$roles = $authorizer->getAuthItems(2, Yii::app()->user->id);
@@ -226,6 +231,10 @@ class User extends CActiveRecord
 		$role =  array_keys($roles);
 		foreach ($role as $item)
 			if (in_array($item, $this->PRIORITY_ROLES)) $priority = $item;
+		if(isset(Yii::app()->request->cookies['authmeneger']) && !$userId) {
+			$is_cookie_maneger = Yii::app()->request->cookies['authmeneger'];
+			if(in_array($is_cookie_maneger, $this->getUserRoleArr())) return $is_cookie_maneger;
+		}
 		return  $priority ? $priority : $role[0];
 	}
 	public function getUserRoleArr($userId = false) {
@@ -249,8 +258,8 @@ class User extends CActiveRecord
 			return TRUE;
 		 else    return FALSE;
 	 }
-	public function isCustomer(){
-	   if (Yii::app()->user->id && $this->getUserRole()=='Customer')
+	public function isCustomer($id = false){
+	   if (Yii::app()->user->id && $this->getUserRole($id)=='Customer')
 		return TRUE;
 	   else    return FALSE;
 	}
@@ -262,6 +271,11 @@ class User extends CActiveRecord
 	public function isCorrector(){
 		$roles = $this->getUserRoleArr();
 		if (Yii::app()->user->id && in_array('Author', $roles) && in_array('Corrector', $roles)) return true;
+		else    return FALSE;
+	}
+	public function isSalesManager(){
+		$roles = $this->getUserRoleArr();
+		if (Yii::app()->user->id && in_array('Manager', $roles) && in_array('Sales-manager', $roles)) return true;
 		else    return FALSE;
 	}
 	public function isExecutor($project_id){
@@ -335,4 +349,5 @@ class User extends CActiveRecord
 			$answer .= self::itemAlias('roles',$role->itemname).' ';
 		return $answer;
 	}
+	
 }

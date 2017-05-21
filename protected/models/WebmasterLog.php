@@ -7,7 +7,7 @@ class WebmasterLog extends CActiveRecord
 	const UNIQUE=2;  //просто уник
 	const PARTNER_REPEAT=3; //повторный с партнерки не зарегеный
 	const REPEAT=4; //повторный не зарегеный
-	const REG=5; //регистрация нов пользователя
+	const REG_CUSTOMER=5; //регистрация нов заказчика
 	const FIRST_ORDER=6; //рег нового заказа
 	const NON_FIRST_ORDER=7;
 	const FULL_PAYMENT_4_FIRST_ORDER=8;
@@ -16,6 +16,7 @@ class WebmasterLog extends CActiveRecord
 	const FINISH_FIRST_ORDER_FAILURE=11;
 	const FINISH_NON_FIRST_ORDER_SUCCESS=12;
 	const FINISH_NON_FIRST_ORDER_FAILURE=13;
+	const REG_EXECUTOR = 14;
 	
 	/*
 	 * @return string the associated database table name

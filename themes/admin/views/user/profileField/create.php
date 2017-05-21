@@ -1,4 +1,9 @@
 <?php
+Yii::app()->getClientScript()->registerCssFile(Yii::app()->theme->baseUrl.'/css/manager.css');
+Yii::app()->clientScript->registerScriptFile('/js/masonry.min.js', CClientScript::POS_END);
+Yii::app()->clientScript->registerScriptFile('/js/common-masonry.js', CClientScript::POS_END);
+Yii::app()->clientScript->registerScriptFile('/js/worktypes.js');
+
 $this->breadcrumbs=array(
 	UserModule::t('Profile Fields')=>array('admin'),
 	UserModule::t('Create'),

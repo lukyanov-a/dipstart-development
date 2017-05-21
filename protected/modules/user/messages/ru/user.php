@@ -119,8 +119,8 @@ return array(
 	'Widget'=>'Виджет',
 	'Widget parametrs'=>'Параметры виджета',
 	'Widget name.'=>'Название виджета.',
-	'Allowed lowercase letters and digits.' => 'Допускаются строчные буквы и цифры.',
-	'Field name on the language of "sourceLanguage".' => 'Название поля на языке "sourceLanguage".',
+	'Allowed lowercase letters and digits.' => 'Допускаются строчные буквы и цифры. > “любое название поля латинскими буквами и/или цифрами. (это внутренее название, видно только пользователю)“',
+	'Field name on the language of "sourceLanguage".' => 'Название поля.',
 	'Field type column in the database.' => 'Тип поля колонки в базе данных.',
 	'Field size column in the database.' => 'Размер поля колонки в базе данных',
 	'The minimum value of the field (form validator).' => 'Минимальное значение поля (проверка формы).',
@@ -128,20 +128,22 @@ return array(
 	"Regular expression (example: '/^[A-Za-z0-9\s,]+$/u')." => "Регулярные выражения (пример: '/^[A-Za-z0-9\s,]+$/u')",
 	'Predefined values (example: 1;2;3;4;5 or 1==One;2==Two;3==Three;4==Four;5==Five).' => 'Предопределенные значения (пример: 1;2;3;4;5 или 1==Один;2==Два;3==Три;4==Четыре;5==Пять).',
 	'Error message when you validate the form.' => 'Сообщение об ошибке при проверке формы.',
-	'The value of the default field (database).' => 'Значение поля по умолчанию (база данных).',
+	'The value of the default field (database).' => 'Значение поля по умолчанию.',
 	'Display order of fields.' => 'Порядок отображения полей.',
 	'Not visited' => 'Не входил',
 	'Search' => 'Искать',
 	'Advanced Search' => 'Расширенный поиск',
 	'You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b> or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.'=>'Вы можете использовать операторы сравнения (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b> or <b>=</b>) установив их перед значением.',
     'User rights' => 'Права пользователей',
-    'Customer' => 'Заказчик',
-    'Author' => 'Автор',
+    'Guest' => 'Гость',
+	'Customer' => 'Заказчик',
+    'Author' => 'Исполнитель',
 	'Executor' => 'Исполнитель',
-	'Admin' => 'Администратор',
-	'Manager' => 'Менеджер',
+	'Admin' => 'Супер-админ',
+	'Manager' => 'Администратор',
 	'Webmaster' => 'Вэбмастер',
-	'Corrector' => 'Корректор',
+	'Corrector' => 'Технический руководитель',
+	'Sales manager' => 'Менеджер',
 	'Roles' => 'Роли',
     'Hello, please fill an anket for authorsAuthor' => 'Здравствуйте, заполните, пожалуйста, Вашу анкету автора научных работ... ',
     'Hello, please fill an anket for authorsCustomer' => 'Здравствуйте, заполните Вашу анкету ',
@@ -183,13 +185,15 @@ return array(
 	'The user changed data in the profile' =>  'Пользователь изменил данные в профиле',
 	'accepted order' =>  'проверил заказ',
 	'Order reminder' => 'Напоминание о заказе: ',
+	'User reminder' => 'Напоминание о пользователе: ',
 	'Stage expired' => 'Срок этапа истёк... заказ: ',
 
 	// customerOrderList.php
 	'CurrentProjects' => 'Текущие проекты',
 	'DoneProjects' => 'Завершённые проекты',
 
-	'PaymentProps'=>'Платёжный реквизит',
+	'PaymentProps'=>'Является ли это поле платёжным реквизитом (например номер счета и т.д.)',
+	'paymentPropsShort'=>'Платёжный реквизит',
 	
 	// специализации
 	
@@ -254,5 +258,18 @@ return array(
 	'Receive notification of the occurrence of terms' => 'Получать уведомление о наступлении сроков',
 	'Time notification' => 'Время за которое необходимо уведомить',
     'Recive general mailing' => 'Подписаться на общую рассылку компании',
+
+	'Автор' => 'Исполнитель',
+	'View list' => 'Посмотреть список',
+	
+	'LIST' => 'Поле с выпадающим списком',
+	'BOOL' => 'Поле с галочкой',
+	'INTEGER' => 'Поле с цифровым значением',
+	'VARCHAR' => 'Поле со строкой',
+	'TEXT' => 'Большое текстовое поле',
+
+	'An inscription on the field with a choice of services: for example "Choose a service" or "Type of service", etc.' => 'Надпись на поле с выбором услуг: например “Выберите услугу” или “Тип услуги” и тд',
+	'Error message (for example, "you did not select any of the categories")' => 'Сообщение об ошибке (например, “вы не выбрали ниодну из категорий”)',
+	'An inscription on the field with the choice of the name: for example "project name"' => 'Надпись на поле с выбором названия: например “название проекта”',
 );
 

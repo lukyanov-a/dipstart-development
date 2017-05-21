@@ -32,7 +32,41 @@ class Events extends CActiveRecord {
 			'status' => 'Статус',
 		);
 	}
-        
+	
+	public static function getCacheKey($role = 'manager')
+	{
+		if ($role == 'manager') {
+			return Company::getId().'-events-manager';
+		} elseif ($role == 'sales-manager') {
+			return Company::getId().'-events-sales-manager';
+		} else {
+			return Company::getId().'-events';
+		}
+	}
+	
+	protected function afterSave() {
+		Yii::app()->cache->delete(self::getCacheKey());
+		Yii::app()->cache->delete(self::getCacheKey('sales-manager'));
+        return parent::afterSave();
+    }
+	
+	public function afterDelete() {
+        Yii::app()->cache->delete(self::getCacheKey());
+		Yii::app()->cache->delete(self::getCacheKey('sales-manager'));
+        return parent::afterDelete();
+    } 
+    
+    public function scopes() {
+        return array(
+            'forManager'=>array(
+                'condition'=>'type IN (1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17)',
+            ),
+			'forSalesManager'=>array(
+                'condition'=>'type IN (14,18)',
+            ),
+        );
+    }
+	
     public function search()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.

@@ -71,7 +71,7 @@ div.form-item label {
 }
 
 div.form-item input[type="text"], div.form-item select {
-    padding: 5px 8px;
+    padding: 5px 38px 5px 8px;
     line-height: 22px;
     margin: 10px 20px 15px;
 	width: 93%;

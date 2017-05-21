@@ -36,7 +36,7 @@ $(document).ready(function () {
 		if($data->approve == Payment::REJECTED) $html .= Yii::t('site','Rejected');
 		return $html;
 	}
-	$provider = $model->search('0');
+	$provider = $model->search(array(0));
 	$this->widget('zii.widgets.grid.CGridView', array(
 		'id'=>'buh_transaction_in',
 		'dataProvider' => $provider,
@@ -102,7 +102,8 @@ $(document).ready(function () {
 			),*/
 			array(
 				'name' => 'summ',
-				'footer'=>$model->pageTotal($provider),
+				'footer'=>ProjectModule::t('The amount in accordance with the filter criteria').': <b>'.$model->pageTotal($provider).'</b>',
+				'footerHtmlOptions'=>array('colspan'=>'4'),
 			),
 			array(
 				'header' => Yii::t('site','Payment method'),
@@ -213,7 +214,7 @@ $(document).ready(function () {
 <div id="out" style="display: none;">
 	<h3><?=ProjectModule::t('Pay for all')?></h3>
 	<?php
-	$provider = $model->search('1,2,3');
+	$provider = $model->search(array(1,2,3,4));
 	$this->widget('zii.widgets.grid.CGridView', array(
 		'id'=>'buh_transaction_out',
 		'dataProvider' => $provider,
@@ -279,7 +280,8 @@ $(document).ready(function () {
 			),
 			array(
 				'name' => 'summ',
-				'footer'=>$model->pageTotal($provider),
+				'footer'=>ProjectModule::t('The amount in accordance with the filter criteria').': <b>'.$model->pageTotal($provider).'</b>',
+				'footerHtmlOptions'=>array('colspan'=>'4'),
 			),
 			array(
 				'header' => Yii::t('site','Payment method'),

@@ -74,29 +74,29 @@ class EventsCommand extends CConsoleCommand {
 			}
 	}
 	
-	//Создает событие у менеджера когда наступило время
-	public function manager() {
-		// Дата информирования менеджера
-		$projectsModel = Zakaz::model()->findAll('status<>:status', array(':status'=>5));
-		foreach ($projectsModel as $project) {
+	protected function processEventItems($items, $field, $event, $item_id = 'id') {
+		foreach ($items as $item) {
 			$dateStart = strtotime(date('Y-m-d H:i',time())) - (self::INTERVAL * 60);
-			//echo 'order #'.$project->id.' '.$project->title.': '.$project->manager_informed."\n";
-			if (strtotime(date('Y-m-d H:i',strtotime($project->manager_informed))) >= $dateStart && strtotime(date('Y-m-d H:i',strtotime($project->manager_informed))) < strtotime(date('Y-m-d H:i',time()))) {
-				//echo Company::getId().' #'.$project->id.' manager informed'."\n";
-				Yii::import('application.modules.project.components.EventHelper');
-				EventHelper::managerInformed($project->id);
+			if (strtotime(date('Y-m-d H:i',strtotime($item->$field))) >= $dateStart && strtotime(date('Y-m-d H:i',strtotime($item->$field))) < strtotime(date('Y-m-d H:i',time()))) {
+				EventHelper::$event($item->$item_id);
 			}
 		}
+	}
+	
+	//Создает событие у менеджера когда наступило время
+	public function manager() {
+		Yii::import('application.modules.project.components.EventHelper');
+		// Дата информирования администратора
+		$projectsModel = Zakaz::model()->findAll('status<>:status', array(':status'=>5));
+		$this->processEventItems($projectsModel, 'manager_informed', 'managerInformed');
 		
 		// У части заказа незавершенного заказа
 		$projectsPartsModel = ZakazParts::model()->findAllByAttributes(array('status_id'=>'1'));
-		foreach ($projectsPartsModel as $projectStage) {
-			$dateStart = strtotime(date('Y-m-d H:i',time())) - (self::INTERVAL * 60);
-			if (strtotime(date('Y-m-d H:i',strtotime($projectStage->date))) >= $dateStart && strtotime(date('Y-m-d H:i',strtotime($projectStage->date))) < strtotime(date('Y-m-d H:i',time()))) {
-				Yii::import('application.modules.project.components.EventHelper');
-				EventHelper::stageExpired($projectStage->proj_id);
-			}
-		}
+		$this->processEventItems($projectsPartsModel, 'date', 'stageExpired', 'proj_id');
+
+		// Дата информирования менеджера
+		$profileModel = Profile::model()->findAll();
+		$this->processEventItems($profileModel, 'manager_informed', 'salesManagerInformed', 'user_id');
 	}
 	
 	//Отправляет n писем из списка для рассылки

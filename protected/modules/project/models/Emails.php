@@ -235,6 +235,9 @@ class Emails extends CActiveRecord {
 			'%новый заказ%',
 */			
 		);
+
+		if($type_id==1 || ($type_id>10 && $type_id<18)) $this->page_order = $this->page_order.'&authmeneger=Customer';
+		if($type_id==2 || ($type_id>17 && $type_id<25)) $this->page_order = $this->page_order.'&authmeneger=Author';
 		
 		$subst = array(
 			$this->site,

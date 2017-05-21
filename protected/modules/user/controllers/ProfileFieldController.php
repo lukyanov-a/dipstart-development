@@ -28,7 +28,7 @@ class ProfileFieldController extends Controller
 	public function accessRules() {
 		return array(
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('create','update','view','admin','delete'),
+				'actions'=>array('create','update', 'updatespecials2','view','admin','delete'),
 				'users'=>UserModule::getAdmins(),
 			),
 			array('deny',  // deny all users

@@ -26,7 +26,7 @@ class YiiChatWidget extends CWidget {
 	public	$minPostLen=2;
 	public	$maxPostLen=140;
 	public  $model; // a model instance, it must implements IYiiChat
-	public  $timerMs = 5000;
+	public  $timerMs = 50000;
 	public  $data;	// public data passed to the model instance
 
 	public	$myOwnPostCssStyle;		// css style names
@@ -85,7 +85,7 @@ class YiiChatWidget extends CWidget {
 
 	public function _prepareAssets(){
 		$localAssetsDir = dirname(__FILE__) . '/assets';
-		$this->_baseUrl = Yii::app()->getAssetManager()->publish($localAssetsDir,false,-1,1);
+		$this->_baseUrl = Yii::app()->getAssetManager()->publish($localAssetsDir,false,-1,false); //last attribute - force copy
         $cs = Yii::app()->getClientScript();
         $cs->registerCoreScript('jquery');
 		foreach(scandir($localAssetsDir) as $f){

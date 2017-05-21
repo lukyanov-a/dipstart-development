@@ -269,10 +269,12 @@ top: 0;
 }
 
 .operations li {
-border-right: 1px dotted #CEDFED;
-display: table-cell;
-width: 1%;
-padding:0;
+	background: hsla(213, 100%, 87%, 0.16);
+	border-right: 1px dotted #CEDFED;
+	display: table-cell;
+	width: 1%;
+	padding:0;
+	vertical-align: middle;
 }
 
 .operations li:hover{
@@ -284,7 +286,6 @@ background:#EBF6FF;
 }
 
 .operations li a{
-background:hsla(213, 100%, 87%, 0.16);
 display: block;
 padding: 5px;
 text-align: center;
@@ -393,18 +394,18 @@ table.payment-table td button {
 }
 
 label[for="Templates_name"] {
-    width: 200px;
+    width: 400px;
     margin-bottom: 18px;
 }
 
 label[for="Templates_title"] {
-    width: 200px;
+    width: 400px;
     margin-top: 5px;
     margin-bottom: 20px;
 }
 
 label[for="Templates_text"] {
-    width: 200px;
+    width: 400px;
     margin-top: 5px;
 }
 
@@ -561,4 +562,100 @@ textarea#code {
 
 .add-templete-steps {
 	border-bottom: 1px dashed;
+
+/*	Upload	*/
+.qq-upload-drop-area {
+	display:block!important;
+}
+
+.qq-upload-drop-area {
+	display: block!important;
+	position: relative;
+	background-color: #fff;
+	border: 1px solid #DDDDDD;
+	margin-left: 0;
+	width: 100%;
+	height: auto;
+	min-height: 100px;
+	margin-top: 20px;
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+
+.qq-upload-drop-area span {
+	margin-top: 15px;
+	margin-left: 0;
+	font-size: 2rem;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #EDEDED;
+	position: relative;
+}
+
+.qq-upload-button {
+	width: 90%;
+	background-color: white;
+	color: #9F9F9F;
+	margin: 15px auto;
+	border: 1px solid #ddd;
+}
+
+.qq-upload-button:hover {color: #868686;	border: 1px solid #ccc;transition: all 0.3s ease;	}
+
+.qq-upload-list {
+	margin: 0;
+	padding-top: 10px;
+}
+
+.qq-upload-list li {
+	text-align: left;
+	padding-left: 15px;
+	padding-right: 15px;
+	list-style-type: none;
+	display: block;
+	overflow: hidden;
+}
+.qq-upload-list li span{
+	margin: 0;
+	padding: 0;
+	line-height: 15px;
+	font-size: 12px;
+}
+
+.qq-upload-list li a#parts_file {
+	display: block;
+	float: left;
+	margin: 10px 0;
+	max-width: 65%;
+	height: auto;
+	overflow: hidden;
+	word-wrap: break-word;
+}
+
+.qq-upload-list li button#approve_file {
+	float: right;
+	padding: 2px 10px 3px;
+	margin: 5px 0 5px;
+	font-size: 13px;
+}
+
+ul.qq-upload-list li.qq-upload-success {margin-top:10px;}
+ul.qq-upload-list li.qq-upload-success span.qq-upload-file {
+	margin-right: 10px;
+	color: silver;
+	text-transform: none;
+	display: inline;
+	width: auto;
+}
+ul.qq-upload-list li.qq-upload-success span.qq-upload-size {
+	color:silver;
+	text-transform:none;
+	display: inline;
+	width: auto;
+}
+/*	END-Upload	*/
+
+.hasDatepicker {
+    width: 125px!important;
+    padding: 2px 5px!important;
 }

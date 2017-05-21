@@ -34,10 +34,11 @@ class CatalogController extends Controller {
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-	public function actionView($id)
+	public function actionView($id, $field_varname = -1)
 	{
         $this->render('view',array(
 			'model'=>$this->loadModel($id),
+			'field_varname'=>$field_varname
 		));
 	}
 
@@ -45,7 +46,7 @@ class CatalogController extends Controller {
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate() {
+	public function actionCreate($field_varname = -1, $parent = 0) {
 		$model=new Catalog;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -55,11 +56,13 @@ class CatalogController extends Controller {
 		{
 			$model->attributes=$_POST['Catalog'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('view','id'=>$model->id, 'field_varname'=>$field_varname));
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
+			'field_varname'=>$field_varname,
+			'parent' => $parent
 		));
 	}
 
@@ -68,7 +71,7 @@ class CatalogController extends Controller {
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
-	public function actionUpdate($id)
+	public function actionUpdate($id, $field_varname = -1)
 	{
 		$model=$this->loadModel($id);
 
@@ -79,11 +82,12 @@ class CatalogController extends Controller {
 		{
 			$model->attributes=$_POST['Catalog'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('view','id'=>$model->id, 'field_varname'=>$field_varname));
 		}
 
 		$this->render('update',array(
 			'model'=>$model,
+			'field_varname'=>$field_varname
 		));
 	}
 
@@ -92,13 +96,13 @@ class CatalogController extends Controller {
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
 	 * @param integer $id the ID of the model to be deleted
 	 */
-	public function actionDelete($id)
+	public function actionDelete($id, $field_varname = -1)
 	{
 		$this->loadModel($id)->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin','field_varname'=>$field_varname));
 	}
 
 	/**
@@ -119,14 +123,37 @@ class CatalogController extends Controller {
 	/**
 	 * Manages all models.
 	 */
-	public function actionAdmin()
+	public function actionAdmin($field_varname = -1)
 	{
+		if ($field_varname != -1) {
+			$dataProviderChild = new CActiveDataProvider('Catalog',
+				array('criteria' => array(
+						'condition'=>'field_varname="'.$field_varname.'" AND parent_id!=0'
+					)));
+			$dataProviderParent = new CActiveDataProvider('Catalog',
+				array('criteria' => array(
+					'condition'=>'field_varname="'.$field_varname.'" AND parent_id=0'
+				)));
+		} else {
+			$dataProviderChild = new CActiveDataProvider('Catalog',
+				array('criteria' => array(
+					'condition'=>'parent_id!=0'
+				)));
+			$dataProviderParent = new CActiveDataProvider('Catalog',
+				array('criteria' => array(
+					'condition'=>'parent_id=0'
+				)));
+		}
 		$model=new Catalog('search');
-		$model->unsetAttributes();  // clear any default values
+		$model->unsetAttributes();
+		
 		if(isset($_GET['Catalog']))
 			$model->attributes=$_GET['Catalog'];
         $this->render('admin',array(
 			'model'=>$model,
+			'dataProviderChild'=>$dataProviderChild,
+			'dataProviderParent'=>$dataProviderParent,
+			'field_varname'=>$field_varname
 		));
 	}
 

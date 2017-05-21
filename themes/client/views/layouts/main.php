@@ -28,8 +28,8 @@
 	<?php $company = Company::getCompany();
 	if($company->icon) echo '<link rel="shortcut icon" href="'.Yii::app()->getBaseUrl(/*true*/).'/'.$company->getFilesPath().'/'.$company->icon.'" type="image/x-icon">'."\n";?>
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
-    <meta name="description" content="{$description}" />
-    <meta name="keywords" content="{$keywords}"/>
+    <!--<meta name="description" content="{$description}" />
+    <meta name="keywords" content="{$keywords}"/>-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!--[if lte IE 8]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>

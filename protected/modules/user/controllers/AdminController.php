@@ -42,9 +42,9 @@ class AdminController extends Controller {
 		$model=new User('search');
 		//$model = User::model()->search();
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['User']))
+		if(isset($_GET['User'])) {
 			$model->attributes=$_GET['User'];
-
+		}
 		$this->render('index',array(
 			'model'=>$model,
 		));
@@ -118,9 +118,21 @@ class AdminController extends Controller {
 		}
 		$profile = $model->profile;
 		$this->performAjaxValidation(array($model,$profile));
-
+        if (Yii::app()->request->isAjaxRequest) {
+            $data = Yii::app()->request->getRestParams();
+			$field = str_replace('Profile_','',$data['elid']);
+            if (is_array($data)) {
+                echo json_encode($profile->$field=$data['data']);
+				echo json_encode($profile->save());
+				echo json_encode($profile->errors);
+                Yii::app()->end();
+            }
+        }
 		$manager = !User::model()->isAuthor();
 		$admin	 = User::model()->isAdmin();
+
+		$formModel = new AssignmentForm();
+		$authorizer = Rights::module()->getAuthorizer();
 
 		if(isset($_POST['User'])) {
 			$model->attributes=$_POST['User'];
@@ -136,15 +148,46 @@ class AdminController extends Controller {
 				$profile->save();
 				$this->redirect(array('update','id'=>$model->id));
 			} else $profile->validate();
-		};
+		} elseif( $admin && isset($_POST['AssignmentForm'])===true ) {
+			$formModel->attributes = $_POST['AssignmentForm'];
+			if( $formModel->validate()===true )
+			{
+				// Update and redirect
+				$authorizer->authManager->assign($formModel->itemname, $model->id);
+				$item = $authorizer->authManager->getAuthItem($formModel->itemname);
+				$item = $authorizer->attachAuthItemBehavior($item);
 
-		$fields = ProfileField::model()->findAll();
+				Yii::app()->user->setFlash('success',
+					Rights::t('core', 'Permission :name assigned.', array(':name'=>$item->getNameText()))
+				);
+
+				$this->redirect(array('update','id'=>$model->id));
+			}
+		};
+		if (User::model()->isAdmin()) {
+			$fields = ProfileField::model()->findAll();
+		} elseif (User::model()->isSalesManager()) {
+			$fields = ProfileField::model()->forSalesManager()->findAll();
+		} elseif (User::model()->isManager()) {
+			$fields = ProfileField::model()->forManager()->findAll();
+		}
+
+		$assignedItems = $authorizer->getAuthItems(null, $model->id);
+		$assignments = array_keys($assignedItems);
+		$assignSelectOptions = Rights::getAuthItemSelectOptions(2, $assignments);
+		$dataProvider = new RAuthItemDataProvider('assignments', array(
+			'userId'=>$model->id,
+		));
+
 		$this->render('update',array(
 			'model'		=> $model,
 			'profile'	=> $profile,
 			'manager'	=> $manager,
 			'admin'		=> $admin,
 			'fields'	=> $fields,
+			'dataProvider' => $dataProvider,
+			'formModel'=>$formModel,
+			'assignSelectOptions'=>$assignSelectOptions,
 		));	
 	}
 	/**
@@ -193,7 +236,7 @@ class AdminController extends Controller {
 		if($this->_model===null)
 		{
 			if(isset($_GET['id']))
-				$this->_model=User::model()->notsafe()->findbyPk($_GET['id']);
+				$this->_model=User::model()->notsafe()->with('zakaz')->findbyPk($_GET['id']);
 			if($this->_model===null)
 				throw new CHttpException(404,Yii::t('site','The requested page does not exist.'));
 		}

@@ -783,11 +783,6 @@ div.partStatus {
     display: block;
 }
 
-.hasDatepicker {
-    width: 125px!important;
-    padding: 2px 5px!important;
-}
-
 .panel-title a {
     padding-left: 8px;
     padding-top: 0px!important;

@@ -3,7 +3,7 @@ class DSApplication extends CWebApplication
 {
 	public function runController($route)
 	{
-		Yii::app()->language = Campaign::getLanguage();
+		Yii::app()->language = Company::getLanguage();
 
 		if(($ca=$this->createController($route))!==null)
 		{
