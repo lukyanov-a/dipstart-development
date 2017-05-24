@@ -317,8 +317,21 @@ $( document ).ready( function() {
 
     $('input#technicalspec').change(function(){
         var val = $(this).prop('checked') ? 1 : 0;
+        if(val==0) {
+            $('#technicalspec_type').hide();
+
+            var orderId = $(this).data('id');
+            $.post('/project/zakaz/setTechSpec', {orderId: orderId, val: val});
+        } else {
+            $('#technicalspec_type').show();
+        }
+    });
+
+    $('#technicalspec_type').change(function(){
+        var val = 1;
+        var type = $(this).val();
         var orderId = $(this).data('id');
-        $.post('/project/zakaz/setTechSpec', {orderId: orderId, val: val}, function (status){
+        $.post('/project/zakaz/setTechSpec', {orderId: orderId, val: val, type: type}, function (status){
             switch (status) {
                 case 'no_users':
                     alert('Нет тех.руководителей');

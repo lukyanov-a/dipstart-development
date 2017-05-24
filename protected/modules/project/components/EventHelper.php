@@ -162,9 +162,17 @@ class EventHelper {
         return self::sendEvent($creator, self::TYPE_CUSTOMER_REGISTRED, $text);
     }
 	
-    public static function correctorAccepted($id) {
+    public static function correctorAccepted($id, $classaction = 0) {
+        if($classaction) {
+            $managerlog = new ManagerLog();
+            $managerlog->uid = Yii::app()->user->id;
+            $managerlog->action = $classaction;
+            $managerlog->datetime = date('Y-m-d H:i:s');
+            $managerlog->order_id = $id;
+            $managerlog->save();
+        }
         $userName = User::model()->findByPk(Yii::app()->user->id)->username;
-        $description = Yii::t('site','User').' '.$userName." ".UserModule::t('accepted order');
+        $description = Yii::t('site','User').' '.$userName." ".UserModule::t('accepted')." ".ClassAction::getName($classaction);
         return self::sendEvent($id, self::TYPE_ACCEPTED_ORDER, $description);
 	}
 }
