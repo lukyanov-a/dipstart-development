@@ -35,7 +35,7 @@ if (Company::getId()){
 		);
 	}
 	$columns[] = array(
-		'name'=>'need action',
+		'name'=>ProjectModule::t('Need Action'),
 		'value'=> function($data) {
 			return ClassAction::getName($data->technicalspec);
 		},

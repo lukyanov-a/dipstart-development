@@ -562,6 +562,15 @@ class ZakazController extends Controller {
 					//$email->password= $soucePassword;
 					$email->sendTo( $user->email, $rec[0]->title, $rec[0]->text, $type_id);
 
+					if (User::model()->isManager()) {
+						$managerlog = new ManagerLog();
+						$managerlog->uid = Yii::app()->user->id;
+						$managerlog->action = ManagerLog::ORDER_ACCEPTED;;
+						$managerlog->datetime = date('Y-m-d H:i:s');
+						$managerlog->order_id = $model->id;
+						$managerlog->save();
+					}
+
 					$this->redirect(Yii::app()->createUrl('project/zakaz/update', array(
                         'id' => $model->id
                     )));
@@ -754,7 +763,7 @@ class ZakazController extends Controller {
 			$criteria->addInCondition('specials2',$specials2);
 		}
 		// $criteria->compare('executor', '<>'.$user->id);
-		$criteria->compare('technicalspec', 1);
+		$criteria->compare('technicalspec', '<>0');
 
         $dataProvider = new CActiveDataProvider(Zakaz::model()->resetScope(), [
             'criteria' => $criteria,

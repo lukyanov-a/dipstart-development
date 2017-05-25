@@ -10,6 +10,17 @@ class m190516_101558_create_class_action extends CDbMigration
                 'factor' => 'int NOT NULL',
                 'PRIMARY KEY (`id`)'
             ), 'AUTO_INCREMENT=100');
+
+		$this->insert('ClassAction', [
+			'id' => '1',
+			'name' => 'Просмотр заказа менеджером',
+			'factor' => '0',
+		]);
+		$this->insert('ClassAction', [
+			'id' => '2',
+			'name' => 'Проверка заказа менеджером',
+			'factor' => '0',
+		]);
 	}
 
 	public function down()

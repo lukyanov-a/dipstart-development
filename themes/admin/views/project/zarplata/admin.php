@@ -21,6 +21,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array(
             'class'=>'CButtonColumn',
             'template'=>'{update} {delete}',
+            'buttons'=>array(
+                'delete'=>array(
+                    'visible'=>'$data->id != "1" && $data->id != "2"',
+                ),
+            ),
         ),
     ),
 )); ?>

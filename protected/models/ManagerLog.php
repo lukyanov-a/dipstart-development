@@ -4,6 +4,7 @@ class ManagerLog extends CActiveRecord
 
 	// types of actions
 	const ORDER_PAGE_VIEW = 1; // загрузка страницы заказа 
+	const ORDER_ACCEPTED = 2; // проверка заказа менеджером 
 	
 	/*
 	 * @return string the associated database table name
@@ -49,14 +50,19 @@ class ManagerLog extends CActiveRecord
 	 * @return array customized attribute labels (name=>label)
 	 */
 	public function attributeLabels() {
-		return array(
+		$actions = ClassAction::model()->findAll();
+		$action_label = array();
+		foreach ($actions as $action) {
+			$action_label['action_'.$action->id] = $action->name;
+		}
+
+		return array_merge(array(
 			'id' => Yii::t('site','ID'),
 			'uid' => Yii::t('site','Manager'),
 			'datetime' => Yii::t('site','Date and time'),
 			'order_id' => Yii::t('site','Order number'),
 			'action' => Yii::t('site','Action'),
-			'action_1' => Yii::t('site','Order page view'),
-		);
+		),$action_label);
 	}
 	
 	public static function getLabel($varname) {

@@ -63,7 +63,9 @@ class ZarplataController extends Controller
             if(isset($data['val'])) {
                 $user_auth = AuthAssignment::model()->findByAttributes(array('itemname' => $data['val']));
                 $user_id = $user_auth->userid;
-                $summ = $this->calculate($user_id);
+                if($data['val']=='Corrector') {
+                    $summ = $this->calculate($user_id);
+                } else $summ = $this->calculateManeger($user_id);
             }
 
             echo $summ;
@@ -76,7 +78,9 @@ class ZarplataController extends Controller
             $user_auth = AuthAssignment::model()->findByAttributes(array('itemname' => $val));
             $user_id = $user_auth->userid;
 
-            $summ = $this->calculate($user_id);
+            if($val=='Corrector') {
+                $summ = $this->calculate($user_id, true);
+            } else $summ = $this->calculateManeger($user_id, true);
             $award = 0;
             if(isset($_POST['award']) && !empty($_POST['award'])) {
                 $award = (int)$_POST['award'];
@@ -100,6 +104,29 @@ class ZarplataController extends Controller
         }
 
         $this->render('salaryup');
+    }
+
+    public function calculateManeger($user_id, $update = false) {
+        $summ = 0;
+        $log = ManagerLog::model()->findAllByAttributes(
+            array('uid' => $user_id, 'payment'=>'0'), array('order'=>'datetime ASC'));
+        if(!empty($log)) {
+            $old_time = 0;
+            foreach ($log as $item) {
+                $time_action = strtotime($item->datetime);
+                if($time_action>($old_time+60*3)) {
+                    $summ += ClassAction::getFactor($item->action);
+                }
+                if ($update) {
+                    $managerlog = ManagerLog::model()->findByPk($item->id);
+                    $managerlog->payment = 1;
+                    $managerlog->save();
+                }
+                $old_time = $time_action;
+            }
+        }
+
+        return $summ;
     }
 
     public function calculate($user_id, $update = false) {
