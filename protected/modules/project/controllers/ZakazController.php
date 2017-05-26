@@ -564,8 +564,11 @@ class ZakazController extends Controller {
 					$this->redirect(Yii::app()->createUrl('project/zakaz/update', array(
                         'id' => $model->id
                     )));
-                }
-					
+                } else {
+					if($model->hasErrors()){
+						throw new CHttpException(406, CHtml::errorSummary($model));
+					}
+				}	
             } else {
                 // если нет то просто удаляем
                 $model->delete();
