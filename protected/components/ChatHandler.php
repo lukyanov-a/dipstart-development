@@ -65,7 +65,7 @@ class ChatHandler extends YiiChatDbHandlerBase {
 			if ($res[$k]->recipient > 0) {
                 $res1[$k]['recipient'] = array();
                 $res1[$k]['recipient']['fullusername']=$res[$k]->recipientObject->email;
-                $res1[$k]['recipient']['superuser']=$res[$k]->recipientObject->getRelated('AuthAssignment')->attributes;
+                if($res[$k]->recipientObject) $res1[$k]['recipient']['superuser']=$res[$k]->recipientObject->getRelated('AuthAssignment')->attributes;
                 switch ($res1[$k]['recipient']['superuser']['itemname']){
                     case 'Admin':
                         $res1[$k]['recipient']['username']=ProjectModule::t('to admin');//'админу';
