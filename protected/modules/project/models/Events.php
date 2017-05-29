@@ -45,14 +45,14 @@ class Events extends CActiveRecord {
 	}
 	
 	protected function afterSave() {
-		//Yii::app()->cache->delete(self::getCacheKey());
-		//Yii::app()->cache->delete(self::getCacheKey('sales-manager'));
+		Yii::app()->cache->delete(self::getCacheKey());
+		Yii::app()->cache->delete(self::getCacheKey('sales-manager'));
         return parent::afterSave();
     }
 	
 	public function afterDelete() {
-        //Yii::app()->cache->delete(self::getCacheKey());
-		//Yii::app()->cache->delete(self::getCacheKey('sales-manager'));
+        Yii::app()->cache->delete(self::getCacheKey());
+		Yii::app()->cache->delete(self::getCacheKey('sales-manager'));
         return parent::afterDelete();
     } 
     

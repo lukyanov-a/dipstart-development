@@ -381,5 +381,7 @@ return array(
 	'Delete actions' => 'Удалить действие',
 	'Manage actions' => 'Управление действиями',
 	'Create classifying actions' => 'Создать класификацию действия',
-	'Update classifying actions' => 'Редактирование класификации действия'
+	'Update classifying actions' => 'Редактирование класификации действия',
+	'View manager order' => 'Просмотр заказа менеджером',
+	'Checking the manager order' => 'Проверка заказа менеджером',
 );

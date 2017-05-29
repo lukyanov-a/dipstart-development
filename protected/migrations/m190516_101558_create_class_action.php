@@ -13,12 +13,12 @@ class m190516_101558_create_class_action extends CDbMigration
 
 		$this->insert('ClassAction', [
 			'id' => '1',
-			'name' => 'Просмотр заказа менеджером',
+			'name' => Yii::t('site','View manager order'),
 			'factor' => '0',
 		]);
 		$this->insert('ClassAction', [
 			'id' => '2',
-			'name' => 'Проверка заказа менеджером',
+			'name' => Yii::t('site','Checking the manager order'),
 			'factor' => '0',
 		]);
 	}
