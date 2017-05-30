@@ -114,7 +114,7 @@ class ZarplataController extends Controller
             $old_time = 0;
             foreach ($log as $item) {
                 $time_action = strtotime($item->datetime);
-                if($time_action>($old_time+60*3)) {
+                if($time_action>($old_time+60)) {
                     $summ += ClassAction::getFactor($item->action);
                 }
                 if ($update) {
