@@ -47,6 +47,7 @@ switch ($role){
 			array('label'=>Yii::t('site','Base settings'), 'url'=>array('/company/edit')),
 			array('label'=>Yii::t('site','Templates'), 'url'=>array('/templates/admin')),
             array('label'=>Yii::t('site','Templates steps'), 'url'=>array('/templatesSteps/admin')),
+			array('label'=>Yii::t('site','Filter templates'), 'url'=>array('/filters/admin')),
 			array('label'=>Yii::t('site','Statuses'), 'url'=>array('/projectStatus/admin')),
 			array('label'=>Yii::t('site','Salaries'), 'url'=>array('/project/zarplata/index')),
 			array('label'=>Yii::t('site','Parts statuses'), 'url'=>array('/partStatus/admin')),

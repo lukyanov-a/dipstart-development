@@ -113,7 +113,23 @@ if ($projectFields) {
 		'value'=>'$data->dbdate'
 	);
 */
+
+$filters = Filters::getFilters('Projects', 'Manager');
+if(!empty($filters)) {
 ?>
+	<p><?=Yii::t('site','Filters')?>:
+		<?php
+		$default = Filters::getDefaultFilters('Projects', 'Manager');
+		$active = $default->id;
+		if(isset($_GET['filter'])) $active = $_GET['filter'];
+		foreach ($filters as $filter) { ?>
+			<a href="/project/zakaz/?filter=<?php echo $filter->id; ?>" class="filters-team <?php if($filter->id==$active) echo "active"; ?>">
+				<?php echo $filter->name; ?>
+			</a>
+		<?php } ?>
+	</p>
+<?php } ?>
+	
 <div id="grid">
 <?php $this->widget('zii.widgets.grid.CGridView', array(
     'id'=>'order_list',

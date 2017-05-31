@@ -384,4 +384,18 @@ return array(
 	'Update classifying actions' => 'Редактирование класификации действия',
 	'View manager order' => 'Просмотр заказа менеджером',
 	'Checking the manager order' => 'Проверка заказа менеджером',
+
+	'Filter templates' => 'Шаблоны фильтров',
+	'Filters' => 'Фильтры',
+	'Create filter' => 'Создать фильтер',
+	'Delete filter' => 'Удалить фильтер',
+	'Manage filter' => 'Управление фильтрами',
+	'Name filter' => 'Название фильтра',
+	'For table' => 'Для таблици',
+	'Filter' => 'Фильтер',
+	'By default' => 'По умолчанию',
+	'For role' => 'Для роли',
+	'Column' => 'Поле',
+	'Operator' => 'Оператор',
+	'Value' => 'Значение',
 );

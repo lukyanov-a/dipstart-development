@@ -152,3 +152,11 @@ div.events input[type="button"] + a:hover {
 .create-zakaz-block #showAll {
 	display: none;
 }
+
+.filters-team {
+	border-bottom: 1px dashed;
+}
+
+.filters-team.active {
+	border-bottom: 0;
+}
