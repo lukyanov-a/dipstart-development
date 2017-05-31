@@ -138,4 +138,28 @@ div.events input[type="button"]:hover {
 
 div.events input[type="button"] + a:hover {
     background-color: #C5CCD8;
+<<<<<<< HEAD
+=======
+}
+.emails-form .row {
+	margin: 10px;
+}
+.emails-form label {
+	margin-right: 10px;
+}
+.emails-form span.result {
+	margin-left: 10px;
+}
+
+.create-zakaz-block #showAll {
+	display: none;
+}
+
+.filters-team {
+	border-bottom: 1px dashed;
+}
+
+.filters-team.active {
+	border-bottom: 0;
+>>>>>>> b0c3ff2... universal filters
 }

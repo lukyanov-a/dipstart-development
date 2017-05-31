@@ -593,25 +593,26 @@ class ZakazController extends Controller {
 	 * Lists all models.
 	 */
 	public function actionIndex($all=0) {
-        $model = new Zakaz('search');
-        $model->unsetAttributes();
+		$model = new Zakaz('search');
+		$model->unsetAttributes();
 		if($all == 1) $model->setAttribute('status', -1);
-        if(Yii::app()->request->isAjaxRequest) {
 
-            array_walk($_POST['Zakaz'],function(&$v,$k){
+        if(Yii::app()->request->isAjaxRequest) {
+			array_walk($_POST['Zakaz'],function(&$v,$k){
                 if (substr($k,0,2))
                     if (strlen($v)>10) $v=substr($v,0,10);
             });
 			$params = Yii::app()->request->getParam('Zakaz');
             $model->setAttributes($params);
 			Yii::app()->user->setState('ZakazFilterState', $params);
+
             $this->renderPartial('index', array(
                 'model' => $model,
             ), false, true);
         }
         else {
 			$params = Yii::app()->user->getState('ZakazFilterState');
-			if ( isset($params) ) {
+			if ( isset($params)) {
 				$model->setAttributes($params);
 			}
             $this->render('index',array(
