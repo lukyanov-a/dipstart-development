@@ -252,8 +252,6 @@ return array(
 	'%new order%' => '%новый заказ%',
 	'Notification for executor about the occurrence timing of the completion of the order' => 'Уведовление о наступлении сроков завершения заказа',
 	'Notification for executor about the occurrence timing of the completion of the completion point' => 'Уведовление о наступлении сроков завершения этапа заказа',
-<<<<<<< HEAD
-=======
 
 	'Templates steps' => 'Шаблоны этапов',
 	'Manage Templates steps' => 'Управление шаблонами этапов',
@@ -370,5 +368,4 @@ return array(
 	'Column' => 'Поле',
 	'Operator' => 'Оператор',
 	'Value' => 'Значение',
->>>>>>> b0c3ff2... universal filters
 );

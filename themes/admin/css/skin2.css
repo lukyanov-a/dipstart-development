@@ -138,8 +138,6 @@ div.events input[type="button"]:hover {
 
 div.events input[type="button"] + a:hover {
     background-color: #C5CCD8;
-<<<<<<< HEAD
-=======
 }
 .emails-form .row {
 	margin: 10px;
@@ -161,5 +159,4 @@ div.events input[type="button"] + a:hover {
 
 .filters-team.active {
 	border-bottom: 0;
->>>>>>> b0c3ff2... universal filters
 }

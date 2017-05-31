@@ -32,16 +32,11 @@ switch ($role){
 		$items[] = array('label'=>Yii::t('site','Company settings'), 'url'=>array('#'), 'items' => array(
 			array('label'=>Yii::t('site','Base settings'), 'url'=>array('/company/edit')),
 			array('label'=>Yii::t('site','Templates'), 'url'=>array('/templates/admin')),
-<<<<<<< HEAD
-			array('label'=>Yii::t('site','Statuses'), 'url'=>array('/projectStatus/index')),
-			array('label'=>Yii::t('site','Parts statuses'), 'url'=>array('/partStatus/index')),
-=======
             array('label'=>Yii::t('site','Templates steps'), 'url'=>array('/templatesSteps/admin')),
 			array('label'=>Yii::t('site','Filter templates'), 'url'=>array('/filters/admin')),
 			array('label'=>Yii::t('site','Statuses'), 'url'=>array('/projectStatus/admin')),
 			array('label'=>Yii::t('site','Salaries'), 'url'=>array('/project/zarplata/index')),
 			array('label'=>Yii::t('site','Parts statuses'), 'url'=>array('/partStatus/admin')),
->>>>>>> b0c3ff2... universal filters
 			array('label'=>Yii::t('site','Project fields settings'), 'url'=>array('/project/projectField/admin')),
 			array('label'=>Yii::t('site','Profile fields settings'), 'url'=>array('/user/profileField/admin')),
 			array('label'=>Yii::t('site','Rights'), 'url'=>array('/rights')),
@@ -93,7 +88,7 @@ Yii::app()->clientScript->registerCssFile('/css/font-awesome/css/font-awesome.cs
 
 <?php 
 /*
-echo CHtml::link('Обратная связь', "#back-window", array("id"=>"back-link")); 
+echo CHtml::link('пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ', "#back-window", array("id"=>"back-link")); 
 $this->widget('application.extensions.fancybox.EFancyBox', 
 array(
 	'target'=>'a#back-//link',
