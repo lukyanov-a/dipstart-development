@@ -22,11 +22,11 @@ $(document).ready(function () {
 });
 </script>
 <?php
-$filters = Filters::getFilters('Payment', 'Manager');
+$filters = Filters::getFilters('Payment', User::model()->getUserRole());
 if(!empty($filters)) { ?>
 	<p><?=Yii::t('site','Filters')?>:
 		<?php
-		$default = Filters::getDefaultFilters('Payment', 'Manager');
+		$default = Filters::getDefaultFilters('Payment', User::model()->getUserRole());
 		$active = $default->id;
 		if(isset($_GET['filter'])) $active = $_GET['filter'];
 		foreach ($filters as $filter) { ?>

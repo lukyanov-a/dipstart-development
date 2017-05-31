@@ -155,6 +155,7 @@ div.events input[type="button"] + a:hover {
 
 .filters-team {
 	border-bottom: 1px dashed;
+	margin-right: 5px;
 }
 
 .filters-team.active {

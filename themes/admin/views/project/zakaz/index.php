@@ -114,12 +114,12 @@ if ($projectFields) {
 	);
 */
 
-$filters = Filters::getFilters('Projects', 'Manager');
+$filters = Filters::getFilters('Projects', User::model()->getUserRole());
 if(!empty($filters)) {
 ?>
 	<p><?=Yii::t('site','Filters')?>:
 		<?php
-		$default = Filters::getDefaultFilters('Projects', 'Manager');
+		$default = Filters::getDefaultFilters('Projects', User::model()->getUserRole());
 		$active = $default->id;
 		if(isset($_GET['filter'])) $active = $_GET['filter'];
 		foreach ($filters as $filter) { ?>

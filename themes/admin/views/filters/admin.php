@@ -14,8 +14,20 @@ $this->widget('zii.widgets.grid.CGridView', array(
     'columns'=>array(
         'id',
         'name',
-        'role',
-        'table',
+        array(
+            'name' => 'role',
+            'value' => 'UserModule::t($data->role)'
+        ),
+        array(
+            'name' => 'table',
+            'value' => 'UserModule::t($data->table)'
+        ),
+        array(
+            'name' => 'default',
+            'value' => function($data) {
+                return $data->default ? Yii::t('site','yes') : Yii::t('site','no');
+            }
+        ),
         array(
             'class'=>'CButtonColumn',
             'template'=>'{update} {delete}',

@@ -25,11 +25,11 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->theme->baseUrl.'/css/
 				</label>
 				<?php
 				$fa = array(
-					array('name' => 'Manager'),
-					array('name' => 'Customer'),
-					array('name' => 'Author'),
+					array('val' => 'Manager', 'name' => UserModule::t('Manager')),
+					array('val' => 'Customer', 'name' => UserModule::t('Customer')),
+					array('val' => 'Author', 'name' => UserModule::t('Author')),
 				);
-				echo CHtml::activeDropDownList($model, 'role', CHtml::listData($fa, 'name', 'name'),
+				echo CHtml::activeDropDownList($model, 'role', CHtml::listData($fa, 'val', 'name'),
 					array(
 						'empty' => Yii::t('site','Select an role...'),
 						'class' => 'form-control',
@@ -51,11 +51,13 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->theme->baseUrl.'/css/
 				</label>
 				<?php
 				$fa = array(
-					array('name' => 'User'),
-					array('name' => 'Projects'),
-					array('name' => 'Payment'),
+					array('name' => UserModule::t('User'), 'val' => 'User'),
+					array('name' => UserModule::t('Projects'), 'val' => 'Projects'),
+					array('name' => UserModule::t('Payment'), 'val' => 'Payment'),
+					array('name' => UserModule::t('CurrentProjects'), 'val' => 'CurrentProjects'),
+					array('name' => UserModule::t('DoneProjects'), 'val' => 'DoneProjects'),
 				);
-				echo CHtml::activeDropDownList($model, 'table', CHtml::listData($fa, 'name', 'name'),
+				echo CHtml::activeDropDownList($model, 'table', CHtml::listData($fa, 'val', 'name'),
 					array(
 						'empty' => Yii::t('site','Select an role...'),
 						'class' => 'form-control',
@@ -64,13 +66,13 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->theme->baseUrl.'/css/
 				?>
 			</div>
 
-			<? if($model->table) {
-				$columns = Filters::getColumnTable($model->table);
-				$filter = unserialize($model->filter);
-				$this->renderPartial('tableColumn', array('columns'=>$columns, 'filter' => $filter));
-			} ?>
-
-			<div id="column_table"></div>
+			<div id="column_table">
+				<? if($model->table) {
+					$columns = Filters::getColumnTable($model->table);
+					$filter = unserialize($model->filter);
+					$this->renderPartial('tableColumn', array('columns'=>$columns, 'filter' => $filter));
+				} ?>
+			</div>
 
 			<div style="clear: both"></div>
 
@@ -87,23 +89,33 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->theme->baseUrl.'/css/
 </div><!-- form -->
 
 <script>
-	function showSelectTable(selected) {
-		var role = selected.value;
+	function setRole(role) {
 		if(role=='Customer') {
-			$('#table option[value="Payment"]').hide();
-			$('#table option[value="User"]').hide();
-			$('#table option[value="Projects"]').show();
+			$('#table option').hide();
+			$('#table option[value="CurrentProjects"]').show();
+			$('#table option[value="DoneProjects"]').show();
 		} else if(role=='Author') {
-			$('#table option[value="Payment"]').hide();
-			$('#table option[value="User"]').hide();
-			$('#table option[value="Projects"]').show();
+			$('#table option').hide();
+			$('#table option[value="CurrentProjects"]').show();
+			$('#table option[value="DoneProjects"]').show();
 		} else if(role=='Manager') {
-			$('#table option[value="Payment"]').show();
+			$('#table option').hide();
 			$('#table option[value="User"]').show();
 			$('#table option[value="Projects"]').show();
+			$('#table option[value="Payment"]').show();
 		}
+	}
+
+	function showSelectTable(selected) {
+		var role = $(selected).val();
+		setRole(role);
+		$('#table option[value=""]').show();
+		$('#table select').val("");
+		$('#column_table').hide();
 		$('#table').show();
 	}
+
+	<?php if($model->role) echo 'setRole("'.$model->role.'");'; ?>
 
 	function showColumnTable(selected) {
 		var table = selected.value;
@@ -113,6 +125,7 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->theme->baseUrl.'/css/
 			success: function(html) {
 				if (html != 'null') {
 					$('#column_table').html(html);
+					$('#column_table').show();
 				}
 			}
 		});

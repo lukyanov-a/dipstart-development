@@ -43,12 +43,12 @@ $('.search-form form').submit(function(){
 </div><!-- search-form -->
 
 <?php
-$filters = Filters::getFilters('User', 'Manager');
+$filters = Filters::getFilters('User', User::model()->getUserRole());
 if(!empty($filters)) {
 	?>
 	<p><?=Yii::t('site','Filters')?>:
 		<?php
-		$default = Filters::getDefaultFilters('User', 'Manager');
+		$default = Filters::getDefaultFilters('User', User::model()->getUserRole());
 		$active = $default->id;
 		if(isset($_GET['filter'])) $active = $_GET['filter'];
 		foreach ($filters as $filter) { ?>

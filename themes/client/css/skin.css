@@ -1473,3 +1473,12 @@ ul.files-list {
     overflow: hidden;
   }
 }
+
+.filters-team {
+    border-bottom: 1px dashed;
+    margin-right: 5px;
+}
+
+.filters-team.active {
+    border-bottom: 0;
+}
