@@ -87,11 +87,13 @@ class AdminController extends Controller {
 			$_POST['Profile']['mailing_list'] = array_search($_POST['Profile']['mailing_list'],$_temp);
 			$profile->attributes = $_POST['Profile'];
 			if($model->validate()&&$profile->validate()) {
-							//var_dump ($model); die();
+				$model->status = 1;
 				$model->password=Yii::app()->controller->module->encrypting($model->password);
 				if($model->save()) {
 					$profile->user_id=$model->id;
 					$profile->save();
+					$authorizer = Rights::module()->getAuthorizer();
+					$authorizer->authManager->assign('Customer', $model->id);
 				}
 				$this->redirect(array('update','id'=>$model->id));
 			} else $profile->validate();
