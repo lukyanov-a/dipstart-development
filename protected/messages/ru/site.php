@@ -369,4 +369,17 @@ return array(
 	'Childs management' => 'Управление дочерними категориями',
 	'Create Parents Categories' => 'Создать родительскую категорию',
 
+	'Filter templates' => 'Шаблоны фильтров',
+	'Filters' => 'Фильтры',
+	'Create filter' => 'Создать фильтер',
+	'Delete filter' => 'Удалить фильтер',
+	'Manage filter' => 'Управление фильтрами',
+	'Name filter' => 'Название фильтра',
+	'For table' => 'Для таблици',
+	'Filter' => 'Фильтер',
+	'By default' => 'По умолчанию',
+	'For role' => 'Для роли',
+	'Column' => 'Поле',
+	'Operator' => 'Оператор',
+	'Value' => 'Значение',
 );

@@ -21,6 +21,21 @@ $(document).ready(function () {
 	});
 });
 </script>
+<?php
+$filters = Filters::getFilters('Payment', 'Manager');
+if(!empty($filters)) { ?>
+	<p><?=Yii::t('site','Filters')?>:
+		<?php
+		$default = Filters::getDefaultFilters('Payment', 'Manager');
+		$active = $default->id;
+		if(isset($_GET['filter'])) $active = $_GET['filter'];
+		foreach ($filters as $filter) { ?>
+			<a href="/project/payment/view/?filter=<?php echo $filter->id; ?>" class="filters-team <?php if($filter->id==$active) echo "active"; ?>">
+				<?php echo $filter->name; ?>
+			</a>
+		<?php } ?>
+	</p>
+<?php } ?>
 <ul class="operations">
 	<li><a href="#" id="extremum-in"><?=ProjectModule::t('Getting money')?></a></li>
 	<li><a href="#" id="extremum-out"><?=ProjectModule::t('Pay for all')?></a></li>

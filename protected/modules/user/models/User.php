@@ -210,6 +210,22 @@ class User extends CActiveRecord
 		$criteria->with = 'AuthAssignment';
 		$criteria->compare('AuthAssignment.itemname',$this->roles,true);
 
+		$filter = null;
+		if(isset($_GET['filter'])) $filter = Filters::model()->findByPk($_GET['filter']);
+		if(!$filter) $filter = Filters::getDefaultFilters('User', 'Manager');
+		if($filter) {
+			foreach (unserialize($filter->filter) as $key=>$item) {
+				if($item['operator']=="LIKE") {
+					$match = addcslashes($item['value'], '%_');
+					$criteria->condition = $key." ".$item['operator']." :".$key.'_filter';
+					$criteria->params = array(':'.$key.'_filter' => "%$match%");
+				} else {
+					$criteria->condition = $key." ".$item['operator']." :".$key.'_filter';
+					$criteria->params = array(':'.$key.'_filter' => $item['value']);
+				}
+			}
+		}
+
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
 			'pagination'=>array(
