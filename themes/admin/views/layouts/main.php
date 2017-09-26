@@ -110,6 +110,30 @@ Yii::app()->clientScript->registerCssFile('/css/font-awesome/css/font-awesome.cs
 	</div>
 <?php echo $content;?>
 
+<?php 
+/*
+echo CHtml::link('�������� �����', "#back-window", array("id"=>"back-link")); 
+$this->widget('application.extensions.fancybox.EFancyBox', 
+array(
+	'target'=>'a#back-//link',
+	'config'=>array(),
+    )
+);
+id = @string, the id of the widget.
+target          =   @string, the target objects, user jquery notation.
+easingEnabled   =   @boolean, whether to enable mouse interations. Defauts set to true.
+mouseEnabled    =   @boolean, whether to insert jquery easing plugin to expand transitions effects. Check http://gsgd.co.uk/sandbox/jquery/easing/. Defaults set to false.
+config          =   @array, configuration parameters of fancy box plugin. Defaults set to basic fancy box configuration.
+<!--
+<div style="display:none">
+  <div id="back-window">
+    <?php //echo $this->renderPartial('/project/event/back'); ?>
+  </div>
+</div>
+
+-->
+*/
+?>  
 </div>
 </body>
 </html>

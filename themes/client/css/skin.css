@@ -1656,3 +1656,12 @@ body.pushed #layout, body.pushed header {
     position: relative;
     z-index: 98;
 }
+
+.filters-team {
+    border-bottom: 1px dashed;
+    margin-right: 5px;
+}
+
+.filters-team.active {
+    border-bottom: 0;
+}

@@ -387,20 +387,10 @@ class Zakaz extends CActiveRecord {
 			}
 		}
 
-		$filter = null;
-		if(isset($_GET['filter'])) $filter = Filters::model()->findByPk($_GET['filter']);
-		if(!$filter) $filter = Filters::getDefaultFilters('Projects', 'Manager');
-		if($filter) {
-			foreach (unserialize($filter->filter) as $key=>$item) {
-				if($item['operator']=="LIKE") {
-					$match = addcslashes($item['value'], '%_');
-					$criteria->condition = "t.".$key." ".$item['operator']." :".$key.'_filter';
-					$criteria->params = array(':'.$key.'_filter' => "%$match%");
-				} else {
-					$criteria->condition = "t.".$key." ".$item['operator']." :".$key.'_filter';
-					$criteria->params = array(':'.$key.'_filter' => $item['value']);
-				}
-			}
+
+		if($data = Filters::getConditionAndParans('Projects', User::model()->getUserRole())) {
+			$criteria->condition = $data['condition'];
+			$criteria->params = $data['params'];
 		}
 
 		if (!($this->status) or $this->status == 0){            /// Так ли делать

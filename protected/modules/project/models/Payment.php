@@ -203,20 +203,10 @@ class Payment extends CActiveRecord {
 		$criteria->compare('approve',$this->approve);
 		$criteria->compare('method',$this->method,true);
 
-		$filter = null;
-		if(isset($_GET['filter'])) $filter = Filters::model()->findByPk($_GET['filter']);
-		if(!$filter) $filter = Filters::getDefaultFilters('Payment', 'Manager');
-		if($filter) {
-			foreach (unserialize($filter->filter) as $key=>$item) {
-				if($item['operator']=="LIKE") {
-					$match = addcslashes($item['value'], '%_');
-					$criteria->condition = $key." ".$item['operator']." :".$key.'_filter';
-					$criteria->params = array(':'.$key.'_filter' => "%$match%");
-				} else {
-					$criteria->condition = $key." ".$item['operator']." :".$key.'_filter';
-					$criteria->params = array(':'.$key.'_filter' => $item['value']);
-				}
-			}
+
+		if($data = Filters::getConditionAndParans('Payment', User::model()->getUserRole())) {
+			$criteria->condition = $data['condition'];
+			$criteria->params = $data['params'];
 		}
 
 		return new CActiveDataProvider($this, array(

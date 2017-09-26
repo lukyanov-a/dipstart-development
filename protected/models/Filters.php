@@ -58,6 +58,8 @@ class Filters extends CActiveRecord {
     public static function getColumnTable($table) {
         switch ($table) {
             case 'Projects':
+            case 'CurrentProjects':
+            case 'DoneProjects':
                 $model = new Project();
                 break;
             case 'User':
@@ -69,6 +71,34 @@ class Filters extends CActiveRecord {
         }
 
         return $model->getMetaData()->tableSchema->columns;
+    }
+
+    public static function getConditionAndParans($table, $role) {
+        $filter = null;
+        if(isset($_GET['filter'])) $filter = Filters::model()->findByPk($_GET['filter']);
+        if(!$filter || $filter->table!=$table || $filter->role!=$role) $filter = Filters::getDefaultFilters($table, $role);
+        if($filter) {
+            $condition = '';
+            $params = array();
+            $first = true;
+            foreach (unserialize($filter->filter) as $key=>$item) {
+                if($first) $first = false;
+                else $condition .= ' AND ';
+                if($item['operator']=="LIKE") {
+                    $match = addcslashes($item['value'], '%_');
+                    $condition .= "t.".$key." ".$item['operator']." :".$key.'_filter';
+                    $params[':'.$key.'_filter'] = "%$match%";
+                } else {
+                    $condition .= "t.".$key." ".$item['operator']." :".$key.'_filter';
+                    $params[':'.$key.'_filter'] = $item['value'];
+                }
+            }
+            if(!empty($params) && !empty($condition)) {
+                return array('condition' => $condition, 'params' => $params);
+            }
+        }
+        
+        return false;
     }
 
     public static function model($className=__CLASS__)

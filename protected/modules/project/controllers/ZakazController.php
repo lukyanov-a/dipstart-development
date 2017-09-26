@@ -673,6 +673,11 @@ class ZakazController extends Controller {
 		};	
 		$criteria->addInCondition('status',$arr);
 
+		if($data = Filters::getConditionAndParans('CurrentProjects', User::model()->getUserRole())) {
+			$criteria->condition = $data['condition'];
+			$criteria->params = $data['params'];
+		}
+
         $dataProvider = new CActiveDataProvider(Zakaz::model()->resetScope(), [
             'criteria' => $criteria,
 			'pagination' => false
@@ -684,6 +689,11 @@ class ZakazController extends Controller {
 		if (User::model()->isAuthor())	$criteria_done->compare('executor', $uid);
 		if (User::model()->isCustomer())$criteria_done->compare('user_id',  $uid);
 		$criteria_done->addInCondition('status',array(5));
+
+		if($data = Filters::getConditionAndParans('DoneProjects', User::model()->getUserRole())) {
+			$criteria_done->condition = $data['condition'];
+			$criteria_done->params = $data['params'];
+		}
 
         $dataProvider_done = new CActiveDataProvider(Zakaz::model()->resetScope(), [
             'criteria' => $criteria_done,
