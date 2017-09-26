@@ -133,8 +133,8 @@ class ZarplataController extends Controller
         $summ = 0;
         $log = ManagerLog::model()->findAllByAttributes(
             array('uid' => $user_id, 'payment'=>'0'),
-            'action>:action',
-            array(':action'=>'99'));
+            'action>=:action',
+            array(':action'=>ManagerLog::MIN_CUSTOM_EVENT));
         if(!empty($log)) {
             foreach ($log as $item) {
                 $summ += ClassAction::getFactor($item->action);

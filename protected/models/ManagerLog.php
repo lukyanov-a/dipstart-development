@@ -5,6 +5,7 @@ class ManagerLog extends CActiveRecord
 	// types of actions
 	const ORDER_PAGE_VIEW = 1; // загрузка страницы заказа 
 	const ORDER_ACCEPTED = 2; // проверка заказа менеджером 
+	const MIN_CUSTOM_EVENT = 100; // щетчик id события в базе 
 	
 	/*
 	 * @return string the associated database table name
