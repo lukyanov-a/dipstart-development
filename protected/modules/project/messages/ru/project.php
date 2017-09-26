@@ -322,4 +322,5 @@ return array(
 	'Executor is not assigned' => 'Исполнитель не назначен',
     
     'You can unsubscribe...' => 'Вы можете отказаться от подписки в настройках профиля',
+	'Need Action' => 'Требуется действие'
 );

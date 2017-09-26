@@ -34,6 +34,12 @@ if (Company::getId()){
 			'value'=>'$data->catalog_specials2->cat_name',
 		);
 	}
+	$columns[] = array(
+		'name'=>ProjectModule::t('Need Action'),
+		'value'=> function($data) {
+			return ClassAction::getName($data->technicalspec);
+		},
+	);
 	$columns[] = 'closestDate';
 
 	if (!isset($only_new))

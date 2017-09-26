@@ -418,6 +418,7 @@ class ZakazController extends Controller {
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 		if(isset($_POST['Zakaz'])) {
+			$technicalspec = $model->technicalspec;
 			$model->attributes = $_POST['Zakaz'];
 
 			if(isset($_POST['Zakaz']['dbdate']))
@@ -437,7 +438,7 @@ class ZakazController extends Controller {
 
 			if($model->save()) {
 				if (Yii::app()->request->getParam('accepted') && User::model()->isCorrector())
-					EventHelper::correctorAccepted($model->id);
+					EventHelper::correctorAccepted($model->id, $technicalspec);
 
 				$role = User::model()->getUserRole();
 				if ($role != 'Manager' && $role != 'Admin') {
@@ -560,6 +561,15 @@ class ZakazController extends Controller {
 					//$email->login= $user->username;
 					//$email->password= $soucePassword;
 					$email->sendTo( $user->email, $rec[0]->title, $rec[0]->text, $type_id);
+
+					if (User::model()->isManager()) {
+						$managerlog = new ManagerLog();
+						$managerlog->uid = Yii::app()->user->id;
+						$managerlog->action = ManagerLog::ORDER_ACCEPTED;;
+						$managerlog->datetime = date('Y-m-d H:i:s');
+						$managerlog->order_id = $model->id;
+						$managerlog->save();
+					}
 
 					$this->redirect(Yii::app()->createUrl('project/zakaz/update', array(
                         'id' => $model->id
@@ -757,7 +767,7 @@ class ZakazController extends Controller {
 			$criteria->addInCondition('specials2',$specials2);
 		}
 		// $criteria->compare('executor', '<>'.$user->id);
-		$criteria->compare('technicalspec', 1);
+		$criteria->compare('technicalspec', '<>0');
 
         $dataProvider = new CActiveDataProvider(Zakaz::model()->resetScope(), [
             'criteria' => $criteria,
@@ -868,7 +878,12 @@ class ZakazController extends Controller {
         if (!$order) {
             throw new CHttpException(500);
         }
-		$order->technicalspec = $val;
+		if(isset($_POST['type'])) {
+			$order->technicalspec = $_POST['type'];
+		} else {
+			$order->technicalspec = $val;
+		}
+
 		$order->save();
 
 		if ($val)
