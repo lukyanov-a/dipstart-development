@@ -59,7 +59,7 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->theme->baseUrl.'/css/
 				);
 				echo CHtml::activeDropDownList($model, 'table', CHtml::listData($fa, 'val', 'name'),
 					array(
-						'empty' => Yii::t('site','Select an role...'),
+						'empty' => Yii::t('site','Select an table...'),
 						'class' => 'form-control',
 						'onchange' => 'showColumnTable(this)'
 					));
@@ -108,26 +108,52 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->theme->baseUrl.'/css/
 
 	function showSelectTable(selected) {
 		var role = $(selected).val();
-		setRole(role);
-		$('#table option[value=""]').show();
-		$('#table select').val("");
-		$('#column_table').hide();
-		$('#table').show();
+		if(role=='') {
+			$('#table').hide();
+			$('#column_table').html("");
+			$('#column_table').hide();
+		} else {
+			setRole(role);
+			$('#table option[value=""]').show();
+			$('#table select').val("");
+			$('#column_table').hide();
+			$('#table').show();
+		}
 	}
 
 	<?php if($model->role) echo 'setRole("'.$model->role.'");'; ?>
 
 	function showColumnTable(selected) {
 		var table = selected.value;
-		$.ajax({
-			type: "POST",
-			url:'http://'+document.domain+'/filters/columnTable/?table='+table,
-			success: function(html) {
-				if (html != 'null') {
-					$('#column_table').html(html);
-					$('#column_table').show();
+		if(table=='') {
+			$('#column_table').html("");
+			$('#column_table').hide();
+		} else {
+			$.ajax({
+				type: "POST",
+				url: 'http://' + document.domain + '/filters/columnTable/?table=' + table,
+				success: function (html) {
+					if (html != 'null') {
+						$('#column_table').html(html);
+						$('#column_table').show();
+					}
 				}
-			}
-		});
+			});
+		}
 	}
+
+	$('#filter-form').submit(function(e) {
+		var table = $('#Filters_role').val();
+		var role = $('#Filters_table').val();
+		if(table=='') {
+			e.preventDefault();
+			$('#Filters_role').css("border-color", "red");
+			return false;
+		} else if(role=='') {
+			e.preventDefault();
+			$('#Filters_role').css("border-color", "#ccc");
+			$('#Filters_table').css("border-color", "red");
+			return false;
+		}
+	});
 </script>
