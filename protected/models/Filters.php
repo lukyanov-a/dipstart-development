@@ -83,14 +83,14 @@ class Filters extends CActiveRecord {
             $first = true;
             foreach (unserialize($filter->filter) as $key=>$item) {
                 if($first) $first = false;
-                else $condition .= ' AND ';
+                else $condition .= ' '.$item['operand'].' ';
                 if($item['operator']=="LIKE") {
                     $match = addcslashes($item['value'], '%_');
-                    $condition .= "t.".$key." ".$item['operator']." :".$key.'_filter';
-                    $params[':'.$key.'_filter'] = "%$match%";
+                    $condition .= "t.".$item['column']." ".$item['operator']." :".$item['column'].'_filter_'.$key;
+                    $params[':'.$item['column'].'_filter_'.$key] = "%$match%";
                 } else {
-                    $condition .= "t.".$key." ".$item['operator']." :".$key.'_filter';
-                    $params[':'.$key.'_filter'] = $item['value'];
+                    $condition .= "t.".$item['column']." ".$item['operator']." :".$item['column'].'_filter_'.$key;
+                    $params[':'.$item['column'].'_filter_'.$key] = $item['value'];
                 }
             }
             if(!empty($params) && !empty($condition)) {

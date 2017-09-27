@@ -156,4 +156,28 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->theme->baseUrl.'/css/
 			return false;
 		}
 	});
+
+	$('#column_table').on('click', '.add_row', function (e) {
+		e.preventDefault();
+		var $row = $(this).parent().parent();
+		var $clone = $row.clone(true);
+		$row.find('.add_row').remove();
+		$row.find('td.operand').append('<select class="form-control" name="Filters[filter][operand][]">' +
+				'<option value="AND">AND</option>' +
+				'<option value="OR">OR</option>' +
+				'</select>');
+		$row.find('td:last').append('<a href="#" class="del_row">-</a>');
+		$clone.find('input').val("");
+		$clone.find('.first-operand').remove();
+		$row.after($clone);
+	});
+
+	$('#column_table').on('click', '.del_row', function (e) {
+		e.preventDefault();
+		var $row = $(this).parent().parent();
+		$row.remove();
+		if($('#column_table tbody tr:first td:first').find('.first-operand').length<1) {
+			$('#column_table tbody tr:first td:first').append('<input type="hidden" name="Filters[filter][operand][]" value="" class="first-operand">');
+		}
+	});
 </script>

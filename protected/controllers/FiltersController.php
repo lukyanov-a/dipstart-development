@@ -21,9 +21,14 @@ class FiltersController extends Controller {
             $filter = array();
             $t_filter = $_POST['Filters']['filter'];
             $_POST['Filters']['default'] = (int)$_POST['Filters']['default'];
-            foreach ($t_filter as $key=>$item) {
-                if($t_filter[$key]['value']) {
-                    $filter[$key] = $t_filter[$key];
+            foreach ($t_filter['value'] as $key=>$item) {
+                if ($item) {
+                    $filter[] = array(
+                        'value' => $t_filter['value'][$key],
+                        'operator' => $t_filter['operator'][$key],
+                        'column' => $t_filter['column'][$key],
+                        'operand' => $t_filter['operand'][$key],
+                    );
                 }
             }
             $_POST['Filters']['filter'] = serialize($filter);
@@ -57,9 +62,14 @@ class FiltersController extends Controller {
             $filter = array();
             $t_filter = $_POST['Filters']['filter'];
             $_POST['Filters']['default'] = (int)$_POST['Filters']['default'];
-            foreach ($t_filter as $key=>$item) {
-                if($t_filter[$key]['value']) {
-                    $filter[$key] = $t_filter[$key];
+            foreach ($t_filter['value'] as $key=>$item) {
+                if ($item) {
+                    $filter[] = array(
+                        'value' => $t_filter['value'][$key],
+                        'operator' => $t_filter['operator'][$key],
+                        'column' => $t_filter['column'][$key],
+                        'operand' => $t_filter['operand'][$key],
+                    );
                 }
             }
             $_POST['Filters']['filter'] = serialize($filter);
@@ -95,7 +105,7 @@ class FiltersController extends Controller {
     public function actionColumnTable($table) {
         $columns = Filters::getColumnTable($table);
 
-        $this->render('tableColumn',array(
+        $this->renderPartial('tableColumn',array(
             'columns'=>$columns,
         ));
     }
