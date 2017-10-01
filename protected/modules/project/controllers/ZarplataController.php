@@ -60,9 +60,17 @@ class ZarplataController extends Controller
         if (Yii::app()->request->isAjaxRequest) {
             $summ = 0;
             $data = Yii::app()->request->getRestParams();
-            if(isset($data['val'])) {
-                $user_auth = AuthAssignment::model()->findByAttributes(array('itemname' => $data['val']));
-                $user_id = $user_auth->userid;
+            if($data['action']=='get_users') {
+                $user_auth = AuthAssignment::model()->findAllByAttributes(array('itemname' => $data['val']));
+                echo '<option value>'.Yii::t('site','Select an employee...').'</option>';
+                foreach ($user_auth as $user) {
+                    $userModel = User::model()->findByPk($user->userid);
+                    echo '<option value="'.$user->userid.'">'.$userModel->username.'</option>';
+                }
+                Yii::app()->end();
+            }
+            if($data['action']=='get_employee') {
+                $user_id = $data['user_id'];
                 if($data['val']=='Corrector') {
                     $summ = $this->calculate($user_id);
                 } else $summ = $this->calculateManeger($user_id);
@@ -75,8 +83,7 @@ class ZarplataController extends Controller
 
         if(isset($_POST['calculation'])) {
             $val = $_POST['employee'];
-            $user_auth = AuthAssignment::model()->findByAttributes(array('itemname' => $val));
-            $user_id = $user_auth->userid;
+            $user_id = $_POST['users_id'];
 
             if($val=='Corrector') {
                 $summ = $this->calculate($user_id, true);

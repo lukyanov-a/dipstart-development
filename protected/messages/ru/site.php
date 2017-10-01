@@ -371,6 +371,7 @@ return array(
 
 	'Salaries' => 'Зарплаты',
 	'Manage classifying actions' => 'Управление классификациями действий',
+	'Select class an employee...' => 'Выберите класс сотрудника...',
 	'Select an employee...' => 'Выберите сотрудника...',
 	'calculation' => 'Расчет',
 	'Award' => 'Премию/штраф',
