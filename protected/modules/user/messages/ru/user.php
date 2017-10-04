@@ -106,6 +106,8 @@ return array(
 	'Visible' => 'Видимость',
 	'Registered users' => 'Зарегистрированные пользователи',
 	'For all' => 'Для всех',
+	'For Corrector, not for Executor' => 'Для техрука, скрыт для Исполнителя',
+	'For Corrector, not for Executor and Customer' => 'Для техрука, скрыт для Исполнителя и Заказчика',
 	'Only owner' => 'Только владелец',
 	'Hidden' => 'Скрыт',
 	'Profile Fields' => 'Поля профиля',
