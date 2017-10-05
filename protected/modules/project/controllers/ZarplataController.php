@@ -116,12 +116,12 @@ class ZarplataController extends Controller
     public function calculateManeger($user_id, $update = false) {
         $summ = 0;
         $log = ManagerLog::model()->findAllByAttributes(
-            array('uid' => $user_id, 'payment'=>'0'), array('order'=>'datetime ASC'));
+            array('uid' => $user_id, 'payment'=>'0'), array('order'=>'datetime ASC', 'group'=>'order_id, action'));
         if(!empty($log)) {
             $old_time = 0;
             foreach ($log as $item) {
                 $time_action = strtotime($item->datetime);
-                if($time_action>($old_time+60)) {
+                if($time_action>($old_time+(60*2))) {
                     $summ += ClassAction::getFactor($item->action);
                 }
                 if ($update) {
