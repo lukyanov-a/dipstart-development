@@ -225,6 +225,11 @@ $customer = $model->user;
 				<div class="col-xs-12 techspecBlock">
                     <input type="checkbox" name="technicalspec" id="technicalspec" data-id="<?=$model->id?>" <?=($model->technicalspec ? 'checked="checked"' : '')?> />
                     <label for="technicalspec"><?=ProjectModule::t('technicalspec')?></label>
+					<?=CHtml::dropDownList('technicalspec_type', '', CHtml::listData(ClassAction::model()->findAll(), 'id', 'name'), array(
+						'data-id' => $model->id,
+						'prompt'=> Yii::t('site','Select a type action'),
+						'style' => 'display: none'
+					)); ?>
 				</div>
 
 				<hr>

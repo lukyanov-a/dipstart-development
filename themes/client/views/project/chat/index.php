@@ -16,6 +16,8 @@ $upload_params = array('id' => $order->id);
 			echo '<div class="zakaz-info-header" ><font color="green">'.YII::t('site','YouAreExecutor').'</font></div>';
 		} elseif ((User::model()->isCustomer() || User::model()->isCorrector()) && (!$order->is_active || !$moderated)) {
 			echo '<div class="zakaz-info-header" ><font color="green">'.YII::t('site','AfterModerate').'.</font></div>';
+		} elseif($order->technicalspec && User::model()->isCorrector()) {
+			echo '<div class="zakaz-info-header" ><font color="green">'.ClassAction::getName($order->technicalspec).'</font></div>';
 		}
 	?>
 	<div class="col-xs-12 info-block" style="margin-bottom: 15px;">

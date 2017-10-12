@@ -386,6 +386,13 @@ class Zakaz extends CActiveRecord {
 				$criteria->compare('t.'.$tmp, $this->$tmp);
 			}
 		}
+
+
+		if($data = Filters::getConditionAndParans('Projects', User::model()->getUserRole())) {
+			$criteria->condition = $data['condition'];
+			$criteria->params = $data['params'];
+		}
+
 		if (!($this->status) or $this->status == 0){            /// Так ли делать
 			$criteria->addNotInCondition('status', array(5));
 		} else if ($this->status == -1) {

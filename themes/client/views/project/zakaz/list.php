@@ -34,6 +34,12 @@ if (Company::getId()){
 			'value'=>'$data->catalog_specials2->cat_name',
 		);
 	}
+	$columns[] = array(
+		'name'=>ProjectModule::t('Need Action'),
+		'value'=> function($data) {
+			return ClassAction::getName($data->technicalspec);
+		},
+	);
 	$columns[] = 'closestDate';
 
 	if (!isset($only_new))
@@ -74,6 +80,21 @@ if (User::model()->isCorrector() && $tech) {
 
 <div class="twin-tab">
 <div class="first-tab" id="first-tab">
+	<?php $filters = Filters::getFilters('CurrentProjects', User::model()->getUserRole());
+	if(!empty($filters)) {
+		?>
+		<p><?=Yii::t('site','Filters')?>:
+			<?php
+			$default = Filters::getDefaultFilters('CurrentProjects', User::model()->getUserRole());
+			$active = $default->id;
+			if(isset($_GET['filter'])) $active = $_GET['filter'];
+			foreach ($filters as $filter) { ?>
+				<a href="/project/zakaz/ownList/?tab=0&filter=<?php echo $filter->id; ?>" class="filters-team <?php if($filter->id==$active) echo "active"; ?>">
+					<?php echo $filter->name; ?>
+				</a>
+			<?php } ?>
+		</p>
+	<?php } ?>
 <?php
 }
 $this->widget('zii.widgets.grid.CGridView', array(
@@ -89,6 +110,21 @@ if (!isset($only_new)) {
 ?>
 </div>
 <div class="second-tab" id="second-tab">
+	<?php $filters = Filters::getFilters('DoneProjects', User::model()->getUserRole());
+	if(!empty($filters)) {
+		?>
+		<p><?=Yii::t('site','Filters')?>:
+			<?php
+			$default = Filters::getDefaultFilters('DoneProjects', User::model()->getUserRole());
+			$active = $default->id;
+			if(isset($_GET['filter'])) $active = $_GET['filter'];
+			foreach ($filters as $filter) { ?>
+				<a href="/project/zakaz/ownList/?tab=1&filter=<?php echo $filter->id; ?>" class="filters-team <?php if($filter->id==$active) echo "active"; ?>">
+					<?php echo $filter->name; ?>
+				</a>
+			<?php } ?>
+		</p>
+	<?php } ?>
 <?php
 	$this->widget('zii.widgets.grid.CGridView', array(
 		'id'=>'zakaz-grid-done',
@@ -122,7 +158,8 @@ if (!isset($only_new)) {
 			$('#first-tab-li').removeClass('active');
 			$('#second-tab-li').addClass('active');
 		};	
-	};	
+	};
+	<?php if(isset($_GET['tab'])) echo 'clickOnTab('.$_GET['tab'].');'; ?>
 	$(document).ready(function()
 	{
 		$('body').on('dblclick', '#zakaz-grid tbody tr', function(event)
