@@ -127,6 +127,9 @@ if(!empty($filters)) {
 				<?php echo $filter->name; ?>
 			</a>
 		<?php } ?>
+		<a href="/project/zakaz/" class="filters-team">
+			Сбросить фильтр
+		</a>
 	</p>
 <?php } ?>
 	

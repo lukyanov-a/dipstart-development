@@ -674,8 +674,8 @@ class ZakazController extends Controller {
 		$criteria->addInCondition('status',$arr);
 
 		if($data = Filters::getConditionAndParans('CurrentProjects', User::model()->getUserRole())) {
-			$criteria->condition = $data['condition'];
-			$criteria->params = $data['params'];
+			$criteria->condition .= ' AND ('.$data['condition'].')';
+			$criteria->params = array_merge($criteria->params, $data['params']);
 		}
 
         $dataProvider = new CActiveDataProvider(Zakaz::model()->resetScope(), [
@@ -691,8 +691,8 @@ class ZakazController extends Controller {
 		$criteria_done->addInCondition('status',array(5));
 
 		if($data = Filters::getConditionAndParans('DoneProjects', User::model()->getUserRole())) {
-			$criteria_done->condition = $data['condition'];
-			$criteria_done->params = $data['params'];
+			$criteria_done->condition .= ' AND ('.$data['condition'].')';
+			$criteria_done->params = array_merge($criteria_done->params, $data['params']);
 		}
 
         $dataProvider_done = new CActiveDataProvider(Zakaz::model()->resetScope(), [

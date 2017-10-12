@@ -41,10 +41,11 @@ class Filters extends CActiveRecord {
     }
     
     public static function getFilters($table, $role) {
-        return self::model()->findAllByAttributes(
-            array(
-                'table' => $table,
-                'role'=> $role));
+        $getFilter = array(
+            'table' => $table,
+            'role'=> $role);
+        if($role=="Admin") $getFilter = array('table' => $table);
+        return self::model()->findAllByAttributes($getFilter);
     }
 
     public static function getDefaultFilters($table, $role) {
@@ -73,10 +74,10 @@ class Filters extends CActiveRecord {
         return $model->getMetaData()->tableSchema->columns;
     }
 
-    public static function getConditionAndParans($table, $role) {
+    public static function getConditionAndParans($table, $role, $pref = 't.') {
         $filter = null;
         if(isset($_GET['filter'])) $filter = Filters::model()->findByPk($_GET['filter']);
-        if(!$filter || $filter->table!=$table || $filter->role!=$role) $filter = Filters::getDefaultFilters($table, $role);
+        if(!$filter || $filter->table!=$table || ($filter->role!=$role && $role!="Admin")) $filter = Filters::getDefaultFilters($table, $role);
         if($filter) {
             $condition = '';
             $params = array();
@@ -86,10 +87,10 @@ class Filters extends CActiveRecord {
                 else $condition .= ' '.$item['operand'].' ';
                 if($item['operator']=="LIKE") {
                     $match = addcslashes($item['value'], '%_');
-                    $condition .= "t.".$item['column']." ".$item['operator']." :".$item['column'].'_filter_'.$key;
+                    $condition .= $pref.$item['column']." ".$item['operator']." :".$item['column'].'_filter_'.$key;
                     $params[':'.$item['column'].'_filter_'.$key] = "%$match%";
                 } else {
-                    $condition .= "t.".$item['column']." ".$item['operator']." :".$item['column'].'_filter_'.$key;
+                    $condition .= $pref.$item['column']." ".$item['operator']." :".$item['column'].'_filter_'.$key;
                     $params[':'.$item['column'].'_filter_'.$key] = $item['value'];
                 }
             }

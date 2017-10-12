@@ -13,11 +13,13 @@
             <tr>
                 <td>
                     <?php if($num==0) echo '<input type="hidden" name="Filters[filter][operand][]" value="" class="first-operand">'; ?>
-                    <select class="form-control" name="Filters[filter][column][]">
-                        <?php foreach ($columns as $column) { ?>
-                            <option value="<?php echo $column->name; ?>" <?php if ($column->name==$item['column']) echo 'selected'; ?>>
-                                <?php echo $column->name; ?>
-                            </option>
+                    <select class="form-control" name="Filters[filter][column][]" onchange="selectByColumn(this);">
+                        <?php foreach ($columns as $column) {
+                            if($column->name!='password' && $column->name!='activkey') { ?>
+                                <option value="<?php echo $column->name; ?>" <?php if ($column->name==$item['column']) echo 'selected'; ?>>
+                                    <?php echo Yii::t('site',$column->name); ?>
+                                </option>
+                            <?php } ?>
                         <?php } ?>
                     </select></td>
                 <td><select class="form-control" name="Filters[filter][operator][]">
@@ -29,7 +31,14 @@
                         <option value="<>" <?php if ($item['operator'] == '<>') echo 'selected'; ?>>!=</option>
                         <option value="LIKE" <?php if ($item['operator'] == 'LIKE') echo 'selected'; ?>>Содержит</option>
                     </select></td>
-                <td><input size="30" name="Filters[filter][value][]" value="<?php echo $item['value']; ?>" type="text"></td>
+                <td class="inputReplace">
+                    <?php
+                    $this->renderPartial('columnValue',array(
+                        'column'=> $item['column'],
+                        'table' => $table,
+                        'value' => $item['value']
+                    )); ?>
+                </td>
                 <td class="operand">
                     <?php if(count($filter)>1 && $num!=count($filter)-1) { ?>
                         <select class="form-control" name="Filters[filter][operand][]">
@@ -50,11 +59,13 @@
         <tr>
             <td>
                 <input type="hidden" name="Filters[filter][operand][]" value="" class="first-operand">
-                <select class="form-control" name="Filters[filter][column][]">
-                <?php foreach ($columns as $column) { ?>
-                    <option value="<?php echo $column->name; ?>" <?php //if ($column) echo 'selected'; ?>>
-                        <?php echo $column->name; ?>
-                    </option>
+                <select class="form-control" name="Filters[filter][column][]" onchange="selectByColumn(this);">
+                <?php foreach ($columns as $column) {
+                    if($column->name!='password' && $column->name!='activkey') { ?>
+                        <option value="<?php echo $column->name; ?>" <?php //if ($column) echo 'selected'; ?>>
+                            <?php echo Yii::t('site',$column->name); ?>
+                        </option>
+                    <?php } ?>
                 <?php } ?>
             </select></td>
             <td><select class="form-control" name="Filters[filter][operator][]">
@@ -66,7 +77,12 @@
                     <option value="<>" <?php if ($item['operator'] == '<>') echo 'selected'; ?>>!=</option>
                     <option value="LIKE" <?php if ($item['operator'] == 'LIKE') echo 'selected'; ?>>Содержит</option>
                 </select></td>
-            <td><input size="30" name="Filters[filter][value][]" value="<?php echo $item['value']; ?>" type="text"></td>
+            <td class="inputReplace"><?php
+                $this->renderPartial('columnValue',array(
+                    'column'=> 'id',
+                    'table' => $table,
+                    'value' => $item['value']
+                )); ?></td>
             <td class="operand">
                 <?php //if($num>0) echo '<a href="#" class="del_row">-</a>'; ?>
             </td>

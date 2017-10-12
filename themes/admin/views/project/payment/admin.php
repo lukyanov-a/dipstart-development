@@ -34,6 +34,9 @@ if(!empty($filters)) { ?>
 				<?php echo $filter->name; ?>
 			</a>
 		<?php } ?>
+		<a href="/project/payment/view/" class="filters-team">
+			Сбросить фильтр
+		</a>
 	</p>
 <?php } ?>
 <ul class="operations">

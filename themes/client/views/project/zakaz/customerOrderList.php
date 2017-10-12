@@ -72,6 +72,9 @@ if (!isset($only_new)) {
 					<?php echo $filter->name; ?>
 				</a>
 			<?php } ?>
+			<a href="/project/zakaz/customerOrderList/?tab=0&filter=<?php echo $default->id; ?>" class="filters-team">
+				Сбросить фильтр
+			</a>
 		</p>
 	<?php } ?>
 <?php
@@ -106,6 +109,9 @@ if (!isset($only_new)) {
 					<?php echo $filter->name; ?>
 				</a>
 			<?php } ?>
+			<a href="/project/zakaz/customerOrderList/?tab=1&filter=<?php echo $default->id; ?>" class="filters-team">
+				Сбросить фильтр
+			</a>
 		</p>
 	<?php } ?>
 <?php

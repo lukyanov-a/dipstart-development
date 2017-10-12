@@ -70,7 +70,7 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->theme->baseUrl.'/css/
 				<? if($model->table) {
 					$columns = Filters::getColumnTable($model->table);
 					$filter = unserialize($model->filter);
-					$this->renderPartial('tableColumn', array('columns'=>$columns, 'filter' => $filter));
+					$this->renderPartial('tableColumn', array('columns'=>$columns, 'filter' => $filter, 'table'=>$model->table));
 				} ?>
 			</div>
 
@@ -87,7 +87,11 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->theme->baseUrl.'/css/
 		<?php $this->endWidget(); ?>
 	</div>
 </div><!-- form -->
-
+<?php
+$this->widget('ext.juidatetimepicker.EJuiDateTimePicker', array(
+	'name' => 'data_pick_load',
+	'attribute' => 'data_pick_load'
+));?>
 <script>
 	function setRole(role) {
 		if(role=='Customer') {
@@ -180,4 +184,30 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->theme->baseUrl.'/css/
 			$('#column_table tbody tr:first td:first').append('<input type="hidden" name="Filters[filter][operand][]" value="" class="first-operand">');
 		}
 	});
+
+	function selectByColumn(selected) {
+		var column = selected.value;
+		var table = $('#Filters_table').val();
+		var inputReplace = $(selected).parent().parent().find('.inputReplace');
+		$.ajax({
+			type: "POST",
+			url: 'http://' + document.domain + '/filters/columnValue/?column=' + column + '&table='+table,
+			success: function (html) {
+				inputReplace.html(html);
+			}
+		});
+	}
+
+	function selectByValue(selected) {
+		var value = selected.value;
+		if(value=='other') {
+			$(selected).parent().find('input').attr('name', 'Filters[filter][value][]');
+			$(selected).parent().find('input').show();
+			$(selected).attr('name', '_temp_filteres');
+		} else {
+			$(selected).parent().find('input').attr('name', '_temp_filteres');
+			$(selected).parent().find('input').hide();
+			$(selected).attr('name', 'Filters[filter][value][]');
+		}
+	}
 </script>

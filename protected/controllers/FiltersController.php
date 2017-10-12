@@ -107,6 +107,15 @@ class FiltersController extends Controller {
 
         $this->renderPartial('tableColumn',array(
             'columns'=>$columns,
+            'table' => $table
+        ));
+    }
+
+    public function actionColumnValue($column, $table) {
+        $this->renderPartial('columnValue',array(
+            'column'=> $column,
+            'table' => $table,
+            'value' => false
         ));
     }
 
