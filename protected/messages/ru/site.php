@@ -419,7 +419,6 @@ return array(
 	'pid' => 'pid',
 
 	/*Projects*/
-	'id' => 'ИД',
 	'user_id' => 'Заказчик',
 	'title' => 'Заголовок',
 	'add_demands' => 'add_demands',
@@ -465,4 +464,5 @@ return array(
 	'method' => 'Метод',
 	
 	'my_value' => 'Свое значение',
+	'Reset filter' => 'Сбросить фильтр',
 );

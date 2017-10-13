@@ -229,22 +229,21 @@ return array(
 
 	/*table column*/
 	/*user*/
-	'id' => 'ИД',
-	'username' => 'Логин',
+	'id' => 'ID',
+	'username' => 'Username',
 	'email' => 'Email',
-	'create_at' => 'Создан',
-	'lastvisit_at' => 'Последний визит',
-	'superuser' => 'Супер-админ',
-	'status' => 'Статус',
+	'create_at' => 'Create',
+	'lastvisit_at' => 'Last visit',
+	'superuser' => 'Super-admin',
+	'status' => 'Status',
 	'identity' => 'identity',
 	'network' => 'network',
-	'full_name' => 'Полное имя',
-	'state' => 'Страна',
-	'phone_number' => 'Номер телефона',
+	'full_name' => 'Full name',
+	'state' => 'A country',
+	'phone_number' => 'Phone number',
 	'pid' => 'pid',
 
 	/*Projects*/
-	'id' => 'ID',
 	'user_id' => 'Customer',
 	'title' => 'Header',
 	'add_demands' => 'add_demands',

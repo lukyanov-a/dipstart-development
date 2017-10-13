@@ -128,7 +128,7 @@ if(!empty($filters)) {
 			</a>
 		<?php } ?>
 		<a href="/project/zakaz/" class="filters-team">
-			Сбросить фильтр
+			<?php echo Yii::t('site','Reset filter'); ?>
 		</a>
 	</p>
 <?php } ?>
