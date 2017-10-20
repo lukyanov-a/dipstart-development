@@ -21,13 +21,14 @@ if(($column=='user_id' && $table=='Projects') || ($column=='executor' && $table=
         <?php foreach ($items as $item) {
             if($item->$column) {
                 $text = User::model()->findByPk($item->$column);
-                echo '<option value="' . $item->$column . '" ' . ($value == $item->$column ? 'selected' : '') . '>' . $text->username . '</option>';
+                echo '<option value="' . $item->$column . '" ' . ($value == $item->$column ? 'selected' : '') . '>' .
+                    ($text->username ? $text->username : $text->email) . '</option>';
             }
         }
         echo '<option value="0" ' . ($value == $item->$column ? 'selected' : '') . '>' . Yii::t('site', 'no') . '</option>';
         ?>
     </select>
-<?php } elseif(($column=='status' && $table=='Projects')) {
+<?php } elseif(($column=='status' && $table=='Projects') || ($column=='old_status' && $table=='Projects')) {
     $items = $model::model()->findAll(array('order'=>$column, 'group'=>$column));?>
     <select class="form-control" name="Filters[filter][value][]">
         <?php foreach ($items as $item) {
@@ -37,7 +38,7 @@ if(($column=='user_id' && $table=='Projects') || ($column=='executor' && $table=
             }
         } ?>
     </select>
-<?php } elseif(($column=='specials' && $table=='Projects')) {
+<?php } elseif(($column=='specials' && $table=='Projects') || ($column=='specials2' && $table=='Projects')) {
     $items = $model::model()->findAll(array('order'=>$column, 'group'=>$column));?>
     <select class="form-control" name="Filters[filter][value][]">
         <?php foreach ($items as $item) {
@@ -118,7 +119,7 @@ if(($column=='user_id' && $table=='Projects') || ($column=='executor' && $table=
     <input id="sdfsdf" name="Filters[filter][value][]" type="text" value="<?php echo $value; ?>" class="hasDatepicker">
  <?php }*/
 elseif(($column=='superuser' && $table=='User') || ($column=='status' && $table=='User')
-    || ($column=='is_active' && $table=='Projects')) { ?>
+    || ($column=='is_active' && $table=='Projects') || ($column=='avtoritet' && $table=='Projects')) { ?>
     <select class="form-control" name="Filters[filter][value][]">
         <option value="1" <?php if ($value) echo 'selected'; ?>><?php echo Yii::t('site', 'yes'); ?></option>
         <option value="0" <?php if (!$value) echo 'selected'; ?>><?php echo Yii::t('site', 'no'); ?></option>
@@ -138,7 +139,7 @@ elseif(($column=='superuser' && $table=='User') || ($column=='status' && $table=
     }
     if ($option=='') $not_find_val = true;
     ?>
-    <select class="form-control" name="<?php echo $not_find_val ? 'Filters[filter][value][]' : '_temp_filteres'; ?>" onchange="selectByValue(this);">
+    <select class="form-control" name="<?php echo !$not_find_val ? 'Filters[filter][value][]' : '_temp_filteres'; ?>" onchange="selectByValue(this);">
         <?php echo $option; ?>
         <option value="other" <?php if ($not_find_val) echo 'selected'; ?>>
             <?php echo Yii::t('site', 'my_value'); ?>

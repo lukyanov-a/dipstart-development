@@ -24,7 +24,7 @@ $(document).ready(function () {
 <?php
 $filters = Filters::getFilters('Payment', User::model()->getUserRole());
 if(!empty($filters)) { ?>
-	<p><?=Yii::t('site','Filters')?>:
+	<p style="margin: 15px 0 10px;"><?=Yii::t('site','Filters')?>:
 		<?php
 		$default = Filters::getDefaultFilters('Payment', User::model()->getUserRole());
 		$active = $default->id;

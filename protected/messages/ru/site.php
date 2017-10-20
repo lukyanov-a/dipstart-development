@@ -437,10 +437,10 @@ return array(
 	'is_active' => 'Активный',
 	'technicalspec' => 'Действие для менеджера',
 	'opisanie' => 'Описание',
-	'result_form' => 'result_form',
-	'tech' => 'tech',
-	'Dop_fromMan' => 'Dop_fromMan',
-	'time_to_connect' => 'time_to_connect',
+	'result_form' => 'В каком виде выдавать результат работы?',
+	'tech' => 'Технологии используемые в задаче',
+	'Dop_fromMan' => 'Особенности задачи',
+	'time_to_connect' => 'Время для связи',
 	'parent_id' => 'Родительский заказ',
 	'executor_event' => 'Событие исполнителя',
 	'customer_event' => 'Событие менеджера',
@@ -448,6 +448,9 @@ return array(
 	'pages' => 'Страницы',
 	'time_for_call' => 'Время звонка',
 	'edu_dep' => 'edu_dep',
+    'avtoritet' => 'Заказчик - авторитет',
+    'specials2' => 'Тип работы',
+
 
 	/*Payment*/
 	'order_id' => 'Заказ',

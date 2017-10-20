@@ -273,6 +273,8 @@ return array(
 	'pages' => 'Pages',
 	'time_for_call' => 'Time to call',
 	'edu_dep' => 'edu_dep',
+    'avtoritet' => 'Customer - authority',
+    'specials2' => 'Type of work',
 
 	/*Payment*/
 	'order_id' => 'Order',
