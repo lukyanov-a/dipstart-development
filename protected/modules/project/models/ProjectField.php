@@ -117,11 +117,20 @@ class ProjectField extends CActiveRecord
 					.' OR visible='.self::VISIBLE_CORRECTOR_WITHOUT_EXECUTOR,
                 'order'=>'position',
             ),
-            'forAuthor'=>array(
-                'condition'=>'visible='.self::VISIBLE_AUTHOR_AND_MANAGER
-					.' OR visible='.self::VISIBLE_ALL,
-                'order'=>'position',
-            ),
+            'forAuthor'=> User::model()->isCorrector() ? 
+				array(
+					'condition'=>'visible='.self::VISIBLE_AUTHOR_AND_MANAGER
+						.' OR visible='.self::VISIBLE_ALL
+						.' OR visible='.self::VISIBLE_CORRECTOR_WITHOUT_EXECUTOR
+						.' OR visible='.self::VISIBLE_CORRECTOR_WITHOUT_EXECUTOR_AND_CUSTOMER,
+					'order'=>'position',
+				)
+				:
+				array(
+					'condition'=>'visible='.self::VISIBLE_AUTHOR_AND_MANAGER
+						.' OR visible='.self::VISIBLE_ALL,
+					'order'=>'position',
+				),
             'sort'=>array(
                 'order'=>'position',
             ),
