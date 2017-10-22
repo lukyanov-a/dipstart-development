@@ -73,6 +73,9 @@ class Zakaz extends CActiveRecord {
 			} elseif (User::model()->isAuthor() || Yii::app()->user->isGuest) {
 				$this->_model=ProjectField::model()->forAuthor()->findAll();
 			}
+			  elseif ($role == 'Corrector') {
+				$this->_model=ProjectField::model()->sort()->findAll();
+			}
 		}
 		return $this->_model;
 	}
@@ -233,6 +236,9 @@ class Zakaz extends CActiveRecord {
 			$fields = '';
 
 			$model=$this->getFields();
+			if(!$model)
+				$model=$this->getFields('Corrector');
+			
 			foreach ($model as $field) {
 				$field_rule = array();
 				$fields .= ' ,'.$field->varname;

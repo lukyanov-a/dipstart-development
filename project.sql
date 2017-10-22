@@ -1,22 +1,24 @@
 -- phpMyAdmin SQL Dump
--- version 3.3.7deb7
--- http://www.phpmyadmin.net
+-- version 4.6.6
+-- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Время создания: Сен 30 2017 г., 17:06
--- Версия сервера: 5.5.47
--- Версия PHP: 5.4.36-0+deb7u1
+-- Время создания: Окт 04 2017 г., 13:47
+-- Версия сервера: 5.5.52-38.3
+-- Версия PHP: 5.6.30
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET FOREIGN_KEY_CHECKS=0;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `admintrix-test`
+-- База данных: `cw64959_dipstart`
 --
 
 -- --------------------------------------------------------
@@ -25,6 +27,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- Структура таблицы `1_AuthAssignment`
 --
 
+DROP TABLE IF EXISTS `1_AuthAssignment`;
 CREATE TABLE IF NOT EXISTS `1_AuthAssignment` (
   `itemname` varchar(64) NOT NULL,
   `userid` varchar(64) NOT NULL,
@@ -34,10 +37,15 @@ CREATE TABLE IF NOT EXISTS `1_AuthAssignment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Очистить таблицу перед добавлением данных `1_AuthAssignment`
+--
+
+TRUNCATE TABLE `1_AuthAssignment`;
+--
 -- Дамп данных таблицы `1_AuthAssignment`
 --
 
-INSERT INTO `1_AuthAssignment` (`itemname`, `userid`, `bizrule`, `data`) VALUES
+INSERT IGNORE INTO `1_AuthAssignment` (`itemname`, `userid`, `bizrule`, `data`) VALUES
 ('Admin', '1', NULL, NULL),
 ('Admin', '65', NULL, 'N;'),
 ('Author', '15', NULL, NULL),
@@ -58,6 +66,7 @@ INSERT INTO `1_AuthAssignment` (`itemname`, `userid`, `bizrule`, `data`) VALUES
 ('Author', '59', NULL, NULL),
 ('Author', '60', NULL, NULL),
 ('Corrector', '5', NULL, 'N;'),
+('Corrector', '66', NULL, 'N;'),
 ('Customer', '10', NULL, NULL),
 ('Customer', '11', NULL, NULL),
 ('Customer', '12', NULL, NULL),
@@ -104,6 +113,7 @@ INSERT INTO `1_AuthAssignment` (`itemname`, `userid`, `bizrule`, `data`) VALUES
 -- Структура таблицы `1_cdr`
 --
 
+DROP TABLE IF EXISTS `1_cdr`;
 CREATE TABLE IF NOT EXISTS `1_cdr` (
   `id` char(32) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
   `published` int(11) NOT NULL,
@@ -116,24 +126,35 @@ CREATE TABLE IF NOT EXISTS `1_cdr` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- Очистить таблицу перед добавлением данных `1_cdr`
+--
 
+TRUNCATE TABLE `1_cdr`;
+-- --------------------------------------------------------
 
 --
 -- Структура таблицы `1_ClassAction`
 --
 
+DROP TABLE IF EXISTS `1_ClassAction`;
 CREATE TABLE IF NOT EXISTS `1_ClassAction` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `factor` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=101 ;
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8;
 
+--
+-- Очистить таблицу перед добавлением данных `1_ClassAction`
+--
+
+TRUNCATE TABLE `1_ClassAction`;
 --
 -- Дамп данных таблицы `1_ClassAction`
 --
 
-INSERT INTO `1_ClassAction` (`id`, `name`, `factor`) VALUES
+INSERT IGNORE INTO `1_ClassAction` (`id`, `name`, `factor`) VALUES
 (1, 'Просмотр заказа менеджером', 0),
 (2, 'Проверка заказа менеджером', 0),
 (100, 'тест', 4);
@@ -144,6 +165,7 @@ INSERT INTO `1_ClassAction` (`id`, `name`, `factor`) VALUES
 -- Структура таблицы `1_Emails`
 --
 
+DROP TABLE IF EXISTS `1_Emails`;
 CREATE TABLE IF NOT EXISTS `1_Emails` (
   `id` int(8) NOT NULL AUTO_INCREMENT,
   `to` varchar(128) NOT NULL,
@@ -152,19 +174,20 @@ CREATE TABLE IF NOT EXISTS `1_Emails` (
   `type` int(1) NOT NULL,
   `dt` int(8) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `1_Emails`
+-- Очистить таблицу перед добавлением данных `1_Emails`
 --
 
-
+TRUNCATE TABLE `1_Emails`;
 -- --------------------------------------------------------
 
 --
 -- Структура таблицы `1_Filters`
 --
 
+DROP TABLE IF EXISTS `1_Filters`;
 CREATE TABLE IF NOT EXISTS `1_Filters` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -173,19 +196,20 @@ CREATE TABLE IF NOT EXISTS `1_Filters` (
   `default` tinyint(1) NOT NULL DEFAULT '0',
   `role` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `1_Filters`
+-- Очистить таблицу перед добавлением данных `1_Filters`
 --
 
-
+TRUNCATE TABLE `1_Filters`;
 -- --------------------------------------------------------
 
 --
 -- Структура таблицы `1_ManagerLogs`
 --
 
+DROP TABLE IF EXISTS `1_ManagerLogs`;
 CREATE TABLE IF NOT EXISTS `1_ManagerLogs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL,
@@ -194,13 +218,18 @@ CREATE TABLE IF NOT EXISTS `1_ManagerLogs` (
   `order_id` int(11) DEFAULT NULL,
   `payment` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1628 ;
+) ENGINE=InnoDB AUTO_INCREMENT=1632 DEFAULT CHARSET=utf8;
 
+--
+-- Очистить таблицу перед добавлением данных `1_ManagerLogs`
+--
+
+TRUNCATE TABLE `1_ManagerLogs`;
 --
 -- Дамп данных таблицы `1_ManagerLogs`
 --
 
-INSERT INTO `1_ManagerLogs` (`id`, `uid`, `action`, `datetime`, `order_id`, `payment`) VALUES
+INSERT IGNORE INTO `1_ManagerLogs` (`id`, `uid`, `action`, `datetime`, `order_id`, `payment`) VALUES
 (1, 1, 1, '2016-03-20 00:00:00', 1, 0),
 (2, 1, 1, '2016-03-21 00:00:00', 1, 0),
 (3, 1, 1, '2016-03-21 00:00:00', 1, 0),
@@ -1440,7 +1469,7 @@ INSERT INTO `1_ManagerLogs` (`id`, `uid`, `action`, `datetime`, `order_id`, `pay
 (1237, 1, 1, '2016-05-14 11:21:27', 4, 0),
 (1238, 1, 1, '2016-05-14 11:21:29', 4, 0),
 (1239, 1, 1, '2016-05-15 22:05:04', 7, 0);
-INSERT INTO `1_ManagerLogs` (`id`, `uid`, `action`, `datetime`, `order_id`, `payment`) VALUES
+INSERT IGNORE INTO `1_ManagerLogs` (`id`, `uid`, `action`, `datetime`, `order_id`, `payment`) VALUES
 (1240, 1, 1, '2016-05-16 00:09:43', 7, 0),
 (1241, 1, 1, '2016-05-16 00:11:19', 7, 0),
 (1242, 1, 1, '2016-05-16 00:11:42', 7, 0),
@@ -1828,7 +1857,11 @@ INSERT INTO `1_ManagerLogs` (`id`, `uid`, `action`, `datetime`, `order_id`, `pay
 (1624, 1, 1, '2017-05-21 17:30:10', 4, 0),
 (1625, 1, 1, '2017-05-21 17:33:01', 4, 0),
 (1626, 1, 1, '2017-05-21 18:06:02', 4, 0),
-(1627, 1, 1, '2017-09-26 20:45:20', 4, 0);
+(1627, 1, 1, '2017-09-26 20:45:20', 4, 0),
+(1628, 2, 1, '2017-10-04 12:24:11', 1, 0),
+(1629, 2, 1, '2017-10-04 12:26:01', 10, 0),
+(1630, 2, 1, '2017-10-04 12:27:23', 10, 0),
+(1631, 2, 1, '2017-10-04 12:27:49', 10, 0);
 
 -- --------------------------------------------------------
 
@@ -1836,6 +1869,7 @@ INSERT INTO `1_ManagerLogs` (`id`, `uid`, `action`, `datetime`, `order_id`, `pay
 -- Структура таблицы `1_Moderate`
 --
 
+DROP TABLE IF EXISTS `1_Moderate`;
 CREATE TABLE IF NOT EXISTS `1_Moderate` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `event_id` int(11) NOT NULL,
@@ -1846,30 +1880,36 @@ CREATE TABLE IF NOT EXISTS `1_Moderate` (
   `new_value` text COMMENT 'Новое значение',
   `date_update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Дата изменения',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `1_Moderate`
+-- Очистить таблицу перед добавлением данных `1_Moderate`
 --
 
-
+TRUNCATE TABLE `1_Moderate`;
 -- --------------------------------------------------------
 
 --
 -- Структура таблицы `1_PartStatus`
 --
 
+DROP TABLE IF EXISTS `1_PartStatus`;
 CREATE TABLE IF NOT EXISTS `1_PartStatus` (
-  `id` int(6) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Индекс',
+  `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Индекс',
   `status` varchar(255) NOT NULL COMMENT 'Наименование статуса',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Справочник статусов проектов' AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='Справочник статусов проектов';
 
+--
+-- Очистить таблицу перед добавлением данных `1_PartStatus`
+--
+
+TRUNCATE TABLE `1_PartStatus`;
 --
 -- Дамп данных таблицы `1_PartStatus`
 --
 
-INSERT INTO `1_PartStatus` (`id`, `status`) VALUES
+INSERT IGNORE INTO `1_PartStatus` (`id`, `status`) VALUES
 (1, 'Требуется выполнение'),
 (2, 'Ожидает модерации'),
 (3, 'Выдать заказчику'),
@@ -1882,6 +1922,7 @@ INSERT INTO `1_PartStatus` (`id`, `status`) VALUES
 -- Структура таблицы `1_Payment`
 --
 
+DROP TABLE IF EXISTS `1_Payment`;
 CREATE TABLE IF NOT EXISTS `1_Payment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) DEFAULT NULL,
@@ -1897,13 +1938,18 @@ CREATE TABLE IF NOT EXISTS `1_Payment` (
   `approve` tinyint(1) DEFAULT NULL,
   `method` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=55 ;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
 
+--
+-- Очистить таблицу перед добавлением данных `1_Payment`
+--
+
+TRUNCATE TABLE `1_Payment`;
 --
 -- Дамп данных таблицы `1_Payment`
 --
 
-INSERT INTO `1_Payment` (`id`, `order_id`, `receive_date`, `pay_date`, `theme`, `manager`, `user`, `summ`, `details_type`, `details_number`, `payment_type`, `approve`, `method`) VALUES
+INSERT IGNORE INTO `1_Payment` (`id`, `order_id`, `receive_date`, `pay_date`, `theme`, `manager`, `user`, `summ`, `details_type`, `details_number`, `payment_type`, `approve`, `method`) VALUES
 (1, 1, '2016-03-07 00:00:00', NULL, 'Тестовый заказ', 'admin@programmarius.ru', 'customer@programmarius.ru', 500.00, 0, '', 0, 0, 'Cash'),
 (2, 4, '2016-03-11 00:00:00', NULL, 'Тестовый заказ', 'admin@programmarius.ru', 'customer@programmarius.ru', 3500.00, 0, '', 0, 0, 'Cash'),
 (3, 4, '2016-03-11 00:00:00', '2016-03-30 00:00:00', 'Тестовый заказ', 'admin@programmarius.ru', 'akoch-ov@mail.ru', 2000.00, 0, 'Бакинский банк', 1, 1, 'Cash'),
@@ -1965,19 +2011,25 @@ INSERT INTO `1_Payment` (`id`, `order_id`, `receive_date`, `pay_date`, `theme`, 
 -- Структура таблицы `1_PaymentImage`
 --
 
+DROP TABLE IF EXISTS `1_PaymentImage`;
 CREATE TABLE IF NOT EXISTS `1_PaymentImage` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `project_id` int(11) NOT NULL,
   `image` varchar(255) NOT NULL,
   `approved` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
+--
+-- Очистить таблицу перед добавлением данных `1_PaymentImage`
+--
+
+TRUNCATE TABLE `1_PaymentImage`;
 --
 -- Дамп данных таблицы `1_PaymentImage`
 --
 
-INSERT INTO `1_PaymentImage` (`id`, `project_id`, `image`, `approved`) VALUES
+INSERT IGNORE INTO `1_PaymentImage` (`id`, `project_id`, `image`, `approved`) VALUES
 (1, 1, '1eb57d1251b67216ddb1784367303bec.jpg', 1),
 (2, 73, 'TMPDOODLE1465662891427.jpg', 1);
 
@@ -1987,6 +2039,7 @@ INSERT INTO `1_PaymentImage` (`id`, `project_id`, `image`, `approved`) VALUES
 -- Структура таблицы `1_Profiles`
 --
 
+DROP TABLE IF EXISTS `1_Profiles`;
 CREATE TABLE IF NOT EXISTS `1_Profiles` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID пользовтеля',
   `skype` varchar(50) NOT NULL DEFAULT '',
@@ -2008,16 +2061,21 @@ CREATE TABLE IF NOT EXISTS `1_Profiles` (
   `manager_informed` timestamp NULL DEFAULT NULL,
   `sales` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Профили пользователей' AUTO_INCREMENT=66 ;
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8 COMMENT='Профили пользователей';
 
+--
+-- Очистить таблицу перед добавлением данных `1_Profiles`
+--
+
+TRUNCATE TABLE `1_Profiles`;
 --
 -- Дамп данных таблицы `1_Profiles`
 --
 
-INSERT INTO `1_Profiles` (`user_id`, `skype`, `city`, `work_experience`, `fl_acc`, `wmr`, `yandex`, `how_hear`, `additional`, `rating`, `bank_account`, `specials`, `specials2`, `mailing_for_executors`, `notification`, `notification_time`, `general_mailing`, `manager_informed`, `sales`) VALUES
-(3, '', '', '', '', '', '', '', '', NULL, '', '', '', 1, 0, '', 1, '2017-05-26 11:10:05', 'одл'),
+INSERT IGNORE INTO `1_Profiles` (`user_id`, `skype`, `city`, `work_experience`, `fl_acc`, `wmr`, `yandex`, `how_hear`, `additional`, `rating`, `bank_account`, `specials`, `specials2`, `mailing_for_executors`, `notification`, `notification_time`, `general_mailing`, `manager_informed`, `sales`) VALUES
+(3, '', '', '', '', '', '', '', '', NULL, '', '', '', 1, 0, '', 1, '2017-05-26 08:10:05', 'одл'),
 (4, '', '', '3', '', '', '', '', '', 10, '', '31,32,33,34,36,39,42,47', '75', 1, 0, '', 1, NULL, ''),
-(5, '', '', '', '', '1234567890123', '', '', '', 2, 'Бакинский банк.', '31,33,34,43', '74,75', 1, 1, '1:10', 1, '2017-05-15 20:32:07', ''),
+(5, '', '', '', '', '1234567890123', '', '', '', 2, 'Бакинский банк.', '31,33,34,43', '74,75', 1, 1, '1:10', 1, '2017-05-15 17:32:07', ''),
 (6, 'akoch-ov', 'msc', '', '', '', '', '', '', NULL, '', '', '', 1, 0, '', 1, NULL, ''),
 (7, '', '', '', '', '', '0', '', '', NULL, '', '', '', 1, 0, '', 1, NULL, ''),
 (8, '', '', '', '', '', '0', '', '', NULL, '', '', '', 1, 0, '', 1, NULL, ''),
@@ -2042,6 +2100,7 @@ INSERT INTO `1_Profiles` (`user_id`, `skype`, `city`, `work_experience`, `fl_acc
 -- Структура таблицы `1_ProfilesFields`
 --
 
+DROP TABLE IF EXISTS `1_ProfilesFields`;
 CREATE TABLE IF NOT EXISTS `1_ProfilesFields` (
   `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'Индекс',
   `varname` varchar(50) NOT NULL COMMENT 'Переменная',
@@ -2062,13 +2121,18 @@ CREATE TABLE IF NOT EXISTS `1_ProfilesFields` (
   `paymentProps` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `varname` (`varname`,`widget`,`visible`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Таблица для хранения полей профиля пользователя' AUTO_INCREMENT=28 ;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COMMENT='Таблица для хранения полей профиля пользователя';
 
+--
+-- Очистить таблицу перед добавлением данных `1_ProfilesFields`
+--
+
+TRUNCATE TABLE `1_ProfilesFields`;
 --
 -- Дамп данных таблицы `1_ProfilesFields`
 --
 
-INSERT INTO `1_ProfilesFields` (`id`, `varname`, `title`, `field_type`, `field_size`, `field_size_min`, `required`, `match`, `range`, `error_message`, `other_validator`, `default`, `widget`, `widgetparams`, `position`, `visible`, `paymentProps`) VALUES
+INSERT IGNORE INTO `1_ProfilesFields` (`id`, `varname`, `title`, `field_type`, `field_size`, `field_size_min`, `required`, `match`, `range`, `error_message`, `other_validator`, `default`, `widget`, `widgetparams`, `position`, `visible`, `paymentProps`) VALUES
 (7, 'skype', 'Skype', 'VARCHAR', '50', '3', 0, '', '', '', '', '', '', '', 5, 3, 0),
 (8, 'city', 'Город', 'VARCHAR', '50', '2', 0, '', '', '', '', '', '', '', 6, 3, 0),
 (10, 'work_experience', 'Опыт работы в данной сфере', 'VARCHAR', '20', '1', 2, '', '', '', '', '', '', '', 8, 2, 0),
@@ -2088,6 +2152,7 @@ INSERT INTO `1_ProfilesFields` (`id`, `varname`, `title`, `field_type`, `field_s
 -- Структура таблицы `1_ProjectChanges`
 --
 
+DROP TABLE IF EXISTS `1_ProjectChanges`;
 CREATE TABLE IF NOT EXISTS `1_ProjectChanges` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -2099,22 +2164,27 @@ CREATE TABLE IF NOT EXISTS `1_ProjectChanges` (
   `date_moderate` timestamp NULL DEFAULT NULL,
   `moderate` varchar(45) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
+--
+-- Очистить таблицу перед добавлением данных `1_ProjectChanges`
+--
+
+TRUNCATE TABLE `1_ProjectChanges`;
 --
 -- Дамп данных таблицы `1_ProjectChanges`
 --
 
-INSERT INTO `1_ProjectChanges` (`id`, `user_id`, `project_id`, `file`, `comment`, `date_create`, `date_update`, `date_moderate`, `moderate`) VALUES
-(1, 3, 1, '11781852_898343106898309_5881494036670386948_n.jpg', '...', '2016-04-01 14:40:36', '2016-04-21 16:03:58', '2016-04-21 16:03:58', '0'),
-(2, 3, 1, '1eb57d1251b67216ddb1784367303bec.jpg', '', '2016-04-01 15:11:33', '2016-04-21 15:53:36', '2016-04-21 15:53:36', '1'),
-(3, 3, 1, '_Frenk-Kinslou,-Sekret-mgnovennogo-isceleniya.doc', '', '2016-04-01 15:12:04', '2016-04-21 15:44:37', '2016-04-21 15:44:37', '1'),
-(6, 1, 7, '1eb57d1251b67216ddb1784367303bec(1).jpg', '', '2016-05-16 00:36:59', NULL, NULL, '1'),
-(7, 1, 7, '_Loverblog_bez_trusov.pdf', '', '2016-05-16 00:37:31', NULL, NULL, '1'),
-(8, 1, 7, 'model-vk.pdf', '', '2016-05-16 00:39:44', NULL, NULL, '1'),
-(9, 5, 4, '1eb57d1251b67216ddb1784367303bec(2).jpg', '', '2016-05-22 21:35:49', '2016-05-27 22:32:49', '2016-05-27 22:32:49', '0'),
-(11, 1, 4, '12993577_1603208293333245_2004634962229966960_n.jpg', '', '2016-05-25 18:18:03', '2016-05-27 22:32:48', '2016-05-27 22:32:48', '1'),
-(12, 1, 4, '12993577_1603208293333245_2004634962229966960_n(1).jpg', '', '2016-05-27 22:42:14', '2016-05-27 22:43:07', '2016-05-27 22:43:07', '0');
+INSERT IGNORE INTO `1_ProjectChanges` (`id`, `user_id`, `project_id`, `file`, `comment`, `date_create`, `date_update`, `date_moderate`, `moderate`) VALUES
+(1, 3, 1, '11781852_898343106898309_5881494036670386948_n.jpg', '...', '2016-04-01 11:40:36', '2016-04-21 13:03:58', '2016-04-21 13:03:58', '0'),
+(2, 3, 1, '1eb57d1251b67216ddb1784367303bec.jpg', '', '2016-04-01 12:11:33', '2016-04-21 12:53:36', '2016-04-21 12:53:36', '1'),
+(3, 3, 1, '_Frenk-Kinslou,-Sekret-mgnovennogo-isceleniya.doc', '', '2016-04-01 12:12:04', '2016-04-21 12:44:37', '2016-04-21 12:44:37', '1'),
+(6, 1, 7, '1eb57d1251b67216ddb1784367303bec(1).jpg', '', '2016-05-15 21:36:59', NULL, NULL, '1'),
+(7, 1, 7, '_Loverblog_bez_trusov.pdf', '', '2016-05-15 21:37:31', NULL, NULL, '1'),
+(8, 1, 7, 'model-vk.pdf', '', '2016-05-15 21:39:44', NULL, NULL, '1'),
+(9, 5, 4, '1eb57d1251b67216ddb1784367303bec(2).jpg', '', '2016-05-22 18:35:49', '2016-05-27 19:32:49', '2016-05-27 19:32:49', '0'),
+(11, 1, 4, '12993577_1603208293333245_2004634962229966960_n.jpg', '', '2016-05-25 15:18:03', '2016-05-27 19:32:48', '2016-05-27 19:32:48', '1'),
+(12, 1, 4, '12993577_1603208293333245_2004634962229966960_n(1).jpg', '', '2016-05-27 19:42:14', '2016-05-27 19:43:07', '2016-05-27 19:43:07', '0');
 
 -- --------------------------------------------------------
 
@@ -2122,6 +2192,7 @@ INSERT INTO `1_ProjectChanges` (`id`, `user_id`, `project_id`, `file`, `comment`
 -- Структура таблицы `1_ProjectFields`
 --
 
+DROP TABLE IF EXISTS `1_ProjectFields`;
 CREATE TABLE IF NOT EXISTS `1_ProjectFields` (
   `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'Индекс',
   `varname` varchar(50) NOT NULL COMMENT 'Переменная',
@@ -2136,19 +2207,24 @@ CREATE TABLE IF NOT EXISTS `1_ProjectFields` (
   `work_types` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `varname` (`varname`,`visible`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Таблица для хранения полей профиля пользователя' AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COMMENT='Таблица для хранения полей профиля пользователя';
 
+--
+-- Очистить таблицу перед добавлением данных `1_ProjectFields`
+--
+
+TRUNCATE TABLE `1_ProjectFields`;
 --
 -- Дамп данных таблицы `1_ProjectFields`
 --
 
-INSERT INTO `1_ProjectFields` (`id`, `varname`, `title`, `field_type`, `field_size`, `required`, `error_message`, `default`, `position`, `visible`, `work_types`) VALUES
+INSERT IGNORE INTO `1_ProjectFields` (`id`, `varname`, `title`, `field_type`, `field_size`, `required`, `error_message`, `default`, `position`, `visible`, `work_types`) VALUES
 (1, 'title', 'Название работы', 'VARCHAR', '255', 1, 'Wrong title', '', 1, 1, NULL),
 (2, 'description', 'Требуемый функционал', 'TEXT', '0', 2, '', '', 3, 1, '75,76'),
 (5, 'soderjanie', 'План', 'TEXT', '0', 2, '', '', 2, 1, NULL),
 (7, 'specials', 'Специализация проекта', 'LIST', '0', 3, 'Укажите специальность', '', 1, 1, NULL),
 (9, 'opisanie', 'Описание проекта в целом', 'TEXT', '0', 2, '', '', 2, 1, '74,76'),
-(13, 'result_form', 'В каком виде выдавать результат работы?', 'TEXT', '0', 2, '', '', 8, 1, NULL),
+(13, 'result_form', 'В каком виде выдавать результат работы?', 'TEXT', '0', 2, '', '', 8, 6, NULL),
 (14, 'tech', 'Технологии используемые в задаче', 'TEXT', '0', 2, '', '', 3, 1, '74,76'),
 (16, 'Dop_fromMan', 'Особенности задачи', 'TEXT', '0', 0, '', '', 30, 3, NULL),
 (17, 'time_to_connect', 'Время для связи', 'VARCHAR', '255', 0, '', '', 20, 4, NULL),
@@ -2161,6 +2237,7 @@ INSERT INTO `1_ProjectFields` (`id`, `varname`, `title`, `field_type`, `field_si
 -- Структура таблицы `1_ProjectMessages`
 --
 
+DROP TABLE IF EXISTS `1_ProjectMessages`;
 CREATE TABLE IF NOT EXISTS `1_ProjectMessages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `message` text NOT NULL,
@@ -2173,13 +2250,18 @@ CREATE TABLE IF NOT EXISTS `1_ProjectMessages` (
   `order` int(11) NOT NULL,
   `cost` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=133 ;
+) ENGINE=InnoDB AUTO_INCREMENT=134 DEFAULT CHARSET=utf8;
 
+--
+-- Очистить таблицу перед добавлением данных `1_ProjectMessages`
+--
+
+TRUNCATE TABLE `1_ProjectMessages`;
 --
 -- Дамп данных таблицы `1_ProjectMessages`
 --
 
-INSERT INTO `1_ProjectMessages` (`id`, `message`, `sender`, `sender_role`, `recipient`, `recipient_role`, `moderated`, `date`, `order`, `cost`) VALUES
+INSERT IGNORE INTO `1_ProjectMessages` (`id`, `message`, `sender`, `sender_role`, `recipient`, `recipient_role`, `moderated`, `date`, `order`, `cost`) VALUES
 (1, 'Бла бла', 3, NULL, 0, NULL, 0, '2016-03-07 15:25:32', 1, NULL),
 (5, '<p>(=</p>', 1, NULL, -1, NULL, 0, '2016-03-07 15:29:19', 1, NULL),
 (6, '<p>Бла бла</p>', 1, NULL, -1, NULL, 0, '2016-03-07 15:29:36', 1, NULL),
@@ -2208,9 +2290,9 @@ INSERT INTO `1_ProjectMessages` (`id`, `message`, `sender`, `sender_role`, `reci
 (43, '<p>тест</p>', 1, NULL, 5, NULL, 0, '2016-04-16 20:54:33', 1, NULL),
 (44, 'Сообщение админу', 5, NULL, 1, NULL, 0, '2016-04-22 16:58:20', 1, NULL),
 (45, 'Сообщение заказчику', 5, NULL, 3, NULL, 0, '2016-04-22 16:58:29', 1, NULL),
-(46, 'Здравствуйте %имя%<br>Оповещаем Вас о поступлении нового заказа.<br><br>Наименование: %Наименование% <br>Специальность: %специальность%<br>Ссылка: %ссылка на заказ%<br><br><br>Подробнее узнать о заказе, задать уточняющие вопросы, сообщить о Вашем желании стать Исполнителем этой работы Вы можете в чате, перейдя по этой ссылке %ссылка на заказ%, Предварительно авторизуйтесь в своем личном кабинете (для того что бы каждый раз не авторизовываться поставьте галочку "Запомнить" при авторизации).<br>Если Вы хотите стать автором этой работы, напишите в чат желаемую цену и в течении суток Вы получите ответ о результате. Если Вы делали заявку три раза, указывая при этом адекватную сложности заказа и своему рейтингу цену и Вас не назначили на заказ, подпишите менеджеру "я Исполнитель на очереди" и Вам дадут этот заказ.<br>Пожалуйста, внимательно просмотрите всю информацию о заказе, сроках и подробности написания работы!<br>О назначении Вас исполнителем заказа Вы будете оповещены по электронной почте<br>', 3, NULL, 1, NULL, 0, '2016-04-25 22:44:46', 46, NULL),
-(47, 'Здравствуйте %имя%<br>Оповещаем Вас о поступлении нового заказа.<br><br>Наименование: %Наименование% <br>Специальность: %специальность%<br>Ссылка: %ссылка на заказ%<br><br><br>Подробнее узнать о заказе, задать уточняющие вопросы, сообщить о Вашем желании стать Исполнителем этой работы Вы можете в чате, перейдя по этой ссылке %ссылка на заказ%, Предварительно авторизуйтесь в своем личном кабинете (для того что бы каждый раз не авторизовываться поставьте галочку "Запомнить" при авторизации).<br>Если Вы хотите стать автором этой работы, напишите в чат желаемую цену и в течении суток Вы получите ответ о результате. Если Вы делали заявку три раза, указывая при этом адекватную сложности заказа и своему рейтингу цену и Вас не назначили на заказ, подпишите менеджеру "я Исполнитель на очереди" и Вам дадут этот заказ.<br>Пожалуйста, внимательно просмотрите всю информацию о заказе, сроках и подробности написания работы!<br>О назначении Вас исполнителем заказа Вы будете оповещены по электронной почте<br>', 3, NULL, 1, NULL, 0, '2016-04-26 15:49:29', 47, NULL),
-(48, 'Здравствуйте %имя%<br>Оповещаем Вас о поступлении нового заказа.<br><br>Наименование: %Наименование% <br>Специальность: %специальность%<br>Ссылка: %ссылка на заказ%<br><br><br>Подробнее узнать о заказе, задать уточняющие вопросы, сообщить о Вашем желании стать Исполнителем этой работы Вы можете в чате, перейдя по этой ссылке %ссылка на заказ%, Предварительно авторизуйтесь в своем личном кабинете (для того что бы каждый раз не авторизовываться поставьте галочку "Запомнить" при авторизации).<br>Если Вы хотите стать автором этой работы, напишите в чат желаемую цену и в течении суток Вы получите ответ о результате. Если Вы делали заявку три раза, указывая при этом адекватную сложности заказа и своему рейтингу цену и Вас не назначили на заказ, подпишите менеджеру "я Исполнитель на очереди" и Вам дадут этот заказ.<br>Пожалуйста, внимательно просмотрите всю информацию о заказе, сроках и подробности написания работы!<br>О назначении Вас исполнителем заказа Вы будете оповещены по электронной почте<br>', 3, NULL, 1, NULL, 0, '2016-04-26 16:00:15', 48, NULL),
+(46, 'Здравствуйте %имя%<br>Оповещаем Вас о поступлении нового заказа.<br><br>Наименование: %Наименование% <br>Специальность: %специальность%<br>Ссылка: %ссылка на заказ%<br><br><br>Подробнее узнать о заказе, задать уточняющие вопросы, сообщить о Вашем желании стать Исполнителем этой работы Вы можете в чате, перейдя по этой ссылке %ссылка на заказ%, Предварительно авторизуйтесь в своем личном кабинете (для того что бы каждый раз не авторизовываться поставьте галочку \"Запомнить\" при авторизации).<br>Если Вы хотите стать автором этой работы, напишите в чат желаемую цену и в течении суток Вы получите ответ о результате. Если Вы делали заявку три раза, указывая при этом адекватную сложности заказа и своему рейтингу цену и Вас не назначили на заказ, подпишите менеджеру \"я Исполнитель на очереди\" и Вам дадут этот заказ.<br>Пожалуйста, внимательно просмотрите всю информацию о заказе, сроках и подробности написания работы!<br>О назначении Вас исполнителем заказа Вы будете оповещены по электронной почте<br>', 3, NULL, 1, NULL, 0, '2016-04-25 22:44:46', 46, NULL),
+(47, 'Здравствуйте %имя%<br>Оповещаем Вас о поступлении нового заказа.<br><br>Наименование: %Наименование% <br>Специальность: %специальность%<br>Ссылка: %ссылка на заказ%<br><br><br>Подробнее узнать о заказе, задать уточняющие вопросы, сообщить о Вашем желании стать Исполнителем этой работы Вы можете в чате, перейдя по этой ссылке %ссылка на заказ%, Предварительно авторизуйтесь в своем личном кабинете (для того что бы каждый раз не авторизовываться поставьте галочку \"Запомнить\" при авторизации).<br>Если Вы хотите стать автором этой работы, напишите в чат желаемую цену и в течении суток Вы получите ответ о результате. Если Вы делали заявку три раза, указывая при этом адекватную сложности заказа и своему рейтингу цену и Вас не назначили на заказ, подпишите менеджеру \"я Исполнитель на очереди\" и Вам дадут этот заказ.<br>Пожалуйста, внимательно просмотрите всю информацию о заказе, сроках и подробности написания работы!<br>О назначении Вас исполнителем заказа Вы будете оповещены по электронной почте<br>', 3, NULL, 1, NULL, 0, '2016-04-26 15:49:29', 47, NULL),
+(48, 'Здравствуйте %имя%<br>Оповещаем Вас о поступлении нового заказа.<br><br>Наименование: %Наименование% <br>Специальность: %специальность%<br>Ссылка: %ссылка на заказ%<br><br><br>Подробнее узнать о заказе, задать уточняющие вопросы, сообщить о Вашем желании стать Исполнителем этой работы Вы можете в чате, перейдя по этой ссылке %ссылка на заказ%, Предварительно авторизуйтесь в своем личном кабинете (для того что бы каждый раз не авторизовываться поставьте галочку \"Запомнить\" при авторизации).<br>Если Вы хотите стать автором этой работы, напишите в чат желаемую цену и в течении суток Вы получите ответ о результате. Если Вы делали заявку три раза, указывая при этом адекватную сложности заказа и своему рейтингу цену и Вас не назначили на заказ, подпишите менеджеру \"я Исполнитель на очереди\" и Вам дадут этот заказ.<br>Пожалуйста, внимательно просмотрите всю информацию о заказе, сроках и подробности написания работы!<br>О назначении Вас исполнителем заказа Вы будете оповещены по электронной почте<br>', 3, NULL, 1, NULL, 0, '2016-04-26 16:00:15', 48, NULL),
 (49, 'Я отказываюсь!', 3, NULL, 1, NULL, 0, '2016-04-26 16:16:59', 51, NULL),
 (50, '<p>{old_status}</p>', 1, NULL, -1, NULL, 0, '2016-04-26 20:45:48', 10, NULL),
 (51, '<p>{user_id}</p>\n<p>&nbsp;</p>', 1, NULL, -1, NULL, 0, '2016-04-26 20:46:37', 10, NULL),
@@ -2251,15 +2333,16 @@ INSERT INTO `1_ProjectMessages` (`id`, `message`, `sender`, `sender_role`, `reci
 (104, 'Хочу взять заказ', 4, 2, 1, 1, 0, '2016-06-13 00:16:08', 74, 1000),
 (105, 'Хочу взять заказ', 4, 2, 1, 1, 0, '2016-06-13 00:16:25', 74, 1000),
 (106, '<p>hgfeesdfgsd</p>\n<p><strong>jhjgsd</strong></p>\n<p><em>dfghdfh</em></p>', 1, 1, 5, 2, 0, '2016-06-16 20:29:38', 4, NULL),
-(107, '<p style="box-sizing: border-box; margin: 0px 0px 10px; font-size: 13px; color: #333333; font-family: Roboto;">hgfeesdfgsd</p>\n<p style="box-sizing: border-box; margin: 0px 0px 10px; font-size: 13px; color: #333333; font-family: Roboto;"><strong style="box-sizing: border-box;">jhjgsd</strong></p>\n<p style="box-sizing: border-box; margin: 0px 0px 10px; font-size: 13px; color: #333333; font-family: Roboto;"><em style="box-sizing: border-box;">dfghdfh</em></p>', 1, 1, 5, 2, 0, '2016-06-16 20:32:30', 4, NULL),
-(108, '<p><span style="color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;">не дает файл залить&nbsp;</span><br style="box-sizing: border-box; color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;" /><span style="color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;">вот его содержимое&nbsp;</span><br style="box-sizing: border-box; color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;" /><span style="color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;">По платежным системам.</span><br style="box-sizing: border-box; color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;" /><span style="color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;">Вебмани &ndash; Требует аттестат продавца. Позволяет через АПИ выставлять счет и оплату и возвращает статус и номер (внутренний ) транзакции.</span><br style="box-sizing: border-box; color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;" /><span style="color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;">PayPal &ndash; Требует верификацию счета (картой или банковским счетом). Позволяет через АПИ выставлять счет и оплату и возвращает статус и номер (внутренний ) транзакции. Очень простое АПИ</span><br style="box-sizing: border-box; color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;" /><span style="color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;">Вебмани &ndash; Требует аттестат продавца. Позволяет через АПИ выставлять счет и оплату и возвращает статус и номер (внутренний ) транзакции.</span><br style="box-sizing: border-box; color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;" /><span style="color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;">Yandex &ndash; Требует верификацию сайта и подписание договора. После этого открывает Яндекс кассу. Продвинутое АПИ. Позволяет через АПИ выставлять счет и оплату и возвращает статус и номер (внутренний ) транзакции.</span><br style="box-sizing: border-box; color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;" /><span style="color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;">QIWI Требует верификацию сайта и подписание договора. После этого открывает доступ к АПИ. Позволяет через АПИ выставлять счет и оплату и возвращает статус и номер (внутренний ) транзакции.</span><br style="box-sizing: border-box; color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;" /><span style="color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;">Альфа - Требует верификацию сайта и подписание договора, а также открытие счета в альфа банке. После этого открывает доступ к АПИ. Позволяет через АПИ выставлять счет и оплату и возвращает статус и номер (внутренний ) транзакции.</span></p>', 1, 1, 5, 2, 0, '2016-06-16 20:37:07', 4, NULL),
+(107, '<p style=\"box-sizing: border-box; margin: 0px 0px 10px; font-size: 13px; color: #333333; font-family: Roboto;\">hgfeesdfgsd</p>\n<p style=\"box-sizing: border-box; margin: 0px 0px 10px; font-size: 13px; color: #333333; font-family: Roboto;\"><strong style=\"box-sizing: border-box;\">jhjgsd</strong></p>\n<p style=\"box-sizing: border-box; margin: 0px 0px 10px; font-size: 13px; color: #333333; font-family: Roboto;\"><em style=\"box-sizing: border-box;\">dfghdfh</em></p>', 1, 1, 5, 2, 0, '2016-06-16 20:32:30', 4, NULL),
+(108, '<p><span style=\"color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;\">не дает файл залить&nbsp;</span><br style=\"box-sizing: border-box; color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;\" /><span style=\"color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;\">вот его содержимое&nbsp;</span><br style=\"box-sizing: border-box; color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;\" /><span style=\"color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;\">По платежным системам.</span><br style=\"box-sizing: border-box; color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;\" /><span style=\"color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;\">Вебмани &ndash; Требует аттестат продавца. Позволяет через АПИ выставлять счет и оплату и возвращает статус и номер (внутренний ) транзакции.</span><br style=\"box-sizing: border-box; color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;\" /><span style=\"color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;\">PayPal &ndash; Требует верификацию счета (картой или банковским счетом). Позволяет через АПИ выставлять счет и оплату и возвращает статус и номер (внутренний ) транзакции. Очень простое АПИ</span><br style=\"box-sizing: border-box; color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;\" /><span style=\"color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;\">Вебмани &ndash; Требует аттестат продавца. Позволяет через АПИ выставлять счет и оплату и возвращает статус и номер (внутренний ) транзакции.</span><br style=\"box-sizing: border-box; color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;\" /><span style=\"color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;\">Yandex &ndash; Требует верификацию сайта и подписание договора. После этого открывает Яндекс кассу. Продвинутое АПИ. Позволяет через АПИ выставлять счет и оплату и возвращает статус и номер (внутренний ) транзакции.</span><br style=\"box-sizing: border-box; color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;\" /><span style=\"color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;\">QIWI Требует верификацию сайта и подписание договора. После этого открывает доступ к АПИ. Позволяет через АПИ выставлять счет и оплату и возвращает статус и номер (внутренний ) транзакции.</span><br style=\"box-sizing: border-box; color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;\" /><span style=\"color: #333333; font-family: Roboto; font-size: 12px; line-height: 17.1429px;\">Альфа - Требует верификацию сайта и подписание договора, а также открытие счета в альфа банке. После этого открывает доступ к АПИ. Позволяет через АПИ выставлять счет и оплату и возвращает статус и номер (внутренний ) транзакции.</span></p>', 1, 1, 5, 2, 0, '2016-06-16 20:37:07', 4, NULL),
 (109, '<p>Тестовое сообщение</p>', 2, 5, 5, 2, 0, '2016-09-21 21:07:35', 4, NULL),
 (111, '<p>Hello!</p>', 2, 5, 5, 2, 0, '2016-09-24 20:17:51', 4, NULL),
 (114, 'Хочу взять заказ', 4, 2, 1, 1, 0, '2017-05-02 19:14:23', 1, 111),
 (127, '<p>фывафыва</p>', 5, 5, 4, 2, 0, '2017-05-18 19:55:08', 1, NULL),
 (128, '<p>цйукйцуккукй</p>', 5, 5, 4, 2, 0, '2017-05-18 20:00:20', 1, NULL),
 (129, '<p>ывапыавп</p>', 5, 5, 4, 2, 0, '2017-05-18 20:16:13', 1, NULL),
-(132, '<p>фыафыва</p>', 5, 5, 5, 2, 0, '2017-05-18 20:55:06', 4, NULL);
+(132, '<p>фыафыва</p>', 5, 5, 5, 2, 0, '2017-05-18 20:55:06', 4, NULL),
+(133, 'Хочу взять заказ', 4, 2, 1, 1, 0, '2017-10-04 12:25:13', 10, 12);
 
 -- --------------------------------------------------------
 
@@ -2267,6 +2350,7 @@ INSERT INTO `1_ProjectMessages` (`id`, `message`, `sender`, `sender_role`, `reci
 -- Структура таблицы `1_ProjectPayments`
 --
 
+DROP TABLE IF EXISTS `1_ProjectPayments`;
 CREATE TABLE IF NOT EXISTS `1_ProjectPayments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) DEFAULT NULL,
@@ -2279,13 +2363,18 @@ CREATE TABLE IF NOT EXISTS `1_ProjectPayments` (
   `to_pay` float(10,2) DEFAULT NULL,
   `payed` float(10,2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
+--
+-- Очистить таблицу перед добавлением данных `1_ProjectPayments`
+--
+
+TRUNCATE TABLE `1_ProjectPayments`;
 --
 -- Дамп данных таблицы `1_ProjectPayments`
 --
 
-INSERT INTO `1_ProjectPayments` (`id`, `order_id`, `project_price`, `work_price`, `received`, `approved_in`, `approved_out`, `to_receive`, `to_pay`, `payed`) VALUES
+INSERT IGNORE INTO `1_ProjectPayments` (`id`, `order_id`, `project_price`, `work_price`, `received`, `approved_in`, `approved_out`, `to_receive`, `to_pay`, `payed`) VALUES
 (1, 1, 11100.00, 111.00, 2932.00, NULL, NULL, 333.00, 666.00, 4100.00),
 (2, 4, 7000.00, 555.00, 5500.00, NULL, NULL, 0.00, 0.00, 10000.00),
 (3, 7, 5000.00, NULL, 111.00, NULL, NULL, 0.00, 0.00, NULL),
@@ -2302,14 +2391,15 @@ INSERT INTO `1_ProjectPayments` (`id`, `order_id`, `project_price`, `work_price`
 -- Структура таблицы `1_Projects`
 --
 
+DROP TABLE IF EXISTS `1_Projects`;
 CREATE TABLE IF NOT EXISTS `1_Projects` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Индекс',
-  `user_id` int(11) unsigned NOT NULL COMMENT 'ID пользователя',
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Индекс',
+  `user_id` int(11) UNSIGNED NOT NULL COMMENT 'ID пользователя',
   `title` varchar(255) NOT NULL COMMENT 'Наименование',
   `add_demands` text COMMENT 'Доп. требования',
   `status` tinyint(4) DEFAULT '0' COMMENT 'Статус проекта',
   `last_spam` timestamp NULL DEFAULT NULL,
-  `executor` int(10) unsigned DEFAULT '0' COMMENT 'ID исполнителя',
+  `executor` int(10) UNSIGNED DEFAULT '0' COMMENT 'ID исполнителя',
   `notes` text NOT NULL COMMENT 'Заметки',
   `date` timestamp NULL DEFAULT NULL,
   `max_exec_date` timestamp NULL DEFAULT NULL,
@@ -2334,85 +2424,90 @@ CREATE TABLE IF NOT EXISTS `1_Projects` (
   `parent_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `parent` (`parent_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Таблица для хранения проектов (заказов)' AUTO_INCREMENT=100 ;
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 COMMENT='Таблица для хранения проектов (заказов)';
 
+--
+-- Очистить таблицу перед добавлением данных `1_Projects`
+--
+
+TRUNCATE TABLE `1_Projects`;
 --
 -- Дамп данных таблицы `1_Projects`
 --
 
-INSERT INTO `1_Projects` (`id`, `user_id`, `title`, `add_demands`, `status`, `last_spam`, `executor`, `notes`, `date`, `max_exec_date`, `manager_informed`, `author_informed`, `author_notes`, `description`, `old_status`, `soderjanie`, `specials`, `is_active`, `executor_event`, `customer_event`, `technicalspec`, `opisanie`, `result_form`, `tech`, `Dop_fromMan`, `time_to_connect`, `avtoritet`, `specials2`, `parent_id`) VALUES
-(1, 3, 'Великий заказ всея и вся', NULL, 4, '2016-09-24 20:19:41', 4, 'тест =)', '2016-02-09 04:49:05', '2016-07-21 18:05:20', '2017-05-15 20:29:31', '2016-08-24 04:48:27', '=)', 'ыпывапывп   пттьпрьттпраьтрпт 333', 3, '', '34', 1, '1,3', NULL, 1, '', 'паиаптап', '', '=) (ренрке', '', 0, '75', NULL),
-(4, 3, 'Тестовый заказ', NULL, 4, '2016-06-01 15:15:27', 5, '', NULL, '2017-06-01 15:15:54', '2016-06-01 15:15:27', '2017-06-01 15:15:49', 'ооп', '', 0, 'планчик', '34', 1, '3,1', NULL, 1, '', 'В отличном', '', 'kekeke', '', 1, '74', 1),
-(7, 3, 'Тестовый заказ 1', NULL, 3, NULL, 0, '', '2016-03-29 15:24:38', '2016-03-29 15:24:38', '2016-03-29 15:24:38', '2016-03-29 15:24:38', NULL, '', 3, '', '31', 1, '1', NULL, 0, '', '', '', '', '', 0, '74', 32),
-(10, 12, 'Тестовый заказ 4', NULL, 3, '2016-05-25 19:07:20', 0, '', '2016-03-12 16:59:05', '2016-03-25 16:58:05', '2016-03-12 16:59:05', '2016-03-19 04:58:05', 'ооп', '', 0, '', '31', 1, '1', NULL, 0, '', '', '', '', '', 1, '75', NULL),
-(31, 13, 'Тестовый заказ 5', NULL, 1, NULL, 0, '', '2016-03-12 19:53:37', '2016-03-12 19:53:37', '2016-03-12 19:53:37', '2016-03-12 19:53:37', NULL, '', 1, '', '34', 1, NULL, NULL, 0, '', '', '', '', '', 0, '', NULL),
-(32, 3, 'ppp', NULL, 1, NULL, 0, '', '2016-03-16 07:45:16', NULL, '2016-03-16 07:45:16', '2016-03-16 07:45:16', NULL, '', 0, '', '43', 1, NULL, NULL, 0, '', '', '', '', '', 1, '', NULL),
-(33, 14, 'Темная тема', NULL, 1, NULL, 0, '', '2016-03-16 10:06:56', '2016-03-25 10:06:56', '2016-03-16 10:06:56', '2016-03-20 22:06:56', NULL, '', 0, '', '31', 1, NULL, NULL, 0, '', '', '', '', '', 0, '', NULL),
-(34, 14, 'Тестовый заказ', NULL, 1, NULL, 0, '', '2016-03-16 10:11:39', NULL, '2016-03-16 10:11:39', '2016-03-16 10:11:39', NULL, '', 0, '', '31', 1, '1', NULL, 0, '', '', '', '', '', 0, '74', 33),
-(35, 14, 'Тестовый заказ', NULL, 1, NULL, 0, '', '2016-03-16 10:23:17', NULL, '2016-03-16 10:23:17', '2016-03-16 10:23:17', NULL, '', 0, '', '43', 1, NULL, NULL, 0, '', '', '', '', '', 0, '', NULL),
-(36, 3, 'Две небольшие срочные правки', NULL, 4, NULL, 4, '', '2016-03-22 21:04:30', NULL, '2016-03-22 21:04:30', '2016-03-22 21:04:30', NULL, '', 0, '', '43', 1, NULL, NULL, 0, '', '', '', '', '', 0, '', NULL),
-(37, 14, 'Тестовый заказ, руками не трогать, блеа!', NULL, 1, '2016-04-23 01:05:37', 0, '', '2016-04-23 01:05:37', '2016-04-23 01:05:58', '2016-04-23 01:05:37', '2016-04-23 01:05:37', NULL, '', 0, 'хороший.', '32', 1, NULL, NULL, 0, '', '', '', '', '', 0, '76', NULL),
-(38, 14, 'Правки. Front-end.', NULL, 1, NULL, 0, '', '2016-03-16 23:11:22', NULL, '2016-03-16 23:11:22', '2016-03-16 23:11:22', NULL, '', 0, '', '45', 0, NULL, NULL, 0, '', '', '', '', '', 1, '', NULL),
+INSERT IGNORE INTO `1_Projects` (`id`, `user_id`, `title`, `add_demands`, `status`, `last_spam`, `executor`, `notes`, `date`, `max_exec_date`, `manager_informed`, `author_informed`, `author_notes`, `description`, `old_status`, `soderjanie`, `specials`, `is_active`, `executor_event`, `customer_event`, `technicalspec`, `opisanie`, `result_form`, `tech`, `Dop_fromMan`, `time_to_connect`, `avtoritet`, `specials2`, `parent_id`) VALUES
+(1, 3, 'Великий заказ всея и вся', NULL, 4, '2016-09-24 17:19:41', 4, 'тест =)', '2016-02-09 01:49:05', '2016-07-21 15:05:20', '2017-05-15 17:29:31', '2016-08-24 01:48:27', '=)', 'ыпывапывп   пттьпрьттпраьтрпт 333', 3, '', '34', 1, '1,3', NULL, 1, '', 'паиаптап', '', '=) (ренрке', '', 0, '75', NULL),
+(4, 3, 'Тестовый заказ', NULL, 4, '2016-06-01 12:15:27', 5, '', NULL, '2017-06-01 12:15:54', '2016-06-01 12:15:27', '2017-06-01 12:15:49', 'ооп', '', 0, 'планчик', '34', 1, '3,1', NULL, 1, '', 'В отличном', '', 'kekeke', '', 1, '74', 1),
+(7, 3, 'Тестовый заказ 1', NULL, 3, NULL, 0, '', '2016-03-29 12:24:38', '2016-03-29 12:24:38', '2016-03-29 12:24:38', '2016-03-29 12:24:38', NULL, '', 3, '', '31', 1, '1', NULL, 0, '', '', '', '', '', 0, '74', 32),
+(10, 3, 'Тестовый заказ 4', NULL, 4, '2016-05-25 16:07:20', 4, '', '2016-03-12 13:59:05', '2016-03-25 13:58:05', '2016-03-12 13:59:05', '2016-03-19 01:58:05', 'ооп', '', 0, '', '31', 1, NULL, NULL, 0, '', '', '', '', '', 1, '75', NULL),
+(31, 13, 'Тестовый заказ 5', NULL, 1, NULL, 0, '', '2016-03-12 16:53:37', '2016-03-12 16:53:37', '2016-03-12 16:53:37', '2016-03-12 16:53:37', NULL, '', 1, '', '34', 1, NULL, NULL, 0, '', '', '', '', '', 0, '', NULL),
+(32, 3, 'ppp', NULL, 1, NULL, 0, '', '2016-03-16 04:45:16', NULL, '2016-03-16 04:45:16', '2016-03-16 04:45:16', NULL, '', 0, '', '43', 1, NULL, NULL, 0, '', '', '', '', '', 1, '', NULL),
+(33, 14, 'Темная тема', NULL, 1, NULL, 0, '', '2016-03-16 07:06:56', '2016-03-25 07:06:56', '2016-03-16 07:06:56', '2016-03-20 19:06:56', NULL, '', 0, '', '31', 1, NULL, NULL, 0, '', '', '', '', '', 0, '', NULL),
+(34, 14, 'Тестовый заказ', NULL, 1, NULL, 0, '', '2016-03-16 07:11:39', NULL, '2016-03-16 07:11:39', '2016-03-16 07:11:39', NULL, '', 0, '', '31', 1, '1', NULL, 0, '', '', '', '', '', 0, '74', 33),
+(35, 14, 'Тестовый заказ', NULL, 1, NULL, 0, '', '2016-03-16 07:23:17', NULL, '2016-03-16 07:23:17', '2016-03-16 07:23:17', NULL, '', 0, '', '43', 1, NULL, NULL, 0, '', '', '', '', '', 0, '', NULL),
+(36, 3, 'Две небольшие срочные правки', NULL, 4, NULL, 4, '', '2016-03-22 18:04:30', NULL, '2016-03-22 18:04:30', '2016-03-22 18:04:30', NULL, '', 0, '', '43', 1, NULL, NULL, 0, '', '', '', '', '', 0, '', NULL),
+(37, 14, 'Тестовый заказ, руками не трогать, блеа!', NULL, 1, '2016-04-22 22:05:37', 0, '', '2016-04-22 22:05:37', '2016-04-22 22:05:58', '2016-04-22 22:05:37', '2016-04-22 22:05:37', NULL, '', 0, 'хороший.', '32', 1, NULL, NULL, 0, '', '', '', '', '', 0, '76', NULL),
+(38, 14, 'Правки. Front-end.', NULL, 1, NULL, 0, '', '2016-03-16 20:11:22', NULL, '2016-03-16 20:11:22', '2016-03-16 20:11:22', NULL, '', 0, '', '45', 0, NULL, NULL, 0, '', '', '', '', '', 1, '', NULL),
 (39, 3, 'dsdfgsdg', NULL, 1, NULL, 4, '', NULL, NULL, NULL, NULL, NULL, '', 0, '', '30', 1, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
-(40, 3, 'asdf', NULL, 1, NULL, 0, '', NULL, '2016-03-31 21:18:56', NULL, '2016-03-25 00:00:56', NULL, '', 0, '', '31', 1, NULL, NULL, 0, '', '', '', '', '', 1, '75', NULL),
-(41, 3, 'dgsdgsh', NULL, 1, NULL, 0, '', NULL, '2016-03-31 21:22:18', NULL, '2016-03-25 00:00:18', NULL, '', 0, '', '30', 1, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
-(42, 9, 'Тестовый заказ', NULL, 1, NULL, 0, '', '2016-03-18 21:27:18', '2016-03-30 21:26:18', NULL, '2016-03-24 00:00:18', NULL, '', 0, '', '31', 1, NULL, NULL, 0, '', '', '', '', '', 0, '76', NULL),
-(43, 3, 'India', NULL, 2, NULL, 4, '', '2016-03-26 18:40:27', NULL, NULL, NULL, NULL, '', 0, '', '31', 1, '1', NULL, 0, '', '', '', '', '', 1, '74', 1),
-(44, 6, 'Темная тема', NULL, 1, NULL, 0, '', '2016-04-22 13:39:28', NULL, '2016-04-22 13:39:28', '2016-04-22 13:39:28', NULL, '', 0, '', '32', 1, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
-(45, 3, 'Тестовый заказ, руками не трогать, блеа!', NULL, 1, NULL, 0, '', '2016-04-25 22:43:54', NULL, '2016-04-25 22:43:54', '2016-04-25 22:43:54', NULL, '', 0, '', '32', 1, '1', NULL, 0, '', '', '', '', '', 0, '75', 4),
-(46, 3, 'Тестовый заказ', NULL, 1, NULL, 0, '', '2016-04-25 22:44:45', NULL, '2016-04-25 22:44:45', '2016-04-25 22:44:45', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
-(47, 3, 'Тестовый заказ', NULL, 1, NULL, 0, '', '2016-04-26 15:49:21', NULL, '2016-04-26 15:49:21', '2016-04-26 15:49:21', NULL, '', 0, '', '37', 1, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
-(48, 3, 'Темная тема', NULL, 1, NULL, 0, '', '2016-04-26 16:00:13', NULL, '2016-04-26 16:00:13', '2016-04-26 16:00:13', NULL, '', 0, '', '31', 1, NULL, NULL, 0, '', '', '', '', '', 0, '76', NULL),
-(49, 3, 'Кнопка “Непонятное ТЗ” и "Слишком маленький срок"', NULL, 1, NULL, 0, '', '2016-04-26 16:12:43', NULL, '2016-04-26 16:12:43', '2016-04-26 16:12:43', NULL, '', 0, '', '34', 1, NULL, NULL, 0, '', '', '', '', '', 0, '76', NULL),
-(50, 3, 'Кнопка “Непонятное ТЗ” и "Слишком маленький срок"', NULL, 1, NULL, 0, '', '2016-04-26 16:16:39', NULL, '2016-04-26 16:16:39', '2016-04-26 16:16:39', NULL, '', 0, '', '34', 0, NULL, NULL, 0, '', '', '', '', '', 0, '76', NULL),
-(51, 3, 'Кнопка “Непонятное ТЗ” и "Слишком маленький срок"', NULL, 1, NULL, 0, '', '2016-04-26 16:16:51', NULL, '2016-04-26 16:16:51', '2016-04-26 16:16:51', NULL, '', 0, '', '34', 1, NULL, NULL, 0, '', '', '', '', '', 0, '76', NULL),
-(52, 3, 'Тестовый заказ, руками не трогать, блеа!', NULL, 1, NULL, 0, '', '2016-04-27 20:46:19', NULL, '2016-04-27 20:46:19', '2016-04-27 20:46:19', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '76', NULL),
-(53, 3, 'Темная тема', NULL, 1, NULL, 0, '', '2016-04-28 17:03:36', NULL, '2016-04-28 17:03:36', '2016-04-28 17:03:36', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
-(54, 3, 'Темная тема', NULL, 1, NULL, 0, '', '2016-04-28 17:06:18', NULL, '2016-04-28 17:06:18', '2016-04-28 17:06:18', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
-(55, 3, 'Темная тема', NULL, 1, NULL, 0, '', '2016-04-28 17:07:42', NULL, '2016-04-28 17:07:42', '2016-04-28 17:07:42', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
-(56, 3, 'Темная тема', NULL, 1, NULL, 0, '', '2016-04-28 17:08:19', NULL, '2016-04-28 17:08:19', '2016-04-28 17:08:19', NULL, '', 0, '', '31', 1, '1', NULL, 0, '', '', '', '', '', 0, '74', 1),
-(57, 3, 'Тестовый заказ, руками не трогать, блеа!', NULL, 1, NULL, 0, '', '2016-04-29 01:16:37', NULL, '2016-04-29 01:16:37', '2016-04-29 01:16:37', NULL, '', 0, '', '32', 1, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
-(58, 3, 'Темная тема', NULL, 1, NULL, 0, '', '2016-05-02 12:49:58', NULL, '2016-05-02 12:49:58', '2016-05-02 12:49:58', NULL, '', 0, '', '33', 1, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
-(59, 30, 'Темная тема', NULL, 1, NULL, 0, '', '2016-05-13 19:21:55', NULL, '2016-05-13 19:21:55', '2016-05-13 19:21:55', NULL, '', 0, '', '32', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
-(60, 31, 'Тестовый заказ', NULL, 1, NULL, 0, '', '2016-05-13 23:42:01', NULL, '2016-05-13 23:42:01', '2016-05-13 23:42:01', NULL, '', 0, '', '32', 1, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
-(61, 32, 'Тестовый заказ', NULL, 1, NULL, 0, '', '2016-05-13 23:49:10', NULL, '2016-05-13 23:49:10', '2016-05-13 23:49:10', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
-(62, 32, 'Тестовый заказ', NULL, 1, NULL, 0, '', '2016-05-13 23:52:34', NULL, '2016-05-13 23:52:34', '2016-05-13 23:52:34', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
-(63, 32, 'Темная тема', NULL, 1, NULL, 0, '', '2016-05-13 23:53:44', NULL, '2016-05-13 23:53:44', '2016-05-13 23:53:44', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
-(64, 33, 'Темная тема', NULL, 1, NULL, 0, '', '2016-05-14 13:33:32', NULL, '2016-05-14 13:33:32', '2016-05-14 13:33:32', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
-(65, 34, 'Tune', NULL, 1, NULL, 0, '', '2016-05-14 13:34:35', '2016-05-14 13:30:35', '2016-05-14 13:34:35', '2016-05-14 13:32:35', NULL, '', 0, 'Rlsld', '37', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
-(66, 36, 'Темная тема', NULL, 5, NULL, 0, '', '2016-05-14 22:39:12', NULL, '2016-07-09 18:05:51', '2016-05-14 22:39:12', NULL, '', 0, '', '34', 1, '1', NULL, 0, '', '', '', '', '', 0, '75', NULL),
-(67, 34, 'rel', NULL, 3, '2016-05-18 17:22:47', 0, '', '2016-05-16 22:58:15', NULL, '2016-05-16 22:58:15', '2016-05-16 22:58:15', NULL, '', 0, '', '31', 1, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
-(68, 45, 'щзут', NULL, 1, NULL, 0, '', '2016-05-17 14:42:04', '2016-05-25 14:40:04', '2016-05-17 14:42:04', '2016-05-21 14:41:04', NULL, '', 0, '', '33', 1, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
-(69, 46, '111', NULL, 1, NULL, 0, '', '2016-05-17 14:43:51', '2016-05-28 14:43:51', '2016-05-17 14:43:51', '2016-05-23 02:43:51', NULL, '', 0, '', '63', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
-(70, 47, '4345', NULL, 1, NULL, 0, '', '2016-05-17 14:44:39', NULL, '2016-05-17 14:44:39', '2016-05-17 14:44:39', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '76', NULL),
-(71, 34, 'fuckin site', NULL, 2, NULL, 0, '', '2016-06-11 10:23:13', '2016-06-23 10:14:13', '2016-06-11 10:23:13', '2016-06-17 10:18:13', NULL, '', 0, '', '49', 1, '1', NULL, 0, '', 'По почте России', '', '', '', 0, '76', NULL),
-(73, 3, 'fuckin character', NULL, 4, NULL, 34, '', '2016-06-11 19:32:53', NULL, '2016-06-11 19:32:53', '2016-06-11 19:32:53', NULL, '', 0, '', '49', 1, NULL, NULL, 0, '', '', '', '', '', 0, '76', NULL),
-(74, 3, 'Qwerty', NULL, 4, NULL, 4, '', '2016-06-12 23:50:02', NULL, '2016-06-12 23:50:02', '2016-06-12 23:50:02', NULL, '', 0, '', '47', 1, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
-(75, 3, 'test', NULL, 1, NULL, 0, '', '2017-02-27 17:24:26', '2017-03-03 17:24:26', '2017-02-27 17:24:27', '2017-03-01 17:24:27', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
-(76, 3, 'test', NULL, 1, NULL, 0, '', '2017-02-27 17:41:46', '2017-03-03 17:24:46', '2017-02-27 17:41:46', '2017-03-01 17:32:46', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
-(77, 3, 'test', NULL, 1, NULL, 0, '', '2017-02-27 17:42:47', '2017-03-03 17:24:47', '2017-02-27 17:42:47', '2017-03-01 17:33:47', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
-(78, 3, 'test', NULL, 1, NULL, 0, '', '2017-02-27 17:43:19', '2017-03-03 17:24:19', '2017-02-27 17:43:19', '2017-03-01 17:33:19', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
-(79, 3, 'test', NULL, 1, NULL, 0, '', '2017-02-27 17:47:53', '2017-03-03 17:24:53', '2017-02-27 17:47:53', '2017-03-01 17:35:53', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
-(80, 3, 'test', NULL, 1, NULL, 0, '', '2017-02-27 17:47:58', '2017-03-03 17:24:58', '2017-02-27 17:47:58', '2017-03-01 17:35:58', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
-(81, 3, 'test', NULL, 1, NULL, 0, '', '2017-02-27 17:48:12', '2017-03-03 17:24:12', '2017-02-27 17:48:12', '2017-03-01 17:36:12', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
-(82, 3, 'test', NULL, 1, NULL, 0, '', '2017-02-27 17:49:20', '2017-03-03 17:24:20', '2017-02-27 17:49:20', '2017-03-01 17:36:20', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
-(83, 3, 'test', NULL, 1, NULL, 0, '', '2017-02-27 17:50:00', '2017-03-03 17:24:00', '2017-02-27 17:50:00', '2017-03-01 17:37:00', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
-(84, 6, 'тести', NULL, 1, NULL, 0, '', '2017-03-11 19:07:26', NULL, '2017-03-11 19:07:26', '2017-03-11 19:07:26', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
-(85, 6, 'тести', NULL, 1, NULL, 0, '', '2017-03-11 19:38:42', NULL, '2017-03-11 19:38:42', '2017-03-11 19:38:42', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
-(86, 6, 'тести', NULL, 1, NULL, 0, '', '2017-03-11 19:39:06', NULL, '2017-03-11 19:39:06', '2017-03-11 19:39:06', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
-(87, 6, 'тести', NULL, 1, NULL, 0, '', '2017-03-11 19:39:10', NULL, '2017-03-11 19:39:10', '2017-03-11 19:39:10', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
-(88, 6, 'тести', NULL, 1, NULL, 0, '', '2017-03-11 19:42:00', NULL, '2017-03-11 19:42:00', '2017-03-11 19:42:00', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
-(89, 6, 'тести', NULL, 1, NULL, 0, '', '2017-03-11 19:42:28', NULL, '2017-03-11 19:42:28', '2017-03-11 19:42:28', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
-(90, 6, 'тести', NULL, 1, NULL, 0, '', '2017-03-11 19:45:23', NULL, '2017-03-11 19:45:23', '2017-03-11 19:45:23', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
-(91, 6, 'тести', NULL, 1, NULL, 0, '', '2017-03-11 19:45:42', NULL, '2017-03-11 19:45:42', '2017-03-11 19:45:42', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
-(92, 6, 'тести', NULL, 1, NULL, 0, '', '2017-03-11 19:46:12', NULL, '2017-03-11 19:46:12', '2017-03-11 19:46:12', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
-(93, 6, 'gjkjhgblkj', NULL, 1, NULL, 0, '', '2017-03-11 19:46:29', NULL, '2017-03-11 19:46:29', '2017-03-11 19:46:29', NULL, '', 0, '', '32', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
-(94, 6, 'jhlkgjkl', NULL, 1, NULL, 0, '', '2017-03-11 19:47:14', NULL, '2017-03-11 19:47:14', '2017-03-11 19:47:14', NULL, '', 0, '', '32', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
-(95, 6, 'Тестовый заказ, удаляйте', NULL, 1, NULL, 0, '', '2017-03-11 19:47:33', NULL, '2017-03-11 19:47:33', '2017-03-11 19:47:33', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
-(96, 6, 'Тестовый заказ, удаляйте', NULL, 1, NULL, 0, '', '2017-03-11 19:53:50', NULL, '2017-03-11 19:53:50', '2017-03-11 19:53:50', NULL, '', 0, '', '32', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
-(97, 6, 'Тестовый заказ, удаляйте', NULL, 1, NULL, 0, '', '2017-03-11 20:00:17', NULL, '2017-03-11 20:00:17', '2017-03-11 20:00:17', NULL, '', 0, '', '32', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
-(98, 6, 'Тестовый заказ, удаляйте', NULL, 1, NULL, 0, '', '2017-03-11 20:01:25', NULL, '2017-03-11 20:01:25', '2017-03-11 20:01:25', NULL, '', 0, '', '32', 0, NULL, NULL, 0, '', '', '', '', '', 0, '76', NULL),
-(99, 6, 'Тестовый заказ, удаляйте', NULL, 1, NULL, 0, '', '2017-03-11 20:02:29', NULL, '2017-03-11 20:02:29', '2017-03-11 20:02:29', NULL, '', 0, '', '32', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL);
+(40, 3, 'asdf', NULL, 1, NULL, 0, '', NULL, '2016-03-31 18:18:56', NULL, '2016-03-24 21:00:56', NULL, '', 0, '', '31', 1, NULL, NULL, 0, '', '', '', '', '', 1, '75', NULL),
+(41, 3, 'dgsdgsh', NULL, 1, NULL, 0, '', NULL, '2016-03-31 18:22:18', NULL, '2016-03-24 21:00:18', NULL, '', 0, '', '30', 1, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
+(42, 9, 'Тестовый заказ', NULL, 1, NULL, 0, '', '2016-03-18 18:27:18', '2016-03-30 18:26:18', NULL, '2016-03-23 21:00:18', NULL, '', 0, '', '31', 1, NULL, NULL, 0, '', '', '', '', '', 0, '76', NULL),
+(43, 3, 'India', NULL, 2, NULL, 4, '', '2016-03-26 15:40:27', NULL, NULL, NULL, NULL, '', 0, '', '31', 1, '1', NULL, 0, '', '', '', '', '', 1, '74', 1),
+(44, 6, 'Темная тема', NULL, 1, NULL, 0, '', '2016-04-22 10:39:28', NULL, '2016-04-22 10:39:28', '2016-04-22 10:39:28', NULL, '', 0, '', '32', 1, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
+(45, 3, 'Тестовый заказ, руками не трогать, блеа!', NULL, 1, NULL, 0, '', '2016-04-25 19:43:54', NULL, '2016-04-25 19:43:54', '2016-04-25 19:43:54', NULL, '', 0, '', '32', 1, '1', NULL, 0, '', '', '', '', '', 0, '75', 4),
+(46, 3, 'Тестовый заказ', NULL, 1, NULL, 0, '', '2016-04-25 19:44:45', NULL, '2016-04-25 19:44:45', '2016-04-25 19:44:45', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
+(47, 3, 'Тестовый заказ', NULL, 1, NULL, 0, '', '2016-04-26 12:49:21', NULL, '2016-04-26 12:49:21', '2016-04-26 12:49:21', NULL, '', 0, '', '37', 1, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
+(48, 3, 'Темная тема', NULL, 1, NULL, 0, '', '2016-04-26 13:00:13', NULL, '2016-04-26 13:00:13', '2016-04-26 13:00:13', NULL, '', 0, '', '31', 1, NULL, NULL, 0, '', '', '', '', '', 0, '76', NULL),
+(49, 3, 'Кнопка “Непонятное ТЗ” и \"Слишком маленький срок\"', NULL, 1, NULL, 0, '', '2016-04-26 13:12:43', NULL, '2016-04-26 13:12:43', '2016-04-26 13:12:43', NULL, '', 0, '', '34', 1, NULL, NULL, 0, '', '', '', '', '', 0, '76', NULL),
+(50, 3, 'Кнопка “Непонятное ТЗ” и \"Слишком маленький срок\"', NULL, 1, NULL, 0, '', '2016-04-26 13:16:39', NULL, '2016-04-26 13:16:39', '2016-04-26 13:16:39', NULL, '', 0, '', '34', 0, NULL, NULL, 0, '', '', '', '', '', 0, '76', NULL),
+(51, 3, 'Кнопка “Непонятное ТЗ” и \"Слишком маленький срок\"', NULL, 1, NULL, 0, '', '2016-04-26 13:16:51', NULL, '2016-04-26 13:16:51', '2016-04-26 13:16:51', NULL, '', 0, '', '34', 1, NULL, NULL, 0, '', '', '', '', '', 0, '76', NULL),
+(52, 3, 'Тестовый заказ, руками не трогать, блеа!', NULL, 1, NULL, 0, '', '2016-04-27 17:46:19', NULL, '2016-04-27 17:46:19', '2016-04-27 17:46:19', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '76', NULL),
+(53, 3, 'Темная тема', NULL, 1, NULL, 0, '', '2016-04-28 14:03:36', NULL, '2016-04-28 14:03:36', '2016-04-28 14:03:36', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
+(54, 3, 'Темная тема', NULL, 1, NULL, 0, '', '2016-04-28 14:06:18', NULL, '2016-04-28 14:06:18', '2016-04-28 14:06:18', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
+(55, 3, 'Темная тема', NULL, 1, NULL, 0, '', '2016-04-28 14:07:42', NULL, '2016-04-28 14:07:42', '2016-04-28 14:07:42', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
+(56, 3, 'Темная тема', NULL, 1, NULL, 0, '', '2016-04-28 14:08:19', NULL, '2016-04-28 14:08:19', '2016-04-28 14:08:19', NULL, '', 0, '', '31', 1, '1', NULL, 0, '', '', '', '', '', 0, '74', 1),
+(57, 3, 'Тестовый заказ, руками не трогать, блеа!', NULL, 1, NULL, 0, '', '2016-04-28 22:16:37', NULL, '2016-04-28 22:16:37', '2016-04-28 22:16:37', NULL, '', 0, '', '32', 1, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
+(58, 3, 'Темная тема', NULL, 1, NULL, 0, '', '2016-05-02 09:49:58', NULL, '2016-05-02 09:49:58', '2016-05-02 09:49:58', NULL, '', 0, '', '33', 1, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
+(59, 30, 'Темная тема', NULL, 1, NULL, 0, '', '2016-05-13 16:21:55', NULL, '2016-05-13 16:21:55', '2016-05-13 16:21:55', NULL, '', 0, '', '32', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
+(60, 31, 'Тестовый заказ', NULL, 1, NULL, 0, '', '2016-05-13 20:42:01', NULL, '2016-05-13 20:42:01', '2016-05-13 20:42:01', NULL, '', 0, '', '32', 1, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
+(61, 32, 'Тестовый заказ', NULL, 1, NULL, 0, '', '2016-05-13 20:49:10', NULL, '2016-05-13 20:49:10', '2016-05-13 20:49:10', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
+(62, 32, 'Тестовый заказ', NULL, 1, NULL, 0, '', '2016-05-13 20:52:34', NULL, '2016-05-13 20:52:34', '2016-05-13 20:52:34', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
+(63, 32, 'Темная тема', NULL, 1, NULL, 0, '', '2016-05-13 20:53:44', NULL, '2016-05-13 20:53:44', '2016-05-13 20:53:44', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
+(64, 33, 'Темная тема', NULL, 1, NULL, 0, '', '2016-05-14 10:33:32', NULL, '2016-05-14 10:33:32', '2016-05-14 10:33:32', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
+(65, 34, 'Tune', NULL, 1, NULL, 0, '', '2016-05-14 10:34:35', '2016-05-14 10:30:35', '2016-05-14 10:34:35', '2016-05-14 10:32:35', NULL, '', 0, 'Rlsld', '37', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
+(66, 36, 'Темная тема', NULL, 5, NULL, 0, '', '2016-05-14 19:39:12', NULL, '2016-07-09 15:05:51', '2016-05-14 19:39:12', NULL, '', 0, '', '34', 1, '1', NULL, 0, '', '', '', '', '', 0, '75', NULL),
+(67, 34, 'rel', NULL, 3, '2016-05-18 14:22:47', 0, '', '2016-05-16 19:58:15', NULL, '2016-05-16 19:58:15', '2016-05-16 19:58:15', NULL, '', 0, '', '31', 1, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
+(68, 45, 'щзут', NULL, 1, NULL, 0, '', '2016-05-17 11:42:04', '2016-05-25 11:40:04', '2016-05-17 11:42:04', '2016-05-21 11:41:04', NULL, '', 0, '', '33', 1, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
+(69, 46, '111', NULL, 1, NULL, 0, '', '2016-05-17 11:43:51', '2016-05-28 11:43:51', '2016-05-17 11:43:51', '2016-05-22 23:43:51', NULL, '', 0, '', '63', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
+(70, 47, '4345', NULL, 1, NULL, 0, '', '2016-05-17 11:44:39', NULL, '2016-05-17 11:44:39', '2016-05-17 11:44:39', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '76', NULL),
+(71, 34, 'fuckin site', NULL, 2, NULL, 0, '', '2016-06-11 07:23:13', '2016-06-23 07:14:13', '2016-06-11 07:23:13', '2016-06-17 07:18:13', NULL, '', 0, '', '49', 1, '1', NULL, 0, '', 'По почте России', '', '', '', 0, '76', NULL),
+(73, 3, 'fuckin character', NULL, 4, NULL, 34, '', '2016-06-11 16:32:53', NULL, '2016-06-11 16:32:53', '2016-06-11 16:32:53', NULL, '', 0, '', '49', 1, NULL, NULL, 0, '', '', '', '', '', 0, '76', NULL),
+(74, 3, 'Qwerty', NULL, 4, NULL, 4, '', '2016-06-12 20:50:02', NULL, '2016-06-12 20:50:02', '2016-06-12 20:50:02', NULL, '', 0, '', '47', 1, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
+(75, 3, 'test', NULL, 1, NULL, 0, '', '2017-02-27 14:24:26', '2017-03-03 14:24:26', '2017-02-27 14:24:27', '2017-03-01 14:24:27', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
+(76, 3, 'test', NULL, 1, NULL, 0, '', '2017-02-27 14:41:46', '2017-03-03 14:24:46', '2017-02-27 14:41:46', '2017-03-01 14:32:46', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
+(77, 3, 'test', NULL, 1, NULL, 0, '', '2017-02-27 14:42:47', '2017-03-03 14:24:47', '2017-02-27 14:42:47', '2017-03-01 14:33:47', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
+(78, 3, 'test', NULL, 1, NULL, 0, '', '2017-02-27 14:43:19', '2017-03-03 14:24:19', '2017-02-27 14:43:19', '2017-03-01 14:33:19', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
+(79, 3, 'test', NULL, 1, NULL, 0, '', '2017-02-27 14:47:53', '2017-03-03 14:24:53', '2017-02-27 14:47:53', '2017-03-01 14:35:53', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
+(80, 3, 'test', NULL, 1, NULL, 0, '', '2017-02-27 14:47:58', '2017-03-03 14:24:58', '2017-02-27 14:47:58', '2017-03-01 14:35:58', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
+(81, 3, 'test', NULL, 1, NULL, 0, '', '2017-02-27 14:48:12', '2017-03-03 14:24:12', '2017-02-27 14:48:12', '2017-03-01 14:36:12', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
+(82, 3, 'test', NULL, 1, NULL, 0, '', '2017-02-27 14:49:20', '2017-03-03 14:24:20', '2017-02-27 14:49:20', '2017-03-01 14:36:20', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
+(83, 3, 'test', NULL, 1, NULL, 0, '', '2017-02-27 14:50:00', '2017-03-03 14:24:00', '2017-02-27 14:50:00', '2017-03-01 14:37:00', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
+(84, 6, 'тести', NULL, 1, NULL, 0, '', '2017-03-11 16:07:26', NULL, '2017-03-11 16:07:26', '2017-03-11 16:07:26', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
+(85, 6, 'тести', NULL, 1, NULL, 0, '', '2017-03-11 16:38:42', NULL, '2017-03-11 16:38:42', '2017-03-11 16:38:42', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
+(86, 6, 'тести', NULL, 1, NULL, 0, '', '2017-03-11 16:39:06', NULL, '2017-03-11 16:39:06', '2017-03-11 16:39:06', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
+(87, 6, 'тести', NULL, 1, NULL, 0, '', '2017-03-11 16:39:10', NULL, '2017-03-11 16:39:10', '2017-03-11 16:39:10', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
+(88, 6, 'тести', NULL, 1, NULL, 0, '', '2017-03-11 16:42:00', NULL, '2017-03-11 16:42:00', '2017-03-11 16:42:00', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
+(89, 6, 'тести', NULL, 1, NULL, 0, '', '2017-03-11 16:42:28', NULL, '2017-03-11 16:42:28', '2017-03-11 16:42:28', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
+(90, 6, 'тести', NULL, 1, NULL, 0, '', '2017-03-11 16:45:23', NULL, '2017-03-11 16:45:23', '2017-03-11 16:45:23', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
+(91, 6, 'тести', NULL, 1, NULL, 0, '', '2017-03-11 16:45:42', NULL, '2017-03-11 16:45:42', '2017-03-11 16:45:42', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
+(92, 6, 'тести', NULL, 1, NULL, 0, '', '2017-03-11 16:46:12', NULL, '2017-03-11 16:46:12', '2017-03-11 16:46:12', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
+(93, 6, 'gjkjhgblkj', NULL, 1, NULL, 0, '', '2017-03-11 16:46:29', NULL, '2017-03-11 16:46:29', '2017-03-11 16:46:29', NULL, '', 0, '', '32', 0, NULL, NULL, 0, '', '', '', '', '', 0, '74', NULL),
+(94, 6, 'jhlkgjkl', NULL, 1, NULL, 0, '', '2017-03-11 16:47:14', NULL, '2017-03-11 16:47:14', '2017-03-11 16:47:14', NULL, '', 0, '', '32', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
+(95, 6, 'Тестовый заказ, удаляйте', NULL, 1, NULL, 0, '', '2017-03-11 16:47:33', NULL, '2017-03-11 16:47:33', '2017-03-11 16:47:33', NULL, '', 0, '', '31', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
+(96, 6, 'Тестовый заказ, удаляйте', NULL, 1, NULL, 0, '', '2017-03-11 16:53:50', NULL, '2017-03-11 16:53:50', '2017-03-11 16:53:50', NULL, '', 0, '', '32', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
+(97, 6, 'Тестовый заказ, удаляйте', NULL, 1, NULL, 0, '', '2017-03-11 17:00:17', NULL, '2017-03-11 17:00:17', '2017-03-11 17:00:17', NULL, '', 0, '', '32', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL),
+(98, 6, 'Тестовый заказ, удаляйте', NULL, 1, NULL, 0, '', '2017-03-11 17:01:25', NULL, '2017-03-11 17:01:25', '2017-03-11 17:01:25', NULL, '', 0, '', '32', 0, NULL, NULL, 0, '', '', '', '', '', 0, '76', NULL),
+(99, 6, 'Тестовый заказ, удаляйте', NULL, 1, NULL, 0, '', '2017-03-11 17:02:29', NULL, '2017-03-11 17:02:29', '2017-03-11 17:02:29', NULL, '', 0, '', '32', 0, NULL, NULL, 0, '', '', '', '', '', 0, '75', NULL);
 
 -- --------------------------------------------------------
 
@@ -2420,6 +2515,7 @@ INSERT INTO `1_Projects` (`id`, `user_id`, `title`, `add_demands`, `status`, `la
 -- Структура таблицы `1_ProjectsEvents`
 --
 
+DROP TABLE IF EXISTS `1_ProjectsEvents`;
 CREATE TABLE IF NOT EXISTS `1_ProjectsEvents` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(100) DEFAULT NULL,
@@ -2428,15 +2524,21 @@ CREATE TABLE IF NOT EXISTS `1_ProjectsEvents` (
   `timestamp` int(11) DEFAULT NULL,
   `status` tinyint(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=293 ;
+) ENGINE=MyISAM AUTO_INCREMENT=295 DEFAULT CHARSET=utf8;
 
+--
+-- Очистить таблицу перед добавлением данных `1_ProjectsEvents`
+--
+
+TRUNCATE TABLE `1_ProjectsEvents`;
 --
 -- Дамп данных таблицы `1_ProjectsEvents`
 --
 
-INSERT INTO `1_ProjectsEvents` (`id`, `type`, `event_id`, `description`, `timestamp`, `status`) VALUES
-(285, '5', 4, 'Пользователь akoch-ov оставил сообщение: "7674567."', 1494092139, 0),
-(290, '16', 1, 'Срок этапа истёк... заказ: ', 1494869543, 0);
+INSERT IGNORE INTO `1_ProjectsEvents` (`id`, `type`, `event_id`, `description`, `timestamp`, `status`) VALUES
+(285, '5', 4, 'Пользователь akoch-ov оставил сообщение: \"7674567.\"', 1494092139, 0),
+(290, '16', 1, 'Срок этапа истёк... заказ: ', 1494869543, 0),
+(294, '14', 66, 'В системе зарегистрировался новый заказчик <a href=\"/user/admin/update/id/66\">vank300828@gmail.com</a>', 1507110992, 0);
 
 -- --------------------------------------------------------
 
@@ -2444,9 +2546,10 @@ INSERT INTO `1_ProjectsEvents` (`id`, `type`, `event_id`, `description`, `timest
 -- Структура таблицы `1_ProjectsParts`
 --
 
+DROP TABLE IF EXISTS `1_ProjectsParts`;
 CREATE TABLE IF NOT EXISTS `1_ProjectsParts` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Индекс',
-  `proj_id` int(11) unsigned NOT NULL COMMENT 'ID проекта',
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Индекс',
+  `proj_id` int(11) UNSIGNED NOT NULL COMMENT 'ID проекта',
   `title` varchar(255) NOT NULL COMMENT 'Наименование',
   `file` varchar(255) DEFAULT NULL COMMENT 'Вложенный файл',
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -2454,47 +2557,52 @@ CREATE TABLE IF NOT EXISTS `1_ProjectsParts` (
   `comment` varchar(255) DEFAULT NULL,
   `show` tinyint(1) DEFAULT '0',
   `author_id` varchar(100) DEFAULT NULL,
-  `status_id` int(10) unsigned NOT NULL DEFAULT '1',
+  `status_id` int(10) UNSIGNED NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Дополнительные части (этапы) проекта' AUTO_INCREMENT=50 ;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8 COMMENT='Дополнительные части (этапы) проекта';
 
+--
+-- Очистить таблицу перед добавлением данных `1_ProjectsParts`
+--
+
+TRUNCATE TABLE `1_ProjectsParts`;
 --
 -- Дамп данных таблицы `1_ProjectsParts`
 --
 
-INSERT INTO `1_ProjectsParts` (`id`, `proj_id`, `title`, `file`, `date`, `payment`, `comment`, `show`, `author_id`, `status_id`) VALUES
-(1, 1, 'Этап 1', NULL, '2016-03-07 16:11:55', NULL, NULL, 0, '0', 3),
-(2, 36, 'Супер этап', NULL, '2016-03-30 17:15:14', NULL, '=) (=', 0, '4', 4),
-(4, 36, 'Пупер этап', NULL, '2016-03-24 04:15:20', NULL, 'Вааащеее', 0, '4', 4),
-(5, 36, 'Новая Часть', NULL, '2016-03-24 04:59:18', NULL, NULL, 0, '4', 2),
-(6, 1, 'Новая Часть', NULL, '2016-04-12 18:52:50', NULL, NULL, 0, '5', 2),
-(7, 1, 'Аудит', NULL, '2016-04-24 18:54:50', NULL, '', 0, '5', 3),
-(9, 10, 'Новый этап', NULL, '2016-04-19 21:51:45', NULL, NULL, 0, '0', 1),
-(10, 1, 'Новый этап', NULL, '2016-04-21 04:08:49', NULL, NULL, 0, '5', 3),
-(11, 7, 'Новый этапввсысывс', NULL, '2016-04-21 04:22:43', NULL, NULL, 0, '0', 1),
-(12, 7, 'Новый этапавмвамв', NULL, '2016-04-21 04:22:58', NULL, NULL, 0, '0', 1),
-(13, 1, 'Зига', NULL, '2016-04-21 22:52:36', NULL, NULL, 0, '5', 2),
-(14, 44, 'Новый этап', NULL, '2016-04-22 13:39:39', NULL, NULL, 0, '0', 3),
-(15, 56, 'Новый этап', NULL, '2016-04-28 18:40:15', NULL, NULL, 0, '0', 1),
-(16, 1, '6', NULL, '2016-05-08 20:54:26', NULL, NULL, 0, '0', 1),
-(17, 1, '7', NULL, '2016-05-08 20:54:35', NULL, NULL, 0, '0', 1),
-(18, 1, '8', NULL, '2016-05-08 20:54:41', NULL, NULL, 0, '0', 1),
-(19, 1, '9', NULL, '2017-05-15 20:29:19', NULL, NULL, 0, '0', 1),
-(20, 1, '10', NULL, '2016-05-08 20:54:53', NULL, NULL, 0, '0', 1),
-(21, 1, 'Новый этап', NULL, '2016-05-08 20:55:00', NULL, NULL, 0, '0', 1),
-(22, 1, 'Новый этап', NULL, '2016-05-08 20:55:08', NULL, NULL, 0, '0', 1),
-(23, 57, 'Новый этап', NULL, '2016-05-13 15:10:25', NULL, NULL, 0, '0', 1),
-(27, 73, 'Этап 1', NULL, '2016-06-11 19:39:19', NULL, NULL, 0, '0', 4),
-(28, 73, 'Этап 2', NULL, '2016-06-11 19:39:26', NULL, NULL, 0, '0', 1),
-(29, 74, 'Новый этап', NULL, '2016-06-13 00:16:44', NULL, NULL, 0, '4', 4),
-(30, 35, 'Вся работа', NULL, '1970-01-01 03:01:00', NULL, NULL, 0, '0', 1),
-(31, 35, 'Вся работа', NULL, '1970-01-01 03:01:00', NULL, NULL, 0, '0', 1),
-(32, 32, 'Вся работа', NULL, '1970-01-01 03:01:00', NULL, NULL, 0, '0', 1),
-(45, 4, 'Парсинг', NULL, '1974-09-28 23:09:30', NULL, NULL, 0, '5', 1),
-(46, 4, 'Чистка', NULL, '1984-03-23 16:03:30', NULL, NULL, 0, '5', 1),
-(47, 4, 'Корректировка', NULL, '1998-06-14 06:06:00', NULL, NULL, 0, '5', 1),
-(48, 4, 'бла-бла-бла', NULL, '2012-09-03 19:09:30', NULL, NULL, 0, '5', 1),
-(49, 4, 'адын', NULL, '2017-06-01 15:06:00', NULL, NULL, 0, '5', 1);
+INSERT IGNORE INTO `1_ProjectsParts` (`id`, `proj_id`, `title`, `file`, `date`, `payment`, `comment`, `show`, `author_id`, `status_id`) VALUES
+(1, 1, 'Этап 1', NULL, '2016-03-07 13:11:55', NULL, NULL, 0, '0', 3),
+(2, 36, 'Супер этап', NULL, '2016-03-30 14:15:14', NULL, '=) (=', 0, '4', 4),
+(4, 36, 'Пупер этап', NULL, '2016-03-24 01:15:20', NULL, 'Вааащеее', 0, '4', 4),
+(5, 36, 'Новая Часть', NULL, '2016-03-24 01:59:18', NULL, NULL, 0, '4', 2),
+(6, 1, 'Новая Часть', NULL, '2016-04-12 15:52:50', NULL, NULL, 0, '5', 2),
+(7, 1, 'Аудит', NULL, '2016-04-24 15:54:50', NULL, '', 0, '5', 3),
+(9, 10, 'Новый этап', NULL, '2016-04-19 18:51:45', NULL, NULL, 0, '0', 1),
+(10, 1, 'Новый этап', NULL, '2016-04-21 01:08:49', NULL, NULL, 0, '5', 3),
+(11, 7, 'Новый этапввсысывс', NULL, '2016-04-21 01:22:43', NULL, NULL, 0, '0', 1),
+(12, 7, 'Новый этапавмвамв', NULL, '2016-04-21 01:22:58', NULL, NULL, 0, '0', 1),
+(13, 1, 'Зига', NULL, '2016-04-21 19:52:36', NULL, NULL, 0, '5', 2),
+(14, 44, 'Новый этап', NULL, '2016-04-22 10:39:39', NULL, NULL, 0, '0', 3),
+(15, 56, 'Новый этап', NULL, '2016-04-28 15:40:15', NULL, NULL, 0, '0', 1),
+(16, 1, '6', NULL, '2016-05-08 17:54:26', NULL, NULL, 0, '0', 1),
+(17, 1, '7', NULL, '2016-05-08 17:54:35', NULL, NULL, 0, '0', 1),
+(18, 1, '8', NULL, '2016-05-08 17:54:41', NULL, NULL, 0, '0', 1),
+(19, 1, '9', NULL, '2017-05-15 17:29:19', NULL, NULL, 0, '0', 1),
+(20, 1, '10', NULL, '2016-05-08 17:54:53', NULL, NULL, 0, '0', 1),
+(21, 1, 'Новый этап', NULL, '2016-05-08 17:55:00', NULL, NULL, 0, '0', 1),
+(22, 1, 'Новый этап', NULL, '2016-05-08 17:55:08', NULL, NULL, 0, '0', 1),
+(23, 57, 'Новый этап', NULL, '2016-05-13 12:10:25', NULL, NULL, 0, '0', 1),
+(27, 73, 'Этап 1', NULL, '2016-06-11 16:39:19', NULL, NULL, 0, '0', 4),
+(28, 73, 'Этап 2', NULL, '2016-06-11 16:39:26', NULL, NULL, 0, '0', 1),
+(29, 74, 'Новый этап', NULL, '2016-06-12 21:16:44', NULL, NULL, 0, '4', 4),
+(30, 35, 'Вся работа', NULL, '1970-01-01 00:01:00', NULL, NULL, 0, '0', 1),
+(31, 35, 'Вся работа', NULL, '1970-01-01 00:01:00', NULL, NULL, 0, '0', 1),
+(32, 32, 'Вся работа', NULL, '1970-01-01 00:01:00', NULL, NULL, 0, '0', 1),
+(45, 4, 'Парсинг', NULL, '1974-09-28 20:09:30', NULL, NULL, 0, '5', 1),
+(46, 4, 'Чистка', NULL, '1984-03-23 13:03:30', NULL, NULL, 0, '5', 1),
+(47, 4, 'Корректировка', NULL, '1998-06-14 02:06:00', NULL, NULL, 0, '5', 1),
+(48, 4, 'бла-бла-бла', NULL, '2012-09-03 15:09:30', NULL, NULL, 0, '5', 1),
+(49, 4, 'адын', NULL, '2017-06-01 12:06:00', NULL, NULL, 0, '5', 1);
 
 -- --------------------------------------------------------
 
@@ -2502,17 +2610,23 @@ INSERT INTO `1_ProjectsParts` (`id`, `proj_id`, `title`, `file`, `date`, `paymen
 -- Структура таблицы `1_ProjectStatus`
 --
 
+DROP TABLE IF EXISTS `1_ProjectStatus`;
 CREATE TABLE IF NOT EXISTS `1_ProjectStatus` (
-  `id` int(6) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Индекс',
+  `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Индекс',
   `status` varchar(255) NOT NULL COMMENT 'Наименование статуса',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Справочник статусов проектов' AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='Справочник статусов проектов';
 
+--
+-- Очистить таблицу перед добавлением данных `1_ProjectStatus`
+--
+
+TRUNCATE TABLE `1_ProjectStatus`;
 --
 -- Дамп данных таблицы `1_ProjectStatus`
 --
 
-INSERT INTO `1_ProjectStatus` (`id`, `status`) VALUES
+INSERT IGNORE INTO `1_ProjectStatus` (`id`, `status`) VALUES
 (1, 'Новый заказ'),
 (2, 'Ждем решен. клиента'),
 (3, 'Ищется автор'),
@@ -2525,21 +2639,27 @@ INSERT INTO `1_ProjectStatus` (`id`, `status`) VALUES
 -- Структура таблицы `1_Templates`
 --
 
+DROP TABLE IF EXISTS `1_Templates`;
 CREATE TABLE IF NOT EXISTS `1_Templates` (
-  `id` int(6) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `title` varchar(255) NOT NULL,
   `text` text NOT NULL,
   `type_id` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=118 ;
+) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8;
 
+--
+-- Очистить таблицу перед добавлением данных `1_Templates`
+--
+
+TRUNCATE TABLE `1_Templates`;
 --
 -- Дамп данных таблицы `1_Templates`
 --
 
-INSERT INTO `1_Templates` (`id`, `name`, `title`, `text`, `type_id`) VALUES
-(2, 'Заказчику', 'когда не можем дозвониться', '{ProjectPayments_project_price} К сожалению, не можем дозвониться на указанный в заказе телефон, пожалуйста, оставьте актуальный номер телефона в чате заказа или наберите нас + 7 (495) 504 37 19, необходимо обсудить детали Вашего заказа "{Zakaz_title}". Спасибо за доверие к нашей компании!{ProjectPayments_project_pri}', 1),
+INSERT IGNORE INTO `1_Templates` (`id`, `name`, `title`, `text`, `type_id`) VALUES
+(2, 'Заказчику', 'когда не можем дозвониться', '{ProjectPayments_project_price} К сожалению, не можем дозвониться на указанный в заказе телефон, пожалуйста, оставьте актуальный номер телефона в чате заказа или наберите нас + 7 (495) 504 37 19, необходимо обсудить детали Вашего заказа \"{Zakaz_title}\". Спасибо за доверие к нашей компании!{ProjectPayments_project_pri}', 1),
 (3, 'Заказчику', 'если не оставил телефон', 'Здравствуйте!\r\n\r\nВы оформили заявку на сайте http://adco.obshya.com/\r\n\r\nСпасибо за проявленный интерес к нашей компании!\r\n\r\nРаботу по Вашему заказу выполним! \r\n\r\nОриентировочная цена такой работы: от …\r\n\r\nВы можете задать свой вопрос в Чате Вашего заказа (предварительно авторизовавшись на сайте) или перезвонить нам по телефону: +7(495) 504-37-19.\r\n\r\nТакже, для уточнения подробностей, Вы можете оставить свой контактный телефон - и мы с удовольствием Вам перезвоним и проконсультируем Вас по всем вопросам :).', 1),
 (4, 'Заказчику', 'спрашивает, что с работой', 'Здравствуйте!\r\n\r\nС Вашим заказом все в порядке. Исполнитель работает.\r\n\r\nРабота будет выполнена в срок, указанный в заявке (сроки сдачи частей работы остаются на усмотрение исполнителя)\r\n\r\n', 1),
 (5, 'Исполнителю', 'просьба зайти в чат', 'Просьба почаще проверять чат по взятым заказам и вовремя отвечать на сообщения, чтобы была понятна ситуация по заказу. Это не займет много времени. Спасибо', 2),
@@ -2557,7 +2677,7 @@ INSERT INTO `1_Templates` (`id`, `name`, `title`, `text`, `type_id`) VALUES
 (17, 'Исполнителю', 'порядок закрытия заказа', 'Заказ завершается через неделю после того, как заказчик заберет работу, если в течение этой недели не поступят от него замечания. В случае наличия замечаний- через неделю после выполнения корректировок.', 2),
 (18, 'addzakazavtor', 'Автору: Назначен на заказ', 'Здравствуйте!\r\n\r\nВы назначены Автором этого заказа.\r\n\r\nВаш бюджет составит 500 рублей.\r\n\r\nЕще раз внимательно изучите форму заказа и сообщите менеджеру, что Вы приступаете к написанию работы.\r\n\r\nПожалуйста, проверяйте Вашу почту и чат раз в день, чтобы оперативно отвечать на сообщения от клиента и менеджера. Если Вы по каким-либо причинам не можете закончить работу или задерживаете со сроками - уведомите об этом менеджера заренее. За просрочку работ, без уважительной причины штрафные санкции!\r\n\r\nЕсли Вы задержали работу и не сообщили об этом заранее, и не выходите на связь, мы будем вынуждены снять Вас с этого и остальных заказов, снизить Вам рейтинг ниже нуля и прекратить с Вами сотрудничество\r\n\r\nНадеемся на Ваше понимание отвественности перед Заказчиком!\r\n\r\nПосле утверждния всей работы, оплата будет произведена оплата за заказ на кошельки (WMR и Яндекс .деньги)\r\n\r\nПосле успешной сдачи каждого заказа, у Вас повышается персональной рейтинг Автора. Чем выше рейтинг – тем чаще Вас будут назначать автором работ. Обладателям высокого рейтинга выплачиваются премии. Мы дорожим нашими Авторами с высоким рейтингом! Пожалуйста, ОБЯЗАТЕЛЬНО ПОДТВЕРДИТЕ ВЫПОЛНЕНИЕ ЗАКАЗА В ТЕЧЕНИЕ СУТОК!', 2),
 (19, 'Исполнителю', 'если отказывается от доработок', 'Здравствуйте!\r\n\r\nЕсли, по Вашему мнению, Заказчик изменил (дополнил) первоначальные требования, то, по условиям нашей работы, Вы вправе затребовать дополнительную оплату за заказ. В этом случае, Вам нужно все измениния расписать и выслать клиенту.\r\n\r\nЕсли Клиент/ Менеджер подтвердят это, то Вам будет выплачен дополнительный гонорар. Если же изменений в изначальном ТЗ нет, то Вы как автор, который обязался выполнять работу и делать бесплатные корректировки (что было указано в нашем Соглашении), должны выполнить бесплатно. В случае если доработоки не произведете, то оплаты за заказ не будет.', 2),
-(20, 'Исполнителю', 'если не выслал в срок', 'Здравствуйте!\r\n\r\nПо заказу № {Zakaz_id} Вы должны были сдать работу "{Zakaz_max_exec_date}"!\r\n\r\nПожалуйста, срочно напиши в чате и вышлите работу, сегодня! В противном случае, в соответствии с нашим соглашением, мы будем вынуждены Вас оштрафовать и сильно понизить рейтинг! Компания ДипСтарт.', 2),
+(20, 'Исполнителю', 'если не выслал в срок', 'Здравствуйте!\r\n\r\nПо заказу № {Zakaz_id} Вы должны были сдать работу \"{Zakaz_max_exec_date}\"!\r\n\r\nПожалуйста, срочно напиши в чате и вышлите работу, сегодня! В противном случае, в соответствии с нашим соглашением, мы будем вынуждены Вас оштрафовать и сильно понизить рейтинг! Компания ДипСтарт.', 2),
 (21, 'Исполнителю', 'срок сдачи работы', 'Напоминаем - {} срок сдачи всей работы. Пожалуйста, подтвердите дату.', 2),
 (22, 'Исполнителю', 'спрашивает, что с работой', 'Работа находится на проверке у заказчика и ещё не утверждена. Как только будут результаты проверки - мы Вам сразу же сообщим. С уважением, компания Админтрикс', 2),
 (23, 'Исполнителю', 'когда оплачивают', 'Здравствуйте! Оплата за заказы происходит после того, как Ваш заказ отправлен в бухгалтерию (о том, когда он будет завершен - вы можете уточнить у менеджера в чате). Если из Вашего личного кабинета на сайте  пропал какой-либо заказ - значит он отправлен в бухгалтерию и вскоре будет оплачен. В данный момент оплата происходит в течении всей недели, по рабочим дням. Компания Админтрикс', 2),
@@ -2572,14 +2692,14 @@ INSERT INTO `1_Templates` (`id`, `name`, `title`, `text`, `type_id`) VALUES
 (32, 'Email: Регистрация', 'Добро пожаловать в %компания%', 'Здравствуйте! Благодарим за регистрацию в компании %компания% !\r\n\r\nВаши   данные для входа в систему: \r\nЛогин: %login%\r\nПароль: %password%\r\n\r\nдля Вас создан личный кабинет  %ссылка на страницу личного кабинета%.\r\n\r\nЖелаем успешной работы, %компания%.\r\n', 11),
 (33, 'Email: Заказ принят', 'Регистрация проекта', 'Здравствуйте. Ваш проект успешно зарегистрирован на сайте %сайт%\r\nБлагодарим за заказ!\r\n\r\nКонтроль состояния и исполнения заказа по специальной ссылке: %Ссылка на заказ%\r\n\r\nНомер заказа : %№ заказа%.\r\n\r\nМенеджер сервиса  свяжется с Вами в течение 10 минут.\r\n\r\nТак же Вы  будете проинформированы о состоянии заказа по мере его выполнения.\r\n\r\nС уважением,\r\nкомпания %компания%.', 12),
 (34, 'Email: Счёт к оплате', 'Оплата заказа', 'Здравствуйте!\r\n\r\nПо Вашему заказу %№ заказа% %тема работы% Вам выставлен счет к оплате.\r\n\r\nСумма к оплате: %сумма к оплате% рублей.\r\n\r\nДля того что бы оплатить перейдите по ссылке: %Ссылка на заказ%\r\n\r\nСпасибо!', 13),
-(35, 'Email: Этап готов', 'По заказу "%тема заказа%" есть готовая часть', 'Здравствуйте %имя%!\r\n\r\nПо Вашему заказу "%тема заказа%"  готова часть работы.\r\n\r\nОзнакомится с результатом вы можете перейдя по ссылке: %ссылка на заказ%.\r\n\r\nСпасибо!', 14),
-(36, 'Email: Работа готова', 'Работа готова', 'Здравствуйте %имя%.\r\n\r\nПо Вашему заказу %№ заказа% вся работа "%тема заказа%" готова.\r\n\r\nГотовый материал будет Вам отправлен после полной оплаты заказа.\r\nСсылка для входа на сайт: %ссылка на заказ%\r\n\r\nПри возникновении замечаний Вы можете создать заявку на корректировку работы и мы обязательно выполним ее.\r\n\r\nСпасибо за доверие к нашей компании.', 15),
+(35, 'Email: Этап готов', 'По заказу \"%тема заказа%\" есть готовая часть', 'Здравствуйте %имя%!\r\n\r\nПо Вашему заказу \"%тема заказа%\"  готова часть работы.\r\n\r\nОзнакомится с результатом вы можете перейдя по ссылке: %ссылка на заказ%.\r\n\r\nСпасибо!', 14),
+(36, 'Email: Работа готова', 'Работа готова', 'Здравствуйте %имя%.\r\n\r\nПо Вашему заказу %№ заказа% вся работа \"%тема заказа%\" готова.\r\n\r\nГотовый материал будет Вам отправлен после полной оплаты заказа.\r\nСсылка для входа на сайт: %ссылка на заказ%\r\n\r\nПри возникновении замечаний Вы можете создать заявку на корректировку работы и мы обязательно выполним ее.\r\n\r\nСпасибо за доверие к нашей компании.', 15),
 (37, 'Email: Сообщение заказчику', 'Для Вас сообщение в чате %компания%', 'Здравствуйте %имя%. \r\nВам оставлено сообщение в чате Вашего заказа %№ заказа%:\r\n\r\n%текст сообщения%\r\n\r\nЧтобы ответить на сообщение, перейдите по ссылке.\r\nСсылка на заказ: %ссылка на заказ% \r\nP.S. Это сообщение сформировано роботом автоматически, поэтому отвечать на него не следует.', 16),
 (38, 'Email: Заказ закрыт', 'Заказ завершен', 'Здравствуйте %имя%.\r\n\r\nВаш заказ номер %номер заказа% завершен.\r\n\r\nВ случае необходимости восстановления заказа, обратитесь к менеджеру.\r\n\r\nСпасибо за доверие к нашей компании. \r\nС нетерпением ждем новых заказов от Вас ;)', 17),
-(39, 'Email: Рассылка о свободном заказе', 'Появился новый заказ по Вашей специальности (%специальность%)', 'Здравствуйте %имя%\r\nОповещаем Вас о поступлении нового заказа.\r\n\r\nНаименование: %Наименование% \r\nСпециальность: %специальность%\r\nСсылка: %ссылка на заказ%\r\n\r\n\r\nПодробнее узнать о заказе, задать уточняющие вопросы, сообщить о Вашем желании стать Исполнителем этой работы Вы можете в чате, перейдя по этой ссылке %ссылка на заказ%,  Предварительно авторизуйтесь в своем личном кабинете (для того что бы каждый раз не авторизовываться поставьте галочку "Запомнить" при авторизации).\r\nЕсли Вы хотите стать автором этой работы, напишите в чат желаемую цену и в течении суток Вы получите ответ о результате. Если Вы делали заявку три раза, указывая при этом адекватную сложности заказа и своему рейтингу цену и Вас не назначили на заказ, подпишите менеджеру "я Исполнитель на очереди" и Вам дадут этот заказ.\r\nПожалуйста, внимательно просмотрите всю информацию о заказе, сроках и подробности написания работы!\r\nО назначении Вас исполнителем заказа Вы будете оповещены по электронной почте\r\n', 18),
+(39, 'Email: Рассылка о свободном заказе', 'Появился новый заказ по Вашей специальности (%специальность%)', 'Здравствуйте %имя%\r\nОповещаем Вас о поступлении нового заказа.\r\n\r\nНаименование: %Наименование% \r\nСпециальность: %специальность%\r\nСсылка: %ссылка на заказ%\r\n\r\n\r\nПодробнее узнать о заказе, задать уточняющие вопросы, сообщить о Вашем желании стать Исполнителем этой работы Вы можете в чате, перейдя по этой ссылке %ссылка на заказ%,  Предварительно авторизуйтесь в своем личном кабинете (для того что бы каждый раз не авторизовываться поставьте галочку \"Запомнить\" при авторизации).\r\nЕсли Вы хотите стать автором этой работы, напишите в чат желаемую цену и в течении суток Вы получите ответ о результате. Если Вы делали заявку три раза, указывая при этом адекватную сложности заказа и своему рейтингу цену и Вас не назначили на заказ, подпишите менеджеру \"я Исполнитель на очереди\" и Вам дадут этот заказ.\r\nПожалуйста, внимательно просмотрите всю информацию о заказе, сроках и подробности написания работы!\r\nО назначении Вас исполнителем заказа Вы будете оповещены по электронной почте\r\n', 18),
 (40, 'Email: Исполнителю о назначении', 'О назначении Исполнителем', 'Здравствуйте %имя%!\r\nВы назначены Исполнителем заказа %наименование%.\r\nВаш бюджет составит %из поля стоимость% рублей.\r\nЕще раз внимательно изучите форму заказа и сообщите менеджеру, что Вы приступаете к написанию работы. Работу необходимо сдавать по частям, соблюдая сроки сдачи каждой части указанные в заказе.\r\n\r\nПожалуйста, проверяйте Вашу почту и чат не реже одного раза в день, чтобы оперативно отвечать на сообщения от клиента и менеджера. Если Вы по каким-либо причинам не можете закончить работу или задерживаете со сроками - уведомите об этом менеджера заранее. За нарушение сроков сдачи без уважительной причины применяются штрафные санкции!\r\nЕсли Вы не сдаете вовремя работу, не оповестив нас об этом заранее, и при этом не выходите на связь мы будем вынуждены снять Вас с этого и остальных заказов, снизить Вам рейтинг ниже нуля и прекратить с Вами сотрудничество.\r\nНадеемся на Ваше понимание ответственности перед Заказчиком!\r\nПосле успешной сдачи каждого заказа, у Вас повышается персональной рейтинг Исполнителя. Чем выше рейтинг – тем чаще Вас будут назначать исполнителем на заказы. Обладателям высокого рейтинга выплачиваются премии. Мы дорожим нашими Исполнителями.\r\n\r\nПожалуйста, ОБЯЗАТЕЛЬНО ПОДТВЕРДИТЕ ВЫПОЛНЕНИЕ ЗАКАЗА В ТЕЧЕНИЕ СУТОК!', 19),
 (41, 'Email: Сообщение автору', 'Сообщение в чате', 'Здравствуйте %имя%. \r\nВам оставили сообщение в чате Вашего заказа %№ заказа%\r\n\r\n%текст сообщения%\r\n\r\nДля ответа на это сообщение, перейдите по ссылке.\r\nСсылка на заказ: %ссылка на заказ% \r\nПросьба не отвечать на сообщение ответом на это письмо, отправитель его не получит.', 20),
-(42, 'Email: Исполнителю об отстранении', 'Отстранение от заказа №%№ заказа% "%тема работы%"', 'Здравствуйте %имя%.\r\n\r\nСрок сдачи части %название части% по заказу %ссылка на заказ% нарушен! \r\nВы сняты с заказа без последующей оплаты с понижением рейтинга.\r\n\r\nВернуть заказ возможно, если Вы прикрепите необходимую часть работы до назначения другого исполнителя, поторопитесь пожалуйста!\r\n\r\nПросьба отнестись с ответственностью к работе.	', 21),
+(42, 'Email: Исполнителю об отстранении', 'Отстранение от заказа №%№ заказа% \"%тема работы%\"', 'Здравствуйте %имя%.\r\n\r\nСрок сдачи части %название части% по заказу %ссылка на заказ% нарушен! \r\nВы сняты с заказа без последующей оплаты с понижением рейтинга.\r\n\r\nВернуть заказ возможно, если Вы прикрепите необходимую часть работы до назначения другого исполнителя, поторопитесь пожалуйста!\r\n\r\nПросьба отнестись с ответственностью к работе.	', 21),
 (43, 'Email: Срок сдачи подошёл', 'Сегодня срок сдачи части заказа ', 'Здравствуйте %имя%.\r\n\r\nНапоминаем Вам, что сегодня - срок сдачи части %название части% по заказу %ссылка на заказ%.\r\n\r\nЕсли Вы по каким-либо причинам не можете закончить работу или есть задержка со сроками - уведомите об этом менеджера заранее.\r\n\r\nБлагодарим  за Вашу ответственность.', 22),
 (44, 'Email: Новая доработка', 'Новая доработка', 'Здравствуйте %имя%.\r\n\r\nОбращаем Ваше внимание! \r\nЗаказчик загрузил замечания в форму заказа %ссылка на заказ%, требуется корректировка одной из частей.\r\nЗамечания Вы можете найти в форме заказа в разделе “Доработки”. \r\n\r\nТакже обратите внимание на блок “Части”, данные доработки будут добавлены как новая часть и будет установлен срок их сдачи.', 23),
 (45, 'Email: Исполнителю о зарплате', 'Оплата заказа', 'Здравствуйте %Имя%.\r\n\r\nПо заказу %ссылка на заказ% выставлено к оплате %сумма из выставлено к оплате% рублей.\r\n\r\nОжидайте поступления средств на Ваш счет.', 24),
@@ -2617,7 +2737,7 @@ INSERT INTO `1_Templates` (`id`, `name`, `title`, `text`, `type_id`) VALUES
 (77, 'Zakaz_refound', 'Возврат', 'Возврат средств заказчику.', 4),
 (78, 'Zakaz_open', 'Вернуть заказ', 'Сделать заказ снова откурытым', 4),
 (93, 'Zakaz_stages', 'Этапы', 'Подсказка для этапов.', 4),
-(94, 'Email: Рассылка тех.рук. о свободном заказе', 'Появился новый заказ для тех.рук. по Вашей специальности (%специальность%)', 'Здравствуйте %имя%\r\nОповещаем Вас о поступлении нового заказа.\r\n\r\nНаименование: %Наименование% \r\nСпециальность: %специальность%\r\nСсылка: %ссылка на заказ%\r\n\r\n\r\nПодробнее узнать о заказе, задать уточняющие вопросы, сообщить о Вашем желании стать Исполнителем этой работы Вы можете в чате, перейдя по этой ссылке %ссылка на заказ%, Предварительно авторизуйтесь в своем личном кабинете (для того что бы каждый раз не авторизовываться поставьте галочку "Запомнить" при авторизации).\r\nЕсли Вы хотите стать автором этой работы, напишите в чат желаемую цену и в течении суток Вы получите ответ о результате. Если Вы делали заявку три раза, указывая при этом адекватную сложности заказа и своему рейтингу цену и Вас не назначили на заказ, подпишите менеджеру "я Исполнитель на очереди" и Вам дадут этот заказ.\r\nПожалуйста, внимательно просмотрите всю информацию о заказе, сроках и подробности написания работы!\r\nО назначении Вас исполнителем заказа Вы будете оповещены по электронной почте\r\n', 26),
+(94, 'Email: Рассылка тех.рук. о свободном заказе', 'Появился новый заказ для тех.рук. по Вашей специальности (%специальность%)', 'Здравствуйте %имя%\r\nОповещаем Вас о поступлении нового заказа.\r\n\r\nНаименование: %Наименование% \r\nСпециальность: %специальность%\r\nСсылка: %ссылка на заказ%\r\n\r\n\r\nПодробнее узнать о заказе, задать уточняющие вопросы, сообщить о Вашем желании стать Исполнителем этой работы Вы можете в чате, перейдя по этой ссылке %ссылка на заказ%, Предварительно авторизуйтесь в своем личном кабинете (для того что бы каждый раз не авторизовываться поставьте галочку \"Запомнить\" при авторизации).\r\nЕсли Вы хотите стать автором этой работы, напишите в чат желаемую цену и в течении суток Вы получите ответ о результате. Если Вы делали заявку три раза, указывая при этом адекватную сложности заказа и своему рейтингу цену и Вас не назначили на заказ, подпишите менеджеру \"я Исполнитель на очереди\" и Вам дадут этот заказ.\r\nПожалуйста, внимательно просмотрите всю информацию о заказе, сроках и подробности написания работы!\r\nО назначении Вас исполнителем заказа Вы будете оповещены по электронной почте\r\n', 26),
 (95, 'Message for manager: agreement', 'Сообщение для менеджера: отказ от соглашения', 'Я отказываюсь!', 28),
 (96, 'Message for customer: agreement', 'Сообщение заказчику в случае отказа', 'Наше дело предложить, ваше - отказаться)', 27),
 (97, 'неважно', 'Наименование', 'Текст', 29),
@@ -2627,21 +2747,20 @@ INSERT INTO `1_Templates` (`id`, `name`, `title`, `text`, `type_id`) VALUES
 (101, 'неважно', 'hint for customer', 'Ваше сообщение отправлено, менеджер отвечает в течении получаса. Исполнитель не более чем через сутки.', 31),
 (102, 'Email: Исполнителю о сроке сдачи работы', 'Срок сдачи работы близок!', 'Внимание!\r\nСрок сдачи работы близок!', 32),
 (103, 'Email: Исполнителю о сроке сдачи этапа', 'Срок сдачи этапа близок!', 'Внимание! Срок сдачи этапа близок!', 33),
-(104, 'is_just_enter', 'Заказ только поступил', '<p><i><font size="4"><b>Нужно позвонить заказчику</b></font></i> (текст разговора см в шаблонах!)</p>\r\n<p><b>Если не ответит</b></p>\r\n<p>Написать ему смс</p>\r\n<p><b>Если заказчик согласен на все условия</b></p>\r\n<ol>\r\n	<li>Уточнить когда сможет оплатить и поставить напоминание на соотв время.</li>\r\n	<li>Выставить счет</li>\r\n</ol>\r\n<p><b>Если заказчик еще не принял решение</b></p>\r\n<p>Уточнить о том когда ждать ответа и поставить напоминание на это время</p>\r\n<p>&nbsp;</p>\r\n', 5),
-(105, 'is_wait_customer_decision_without_cash', 'Ждем решения заказчика (если нет предоплаты еще)', '<p><b>Если договаривались что оплатить, а он не оплатил</b></p>\r\n<p>Звоним заказчику, уточняем почему не получилось у него оплатить</p>\r\n<p><b>Если заказчик отказывается заказывать</b></p>\r\n<p>Уточнить причину, постараться всёравно убедить заказать (см шаблоны).&nbsp;</p>\r\n<p>Если всёравно не получилось написать&nbsp;<a href="https://docs.google.com/document/d/1vZOi5GbyCE67pEdLz778p7W8e1uYOo94WdMxpDVMCN8/edit">в этот документ</a>&nbsp;причину</p>\r\n<div><b>Если говорит, что ещё не успел</b></div>\r\n<p>Стараемся поторопить его, объясняя это тем что исполнитель готов выполнить, &nbsp;сроки поджимают и тп</p>\r\n<p>Спрашиваем когда сможет, ставим напоминание &nbsp;на это время.&nbsp;</p>\r\n<p><b>Если точно не может сказать, уточняем чем это вызвано, может его что-то смущает.&nbsp;</b></p>\r\n<p>Если заказчика сомневается задача менеджера убедить заказчика сделать заказ именно у нас.<br>\r\n	<br>\r\n	<font color="#FF0000"><i><b>*!До момента внесения предоплаты все общение с заказчиком осуществляем, по-возможности, голосом по телефону.</b></i></font></p>\r\n', 5),
+(104, 'is_just_enter', 'Заказ только поступил', '<p><i><font size=\"4\"><b>Нужно позвонить заказчику</b></font></i> (текст разговора см в шаблонах!)</p>\r\n<p><b>Если не ответит</b></p>\r\n<p>Написать ему смс</p>\r\n<p><b>Если заказчик согласен на все условия</b></p>\r\n<ol>\r\n	<li>Уточнить когда сможет оплатить и поставить напоминание на соотв время.</li>\r\n	<li>Выставить счет</li>\r\n</ol>\r\n<p><b>Если заказчик еще не принял решение</b></p>\r\n<p>Уточнить о том когда ждать ответа и поставить напоминание на это время</p>\r\n<p>&nbsp;</p>\r\n', 5),
+(105, 'is_wait_customer_decision_without_cash', 'Ждем решения заказчика (если нет предоплаты еще)', '<p><b>Если договаривались что оплатить, а он не оплатил</b></p>\r\n<p>Звоним заказчику, уточняем почему не получилось у него оплатить</p>\r\n<p><b>Если заказчик отказывается заказывать</b></p>\r\n<p>Уточнить причину, постараться всёравно убедить заказать (см шаблоны).&nbsp;</p>\r\n<p>Если всёравно не получилось написать&nbsp;<a href=\"https://docs.google.com/document/d/1vZOi5GbyCE67pEdLz778p7W8e1uYOo94WdMxpDVMCN8/edit\">в этот документ</a>&nbsp;причину</p>\r\n<div><b>Если говорит, что ещё не успел</b></div>\r\n<p>Стараемся поторопить его, объясняя это тем что исполнитель готов выполнить, &nbsp;сроки поджимают и тп</p>\r\n<p>Спрашиваем когда сможет, ставим напоминание &nbsp;на это время.&nbsp;</p>\r\n<p><b>Если точно не может сказать, уточняем чем это вызвано, может его что-то смущает.&nbsp;</b></p>\r\n<p>Если заказчика сомневается задача менеджера убедить заказчика сделать заказ именно у нас.<br>\r\n	<br>\r\n	<font color=\"#FF0000\"><i><b>*!До момента внесения предоплаты все общение с заказчиком осуществляем, по-возможности, голосом по телефону.</b></i></font></p>\r\n', 5),
 (106, 'is_wait_customer_decision_about_stage', 'Ждем решения заказчика (по утверждению этапа)', '<p><b>Если заказчик не утвердил часть</b></p>\r\n<p>Отправлем смс + в чат уведомление</p>\r\n<p><br>\r\n	<b>Если заказчик уточнил точную дату проверки этапа </b></p>\r\n<p><br>\r\n	Напоминание устанавливаем на 1 день позднее даты указанной заказчиком.</p>\r\n<p><br>\r\n	<b>Если заказчик затягивает с утверждением</b></p>\r\n<p>Общий срок исполнения может быть увеличен. Обязательно предварительно уведомить об этом заказчика!</p>\r\n<p><b>&nbsp;Если затягивает слишком долго</b></p>\r\n<p>Отослать предупредждение заказчику о том, что если он не ответит, то мы завершаем заказ</p>\r\n<p><b>Если не ответил даже после того как получил предупреждение</b></p>\r\n<p>Уведомить что заказ завершен и выставить на оплату исполнителю сумму, прямопропорциональную оплаченной уже заказчиком (те если заказчик оплатил только половину, то мы оплачиваем Исполнителю половину его гонорара)</p>\r\n', 5),
 (107, 'is_wait_customer_decision_about_all', 'Ждем решения заказчика (по утверждению всей работы)', 'По готовности этапа “Вся работа” заказчик получает шаблон, о том, что мы ожидаем утверждения проекта.\r\n<br>*Согласно системе нами уже будет получена вся сумма.\r\n<br><b>Поэтому смело ставим оповещение на неделю вперед.</b>\r\n<br>\r\n<br>И если через неделю заказчик так и не утвердит и не предоставит информацию, о том, когда он сможет утвердить, мы выставляем проект на оплату исполнителю.', 5),
-(108, 'is_enter_prepayments', 'Внесение предоплаты заказчиком', '<p>Проверяем чек и с ним все в порядке.</p>\r\n<p>Подтверждаем платеж, Заказчику отправляем шаблон, что оплату получили и приступили к работе</p>\r\n<p>Разбиваем работу на этапы. (если непонятно как разбивать - отправляем вопрос техническому руководителю)</p>\r\n<p>Делаем рассылку и ставим напоминание на следующий день</p>\r\n<p><b>Если в чеке не наши реквизиты\\просто картинка\\чек битый и тд -</b></p>\r\n<p>Платеж не подтверждаем, жмем кнопку Отмена. Звоним заказчку!</p>\r\n<p><b>Проверяем чек и с ним все в порядке</b></p>\r\n<ol start="1" style="list-style-type: lower-roman;">\r\n	<li style="font-weight: 400;"><span style="font-weight: 400;">Подтверждаем платеж,&nbsp;</span></li>\r\n	<li style="font-weight: 400;">Заказчику отправляем шаблон, что оплату получили и приступили к работе</li>\r\n	<li style="font-weight: 400;"><span style="font-weight: 400;">Делаем рассылку и ставим напоминание на следующий день&nbsp;</span></li>\r\n</ol>\r\n<p style="font-weight: 400; margin-left: 40px;"><b>Если в чеке&nbsp;не наши реквизиты\\просто картинка\\чек битый и тд</b></p>\r\n<p style="font-weight: 400; margin-left: 80px;">Платеж не подтверждаем, жмем кнопку Отмена.&nbsp;Звоним заказчку!</p>\r\n<p style="font-weight: 400;"><b>Если заказ срочный</b></p>\r\n<p style="font-weight: 400;">Сразу выполнить альтернативный поиск исполнителей : публикация заказа на фриланс или тематические доски, сообщества и тд заказа.&nbsp;</p>\r\n<p style="font-weight: 400;">Напоминание ставим на час вперед (или другой срок в соответсвии с тем насколько срочный заказ)</p>\r\n<div>&nbsp;</div>\r\n', 5);
-INSERT INTO `1_Templates` (`id`, `name`, `title`, `text`, `type_id`) VALUES
+(108, 'is_enter_prepayments', 'Внесение предоплаты заказчиком', '<p>Проверяем чек и с ним все в порядке.</p>\r\n<p>Подтверждаем платеж, Заказчику отправляем шаблон, что оплату получили и приступили к работе</p>\r\n<p>Разбиваем работу на этапы. (если непонятно как разбивать - отправляем вопрос техническому руководителю)</p>\r\n<p>Делаем рассылку и ставим напоминание на следующий день</p>\r\n<p><b>Если в чеке не наши реквизиты\\просто картинка\\чек битый и тд -</b></p>\r\n<p>Платеж не подтверждаем, жмем кнопку Отмена. Звоним заказчку!</p>\r\n<p><b>Проверяем чек и с ним все в порядке</b></p>\r\n<ol start=\"1\" style=\"list-style-type: lower-roman;\">\r\n	<li style=\"font-weight: 400;\"><span style=\"font-weight: 400;\">Подтверждаем платеж,&nbsp;</span></li>\r\n	<li style=\"font-weight: 400;\">Заказчику отправляем шаблон, что оплату получили и приступили к работе</li>\r\n	<li style=\"font-weight: 400;\"><span style=\"font-weight: 400;\">Делаем рассылку и ставим напоминание на следующий день&nbsp;</span></li>\r\n</ol>\r\n<p style=\"font-weight: 400; margin-left: 40px;\"><b>Если в чеке&nbsp;не наши реквизиты\\просто картинка\\чек битый и тд</b></p>\r\n<p style=\"font-weight: 400; margin-left: 80px;\">Платеж не подтверждаем, жмем кнопку Отмена.&nbsp;Звоним заказчку!</p>\r\n<p style=\"font-weight: 400;\"><b>Если заказ срочный</b></p>\r\n<p style=\"font-weight: 400;\">Сразу выполнить альтернативный поиск исполнителей : публикация заказа на фриланс или тематические доски, сообщества и тд заказа.&nbsp;</p>\r\n<p style=\"font-weight: 400;\">Напоминание ставим на час вперед (или другой срок в соответсвии с тем насколько срочный заказ)</p>\r\n<div>&nbsp;</div>\r\n', 5),
 (109, 'is_no_author_after_mail', 'Нет ни одного автора спустя сутки после рассылки', '<p>Проверить на форму заказа, особенно внимательно изучить тип работы и специальность что бы были правильно поставлены (возможно в форме заказа что то непонятно исполнителям) или отправить техническому руководителю сообщив ему задачу и проблему.</p>\r\n<p>Выполнить альтернативный поиск исполнителей : публикация заказа на фриланс или тематические доски, сообщества и тд заказа.&nbsp;</p>\r\n<p><b>Если исполнителя не получается найти и сроки поджимают&nbsp;</b></p>\r\n<p>Предложить заказчику возврат средств или увиличить сроки</p>\r\n', 5),
-(110, 'is_enter_cost', 'Исполнитель написал свое предложение на новый заказ', '<ol>\r\n	<li style="font-weight: 400;">Выбираем наиболее интересного по соотношению цена качество</li>\r\n	<li style="font-weight: 400;"><span style="font-weight: 400;">Назначаем исполнителем </span></li>\r\n	<li style="font-weight: 400;"><span style="font-weight: 400;">Записываем цену в поле &ldquo;стоимость для автора&rdquo;</span></li>\r\n	<li style="font-weight: 400;"><span style="font-weight: 400;">Проверяем акутальность всех сроков и наличие этапов</span></li>\r\n</ol>\r\n<p style="font-weight: 400;"><b>Если исполнитель с минусовым рейтингом</b></p>\r\n<p style="font-weight: 400;">Назначаем такого исполнителя ТОЛЬКО в случае отсуствия альтернатив (те долгое время не могли найти другого исполнителя )</p>\r\n<p style="font-weight: 400;"><b>Заказ слишком важный/срочный</b></p>\r\n<p style="font-weight: 400;">Назначаем исполнителья с МАЛЕННЬКИМ рейтингом ТОЛЬКО в случае отсуствия альтернатив (те долгое время не могли найти другого исполнителя )</p>\r\n', 5),
+(110, 'is_enter_cost', 'Исполнитель написал свое предложение на новый заказ', '<ol>\r\n	<li style=\"font-weight: 400;\">Выбираем наиболее интересного по соотношению цена качество</li>\r\n	<li style=\"font-weight: 400;\"><span style=\"font-weight: 400;\">Назначаем исполнителем </span></li>\r\n	<li style=\"font-weight: 400;\"><span style=\"font-weight: 400;\">Записываем цену в поле &ldquo;стоимость для автора&rdquo;</span></li>\r\n	<li style=\"font-weight: 400;\"><span style=\"font-weight: 400;\">Проверяем акутальность всех сроков и наличие этапов</span></li>\r\n</ol>\r\n<p style=\"font-weight: 400;\"><b>Если исполнитель с минусовым рейтингом</b></p>\r\n<p style=\"font-weight: 400;\">Назначаем такого исполнителя ТОЛЬКО в случае отсуствия альтернатив (те долгое время не могли найти другого исполнителя )</p>\r\n<p style=\"font-weight: 400;\"><b>Заказ слишком важный/срочный</b></p>\r\n<p style=\"font-weight: 400;\">Назначаем исполнителья с МАЛЕННЬКИМ рейтингом ТОЛЬКО в случае отсуствия альтернатив (те долгое время не могли найти другого исполнителя )</p>\r\n', 5),
 (111, 'is_sent_stage', 'Исполнитель выслал этап работы', '<ol>\r\n	<li>Проверяем присланный файл на наличие контактов и&nbsp;&nbsp;соответствие этапу (чтобы не оказалось, что загружена уже вся работа, когда на выполнении только 1-й этап)</li>\r\n	<li>Одобряем этап (он автоматом становится доступен заказчику)</li>\r\n</ol>\r\n<p><b>Если была внесена только часть предоплаты (не 100%)</b></p>\r\n<p>Одобряем этап только в том случае, если объем работы меньше чем объем предоплаты. Причём, объем предоплаты должен быть немного больше объёма работы (те например если внесено 50% предоплаты и выполнено 50% работы, то считаем что объем выполненной работы БОЛЬШЕ чем предоплаты!). В таком случае, мы просим оплатить оставшуюся часть (или следующую если оплата разбита на многочастей)&nbsp;</p>\r\n<p><b>Если в файле обнаружены контактные данные:&nbsp;</b></p>\r\n<p>1. Скачиваем документ,<br>\r\n	2. Самостоятельно удаляем из документа всю недопустимую информацию и загружаем актуальный файл, который и одобряем к просмотру заказчиком.<br>\r\n	<br>\r\n	<b>Если загруженный файл не соответствует выполняемому этапу: </b><br>\r\n	1. Файл не одобряем.<br>\r\n	2. Требуем переделок от исполнителя (для этого пишем ему в чат и создаем новый этап с корректировками)</p>\r\n<p>&nbsp;</p>\r\n<p>&nbsp;</p>\r\n', 5),
-(112, 'is_not_sent_stage_on_time', 'Исполнитель не выслал этап в срок', '<ol>\r\n	<li style="font-weight: 400;">Предупреждаем исполнителя (в т.ч по смс) о задержке сроков</li>\r\n	<li style="font-weight: 400;">Ставим напоминание на час вперед (или другой срок, если заказ суперсрочный)</li>\r\n</ol>\r\n<p style="font-weight: 400;"><b>Если исполнителеь не выслал после уведомления</b></p>\r\n<ol>\r\n	<li style="font-weight: 400;">СНИМАЕМ исполнителя информируя его об этом ВНЕ ЗАВИСИМОСТИ ОТ ЕГО ОБЕЩАНИЙ!!!! Если исполнитль говорит что он в процессе создания - надо что бы он выслкал что то, что он сделал по факту уже(если не высылает ничего -снимаем!)! &nbsp;(давая ему&nbsp;возможность реабилитироваться, позволив выслать работу пока другой ещё найден не будет)</li>\r\n	<li style="font-weight: 400;">Понижаем ему рейтинг на 4</li>\r\n	<li style="font-weight: 400;">Ставим новый срок этапа и общий срок для исполнителя</li>\r\n	<li style="font-weight: 400;">Ищем нового исполнителя</li>\r\n</ol>\r\n<p style="font-weight: 400;"><b>Если исполнитель выслал работу после снятия, но до назначения другово</b></p>\r\n<p style="font-weight: 400;">Восстанавляиваем его, рейтинг увиличваем на 3 (те -1 в сумме будет штраф за опаздание)</p>\r\n<p style="font-weight: 400;">&nbsp;</p>\r\n', 5),
+(112, 'is_not_sent_stage_on_time', 'Исполнитель не выслал этап в срок', '<ol>\r\n	<li style=\"font-weight: 400;\">Предупреждаем исполнителя (в т.ч по смс) о задержке сроков</li>\r\n	<li style=\"font-weight: 400;\">Ставим напоминание на час вперед (или другой срок, если заказ суперсрочный)</li>\r\n</ol>\r\n<p style=\"font-weight: 400;\"><b>Если исполнителеь не выслал после уведомления</b></p>\r\n<ol>\r\n	<li style=\"font-weight: 400;\">СНИМАЕМ исполнителя информируя его об этом ВНЕ ЗАВИСИМОСТИ ОТ ЕГО ОБЕЩАНИЙ!!!! Если исполнитль говорит что он в процессе создания - надо что бы он выслкал что то, что он сделал по факту уже(если не высылает ничего -снимаем!)! &nbsp;(давая ему&nbsp;возможность реабилитироваться, позволив выслать работу пока другой ещё найден не будет)</li>\r\n	<li style=\"font-weight: 400;\">Понижаем ему рейтинг на 4</li>\r\n	<li style=\"font-weight: 400;\">Ставим новый срок этапа и общий срок для исполнителя</li>\r\n	<li style=\"font-weight: 400;\">Ищем нового исполнителя</li>\r\n</ol>\r\n<p style=\"font-weight: 400;\"><b>Если исполнитель выслал работу после снятия, но до назначения другово</b></p>\r\n<p style=\"font-weight: 400;\">Восстанавляиваем его, рейтинг увиличваем на 3 (те -1 в сумме будет штраф за опаздание)</p>\r\n<p style=\"font-weight: 400;\">&nbsp;</p>\r\n', 5),
 (113, 'is_not_sent_all_on_time', 'Исполнитель не выслал в срок работу', '.', 5),
 (114, 'is_set_new_executors', 'Назначение нового автора (после снятия предыдущего)', '<b>Обновляем все сроки в заказе, сроки исполнителю, а так-же сроки каждого из этапов.</b>', 5),
 (115, 'is_new_message', 'Сообщение в чате', '<p>Одобряем сообщение и совершаем по необходимости какие либо действия (отвечаем и тд)</p>\r\n<p><b>Если содержит контактные данные (кроме адресованных менеджеру)</b></p>\r\n<p>Редактируем их и пересылаем тому, кому адресовалось сообщение</p>\r\n<p><b>Если содержит информацию про цену&nbsp;</b><b>(кроме адресованных менеджеру)</b></p>\r\n<p>Убираем то что касается цены</p>\r\n<p><b>Если содержат информацию про сроки</b></p>\r\n<p>Тк сроки для исполнителя и заказчика разные то такое сообщение мы редактируем, так что бы для заказчика срок был в два раза больше чем для исполнителя!</p>\r\n<p><b>Если сообщение содержит непонятный вопрос технического плана</b></p>\r\n<p>Переадресовываем вопрос техническому руководителю (так же нажимаем галочку требуется тех рук</p>\r\n', 5),
-(116, 'is_new_changes', 'Появились доработки к работе', '<p style="font-weight: 400;">&nbsp;</p>\r\n<ol>\r\n	<li style="font-weight: 400;">Помодерировать файлы</li>\r\n	<li style="font-weight: 400;"><i><b>Обзяательно создать новый этап (указав там название доработки)&nbsp;</b></i></li>\r\n	<li style="font-weight: 400;"><span style="font-weight: 400;">Если были указаны сроки от заказчика - уменьшить их в два раза</span></li>\r\n	<li style="font-weight: 400;"><span style="font-weight: 400;">Оповестить &nbsp;исполнителя о доработках</span></li>\r\n	<li style="font-weight: 400;"><span style="font-weight: 400;">В случае корректировок сроки сдачи заказа и сроки для автора переносятся на актуальные!</span></li>\r\n</ol>\r\n', 5),
-(117, 'is_time_passed', 'Дата и время выполнения прошли (от заказчика)', '<ol>\r\n	<li>Проверить</li>\r\n	<li>Необходимо незамедлительно связаться с заказчиком\r\n		<ol start="1" style="list-style-type: lower-roman;">\r\n			<li>Уточнить актуальность проекта</li>\r\n			<li>Постараться продлить срок</li>\r\n		</ol>\r\n	</li>\r\n</ol>\r\n<p><br>\r\n	<b>Если продлить срок не предоставляется возможным и это новый заказ по которому была внесена предоплата, но исполнителя так и не нашли</b>.<br>\r\n	Сообщить заказчику, что ему будет произведен возврат средств.<br>\r\n	<br>\r\n	<b>Если продлить срок не предоставляется возможным и это заказ который уже практически сделан, но нарушены сроки.</b><br>\r\n	Сообщить заказчику, что в этом случае мы готовы предоставить ему скидку за задержку, порядка 10%.<br>\r\n	<br>\r\n	Продлив срок выполнения, его необходимо сразу-же зафиксировать в поле &ldquo;срок сдачи&rdquo;.<br>\r\n	*И не забыть про срок для исполнителя.</p>\r\n', 5);
+(116, 'is_new_changes', 'Появились доработки к работе', '<p style=\"font-weight: 400;\">&nbsp;</p>\r\n<ol>\r\n	<li style=\"font-weight: 400;\">Помодерировать файлы</li>\r\n	<li style=\"font-weight: 400;\"><i><b>Обзяательно создать новый этап (указав там название доработки)&nbsp;</b></i></li>\r\n	<li style=\"font-weight: 400;\"><span style=\"font-weight: 400;\">Если были указаны сроки от заказчика - уменьшить их в два раза</span></li>\r\n	<li style=\"font-weight: 400;\"><span style=\"font-weight: 400;\">Оповестить &nbsp;исполнителя о доработках</span></li>\r\n	<li style=\"font-weight: 400;\"><span style=\"font-weight: 400;\">В случае корректировок сроки сдачи заказа и сроки для автора переносятся на актуальные!</span></li>\r\n</ol>\r\n', 5),
+(117, 'is_time_passed', 'Дата и время выполнения прошли (от заказчика)', '<ol>\r\n	<li>Проверить</li>\r\n	<li>Необходимо незамедлительно связаться с заказчиком\r\n		<ol start=\"1\" style=\"list-style-type: lower-roman;\">\r\n			<li>Уточнить актуальность проекта</li>\r\n			<li>Постараться продлить срок</li>\r\n		</ol>\r\n	</li>\r\n</ol>\r\n<p><br>\r\n	<b>Если продлить срок не предоставляется возможным и это новый заказ по которому была внесена предоплата, но исполнителя так и не нашли</b>.<br>\r\n	Сообщить заказчику, что ему будет произведен возврат средств.<br>\r\n	<br>\r\n	<b>Если продлить срок не предоставляется возможным и это заказ который уже практически сделан, но нарушены сроки.</b><br>\r\n	Сообщить заказчику, что в этом случае мы готовы предоставить ему скидку за задержку, порядка 10%.<br>\r\n	<br>\r\n	Продлив срок выполнения, его необходимо сразу-же зафиксировать в поле &ldquo;срок сдачи&rdquo;.<br>\r\n	*И не забыть про срок для исполнителя.</p>\r\n', 5);
 
 -- --------------------------------------------------------
 
@@ -2649,20 +2768,26 @@ INSERT INTO `1_Templates` (`id`, `name`, `title`, `text`, `type_id`) VALUES
 -- Структура таблицы `1_TemplatesSteps`
 --
 
+DROP TABLE IF EXISTS `1_TemplatesSteps`;
 CREATE TABLE IF NOT EXISTS `1_TemplatesSteps` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `steps` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
+--
+-- Очистить таблицу перед добавлением данных `1_TemplatesSteps`
+--
+
+TRUNCATE TABLE `1_TemplatesSteps`;
 --
 -- Дамп данных таблицы `1_TemplatesSteps`
 --
 
-INSERT INTO `1_TemplatesSteps` (`id`, `name`, `steps`) VALUES
-(2, 'Один этап', 'a:1:{i:0;a:2:{s:4:"name";s:19:"Вся работа";s:4:"time";s:3:"100";}}'),
-(6, 'Создание РК', 'a:5:{i:0;a:2:{s:4:"name";s:14:"Парсинг";s:4:"time";s:2:"10";}i:1;a:2:{s:4:"name";s:12:"Чистка";s:4:"time";s:2:"20";}i:2;a:2:{s:4:"name";s:26:"Корректировка";s:4:"time";s:2:"30";}i:3;a:2:{s:4:"name";s:20:"бла-бла-бла";s:4:"time";s:2:"30";}i:4;a:2:{s:4:"name";s:8:"адын";s:4:"time";s:2:"10";}}');
+INSERT IGNORE INTO `1_TemplatesSteps` (`id`, `name`, `steps`) VALUES
+(2, 'Один этап', 'a:1:{i:0;a:2:{s:4:\"name\";s:19:\"Вся работа\";s:4:\"time\";s:3:\"100\";}}'),
+(6, 'Создание РК', 'a:5:{i:0;a:2:{s:4:\"name\";s:14:\"Парсинг\";s:4:\"time\";s:2:\"10\";}i:1;a:2:{s:4:\"name\";s:12:\"Чистка\";s:4:\"time\";s:2:\"20\";}i:2;a:2:{s:4:\"name\";s:26:\"Корректировка\";s:4:\"time\";s:2:\"30\";}i:3;a:2:{s:4:\"name\";s:20:\"бла-бла-бла\";s:4:\"time\";s:2:\"30\";}i:4;a:2:{s:4:\"name\";s:8:\"адын\";s:4:\"time\";s:2:\"10\";}}');
 
 -- --------------------------------------------------------
 
@@ -2670,18 +2795,24 @@ INSERT INTO `1_TemplatesSteps` (`id`, `name`, `steps`) VALUES
 -- Структура таблицы `1_TipDone`
 --
 
+DROP TABLE IF EXISTS `1_TipDone`;
 CREATE TABLE IF NOT EXISTS `1_TipDone` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `message_id` int(11) NOT NULL,
   `status` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=79 ;
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8;
 
+--
+-- Очистить таблицу перед добавлением данных `1_TipDone`
+--
+
+TRUNCATE TABLE `1_TipDone`;
 --
 -- Дамп данных таблицы `1_TipDone`
 --
 
-INSERT INTO `1_TipDone` (`id`, `message_id`, `status`) VALUES
+INSERT IGNORE INTO `1_TipDone` (`id`, `message_id`, `status`) VALUES
 (1, 45, 'is_enter_cost'),
 (2, 44, 'is_enter_cost'),
 (3, 42, 'is_enter_cost'),
@@ -2759,7 +2890,9 @@ INSERT INTO `1_TipDone` (`id`, `message_id`, `status`) VALUES
 (75, 123, 'is_new_message'),
 (76, 122, 'is_new_message'),
 (77, 126, 'is_new_message'),
-(78, 125, 'is_new_message');
+(78, 125, 'is_new_message'),
+(79, 133, 'is_enter_cost'),
+(80, 133, 'is_new_message');
 
 -- --------------------------------------------------------
 
@@ -2767,6 +2900,7 @@ INSERT INTO `1_TipDone` (`id`, `message_id`, `status`) VALUES
 -- Структура таблицы `1_Users`
 --
 
+DROP TABLE IF EXISTS `1_Users`;
 CREATE TABLE IF NOT EXISTS `1_Users` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `username` varchar(20) DEFAULT NULL COMMENT 'Логин',
@@ -2776,7 +2910,7 @@ CREATE TABLE IF NOT EXISTS `1_Users` (
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Создан',
   `lastvisit_at` timestamp NULL DEFAULT '0000-00-00 00:00:00' COMMENT 'Последний визит',
   `superuser` int(1) NOT NULL DEFAULT '0' COMMENT 'Суперадмин',
-  `status` int(1) unsigned NOT NULL DEFAULT '0' COMMENT 'Статус (1 - активен, 0 - нет)',
+  `status` int(1) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Статус (1 - активен, 0 - нет)',
   `identity` varchar(255) NOT NULL,
   `network` varchar(255) NOT NULL,
   `full_name` varchar(255) NOT NULL,
@@ -2788,68 +2922,74 @@ CREATE TABLE IF NOT EXISTS `1_Users` (
   UNIQUE KEY `username` (`username`),
   KEY `status` (`status`),
   KEY `superuser` (`superuser`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Таблица пользователей' AUTO_INCREMENT=66 ;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8 COMMENT='Таблица пользователей';
 
+--
+-- Очистить таблицу перед добавлением данных `1_Users`
+--
+
+TRUNCATE TABLE `1_Users`;
 --
 -- Дамп данных таблицы `1_Users`
 --
 
-INSERT INTO `1_Users` (`id`, `username`, `password`, `email`, `activkey`, `create_at`, `lastvisit_at`, `superuser`, `status`, `identity`, `network`, `full_name`, `state`, `phone_number`, `pid`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@programmarius.ru', '883ecbd0cf4b35010bd6d9c01ecfc6ec', '2016-02-09 03:44:27', '2017-09-29 00:04:47', 1, 1, '', '', '', 0, '', NULL),
-(2, 'manager', '1d0258c2440a8d19e716292b231e3190', 'manager@programmarius.ru', '93af3ffb2292787d983828fa47bc0120', '2016-02-09 04:23:41', '2017-09-19 12:14:59', 0, 1, '', '', '', 0, '', NULL),
-(3, 'customer', '91ec1f9324753048c0096d036a694f86', 'customer@programmarius.ru', '6b8eef2334af69b9f6f636ead586773e', '2016-02-09 04:36:09', '2017-08-13 11:27:53', 0, 1, '', '', 'Заказчик Адекватный', 0, '+3 333 333 33 33', NULL),
-(4, 'executor', 'b1925939f66c2e4625aadb18cabf1cea', 'executor@programmarius.ru', '9ac4eb8d2c1690f1cddc541898228b5c', '2016-02-09 04:40:42', '2017-05-03 14:24:10', 0, 1, '', '', 'Исполнительный Исполнитель Прямощасов', 0, '', 56),
-(6, NULL, 'c881306ee9d877031fa2bb25644f7e97', 'ako40ff@gmail.com', '', '2016-03-12 16:18:08', '2017-05-13 17:58:53', 0, 1, 'https://plus.google.com/u/0/106626641882616550662/', 'google', 'Akoch-ov Point', 0, '', NULL),
-(9, '', '8419b291a7544a771ef8f2e73d7475b8', 'ziga-niga@test.com', '', '2016-03-12 17:34:08', '0000-00-00 00:00:00', 0, 1, '', '', 'Нигер Зига', 0, '', NULL),
-(10, NULL, '98bbe3d76dd918829888f620d1070191', 'test2@test.com', '', '2016-03-12 17:42:54', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
-(11, NULL, 'fdeeb48eaf090d135b97f4103bca6d5d', 'test3@test.com', '', '2016-03-12 17:48:08', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
-(12, NULL, '9f82b55f8fe3ae4b322050e488a95b5d', 'test4@test.com', '', '2016-03-12 17:59:05', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', 6),
-(13, NULL, '0591367966306ba6f2d6f83b5cf5efdc', 'test5@test.com', '', '2016-03-12 18:10:24', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', 6),
-(14, NULL, '6f32be3517cedf4cadeb2e5ee3b72a00', 'test10@test.com', '', '2016-03-16 10:06:55', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '+5750001155', NULL),
-(15, NULL, 'c851c9364a8fe7d59595d8d3c5bffd63', 'akhmadullina.e.m@gmail.com', '', '2016-04-14 11:11:30', '2016-04-24 21:41:39', 0, 1, '', '', '', 0, '', NULL),
-(16, NULL, '04b16dc09aed6203039c24e32f6d144b', 'akhmadullina.e.m@yandex.ru', '', '2016-04-14 11:15:56', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
-(17, NULL, '9683a5c3146687787f0ef06c05740016', 'marsel.vip.20056@gmail.com', '', '2016-04-14 11:19:02', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
-(18, NULL, '6bbc77cf4e8c296a4199f89925f06421', 'angel.detka.88@gmail.com', '', '2016-04-14 11:23:40', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
-(19, NULL, 'ed50bd225e06bfcbd76d71332703d8a5', 'alexandraivanova555@gmail.com', '', '2016-04-14 11:27:11', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
-(20, NULL, 'c917fb75a1f45c74b320556778d48648', 'ludm11@bk.ru', '', '2016-04-14 19:59:57', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
-(21, NULL, '1dcc8769057561bbcdb5b30395f02284', 'ludmilasavvina11@gmail.com', '', '2016-04-24 21:14:58', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
-(22, NULL, 'd1d7f311aad35e1f7872178e3477a050', 'test@test.com5', '', '2016-04-27 00:07:42', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', 399),
-(23, NULL, '083572bcdcf1e2dbacc2d58838f8194c', 'test11@test.com', '', '2016-04-28 22:11:08', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', 399),
-(24, NULL, 'cab9c928452c05958daf63619acc2b61', 'test12@test.com', '', '2016-04-28 22:11:39', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', 399),
-(25, NULL, 'fbf5822bc357ee05d501f427ec4b7f17', 'test13@test.com', '', '2016-04-28 22:27:09', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', 399),
-(26, NULL, '2ffc35e439fbed2a30d62290d64a10ae', 'test15@test.com', '', '2016-05-02 13:59:36', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', 399),
-(27, NULL, '6d84c94cd5f1c4e732c7d9f6eba81b55', 'test10@test.com6', '', '2016-05-02 14:04:22', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', 399),
-(28, NULL, '28142d0c1382f340b3931a6fd07ad39d', 'test16@test.com', '', '2016-05-02 14:05:53', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', 399),
-(29, NULL, '23d7916f6221c67f19ee0c253a917cb1', 'test10@test.com7', '', '2016-05-02 14:08:27', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', 399),
-(30, NULL, '2f2673beda15c89b17e90eda1ba73856', 'test@test.com88', '', '2016-05-13 19:21:54', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', 399),
-(31, NULL, 'dc44cfee2cba5b63466e904534d9ffe8', 'test@test.com51', '', '2016-05-13 23:42:01', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
-(32, NULL, 'a3f524d8dd57f57c5be68c73c00e64ea', 'test@test.com52', '', '2016-05-13 23:49:09', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
-(33, NULL, 'a98b2508b35bf51a8f5a947eae235d34', 'test.test@test.ru', '', '2016-05-14 13:33:32', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
-(34, NULL, 'f792903421c797f973c5eb73e68fcf7f', 'egor.kochanov@gmail.com', '85264f9390c32ab3fe923bcbe82c82e4', '2016-05-14 13:34:35', '2016-06-11 19:35:58', 0, 1, 'http://vk.com/id64050367', 'vkontakte', 'Егор Кочанов', 0, '', NULL),
-(35, NULL, '1a27ca89b2ab9d4d05a0f39c660e7fd9', 'test777@test.com', '', '2016-05-14 13:48:54', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
-(36, NULL, 'def123de9ed8918abdfda1e962615cdc', 'test@test.com25', '', '2016-05-14 22:38:53', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
-(41, NULL, '', 'vnhn45@mail.ru', '', '2016-05-15 13:56:12', '0000-00-00 00:00:00', 0, 1, 'http://my.mail.ru/mail/vnhn45/', 'mailru', 'яна бибизячкина', 0, '', NULL),
-(42, NULL, 'fdf490f2bd510dd143635c408c248ce5', 'salamandra927@gmail.com', '', '2016-05-16 22:16:24', '2016-05-18 17:12:21', 0, 1, '', '', '', 0, '9116173908', NULL),
-(43, NULL, 'b4907985a413933398a23237a662158a', 'ioshkarlanovich@yandex.ru', '', '2016-05-16 22:29:43', '2016-05-18 16:23:10', 0, 1, '', '', '', 0, '89636413231 ', NULL),
-(44, NULL, '1ee1d92e43cef342089fa64ac5a060c4', 'weather_2016@mail.ru', '', '2016-05-16 22:35:35', '2016-06-11 19:30:15', 0, 1, '', '', '', 0, '89154445444 ', NULL),
-(45, NULL, '7cdfbadb125b7a31d59b5e95f85bca4a', 'qqqaaa123@ukr.net', '', '2016-05-17 14:40:10', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '380684864300', NULL),
-(46, NULL, '6982bf5e97454fc6ba5322b736885a1a', 'ilyaburmaka@gmail.com', '', '2016-05-17 14:43:29', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '380684864300', NULL),
-(47, NULL, 'b7ede73653360a6354045c7043e7c9dd', 'zipkill1999@gmail.com', '', '2016-05-17 14:44:25', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '380684864300', NULL),
-(49, NULL, '6cb81b2677d12cd83d726c84ea2e882b', 'awatar.iosha@yandex.ru', '', '2016-05-18 15:35:57', '2016-05-18 17:20:00', 0, 1, '', '', '', 0, '', NULL),
-(50, NULL, '634d90a4f8c6e7bef11ceb09e0929a5d', 'potter.reload@yandex.ru', '', '2016-05-26 18:42:29', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
-(51, NULL, '2dcb1ec181ec8ac43f6ed604fa2cb670', 'test@test.com', '', '2016-12-30 23:32:12', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, ' 7903111111', NULL),
-(52, NULL, 'e046c3cf21bf84f31f9aeba7673b17de', 'test1@test.com', '', '2016-12-30 23:52:36', '0000-00-00 00:00:00', 0, 1, '', '', 'Заказчик', 0, ' 79038888888', NULL),
-(53, NULL, '723434d654a6d0eb05900db0e36180d9', 'test7@test.com', '', '2016-12-31 00:00:22', '0000-00-00 00:00:00', 0, 1, '', '', 'Иван Петрович', 0, ' 7904', NULL),
-(54, NULL, '67fd84e131f107b75433420321465dee', 'test123123@test.test', '', '2017-03-20 14:10:42', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
-(55, NULL, '6a14e63f866982d6a13f87ed4334398f', 'test234@aasdf.com', '', '2017-03-20 14:11:27', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
-(56, 'webmaster', '50a9c7dbf0fa09e8969978317dca12e8', 'a.kochanov@etpgpb.ru', '9270474f0d3655e70ec451a2f85bc77a', '2017-04-17 14:07:15', '2017-05-24 17:32:24', 0, 1, '', '', '', 0, '', NULL),
-(57, NULL, 'cf27f8b507b9255bae9c642339afcb3e', 'test44@test.com', '', '2017-04-25 12:09:27', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
-(58, NULL, '861a37728f3be20b06323c7157e34dbe', 'test55@test.com', '', '2017-04-25 12:11:52', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
-(59, NULL, '0b15c3991641e10e7e379deca77f2792', 'author553@test.com', '', '2017-04-29 12:45:12', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', 56),
-(60, NULL, 'e2fa81e9c77693962174d8ceecc65b0d', 'author554@test.com', '', '2017-04-29 14:27:34', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', 56),
-(63, NULL, 'd41d8cd98f00b204e9800998ecf8427e', 'wrqwr@gfsdfgs.tr', 'dca30dbbb06cb1bacfea8a0d98a134ee', '2017-09-19 12:36:00', '0000-00-00 00:00:00', 0, 1, '', '', 'ывпаывап', 0, '', NULL),
-(64, NULL, 'd41d8cd98f00b204e9800998ecf8427e', 'asfdas@fasdfsa.rt', '5965471aa10395eec42a82de5e2e25f4', '2017-09-19 13:08:34', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
-(65, 'eeffssfdfd', 'd41d8cd98f00b204e9800998ecf8427e', 'sdvvffdvdfvd@ccsc.ru', '95887ca94fae828af21bd51322a0d8cb', '2017-09-26 20:43:17', '0000-00-00 00:00:00', 1, 0, '', '', '', 0, '', NULL);
+INSERT IGNORE INTO `1_Users` (`id`, `username`, `password`, `email`, `activkey`, `create_at`, `lastvisit_at`, `superuser`, `status`, `identity`, `network`, `full_name`, `state`, `phone_number`, `pid`) VALUES
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@programmarius.ru', '883ecbd0cf4b35010bd6d9c01ecfc6ec', '2016-02-09 00:44:27', '2017-10-04 09:58:48', 1, 1, '', '', '', 0, '', NULL),
+(2, 'manager', '1d0258c2440a8d19e716292b231e3190', 'manager@programmarius.ru', '93af3ffb2292787d983828fa47bc0120', '2016-02-09 01:23:41', '2017-10-04 09:25:55', 0, 1, '', '', '', 0, '', NULL),
+(3, 'customer', '91ec1f9324753048c0096d036a694f86', 'customer@programmarius.ru', '6b8eef2334af69b9f6f636ead586773e', '2016-02-09 01:36:09', '2017-10-04 09:54:41', 0, 1, '', '', 'Заказчик Адекватный', 0, '+3 333 333 33 33', NULL),
+(4, 'executor', 'b1925939f66c2e4625aadb18cabf1cea', 'executor@programmarius.ru', '9ac4eb8d2c1690f1cddc541898228b5c', '2016-02-09 01:40:42', '2017-10-04 09:54:11', 0, 1, '', '', 'Исполнительный Исполнитель Прямощасов', 0, '', 56),
+(6, NULL, 'c881306ee9d877031fa2bb25644f7e97', 'ako40ff@gmail.com', '', '2016-03-12 13:18:08', '2017-05-13 14:58:53', 0, 1, 'https://plus.google.com/u/0/106626641882616550662/', 'google', 'Akoch-ov Point', 0, '', NULL),
+(9, '', '8419b291a7544a771ef8f2e73d7475b8', 'ziga-niga@test.com', '', '2016-03-12 14:34:08', '0000-00-00 00:00:00', 0, 1, '', '', 'Нигер Зига', 0, '', NULL),
+(10, NULL, '98bbe3d76dd918829888f620d1070191', 'test2@test.com', '', '2016-03-12 14:42:54', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
+(11, NULL, 'fdeeb48eaf090d135b97f4103bca6d5d', 'test3@test.com', '', '2016-03-12 14:48:08', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
+(12, NULL, '9f82b55f8fe3ae4b322050e488a95b5d', 'test4@test.com', '', '2016-03-12 14:59:05', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', 6),
+(13, NULL, '0591367966306ba6f2d6f83b5cf5efdc', 'test5@test.com', '', '2016-03-12 15:10:24', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', 6),
+(14, NULL, '6f32be3517cedf4cadeb2e5ee3b72a00', 'test10@test.com', '', '2016-03-16 07:06:55', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '+5750001155', NULL),
+(15, NULL, 'c851c9364a8fe7d59595d8d3c5bffd63', 'akhmadullina.e.m@gmail.com', '', '2016-04-14 08:11:30', '2016-04-24 18:41:39', 0, 1, '', '', '', 0, '', NULL),
+(16, NULL, '04b16dc09aed6203039c24e32f6d144b', 'akhmadullina.e.m@yandex.ru', '', '2016-04-14 08:15:56', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
+(17, NULL, '9683a5c3146687787f0ef06c05740016', 'marsel.vip.20056@gmail.com', '', '2016-04-14 08:19:02', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
+(18, NULL, '6bbc77cf4e8c296a4199f89925f06421', 'angel.detka.88@gmail.com', '', '2016-04-14 08:23:40', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
+(19, NULL, 'ed50bd225e06bfcbd76d71332703d8a5', 'alexandraivanova555@gmail.com', '', '2016-04-14 08:27:11', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
+(20, NULL, 'c917fb75a1f45c74b320556778d48648', 'ludm11@bk.ru', '', '2016-04-14 16:59:57', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
+(21, NULL, '1dcc8769057561bbcdb5b30395f02284', 'ludmilasavvina11@gmail.com', '', '2016-04-24 18:14:58', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
+(22, NULL, 'd1d7f311aad35e1f7872178e3477a050', 'test@test.com5', '', '2016-04-26 21:07:42', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', 399),
+(23, NULL, '083572bcdcf1e2dbacc2d58838f8194c', 'test11@test.com', '', '2016-04-28 19:11:08', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', 399),
+(24, NULL, 'cab9c928452c05958daf63619acc2b61', 'test12@test.com', '', '2016-04-28 19:11:39', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', 399),
+(25, NULL, 'fbf5822bc357ee05d501f427ec4b7f17', 'test13@test.com', '', '2016-04-28 19:27:09', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', 399),
+(26, NULL, '2ffc35e439fbed2a30d62290d64a10ae', 'test15@test.com', '', '2016-05-02 10:59:36', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', 399),
+(27, NULL, '6d84c94cd5f1c4e732c7d9f6eba81b55', 'test10@test.com6', '', '2016-05-02 11:04:22', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', 399),
+(28, NULL, '28142d0c1382f340b3931a6fd07ad39d', 'test16@test.com', '', '2016-05-02 11:05:53', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', 399),
+(29, NULL, '23d7916f6221c67f19ee0c253a917cb1', 'test10@test.com7', '', '2016-05-02 11:08:27', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', 399),
+(30, NULL, '2f2673beda15c89b17e90eda1ba73856', 'test@test.com88', '', '2016-05-13 16:21:54', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', 399),
+(31, NULL, 'dc44cfee2cba5b63466e904534d9ffe8', 'test@test.com51', '', '2016-05-13 20:42:01', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
+(32, NULL, 'a3f524d8dd57f57c5be68c73c00e64ea', 'test@test.com52', '', '2016-05-13 20:49:09', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
+(33, NULL, 'a98b2508b35bf51a8f5a947eae235d34', 'test.test@test.ru', '', '2016-05-14 10:33:32', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
+(34, NULL, 'f792903421c797f973c5eb73e68fcf7f', 'egor.kochanov@gmail.com', '85264f9390c32ab3fe923bcbe82c82e4', '2016-05-14 10:34:35', '2016-06-11 16:35:58', 0, 1, 'http://vk.com/id64050367', 'vkontakte', 'Егор Кочанов', 0, '', NULL),
+(35, NULL, '1a27ca89b2ab9d4d05a0f39c660e7fd9', 'test777@test.com', '', '2016-05-14 10:48:54', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
+(36, NULL, 'def123de9ed8918abdfda1e962615cdc', 'test@test.com25', '', '2016-05-14 19:38:53', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
+(41, NULL, '', 'vnhn45@mail.ru', '', '2016-05-15 10:56:12', '0000-00-00 00:00:00', 0, 1, 'http://my.mail.ru/mail/vnhn45/', 'mailru', 'яна бибизячкина', 0, '', NULL),
+(42, NULL, 'fdf490f2bd510dd143635c408c248ce5', 'salamandra927@gmail.com', '', '2016-05-16 19:16:24', '2016-05-18 14:12:21', 0, 1, '', '', '', 0, '9116173908', NULL),
+(43, NULL, 'b4907985a413933398a23237a662158a', 'ioshkarlanovich@yandex.ru', '', '2016-05-16 19:29:43', '2016-05-18 13:23:10', 0, 1, '', '', '', 0, '89636413231 ', NULL),
+(44, NULL, '1ee1d92e43cef342089fa64ac5a060c4', 'weather_2016@mail.ru', '', '2016-05-16 19:35:35', '2016-06-11 16:30:15', 0, 1, '', '', '', 0, '89154445444 ', NULL),
+(45, NULL, '7cdfbadb125b7a31d59b5e95f85bca4a', 'qqqaaa123@ukr.net', '', '2016-05-17 11:40:10', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '380684864300', NULL),
+(46, NULL, '6982bf5e97454fc6ba5322b736885a1a', 'ilyaburmaka@gmail.com', '', '2016-05-17 11:43:29', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '380684864300', NULL),
+(47, NULL, 'b7ede73653360a6354045c7043e7c9dd', 'zipkill1999@gmail.com', '', '2016-05-17 11:44:25', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '380684864300', NULL),
+(49, NULL, '6cb81b2677d12cd83d726c84ea2e882b', 'awatar.iosha@yandex.ru', '', '2016-05-18 12:35:57', '2016-05-18 14:20:00', 0, 1, '', '', '', 0, '', NULL),
+(50, NULL, '634d90a4f8c6e7bef11ceb09e0929a5d', 'potter.reload@yandex.ru', '', '2016-05-26 15:42:29', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
+(51, NULL, '2dcb1ec181ec8ac43f6ed604fa2cb670', 'test@test.com', '', '2016-12-30 20:32:12', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, ' 7903111111', NULL),
+(52, NULL, 'e046c3cf21bf84f31f9aeba7673b17de', 'test1@test.com', '', '2016-12-30 20:52:36', '0000-00-00 00:00:00', 0, 1, '', '', 'Заказчик', 0, ' 79038888888', NULL),
+(53, NULL, '723434d654a6d0eb05900db0e36180d9', 'test7@test.com', '', '2016-12-30 21:00:22', '0000-00-00 00:00:00', 0, 1, '', '', 'Иван Петрович', 0, ' 7904', NULL),
+(54, NULL, '67fd84e131f107b75433420321465dee', 'test123123@test.test', '', '2017-03-20 11:10:42', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
+(55, NULL, '6a14e63f866982d6a13f87ed4334398f', 'test234@aasdf.com', '', '2017-03-20 11:11:27', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
+(56, 'webmaster', '50a9c7dbf0fa09e8969978317dca12e8', 'a.kochanov@etpgpb.ru', '9270474f0d3655e70ec451a2f85bc77a', '2017-04-17 11:07:15', '2017-05-24 14:32:24', 0, 1, '', '', '', 0, '', NULL),
+(57, NULL, 'cf27f8b507b9255bae9c642339afcb3e', 'test44@test.com', '', '2017-04-25 09:09:27', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
+(58, NULL, '861a37728f3be20b06323c7157e34dbe', 'test55@test.com', '', '2017-04-25 09:11:52', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
+(59, NULL, '0b15c3991641e10e7e379deca77f2792', 'author553@test.com', '', '2017-04-29 09:45:12', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', 56),
+(60, NULL, 'e2fa81e9c77693962174d8ceecc65b0d', 'author554@test.com', '', '2017-04-29 11:27:34', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', 56),
+(63, NULL, 'd41d8cd98f00b204e9800998ecf8427e', 'wrqwr@gfsdfgs.tr', 'dca30dbbb06cb1bacfea8a0d98a134ee', '2017-09-19 09:36:00', '0000-00-00 00:00:00', 0, 1, '', '', 'ывпаывап', 0, '', NULL),
+(64, NULL, 'd41d8cd98f00b204e9800998ecf8427e', 'asfdas@fasdfsa.rt', '5965471aa10395eec42a82de5e2e25f4', '2017-09-19 10:08:34', '0000-00-00 00:00:00', 0, 1, '', '', '', 0, '', NULL),
+(65, 'eeffssfdfd', 'd41d8cd98f00b204e9800998ecf8427e', 'sdvvffdvdfvd@ccsc.ru', '95887ca94fae828af21bd51322a0d8cb', '2017-09-26 17:43:17', '0000-00-00 00:00:00', 1, 0, '', '', '', 0, '', NULL),
+(66, NULL, '04c49e83e24e02388bfc0eec0daaef4d', 'vank300828@gmail.com', '', '2017-10-04 09:56:32', '2017-10-04 09:59:08', 0, 1, '', '', '', 0, '+380660320513', NULL);
 
 -- --------------------------------------------------------
 
@@ -2857,6 +2997,7 @@ INSERT INTO `1_Users` (`id`, `username`, `password`, `email`, `activkey`, `creat
 -- Структура таблицы `1_WebmasterLogs`
 --
 
+DROP TABLE IF EXISTS `1_WebmasterLogs`;
 CREATE TABLE IF NOT EXISTS `1_WebmasterLogs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `pid` int(11) NOT NULL,
@@ -2865,13 +3006,18 @@ CREATE TABLE IF NOT EXISTS `1_WebmasterLogs` (
   `date` date NOT NULL,
   `order_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=33 ;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 
+--
+-- Очистить таблицу перед добавлением данных `1_WebmasterLogs`
+--
+
+TRUNCATE TABLE `1_WebmasterLogs`;
 --
 -- Дамп данных таблицы `1_WebmasterLogs`
 --
 
-INSERT INTO `1_WebmasterLogs` (`id`, `pid`, `uid`, `action`, `date`, `order_id`) VALUES
+INSERT IGNORE INTO `1_WebmasterLogs` (`id`, `pid`, `uid`, `action`, `date`, `order_id`) VALUES
 (1, 6, NULL, 1, '2016-03-12', NULL),
 (2, 6, NULL, 1, '2016-03-12', NULL),
 (3, 6, NULL, 1, '2016-03-12', NULL),
@@ -2911,6 +3057,7 @@ INSERT INTO `1_WebmasterLogs` (`id`, `pid`, `uid`, `action`, `date`, `order_id`)
 -- Структура таблицы `1_ZakazPartsFiles`
 --
 
+DROP TABLE IF EXISTS `1_ZakazPartsFiles`;
 CREATE TABLE IF NOT EXISTS `1_ZakazPartsFiles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `part_id` int(11) DEFAULT NULL,
@@ -2918,13 +3065,18 @@ CREATE TABLE IF NOT EXISTS `1_ZakazPartsFiles` (
   `file_name` varchar(255) DEFAULT NULL,
   `approved` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
+) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
+--
+-- Очистить таблицу перед добавлением данных `1_ZakazPartsFiles`
+--
+
+TRUNCATE TABLE `1_ZakazPartsFiles`;
 --
 -- Дамп данных таблицы `1_ZakazPartsFiles`
 --
 
-INSERT INTO `1_ZakazPartsFiles` (`id`, `part_id`, `orig_name`, `file_name`, `approved`) VALUES
+INSERT IGNORE INTO `1_ZakazPartsFiles` (`id`, `part_id`, `orig_name`, `file_name`, `approved`) VALUES
 (1, 2, '11781852_898343106898309_5881494036670386948_n.jpg', '11781852_898343106898309_5881494036670386948_n.jpg', 0),
 (4, 2, '1eb57d1251b67216ddb1784367303bec.jpg', '1eb57d1251b67216ddb1784367303bec.jpg', 1),
 (5, 2, 'file.docx', 'file.docx', 0),
@@ -2948,19 +3100,25 @@ INSERT INTO `1_ZakazPartsFiles` (`id`, `part_id`, `orig_name`, `file_name`, `app
 -- Структура таблицы `1_Сatalog`
 --
 
+DROP TABLE IF EXISTS `1_Сatalog`;
 CREATE TABLE IF NOT EXISTS `1_Сatalog` (
   `id` int(6) NOT NULL AUTO_INCREMENT COMMENT 'Индекс',
   `field_varname` varchar(50) NOT NULL,
   `cat_name` varchar(255) NOT NULL COMMENT 'Наименование категории',
   `parent_id` int(6) NOT NULL DEFAULT '0' COMMENT 'Номер родителькой категории',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Таблица ктегорий проекта, имеет древовидную структуру' AUTO_INCREMENT=77 ;
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8 COMMENT='Таблица ктегорий проекта, имеет древовидную структуру';
 
+--
+-- Очистить таблицу перед добавлением данных `1_Сatalog`
+--
+
+TRUNCATE TABLE `1_Сatalog`;
 --
 -- Дамп данных таблицы `1_Сatalog`
 --
 
-INSERT INTO `1_Сatalog` (`id`, `field_varname`, `cat_name`, `parent_id`) VALUES
+INSERT IGNORE INTO `1_Сatalog` (`id`, `field_varname`, `cat_name`, `parent_id`) VALUES
 (29, 'specials', 'html, js (jquery), css', 53),
 (30, 'specials', 'PHP', 0),
 (31, 'specials', 'WordPress CMS ', 30),
@@ -3013,6 +3171,7 @@ INSERT INTO `1_Сatalog` (`id`, `field_varname`, `cat_name`, `parent_id`) VALUES
 -- Структура таблицы `AuthItem`
 --
 
+DROP TABLE IF EXISTS `AuthItem`;
 CREATE TABLE IF NOT EXISTS `AuthItem` (
   `name` varchar(64) NOT NULL,
   `type` int(11) NOT NULL,
@@ -3023,10 +3182,15 @@ CREATE TABLE IF NOT EXISTS `AuthItem` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Очистить таблицу перед добавлением данных `AuthItem`
+--
+
+TRUNCATE TABLE `AuthItem`;
+--
 -- Дамп данных таблицы `AuthItem`
 --
 
-INSERT INTO `AuthItem` (`name`, `type`, `description`, `bizrule`, `data`) VALUES
+INSERT IGNORE INTO `AuthItem` (`name`, `type`, `description`, `bizrule`, `data`) VALUES
 ('Admin', 2, 'Администратор', NULL, 'N;'),
 ('Author', 2, 'Автор', NULL, 'N;'),
 ('Corrector', 2, 'Технический руководитель', NULL, 'N;'),
@@ -3109,6 +3273,7 @@ INSERT INTO `AuthItem` (`name`, `type`, `description`, `bizrule`, `data`) VALUES
 -- Структура таблицы `AuthItemChild`
 --
 
+DROP TABLE IF EXISTS `AuthItemChild`;
 CREATE TABLE IF NOT EXISTS `AuthItemChild` (
   `parent` varchar(64) NOT NULL,
   `child` varchar(64) NOT NULL,
@@ -3117,10 +3282,15 @@ CREATE TABLE IF NOT EXISTS `AuthItemChild` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Очистить таблицу перед добавлением данных `AuthItemChild`
+--
+
+TRUNCATE TABLE `AuthItemChild`;
+--
 -- Дамп данных таблицы `AuthItemChild`
 --
 
-INSERT INTO `AuthItemChild` (`parent`, `child`) VALUES
+INSERT IGNORE INTO `AuthItemChild` (`parent`, `child`) VALUES
 ('Author', 'error'),
 ('Customer', 'error'),
 ('Guest', 'error'),
@@ -3156,6 +3326,7 @@ INSERT INTO `AuthItemChild` (`parent`, `child`) VALUES
 ('Customer', 'project.chat.apiRenameFile'),
 ('Manager', 'project.chat.apiRenameFile'),
 ('Author', 'project.chat.index'),
+('Corrector', 'project.chat.index'),
 ('Customer', 'project.chat.index'),
 ('Customer', 'project.chat.upload'),
 ('Author', 'project.chat.view'),
@@ -3232,6 +3403,7 @@ INSERT INTO `AuthItemChild` (`parent`, `child`) VALUES
 -- Структура таблицы `Companies`
 --
 
+DROP TABLE IF EXISTS `Companies`;
 CREATE TABLE IF NOT EXISTS `Companies` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `frozen` int(1) NOT NULL DEFAULT '0',
@@ -3262,14 +3434,19 @@ CREATE TABLE IF NOT EXISTS `Companies` (
   `smsc_passwd` varchar(32) DEFAULT NULL COMMENT 'smsc.ru api password',
   `module_tree` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
+--
+-- Очистить таблицу перед добавлением данных `Companies`
+--
+
+TRUNCATE TABLE `Companies`;
 --
 -- Дамп данных таблицы `Companies`
 --
 
-INSERT INTO `Companies` (`id`, `frozen`, `organization`, `name`, `domains`, `language`, `supportEmail`, `contacts`, `PaymentCash`, `Payment2Chekout`, `Payment2ChekoutHash`, `FrontPage`, `icon`, `logo`, `header`, `text4guests`, `text4customers`, `WebmasterFirstOrderRate`, `WebmasterSecondOrderRate`, `WebmasterFirstExecutorOrderRate`, `WebmasterSecondExecutorOrderRate`, `agreement4customers`, `agreement4executors`, `telfin_id`, `telfin_secret`, `smsc_login`, `smsc_passwd`, `module_tree`) VALUES
-(1, 0, 1, 'Programmarius.ru', 'adco.obshya.com,adco2.obshya.com,programmarius.admintrix.com', 'ru', 'programmarius@admintrix.com', '', 1, 0, '', '', NULL, 'beer_money.woff', '<p><span style="padding-top: 24px; font-size: 14px; color: #6ea194; font-style: italic; font-family: Comic, sans-serif; display: block;">Компания по созданию сайтов любой сложности.</span></p>\r\n<h1><span style="padding-top: 24px; font-size: 14px; color: #6ea194; font-style: italic; font-family: Comic, sans-serif; display: block;">тест</span></h1>', '<p>Текст для гостей</p>', '<p>Милости просим</p>', 0.3, 0.1, 0.2, NULL, '<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-align: center;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 18.6667px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">Договор &ndash; оферта</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">Настоящий публичный Договор-оферта (далее Оферта) определяет взаимоотношения между Администрацией Сайта и Пользователем (дееспособным физическим или юридическим лицом), принявшим настоящее предложение о заключении Договора, путем осуществления действий по регистрации на сайте </span><a style="text-decoration: none;" href="http://admintrix.com"><span style="font-size: 16px; font-family: Domine; color: #0000ff; text-decoration: underline; vertical-align: baseline; white-space: pre-wrap;">http://admintrix.com</span></a><span style="font-size: 14.6667px; font-family: Calibri; vertical-align: baseline; white-space: pre-wrap;"> &nbsp;</span><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">(далее Сайт). </span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">В соответствии с пунктом 2 ст. 437 ГК РФ данный документ является публичной офертой и, в случае согласия лица с изложенными ниже условиями, такое лицо считается осуществившим акцепт настоящей Оферты и становится Пользователем. В соответствии с пунктом 3 ст. 438 ГК РФ акцепт Оферты равносилен заключению договора на условиях, изложенных в Оферте.</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: center;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">1. Предмет Оферты</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">1.1. Администрация Сайта на возмездной основе оказывает услуги по использованию сервисов Сайта в интересах Пользователя в соответствии с условиями настоящей Оферты. </span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">1.2. В перечень услуг Администрации Сайта входят, но не ограничиваются:</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">1.2.1. Создание, оптимизация и контроль бизнес-процессов, трудовых ресурсов и т.п. в интересах Пользователя;</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">1.2.2. Автоматизированный поиск и подбор заказчиков и клиентов в интересах Пользователя;</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">1.2.3. Продвижение в сети интернет товаров и услуг Пользователя;</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">1.2.4. Создание сайтов и программного обеспечения в интересах Пользователя;</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">1.2.5. Систематизация и контроль показателей продаж и движения финансовых средств в интересах Пользователя;</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">1.2.6. Иные услуги в интересах Пользователя;</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">Конкретные услуги, требующиеся Пользователю, последний выбирает самостоятельно с помощью сервисов Сайта.</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: center;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">2. Термины и определения</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">2.1. Сайт &ndash; интернет-сайт </span><a style="text-decoration: none;" href="http://admintrix.com"><span style="font-size: 16px; font-family: Domine; color: #0000ff; text-decoration: underline; vertical-align: baseline; white-space: pre-wrap;">http://admintrix.com</span></a><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">, используемый Администрацией Сайта на правах собственности, представляющий собой площадку с возможностью оказания услуг в интересах Пользователя.</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">2.2. Регистрация в качестве Пользователя &ndash; последовательное выполнение всех действий, перечисленных на странице Регистрации Сайта, подразумевающее добровольное, полное и безусловное принятие всех положений настоящей Оферты. </span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">2.3. Пользователь &ndash; дееспособное физическое или юридическое лицо, принявшее предложение Администрации Сайта путем акцепта настоящей Оферты в виде осуществления действий по активизации поля &laquo;Я прочитал и принимаю Оферту&raquo; при регистрации на Сайте. </span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">2.4. Личный кабинет Пользователя &ndash; защищенная часть программного обеспечения Сайта. Содержит совокупные данные о Пользователе, статистике, финансовой и иной информации, связанной с его деятельностью на Сайте. Доступ в Личный кабинет возможен после регистрации и авторизации Пользователя на Сайте с помощью логина и пароля.</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-align: center;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">3. Обязанности и права Сторон</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; text-decoration: underline; vertical-align: baseline; white-space: pre-wrap;">3.1. Обязанности Администрации Сайта:</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">3.1.1. Оказывать услуги в полном соответствии с условиями настоящей Оферты.</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">3.1.2. Обеспечить круглосуточную работоспособность Сайта, за исключением случаев, когда доступ к Сайту закрыт по причинам не зависящим от воли Администрации Сайта (отсутствие у Пользователя необходимого программного обеспечения, выхода в интернет, действий провайдеров, энергетических компаний, воздействие компьютерных вирусов и(или) вредоносных программ, технические или регламентные работы на оборудовании и программном обеспечении Администрации Сайта и т.п.). </span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">3.1.3. Предпринимать общепринятые технические и организационные меры, направленные на обеспечение сохранности информации Пользователя. </span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">3.1.4. Строго соблюдать политику конфиденциальности.</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; text-decoration: underline; vertical-align: baseline; white-space: pre-wrap;">3.2. Права Администрации Сайта:</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">3.2.1. Временно приостанавливать оказание услуг, если это вызвано необходимостью восстановления работоспособности Сайта.</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">3.2.2. Вносить изменения в настоящую Оферту.</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">3.2.3. Отказаться от исполнения настоящей Оферты, заблокировать аккаунт Пользователя, если его действия будут препятствовать нормальной работоспособности Сайта и нарушать положения настоящей Оферты.</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">3.2.4. Проверять личные персональные данные и действительность разрешительных документов (свидетельств, лицензий и т.п.) Пользователя, необходимых для использования услуг, оказываемых Администрацией Сайта и в случае представления неверных, недействительных сведения приостановить или прекратить оказание услуг Пользователю.</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 0pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">3.2.5. Использовать указанные Пользователем на Сайте адреса электронной почты, номера сотовых телефонов и иные контактные данные для рассылки информационно-рекламных сообщений. Пользователь разрешает Администрации Сайта направлять ему на номера сотовых телефонов, электронную почту, а также на иные контактные данные, указанные им на Сайте сведения информационного характера о работе Сайта, действий других пользователей в виде текстовых сообщений и(или) графических изображений.</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 0pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">3.2.6. В случае систематических нарушений Пользователем своих обязанностей изложенных в п. 3.3. Оферты Администрация Сайта вправе приостановить или прекратить оказание услуг Пользователю (блокировка аккаунта). Администрация Сайта вправе изменять срок блокировки аккаунта Пользователя без предупреждения и осуществлять блокировку без объяснения причины.</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">3.2.7. На свое усмотрение предоставлять Пользователю скидки (бонусы) по оплате услуг Администрации Сайта для популяризации ресурса в любое время на свое усмотрение.</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; text-decoration: underline; vertical-align: baseline; white-space: pre-wrap;">3.3. Обязанности Пользователя:</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">3.3.1. Перед регистрацией на Сайте внимательно ознакомиться с настоящей Офертой, иной информацией на Сайте, имеющей отношение к порядку и правилам оказания услуг, а также следить за изменениями в них на Сайте.</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">3.3.2. Нести личную ответственность за любые действия, совершенные с использованием своего аккаунта, а также за любые последствия, которые могло повлечь или повлекло использование их третьими лицами, при ненадлежащем хранении Пользователем логина и пароля.</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">3.3.3. Исполнять запреты и ограничения, изложенные в главе 9 настоящей Оферты.</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">3.3.4. При регистрации на Сайте указать достоверные, актуальные и точные сведения о себе, своевременно обновлять данную информацию в своем Личном кабинете в случае ее изменения и нести личную ответственность за представление неверной информации.</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">3.3.5. Принимать надлежащие меры для обеспечения сохранности логина и пароля для авторизации на Сайте.</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">3.3.6. Строго соблюдать политику конфиденциальности.</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">3.3.7. Своевременно информировать Администрацию Сайта об изменении своих реквизитов. &nbsp;</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; text-decoration: underline; vertical-align: baseline; white-space: pre-wrap;">3.4. Права Пользователя:</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">3.4.1. Пользоваться сервисами Сайта в собственных как личных, так и коммерческих интересах.</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-align: center;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">4. Сроки исполнения обязательств, оплата услуг</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 6pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">4.1. Администрация Сайта после регистрации Пользователя на Сайте, предоставляет ему использовать сервисы Сайта в своих интересах в течение всего срока действия настоящей Оферты.</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 6pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">4.2. Срок действия настоящей Оферты: с момента регистрации Пользователя на Сайте до полного исполнения Сторонами своих обязательств и/или принятия решения об удалении, блокировании аккаунта Пользователя.</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 6pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">4.3. Стоимость услуг Администрации Сайта Стороны согласуют на дополнительно путем выбора Пользователем конкретных услуг с помощью сервисов Сайта через личный кабинет.</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 6pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">4.4. Услуги Администрации Сайта, не указанные в п. 1.2., оказываются за дополнительную плату. В этом случае объем, сроки и стоимость таких услуг Стороны согласуют дополнительно с помощью сервисов Сайта. </span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 6pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">4.5. Оплата услуг осуществляется с помощью способов, указанных на Сайте, в виде аванса, при этом Администрация отображает движение денежных средств по расчетам между Пользователем и Администрацией Сайта в личном кабинете Пользователя. &nbsp;</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 6pt; text-indent: 35.4pt; text-align: center;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">5. Политика конфиденциальности</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">5.1. Любая персональная информация, переданная Сторонами друг другу при заключении, исполнении настоящей Оферты, является конфиденциальной информацией.</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">5.2. Стороны обязуются соблюдать действующее законодательство РФ, регламентирующее правоотношения связанные с установлением, изменением и прекращением режима конфиденциальности в отношении персональной информации Сторон и не разглашать конфиденциальную информацию третьим лицам.</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 0pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">5.3. Пользователь дает разрешение</span> <span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">Администрации Сайта</span> <span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">на сбор, обработку и хранение своих личных персональных данных.</span></span></p>\r\n<p>&nbsp;</p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">5.4. В целях исполнения обязательств по настоящей Оферте,</span> <span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">Администрация Сайта</span> <span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">собирает два вида информации о Пользователе:</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">- персональную информацию, которую Пользователь сознательно раскрыл</span> <span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">Администрация Сайта</span> <span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">в целях пользования ресурсами Сайта;</span> </span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">- техническую информацию, автоматически собираемую программным обеспечением Сайта во время его посещения. Во время посещения Пользователем Сайта службе поддержки автоматически становится доступной информация из стандартных журналов регистрации сервера (server logs). Сюда входит IP-адрес компьютера</span> <span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">Пользователя</span> <span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">(или прокси-сервера, если он используется для выхода в интернет); имя интернет-провайдера; имя домена; тип браузера и операционной системы; информация о сайте, с которого Пользователь совершил переход на Сайт; дате и времени этих посещений; файлах, которые Пользователь загружает, скачивает. Эта информация анализируется программно в агрегированном (обезличенном) виде для анализа посещаемости Сайта, и используется при разработке предложений по его улучшению и развитию. Связь между IP-адресом и персональной информацией Пользователя никогда не раскрывается третьим лицам, за исключением тех случаев, когда это требуется законодательством РФ.</span></span></p>\r\n<p dir="ltr" style="line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;"><span id="docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609"><span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">5.5.</span> <span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">Администрация Сайта</span> <span style="font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;">очень серьезно относится к защите персональных данных Пользователя и третьих лиц и никогда не предоставляет персональную информацию Пользователя кому бы то ни было, кроме случаев, когда этого прямо требует уполномоченный государственный орган РФ (например, по письменному запросу суд%D</span></span></p>', '<p>нету</p>', 'G-Vgs1P9qH.w6gEbj0H_tqMKGHrX~8p8', 'x-9vvbtxSX.R57MThpN~fk3GNkGQ.Kht', 'sms-yslugi', '4bgfb76ghy87', 1);
+INSERT IGNORE INTO `Companies` (`id`, `frozen`, `organization`, `name`, `domains`, `language`, `supportEmail`, `contacts`, `PaymentCash`, `Payment2Chekout`, `Payment2ChekoutHash`, `FrontPage`, `icon`, `logo`, `header`, `text4guests`, `text4customers`, `WebmasterFirstOrderRate`, `WebmasterSecondOrderRate`, `WebmasterFirstExecutorOrderRate`, `WebmasterSecondExecutorOrderRate`, `agreement4customers`, `agreement4executors`, `telfin_id`, `telfin_secret`, `smsc_login`, `smsc_passwd`, `module_tree`) VALUES
+(1, 0, 1, 'Programmarius.ru', 'adco.obshya.com,adco2.obshya.com,programmarius.admintrix.com,http://blackstyle-yt.tmweb.ru', 'ru', 'programmarius@admintrix.com', '', 1, 0, '', '', NULL, 'beer_money.woff', '<p><span style=\"padding-top: 24px; font-size: 14px; color: #6ea194; font-style: italic; font-family: Comic, sans-serif; display: block;\">Компания по созданию сайтов любой сложности.</span></p>\r\n<h1><span style=\"padding-top: 24px; font-size: 14px; color: #6ea194; font-style: italic; font-family: Comic, sans-serif; display: block;\">тест</span></h1>', '<p>Текст для гостей</p>', '<p>Милости просим</p>', 0.3, 0.1, 0.2, NULL, '<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-align: center;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 18.6667px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">Договор &ndash; оферта</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">Настоящий публичный Договор-оферта (далее Оферта) определяет взаимоотношения между Администрацией Сайта и Пользователем (дееспособным физическим или юридическим лицом), принявшим настоящее предложение о заключении Договора, путем осуществления действий по регистрации на сайте </span><a style=\"text-decoration: none;\" href=\"http://admintrix.com\"><span style=\"font-size: 16px; font-family: Domine; color: #0000ff; text-decoration: underline; vertical-align: baseline; white-space: pre-wrap;\">http://admintrix.com</span></a><span style=\"font-size: 14.6667px; font-family: Calibri; vertical-align: baseline; white-space: pre-wrap;\"> &nbsp;</span><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">(далее Сайт). </span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">В соответствии с пунктом 2 ст. 437 ГК РФ данный документ является публичной офертой и, в случае согласия лица с изложенными ниже условиями, такое лицо считается осуществившим акцепт настоящей Оферты и становится Пользователем. В соответствии с пунктом 3 ст. 438 ГК РФ акцепт Оферты равносилен заключению договора на условиях, изложенных в Оферте.</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: center;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">1. Предмет Оферты</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">1.1. Администрация Сайта на возмездной основе оказывает услуги по использованию сервисов Сайта в интересах Пользователя в соответствии с условиями настоящей Оферты. </span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">1.2. В перечень услуг Администрации Сайта входят, но не ограничиваются:</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">1.2.1. Создание, оптимизация и контроль бизнес-процессов, трудовых ресурсов и т.п. в интересах Пользователя;</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">1.2.2. Автоматизированный поиск и подбор заказчиков и клиентов в интересах Пользователя;</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">1.2.3. Продвижение в сети интернет товаров и услуг Пользователя;</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">1.2.4. Создание сайтов и программного обеспечения в интересах Пользователя;</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">1.2.5. Систематизация и контроль показателей продаж и движения финансовых средств в интересах Пользователя;</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">1.2.6. Иные услуги в интересах Пользователя;</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">Конкретные услуги, требующиеся Пользователю, последний выбирает самостоятельно с помощью сервисов Сайта.</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: center;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">2. Термины и определения</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">2.1. Сайт &ndash; интернет-сайт </span><a style=\"text-decoration: none;\" href=\"http://admintrix.com\"><span style=\"font-size: 16px; font-family: Domine; color: #0000ff; text-decoration: underline; vertical-align: baseline; white-space: pre-wrap;\">http://admintrix.com</span></a><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">, используемый Администрацией Сайта на правах собственности, представляющий собой площадку с возможностью оказания услуг в интересах Пользователя.</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">2.2. Регистрация в качестве Пользователя &ndash; последовательное выполнение всех действий, перечисленных на странице Регистрации Сайта, подразумевающее добровольное, полное и безусловное принятие всех положений настоящей Оферты. </span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">2.3. Пользователь &ndash; дееспособное физическое или юридическое лицо, принявшее предложение Администрации Сайта путем акцепта настоящей Оферты в виде осуществления действий по активизации поля &laquo;Я прочитал и принимаю Оферту&raquo; при регистрации на Сайте. </span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">2.4. Личный кабинет Пользователя &ndash; защищенная часть программного обеспечения Сайта. Содержит совокупные данные о Пользователе, статистике, финансовой и иной информации, связанной с его деятельностью на Сайте. Доступ в Личный кабинет возможен после регистрации и авторизации Пользователя на Сайте с помощью логина и пароля.</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-align: center;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">3. Обязанности и права Сторон</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; text-decoration: underline; vertical-align: baseline; white-space: pre-wrap;\">3.1. Обязанности Администрации Сайта:</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">3.1.1. Оказывать услуги в полном соответствии с условиями настоящей Оферты.</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">3.1.2. Обеспечить круглосуточную работоспособность Сайта, за исключением случаев, когда доступ к Сайту закрыт по причинам не зависящим от воли Администрации Сайта (отсутствие у Пользователя необходимого программного обеспечения, выхода в интернет, действий провайдеров, энергетических компаний, воздействие компьютерных вирусов и(или) вредоносных программ, технические или регламентные работы на оборудовании и программном обеспечении Администрации Сайта и т.п.). </span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">3.1.3. Предпринимать общепринятые технические и организационные меры, направленные на обеспечение сохранности информации Пользователя. </span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">3.1.4. Строго соблюдать политику конфиденциальности.</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; text-decoration: underline; vertical-align: baseline; white-space: pre-wrap;\">3.2. Права Администрации Сайта:</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">3.2.1. Временно приостанавливать оказание услуг, если это вызвано необходимостью восстановления работоспособности Сайта.</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">3.2.2. Вносить изменения в настоящую Оферту.</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">3.2.3. Отказаться от исполнения настоящей Оферты, заблокировать аккаунт Пользователя, если его действия будут препятствовать нормальной работоспособности Сайта и нарушать положения настоящей Оферты.</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">3.2.4. Проверять личные персональные данные и действительность разрешительных документов (свидетельств, лицензий и т.п.) Пользователя, необходимых для использования услуг, оказываемых Администрацией Сайта и в случае представления неверных, недействительных сведения приостановить или прекратить оказание услуг Пользователю.</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 0pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">3.2.5. Использовать указанные Пользователем на Сайте адреса электронной почты, номера сотовых телефонов и иные контактные данные для рассылки информационно-рекламных сообщений. Пользователь разрешает Администрации Сайта направлять ему на номера сотовых телефонов, электронную почту, а также на иные контактные данные, указанные им на Сайте сведения информационного характера о работе Сайта, действий других пользователей в виде текстовых сообщений и(или) графических изображений.</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 0pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">3.2.6. В случае систематических нарушений Пользователем своих обязанностей изложенных в п. 3.3. Оферты Администрация Сайта вправе приостановить или прекратить оказание услуг Пользователю (блокировка аккаунта). Администрация Сайта вправе изменять срок блокировки аккаунта Пользователя без предупреждения и осуществлять блокировку без объяснения причины.</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">3.2.7. На свое усмотрение предоставлять Пользователю скидки (бонусы) по оплате услуг Администрации Сайта для популяризации ресурса в любое время на свое усмотрение.</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; text-decoration: underline; vertical-align: baseline; white-space: pre-wrap;\">3.3. Обязанности Пользователя:</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">3.3.1. Перед регистрацией на Сайте внимательно ознакомиться с настоящей Офертой, иной информацией на Сайте, имеющей отношение к порядку и правилам оказания услуг, а также следить за изменениями в них на Сайте.</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">3.3.2. Нести личную ответственность за любые действия, совершенные с использованием своего аккаунта, а также за любые последствия, которые могло повлечь или повлекло использование их третьими лицами, при ненадлежащем хранении Пользователем логина и пароля.</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">3.3.3. Исполнять запреты и ограничения, изложенные в главе 9 настоящей Оферты.</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">3.3.4. При регистрации на Сайте указать достоверные, актуальные и точные сведения о себе, своевременно обновлять данную информацию в своем Личном кабинете в случае ее изменения и нести личную ответственность за представление неверной информации.</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">3.3.5. Принимать надлежащие меры для обеспечения сохранности логина и пароля для авторизации на Сайте.</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">3.3.6. Строго соблюдать политику конфиденциальности.</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">3.3.7. Своевременно информировать Администрацию Сайта об изменении своих реквизитов. &nbsp;</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; text-decoration: underline; vertical-align: baseline; white-space: pre-wrap;\">3.4. Права Пользователя:</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">3.4.1. Пользоваться сервисами Сайта в собственных как личных, так и коммерческих интересах.</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-align: center;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">4. Сроки исполнения обязательств, оплата услуг</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 6pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">4.1. Администрация Сайта после регистрации Пользователя на Сайте, предоставляет ему использовать сервисы Сайта в своих интересах в течение всего срока действия настоящей Оферты.</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 6pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">4.2. Срок действия настоящей Оферты: с момента регистрации Пользователя на Сайте до полного исполнения Сторонами своих обязательств и/или принятия решения об удалении, блокировании аккаунта Пользователя.</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 6pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">4.3. Стоимость услуг Администрации Сайта Стороны согласуют на дополнительно путем выбора Пользователем конкретных услуг с помощью сервисов Сайта через личный кабинет.</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 6pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">4.4. Услуги Администрации Сайта, не указанные в п. 1.2., оказываются за дополнительную плату. В этом случае объем, сроки и стоимость таких услуг Стороны согласуют дополнительно с помощью сервисов Сайта. </span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 6pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">4.5. Оплата услуг осуществляется с помощью способов, указанных на Сайте, в виде аванса, при этом Администрация отображает движение денежных средств по расчетам между Пользователем и Администрацией Сайта в личном кабинете Пользователя. &nbsp;</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 6pt; text-indent: 35.4pt; text-align: center;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">5. Политика конфиденциальности</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">5.1. Любая персональная информация, переданная Сторонами друг другу при заключении, исполнении настоящей Оферты, является конфиденциальной информацией.</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">5.2. Стороны обязуются соблюдать действующее законодательство РФ, регламентирующее правоотношения связанные с установлением, изменением и прекращением режима конфиденциальности в отношении персональной информации Сторон и не разглашать конфиденциальную информацию третьим лицам.</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 0pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">5.3. Пользователь дает разрешение</span> <span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">Администрации Сайта</span> <span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">на сбор, обработку и хранение своих личных персональных данных.</span></span></p>\r\n<p>&nbsp;</p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">5.4. В целях исполнения обязательств по настоящей Оферте,</span> <span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">Администрация Сайта</span> <span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">собирает два вида информации о Пользователе:</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">- персональную информацию, которую Пользователь сознательно раскрыл</span> <span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">Администрация Сайта</span> <span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">в целях пользования ресурсами Сайта;</span> </span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">- техническую информацию, автоматически собираемую программным обеспечением Сайта во время его посещения. Во время посещения Пользователем Сайта службе поддержки автоматически становится доступной информация из стандартных журналов регистрации сервера (server logs). Сюда входит IP-адрес компьютера</span> <span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">Пользователя</span> <span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">(или прокси-сервера, если он используется для выхода в интернет); имя интернет-провайдера; имя домена; тип браузера и операционной системы; информация о сайте, с которого Пользователь совершил переход на Сайт; дате и времени этих посещений; файлах, которые Пользователь загружает, скачивает. Эта информация анализируется программно в агрегированном (обезличенном) виде для анализа посещаемости Сайта, и используется при разработке предложений по его улучшению и развитию. Связь между IP-адресом и персональной информацией Пользователя никогда не раскрывается третьим лицам, за исключением тех случаев, когда это требуется законодательством РФ.</span></span></p>\r\n<p dir=\"ltr\" style=\"line-height: 1.3800000000000001; margin-top: 0pt; margin-bottom: 10pt; text-indent: 35.4pt; text-align: justify;\"><span id=\"docs-internal-guid-5fbd29d2-d4ba-592b-6d52-52ff878a2609\"><span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">5.5.</span> <span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">Администрация Сайта</span> <span style=\"font-size: 16px; font-family: Domine; vertical-align: baseline; white-space: pre-wrap;\">очень серьезно относится к защите персональных данных Пользователя и третьих лиц и никогда не предоставляет персональную информацию Пользователя кому бы то ни было, кроме случаев, когда этого прямо требует уполномоченный государственный орган РФ (например, по письменному запросу суд%D</span></span></p>', '<p>нету</p>', 'G-Vgs1P9qH.w6gEbj0H_tqMKGHrX~8p8', 'x-9vvbtxSX.R57MThpN~fk3GNkGQ.Kht', 'sms-yslugi', '4bgfb76ghy87', 1);
 
 -- --------------------------------------------------------
 
@@ -3277,6 +3454,7 @@ INSERT INTO `Companies` (`id`, `frozen`, `organization`, `name`, `domains`, `lan
 -- Структура таблицы `Rights`
 --
 
+DROP TABLE IF EXISTS `Rights`;
 CREATE TABLE IF NOT EXISTS `Rights` (
   `itemname` varchar(64) NOT NULL,
   `type` int(11) NOT NULL,
@@ -3285,10 +3463,10 @@ CREATE TABLE IF NOT EXISTS `Rights` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `Rights`
+-- Очистить таблицу перед добавлением данных `Rights`
 --
 
-
+TRUNCATE TABLE `Rights`;
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
@@ -3311,3 +3489,8 @@ ALTER TABLE `AuthItemChild`
 --
 ALTER TABLE `Rights`
   ADD CONSTRAINT `rights_ibfk_1` FOREIGN KEY (`itemname`) REFERENCES `AuthItem` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+SET FOREIGN_KEY_CHECKS=1;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
