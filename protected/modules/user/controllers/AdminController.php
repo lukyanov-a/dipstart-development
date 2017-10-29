@@ -205,6 +205,7 @@ class AdminController extends Controller {
 			$model = $this->loadModel();
 			$profile = Profile::model()->findByPk($model->id);
 			$AuthAssignment = AuthAssignment::model()->findByAttributes(array('userid'=>$model->id));
+			ManagerLog::model()->deleteAll("`uid` = :uid", array(':uid' => $model->id));
 			if($AuthAssignment) $AuthAssignment->delete();
 			if($profile) $profile->delete();
 			$model->delete();

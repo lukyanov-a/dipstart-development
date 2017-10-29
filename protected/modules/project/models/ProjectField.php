@@ -7,6 +7,8 @@ class ProjectField extends CActiveRecord
 	const VISIBLE_ONLY_MANAGER=2;
 	const VISIBLE_AUTHOR_AND_MANAGER=3;
 	const VISIBLE_CUSTOMER_AND_MANAGER=4;
+	const VISIBLE_CORRECTOR_WITHOUT_EXECUTOR=5;
+	const VISIBLE_CORRECTOR_WITHOUT_EXECUTOR_AND_CUSTOMER=6;
 	
 	
 	const REQUIRED_NO = 0;
@@ -101,18 +103,34 @@ class ProjectField extends CActiveRecord
                 'order'=>'position',
             ),
             'forManager'=>array(
-                'condition'=>'visible='.self::VISIBLE_ALL.' OR visible='.self::VISIBLE_ONLY_MANAGER.' OR visible='.self::VISIBLE_AUTHOR_AND_MANAGER.' OR visible='.self::VISIBLE_CUSTOMER_AND_MANAGER,
+                'condition'=>'visible='.self::VISIBLE_ALL
+					.' OR visible='.self::VISIBLE_ONLY_MANAGER
+					.' OR visible='.self::VISIBLE_AUTHOR_AND_MANAGER
+					.' OR visible='.self::VISIBLE_CUSTOMER_AND_MANAGER
+					.' OR visible='.self::VISIBLE_CORRECTOR_WITHOUT_EXECUTOR
+					.' OR visible='.self::VISIBLE_CORRECTOR_WITHOUT_EXECUTOR_AND_CUSTOMER,
                 'order'=>'position',
             ),
             'forCustomer'=>array(
-                'condition'=>'visible='.self::VISIBLE_CUSTOMER_AND_MANAGER.' OR visible='.self::VISIBLE_ALL,
+                'condition'=>'visible='.self::VISIBLE_CUSTOMER_AND_MANAGER
+					.' OR visible='.self::VISIBLE_ALL
+					.' OR visible='.self::VISIBLE_CORRECTOR_WITHOUT_EXECUTOR,
                 'order'=>'position',
             ),
-            'forAuthor'=>array(
-                'condition'=>'visible='.self::VISIBLE_AUTHOR_AND_MANAGER.' OR visible='.self::VISIBLE_ALL,
-                'order'=>'position',
-            ),
-
+            'forAuthor'=> User::model()->isCorrector() ? 
+				array(
+					'condition'=>'visible='.self::VISIBLE_AUTHOR_AND_MANAGER
+						.' OR visible='.self::VISIBLE_ALL
+						.' OR visible='.self::VISIBLE_CORRECTOR_WITHOUT_EXECUTOR
+						.' OR visible='.self::VISIBLE_CORRECTOR_WITHOUT_EXECUTOR_AND_CUSTOMER,
+					'order'=>'position',
+				)
+				:
+				array(
+					'condition'=>'visible='.self::VISIBLE_AUTHOR_AND_MANAGER
+						.' OR visible='.self::VISIBLE_ALL,
+					'order'=>'position',
+				),
             'sort'=>array(
                 'order'=>'position',
             ),
@@ -148,6 +166,8 @@ class ProjectField extends CActiveRecord
 				self::VISIBLE_ALL => UserModule::t('For all'),
 				self::VISIBLE_NO => UserModule::t('Hidden'),
 				self::VISIBLE_ONLY_MANAGER => UserModule::t('Manager only'),
+				self::VISIBLE_CORRECTOR_WITHOUT_EXECUTOR => UserModule::t('For Corrector, not for Executor'),
+				self::VISIBLE_CORRECTOR_WITHOUT_EXECUTOR_AND_CUSTOMER => UserModule::t('For Corrector, not for Executor and Customer'),
 				self::VISIBLE_AUTHOR_AND_MANAGER => UserModule::t('Author and manager'),
 				self::VISIBLE_CUSTOMER_AND_MANAGER => UserModule::t('Customer and manager'),
 			),

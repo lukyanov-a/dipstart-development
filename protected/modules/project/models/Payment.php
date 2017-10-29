@@ -203,6 +203,12 @@ class Payment extends CActiveRecord {
 		$criteria->compare('approve',$this->approve);
 		$criteria->compare('method',$this->method,true);
 
+
+		if($data = Filters::getConditionAndParans('Payment', User::model()->getUserRole(), '')) {
+			$criteria->condition .= ' AND ('.$data['condition'].')';
+			$criteria->params = array_merge($criteria->params, $data['params']);
+		}
+
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 			'pagination'=>false,

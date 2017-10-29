@@ -225,6 +225,11 @@ $customer = $model->user;
 				<div class="col-xs-12 techspecBlock">
                     <input type="checkbox" name="technicalspec" id="technicalspec" data-id="<?=$model->id?>" <?=($model->technicalspec ? 'checked="checked"' : '')?> />
                     <label for="technicalspec"><?=ProjectModule::t('technicalspec')?></label>
+					<?=CHtml::dropDownList('technicalspec_type', '', CHtml::listData(ClassAction::model()->findAll(), 'id', 'name'), array(
+						'data-id' => $model->id,
+						'prompt'=> Yii::t('site','Select a type action'),
+						'style' => 'display: none'
+					)); ?>
 				</div>
 
 				<hr>
@@ -285,6 +290,17 @@ $customer = $model->user;
 				'hints'=>$hints,
             ));
             ?>
+			<div class="row zero-edge">
+				<?php
+				if($template = TemplatesSteps::model()->findAll()) { ?>
+					<p><?=Yii::t('site','Load from template')?>: 
+					<?php foreach (TemplatesSteps::model()->findAll() as $item) { ?>
+						<a class="add-templete-steps" onclick="add_part_templete(<?= $model->id; ?>,<?= $item->id ?>);"
+						   href="#"><?= $item->name ?></a>,
+					<?php } ?>
+					</p>
+				<?php }?>
+			</div>
             <div class="row zero-edge">
                 <div class="col-xs-12 btn btn-primary addPart" onclick="add_part(<?php echo $model->id;?>,'<?=ProjectModule::t('New stage')?>');">
                 	<?=ProjectModule::t('Add a stage')?>

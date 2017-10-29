@@ -21,6 +21,24 @@ $(document).ready(function () {
 	});
 });
 </script>
+<?php
+$filters = Filters::getFilters('Payment', User::model()->getUserRole());
+if(!empty($filters)) { ?>
+	<p style="margin: 15px 0 10px;"><?=Yii::t('site','Filters')?>:
+		<?php
+		$default = Filters::getDefaultFilters('Payment', User::model()->getUserRole());
+		$active = $default->id;
+		if(isset($_GET['filter'])) $active = $_GET['filter'];
+		foreach ($filters as $filter) { ?>
+			<a href="/project/payment/view/?filter=<?php echo $filter->id; ?>" class="filters-team <?php if($filter->id==$active) echo "active"; ?>">
+				<?php echo $filter->name; ?>
+			</a>
+		<?php } ?>
+		<a href="/project/payment/view/" class="filters-team">
+			<?php echo Yii::t('site','Reset filter'); ?>
+		</a>
+	</p>
+<?php } ?>
 <ul class="operations">
 	<li><a href="#" id="extremum-in"><?=ProjectModule::t('Getting money')?></a></li>
 	<li><a href="#" id="extremum-out"><?=ProjectModule::t('Pay for all')?></a></li>

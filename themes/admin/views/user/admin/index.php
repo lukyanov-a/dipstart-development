@@ -42,6 +42,25 @@ $('.search-form form').submit(function(){
 )); ?>
 </div><!-- search-form -->
 
+<?php
+$filters = Filters::getFilters('User', User::model()->getUserRole());
+if(!empty($filters)) {
+	?>
+	<p><?=Yii::t('site','Filters')?>:
+		<?php
+		$default = Filters::getDefaultFilters('User', User::model()->getUserRole());
+		$active = $default->id;
+		if(isset($_GET['filter'])) $active = $_GET['filter'];
+		foreach ($filters as $filter) { ?>
+			<a href="/user/admin/?filter=<?php echo $filter->id; ?>" class="filters-team <?php if($filter->id==$active) echo "active"; ?>">
+				<?php echo $filter->name; ?>
+			</a>
+		<?php } ?>
+		<a href="/user/admin/" class="filters-team">
+			<?php echo Yii::t('site','Reset filter'); ?>
+		</a>
+	</p>
+<?php } ?>
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'user-grid',
 	'dataProvider'=>$model->with('roles')->search(),

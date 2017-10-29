@@ -59,6 +59,24 @@ if (!isset($only_new)) {
 
 <div class="twin-tab">
 <div class="first-tab" id="first-tab">
+	<?php $filters = Filters::getFilters('CurrentProjects', User::model()->getUserRole());
+	if(!empty($filters)) {
+		?>
+		<p><?=Yii::t('site','Filters')?>:
+			<?php
+			$default = Filters::getDefaultFilters('CurrentProjects', User::model()->getUserRole());
+			$active = $default->id;
+			if(isset($_GET['filter'])) $active = $_GET['filter'];
+			foreach ($filters as $filter) { ?>
+				<a href="/project/zakaz/customerOrderList/?tab=0&filter=<?php echo $filter->id; ?>" class="filters-team <?php if($filter->id==$active) echo "active"; ?>">
+					<?php echo $filter->name; ?>
+				</a>
+			<?php } ?>
+			<a href="/project/zakaz/customerOrderList/?tab=0&filter=<?php echo $default->id; ?>" class="filters-team">
+				<?php echo Yii::t('site','Reset filter'); ?>
+			</a>
+		</p>
+	<?php } ?>
 <?php
 	}; //if (!isset($only_new)) {
 	$this->widget('zii.widgets.grid.CGridView', array(
@@ -78,6 +96,24 @@ if (!isset($only_new)) {
 ?>
 </div>
 <div class="second-tab" id="second-tab">
+	<?php $filters = Filters::getFilters('DoneProjects', User::model()->getUserRole());
+	if(!empty($filters)) {
+		?>
+		<p><?=Yii::t('site','Filters')?>:
+			<?php
+			$default = Filters::getDefaultFilters('DoneProjects', User::model()->getUserRole());
+			$active = $default->id;
+			if(isset($_GET['filter'])) $active = $_GET['filter'];
+			foreach ($filters as $filter) { ?>
+				<a href="/project/zakaz/customerOrderList/?tab=1&filter=<?php echo $filter->id; ?>" class="filters-team <?php if($filter->id==$active) echo "active"; ?>">
+					<?php echo $filter->name; ?>
+				</a>
+			<?php } ?>
+			<a href="/project/zakaz/customerOrderList/?tab=1&filter=<?php echo $default->id; ?>" class="filters-team">
+				<?php echo Yii::t('site','Reset filter'); ?>
+			</a>
+		</p>
+	<?php } ?>
 <?php
 	$this->widget('zii.widgets.grid.CGridView', array(
 		'id'=>'zakaz-grid-done',
@@ -111,7 +147,8 @@ if (!isset($only_new)) {
 			$('#first-tab-li').removeClass('active');
 			$('#second-tab-li').addClass('active');
 		};	
-	};	
+	};
+	<?php if(isset($_GET['tab'])) echo 'clickOnTab('.$_GET['tab'].');'; ?>
 	$(document).ready(function()
 	{
 		$('body').on('dblclick', '#zakaz-grid-done tbody tr', function(event)

@@ -106,6 +106,8 @@ return array(
 	'Visible' => 'Видимость',
 	'Registered users' => 'Зарегистрированные пользователи',
 	'For all' => 'Для всех',
+	'For Corrector, not for Executor' => 'Для техрука, скрыт для Исполнителя',
+	'For Corrector, not for Executor and Customer' => 'Для техрука, скрыт для Исполнителя и Заказчика',
 	'Only owner' => 'Только владелец',
 	'Hidden' => 'Скрыт',
 	'Profile Fields' => 'Поля профиля',
@@ -271,5 +273,8 @@ return array(
 	'An inscription on the field with a choice of services: for example "Choose a service" or "Type of service", etc.' => 'Надпись на поле с выбором услуг: например “Выберите услугу” или “Тип услуги” и тд',
 	'Error message (for example, "you did not select any of the categories")' => 'Сообщение об ошибке (например, “вы не выбрали ниодну из категорий”)',
 	'An inscription on the field with the choice of the name: for example "project name"' => 'Надпись на поле с выбором названия: например “название проекта”',
+
+	'Projects' => 'Заказы',
+	'Payment' => 'Бухгалтерия',
 );
 

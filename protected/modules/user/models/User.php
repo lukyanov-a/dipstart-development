@@ -216,6 +216,11 @@ class User extends CActiveRecord
 		$criteria->with = 'AuthAssignment';
 		$criteria->compare('AuthAssignment.itemname',$this->roles,true);
 
+		if($data = Filters::getConditionAndParans('User', User::model()->getUserRole(), '')) {
+			$criteria->condition = $data['condition'];
+			$criteria->params = $data['params'];
+		}
+
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
 			'pagination'=>array(

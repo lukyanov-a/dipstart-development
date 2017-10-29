@@ -152,3 +152,16 @@ div.events input[type="button"] + a:hover {
 .create-zakaz-block #showAll {
 	display: none;
 }
+
+.filters-team {
+	border-bottom: 1px dashed;
+	margin-right: 5px;
+}
+
+.filters-team.active {
+	border-bottom: 0;
+}
+
+#data_pick_load {
+	display: none;
+}

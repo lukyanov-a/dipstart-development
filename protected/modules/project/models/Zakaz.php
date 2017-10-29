@@ -73,6 +73,9 @@ class Zakaz extends CActiveRecord {
 			} elseif (User::model()->isAuthor() || Yii::app()->user->isGuest) {
 				$this->_model=ProjectField::model()->forAuthor()->findAll();
 			}
+			  elseif ($role == 'Corrector') {
+				$this->_model=ProjectField::model()->sort()->findAll();
+			}
 		}
 		return $this->_model;
 	}
@@ -233,6 +236,9 @@ class Zakaz extends CActiveRecord {
 			$fields = '';
 
 			$model=$this->getFields();
+			if(!$model)
+				$model=$this->getFields('Corrector');
+			
 			foreach ($model as $field) {
 				$field_rule = array();
 				$fields .= ' ,'.$field->varname;
@@ -386,6 +392,13 @@ class Zakaz extends CActiveRecord {
 				$criteria->compare('t.'.$tmp, $this->$tmp);
 			}
 		}
+
+
+		if($data = Filters::getConditionAndParans('Projects', User::model()->getUserRole())) {
+			$criteria->condition = $data['condition'];
+			$criteria->params = $data['params'];
+		}
+
 		if (!($this->status) or $this->status == 0){            /// Так ли делать
 			$criteria->addNotInCondition('status', array(5));
 		} else if ($this->status == -1) {
