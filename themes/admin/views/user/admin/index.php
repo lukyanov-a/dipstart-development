@@ -56,6 +56,9 @@ if(!empty($filters)) {
 				<?php echo $filter->name; ?>
 			</a>
 		<?php } ?>
+		<a href="/user/admin/" class="filters-team">
+			<?php echo Yii::t('site','Reset filter'); ?>
+		</a>
 	</p>
 <?php } ?>
 <?php $this->widget('zii.widgets.grid.CGridView', array(

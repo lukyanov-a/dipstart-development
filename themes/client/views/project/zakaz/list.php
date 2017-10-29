@@ -93,6 +93,9 @@ if (User::model()->isCorrector() && $tech) {
 					<?php echo $filter->name; ?>
 				</a>
 			<?php } ?>
+			<a href="/project/zakaz/ownList/?tab=0&filter=<?php echo $default->id; ?>" class="filters-team">
+				<?php echo Yii::t('site','Reset filter'); ?>
+			</a>
 		</p>
 	<?php } ?>
 <?php
@@ -123,6 +126,9 @@ if (!isset($only_new)) {
 					<?php echo $filter->name; ?>
 				</a>
 			<?php } ?>
+			<a href="/project/zakaz/ownList/?tab=1&filter=<?php echo $default->id; ?>" class="filters-team">
+				<?php echo Yii::t('site','Reset filter'); ?>
+			</a>
 		</p>
 	<?php } ?>
 <?php

@@ -161,3 +161,7 @@ div.events input[type="button"] + a:hover {
 .filters-team.active {
 	border-bottom: 0;
 }
+
+#data_pick_load {
+	display: none;
+}
