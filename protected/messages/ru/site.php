@@ -376,6 +376,7 @@ return array(
 	'calculation' => 'Расчет',
 	'Award' => 'Премию/штраф',
 	'Accrue' => 'Начислить',
+	'Accrue salary' => 'Начислить зарплату',
 	'Payment for actions' => 'Оплата за действия',
 	'Create actions' => 'Создать действие',
 	'Calculate the salary of an employee' => 'Начислить зарплату сотруднику',
