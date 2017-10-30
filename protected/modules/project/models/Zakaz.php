@@ -65,7 +65,7 @@ class Zakaz extends CActiveRecord {
 	public function getFields($role = false) {
 		if (!$this->_model || $role) {
 			if (get_class(Yii::app())=='CConsoleApplication' || User::model()->isAdmin()) {
-				$this->_model=ProjectField::model()->sort()->findAll();
+				$this->_model=ProjectField::model()->findAll(); //sort()->findAll(); просит Rights.php и getAuthManager
 			} elseif (User::model()->isManager()) {
 				$this->_model=ProjectField::model()->forManager()->findAll();
 			} elseif (User::model()->isCustomer() || $role == 'Customer') {

@@ -1,4 +1,6 @@
 <?php
+date_default_timezone_set('Europe/Moscow');
+
 return array(
   
     'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
@@ -62,4 +64,5 @@ return array(
             'count' => 2000,
         ],
     ),
+	'timeZone' => 'Europe/Moscow',
 );
