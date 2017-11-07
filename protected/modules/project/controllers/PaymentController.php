@@ -45,7 +45,8 @@ class PaymentController extends Controller {
 		}
 
 		$data = $model->getTotalData();
-			
+		$profit = $model->getTotalProfitData();
+
 		$data = array(
 			'in' => array(
 				'sum' => empty($data) ? 0 : $data[0]['s'],
@@ -56,11 +57,12 @@ class PaymentController extends Controller {
 				'count' => empty($data) ? 0 : $data[1]['ctn'],
 			)
 		);
-		
+
 		$this->render('admin',array(
 			'model'=>$model,
 			'data'=>$data,
 			'test'=>$test,
+			'profit'=>$profit
 		));
     }
 	

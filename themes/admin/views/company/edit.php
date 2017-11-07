@@ -155,6 +155,11 @@ Yii::app()->getClientScript()->registerScriptFile('/js/tinymce/tinymce.min.js');
 				<?php echo $form->textField($model,'contacts',array('size'=>60,'maxlength'=>255)); ?>
 				<?php echo $form->error($model,'contacts'); ?>
 			</div>
+			<div class="form-item">
+				<?php echo $form->labelEx($model,'analysis'); ?>
+				<?php echo $form->checkBox($model,'analysis'); ?>
+				<?php echo $form->error($model,'analysis'); ?>
+			</div>
 			<div class="form-save">
 				<?php echo CHtml::submitButton(UserModule::t('Save'), array ('class' => 'btn btn-primary')); ?>
 			</div>
