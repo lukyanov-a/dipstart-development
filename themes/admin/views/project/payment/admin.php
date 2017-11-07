@@ -13,11 +13,18 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->theme->baseUrl.'/j
 $(document).ready(function () {
 	$('#extremum-in').click(function() {
 		$('#in').show();
-		$('#out').hide();		
+		$('#out').hide();
+		$('#analysis').hide();
 	});
 	$('#extremum-out').click(function(){
 		$('#in').hide();
 		$('#out').show();
+		$('#analysis').hide();
+	});
+	$('#extremum-analysis').click(function(){
+		$('#out').hide();
+		$('#in').hide();
+		$('#analysis').show();
 	});
 });
 </script>
@@ -42,6 +49,7 @@ if(!empty($filters)) { ?>
 <ul class="operations">
 	<li><a href="#" id="extremum-in"><?=ProjectModule::t('Getting money')?></a></li>
 	<li><a href="#" id="extremum-out"><?=ProjectModule::t('Pay for all')?></a></li>
+	<li><a href="#" id="extremum-analysis"><?=ProjectModule::t('The financial analysis')?></a></li>
 </ul>
 <div id="in">
 	<h3><?=ProjectModule::t('Getting money')?></h3>
@@ -405,4 +413,38 @@ if(!empty($filters)) { ?>
 	Количество: <b><?= $data['out']['count'] ?></b>
 	<br>
 	Сумма: <b><?= $data['out']['sum'] ?>&nbsp;р.</b>
+</div>
+
+<div id="analysis" style="display: none;">
+	<h3><?=ProjectModule::t('The financial analysis')?></h3>
+	<table class="table table-striped" style="text-align: justify; width: 100%;">
+		<thead>
+			<th><?=ProjectModule::t('Date')?></th>
+			<th><?=ProjectModule::t('Income')?></th>
+			<th><?=ProjectModule::t('Expenditure')?></th>
+			<th><?=ProjectModule::t('Profit')?></th>
+		</thead>
+		<?php
+		$totalProfit = 0;
+		$totalIncome = 0;
+		$totalExpenditure = 0;
+		foreach ($profit as $item) {
+			$totalProfit += $item['total'];
+			$totalIncome += $item['s1'];
+			$totalExpenditure += $item['s2'];
+			?>
+			<tr>
+				<td><?php echo date("Y-m", strtotime($item['date'])); ?></td>
+				<td><?php echo $item['s1']; ?></td>
+				<td><?php echo $item['s2']; ?></td>
+				<td><?php echo $item['total']; ?></td>
+			</tr>
+		<?php } ?>
+		<tr>
+			<td><b><?=ProjectModule::t('Total')?></b></td>
+			<td><b><?php echo $totalIncome; ?></b></td>
+			<td><b><?php echo $totalExpenditure; ?></b></td>
+			<td><b><?php echo $totalProfit; ?></b></td>
+		</tr>
+	</table>
 </div>
