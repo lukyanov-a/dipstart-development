@@ -158,6 +158,35 @@ class Payment extends CActiveRecord {
 	public function getTotalData() { // Is it need ?
 		return Yii::app()->db->createCommand("SELECT payment_type, SUM(summ) AS s, COUNT(*) AS ctn FROM `" . self::tableName() . "` GROUP BY payment_type ORDER BY payment_type")->queryAll();
 	}
+
+	public function getTotalProfitData($cache=true, $date=false) {
+		$parametr = '';
+		if($date) {
+			$parametr = 'WHERE MONTH(T1.pay_date)='.date("m").' AND YEAR(T1.pay_date)='.date("Y");
+		}
+		$sql = "SELECT IFNULL(T1.summ, 0) AS s1, 
+					IFNULL(T2.summ, 0) AS s2, 
+					(IFNULL((T1.summ), 0)-IFNULL(SUM(T2.summ), 0)) AS total, 
+					T1.pay_date as date
+			FROM (
+				SELECT SUM(summ) AS summ, pay_date 
+				FROM `" . self::tableName() . "` 
+				WHERE pay_date IS NOT NULL AND payment_type=0 GROUP BY YEAR(pay_date), MONTH(pay_date)
+			) AS T1 
+			LEFT JOIN (
+				SELECT SUM(summ) AS summ, pay_date 
+				FROM `" . self::tableName() . "` 
+				WHERE pay_date IS NOT NULL AND payment_type<>0 GROUP BY YEAR(pay_date), MONTH(pay_date)
+			) AS T2 ON MONTH(T2.pay_date)=MONTH(T1.pay_date) AND YEAR(T2.pay_date)=YEAR(T1.pay_date)
+			".$parametr."
+			GROUP BY YEAR(T1.pay_date), MONTH(T1.pay_date) ORDER BY T1.pay_date DESC";
+		if($cache) {
+			$dependency = new CDbCacheDependency("SELECT MAX(pay_date) FROM `" . self::tableName() . "`");
+			return Yii::app()->db->cache(3600 * 24 * 30, $dependency)->createCommand($sql)->queryAll();
+		} else {
+			return Yii::app()->db->createCommand($sql)->queryAll();
+		}
+	}
 	
 	public function pageTotal($provider) {
 		$total=0;

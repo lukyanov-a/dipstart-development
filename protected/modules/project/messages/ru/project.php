@@ -322,5 +322,10 @@ return array(
 	'Executor is not assigned' => 'Исполнитель не назначен',
     
     'You can unsubscribe...' => 'Вы можете отказаться от подписки в настройках профиля',
-	'Need Action' => 'Требуется действие'
+	'Need Action' => 'Требуется действие',
+	'The financial analysis' => 'Финансовый анализ',
+	'Expenditure' => 'Расход',
+	'Income' => 'Доход',
+	'Profit' => 'Прибыль',
+	'Total' => 'Всего',
 );

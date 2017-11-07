@@ -19,7 +19,7 @@ class Company extends CActiveRecord {
 			array('Payment2ChekoutHash', 'length', 'max'=>64),
 			array('organization, Payment2Chekout', 'numerical', 'integerOnly' => true),
 			array('language','in','range'=>array('en','ru'),'allowEmpty'=>false),
-			array('frozen, PaymentCash, module_tree', 'in', 'range' => array(0, 1),'allowEmpty'=>false),
+			array('frozen, PaymentCash, module_tree, analysis', 'in', 'range' => array(0, 1),'allowEmpty'=>false),
 			array('fileupload', 'file', 'types'=>'jpg,jpeg,gif,png,woff', 'maxSize'=>'409600', 'allowEmpty'=>true),
 			array('iconupload', 'file', 'types'=>'ico', 'maxSize'=>'204800', 'allowEmpty'=>true),
 			array('header, text4guests, text4customers, agreement4customers, agreement4executors', 'length', 'max'=>65535),
@@ -27,7 +27,7 @@ class Company extends CActiveRecord {
 			array('telfin_id, telfin_secret, smsc_login, smsc_passwd', 'length', 'max'=>32),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, frozen, organization, name, domains, language, supportEmail, PaymentCash, Payment2Chekout, Payment2ChekoutHash, FrontPage, icon, logo, header, text4guests, text4customers, agreement4customers, agreement4executors, WebmasterFirstOrderRate, WebmasterSecondOrderRate, WebmasterFirstExecutorOrderRate, WebmasterSecondExecutorOrderRate, telfin_id, telfin_secret, smsc_login, smsc_passwd, module_tree', 'safe', 'on'=>'search'),
+			array('id, frozen, organization, name, domains, language, supportEmail, PaymentCash, Payment2Chekout, Payment2ChekoutHash, FrontPage, icon, logo, header, text4guests, text4customers, agreement4customers, agreement4executors, WebmasterFirstOrderRate, WebmasterSecondOrderRate, WebmasterFirstExecutorOrderRate, WebmasterSecondExecutorOrderRate, telfin_id, telfin_secret, smsc_login, smsc_passwd, module_tree, analysis', 'safe', 'on'=>'search'),
 		);
 	}
 	public function attributeLabels() {
@@ -60,6 +60,7 @@ class Company extends CActiveRecord {
 			'smsc_passwd'                      => Yii::t('site','smsc.ru api password'),
 			'module_tree'                      => Yii::t('site','Tree structure company'),
 			'contacts'                      => Yii::t('site','Contact details'),
+			'analysis'                      => Yii::t('site','make financial analysis available'),
 		);
 	}
 	public static function search_by_domain($domain) {
@@ -115,6 +116,10 @@ class Company extends CActiveRecord {
 	public static function getWebmasterSecondOrderRate() {
 		if(!self::$orgz) self::getCompany();
 		return self::$orgz->WebmasterSecondOrderRate;
+	}
+	public static function getAnalysis() {
+		if(!self::$orgz) self::getCompany();
+		return self::$orgz->analysis;
 	}
 	public static function getWebmasterFirstExecutorOrderRate() {
 		if(!self::$orgz) self::getCompany();
