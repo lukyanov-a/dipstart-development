@@ -471,4 +471,6 @@ return array(
 	'Reset filter' => 'Сбросить фильтр',
 
 	'make financial analysis available' => 'сделать финансовый анализ доступным',
+
+	'Continue' => 'Продолжить',
 );

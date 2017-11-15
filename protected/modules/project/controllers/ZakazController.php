@@ -491,38 +491,37 @@ class ZakazController extends Controller {
      * @param $id
      * @author Emericanec
      */
-    public function actionPreview($id)
+    public function actionPreview($id, $is_managerSale=false)
     {
-            
-        $event = Events::model()->findByPk($id);
+		if($is_managerSale) {
+			Events::model()->forSalesManager()->deleteAll("`event_id` = :event_id",['event_id'=>$id]);
+			$this->redirect(['/user/admin/update', 'id' => $id]);
+		}
+		else
+			$events = Events::model()->forManager()->findByAttributes(['event_id' => $id]);
 
-        if (!$event) {
+        if (!$events) {
             throw new CHttpException(404, "Событие не найдено");
         }
-        
-        if ($event->type == EventHelper::TYPE_CUSTOMER_REGISTRED || $event->type == EventHelper::TYPE_ORDER_SALES_MANAGER_INFORMED) {
-            $rid=$event->event_id;
-            $event->delete();
-            $this->redirect(['/user/admin/update', 'id' => $rid]);
-        }
-        if ($event->type == EventHelper::TYPE_MESSAGE) {
-            $rid=$event->event_id;
-            $event->delete();
-            $this->redirect(['/project/zakaz/update', 'id' => $rid]);
-        }
+		$next = false;
+		
+		foreach ($events as $event) {
+			if ($event->type == EventHelper::TYPE_MESSAGE) {
+				$next = Yii::app()->createUrl('/project/zakaz/update', ['id' => $event->event_id]);
+			}
+		}
 
-        $model = Zakaz::model()->resetScope()->findByPk($event->event_id);
+        $model = Zakaz::model()->resetScope()->findByPk($id);
         if (!$model->is_active) {
 			$user = User::model()->findByPk($model->user_id);
             $this->render('preview', array(
                 'model' => $model,
 				'user' => $user,
-                'event' => $event
+                'event' => $next
             ));
         } else {
-            $rid=$event->event_id;
-            $event->delete();
-            $this->redirect(['/project/zakaz/update', 'id' => $rid]);
+			Events::model()->forManager()->deleteAll("`event_id` = :event_id",['event_id'=>$id]);
+            $this->redirect(['/project/zakaz/update', 'id' => $id]);
         }
     }
     /**
@@ -530,16 +529,16 @@ class ZakazController extends Controller {
      * @param $answer
      * @author Emericanec
      */
-    public function actionModerationAnswer($id, $event_id, $answer){
+    public function actionModerationAnswer($id, $event_next, $answer){
         $model = Zakaz::model()->resetScope()->findByPk($id);
-        $event = Events::model()->findByPk($event_id);
-        if(!$model->is_active && $event) {
+        $events = Events::model()->forManager()->findByAttributes(['event_id'=>$id]);
+        if(!$model->is_active && $events) {
             
             if ($answer == 1) {
                 $model->is_active = 1;
                 
                 if($model->save()) {
-                    $event->delete();
+					Events::model()->forManager()->deleteAll("`event_id` = :event_id",['event_id'=>$id]);
 					
 					// Заказчику проект принят					
 					$type_id = Emails::TYPE_12;
@@ -582,11 +581,16 @@ class ZakazController extends Controller {
             } else {
                 // если нет то просто удаляем
                 $model->delete();
-                $event->delete();
-                $this->redirect(Yii::app()->createUrl('project/event'));
+				Events::model()->forManager()->deleteAll("`event_id` = :event_id",['event_id'=>$id]);
+				if($event_next)
+					$this->redirect($event_next);
+				else
+                	$this->redirect(Yii::app()->createUrl('project/event'));
             }
         }else{
-            $event->delete();
+			Events::model()->forManager()->deleteAll("`event_id` = :event_id",['event_id'=>$id]);
+			if($event_next)
+				$this->redirect($event_next);
             throw new CHttpException("Заказ не найден или его уже отмодерировали");
         }
     }

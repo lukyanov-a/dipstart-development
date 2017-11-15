@@ -29,17 +29,18 @@ class ModerateController extends Controller
 	}*/
 	
 
-    public function actionIndex($id)
+    public function actionIndex($id, $next = false)
     {
         $criteria = new CDbCriteria();
-        $criteria->compare('event_id', $id);
+        $criteria->compare('id_record', $id);
         
         $dataProvider = new CActiveDataProvider('Moderate', [
             'criteria' => $criteria
         ]);
         
         $this->render('index', [
-            'dataProvider' => $dataProvider
+            'dataProvider' => $dataProvider,
+            'next' => $next
         ]);
     }
     
