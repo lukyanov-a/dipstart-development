@@ -45,6 +45,9 @@
 ]) ?>
 
 <?php
+if($next)
+    echo CHtml::link(Yii::t('site', 'Continue'), $next, array('class' => 'btn btn-primary'));
+
 Yii::app()->clientScript->registerScript('updateStatus',"
 	$('.sendData').on('click', function() {
 		$.post($(this).attr('href'));

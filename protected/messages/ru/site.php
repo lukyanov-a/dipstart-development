@@ -469,6 +469,6 @@ return array(
 	
 	'my_value' => 'Свое значение',
 	'Reset filter' => 'Сбросить фильтр',
-
 	'make financial analysis available' => 'сделать финансовый анализ доступным',
+	'Continue' => 'Продолжить',
 );
