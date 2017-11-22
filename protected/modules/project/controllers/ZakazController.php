@@ -495,6 +495,7 @@ class ZakazController extends Controller {
     {
 		if($is_managerSale) {
 			Events::model()->forSalesManager()->deleteAll("`event_id` = :event_id",['event_id'=>$id]);
+			Yii::app()->cache->delete(Events::getCacheKey('sales-manager'));
 			$this->redirect(['/user/admin/update', 'id' => $id]);
 		}
 		else
@@ -521,6 +522,7 @@ class ZakazController extends Controller {
             ));
         } else {
 			Events::model()->forManager()->deleteAll("`event_id` = :event_id",['event_id'=>$id]);
+			Yii::app()->cache->delete(Events::getCacheKey());
             $this->redirect(['/project/zakaz/update', 'id' => $id]);
         }
     }
@@ -539,7 +541,7 @@ class ZakazController extends Controller {
                 
                 if($model->save()) {
 					Events::model()->forManager()->deleteAll("`event_id` = :event_id",['event_id'=>$id]);
-					
+					Yii::app()->cache->delete(Events::getCacheKey());
 					// Заказчику проект принят					
 					$type_id = Emails::TYPE_12;
 					$email = new Emails;
@@ -582,6 +584,7 @@ class ZakazController extends Controller {
                 // если нет то просто удаляем
                 $model->delete();
 				Events::model()->forManager()->deleteAll("`event_id` = :event_id",['event_id'=>$id]);
+				Yii::app()->cache->delete(Events::getCacheKey());
 				if($event_next)
 					$this->redirect($event_next);
 				else
@@ -589,6 +592,7 @@ class ZakazController extends Controller {
             }
         }else{
 			Events::model()->forManager()->deleteAll("`event_id` = :event_id",['event_id'=>$id]);
+			Yii::app()->cache->delete(Events::getCacheKey());
 			if($event_next)
 				$this->redirect($event_next);
             throw new CHttpException("Заказ не найден или его уже отмодерировали");
