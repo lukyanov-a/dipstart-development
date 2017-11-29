@@ -8,9 +8,12 @@
 $items = array();
 $role = User::model()->getUserRole();
 $menuprofile = array('label'=>Yii::t('site','Logout'). ' ('.Yii::app()->user->name.')', 'url'=>array('/user/logout'));
+$itemprofile = array();
+if($role=='Admin')
+	$itemprofile[] = array('label'=>Yii::t('site','Settings'), 'url'=>array('/user/admin/settings'));
 if(count($user_roles = User::model()->getUserRoleArr())>1) {
-	$itemprofile = array();
 	foreach ($user_roles as $user_role) {
+		var_dump($user_role);
 		if(in_array($user_role, User::model()->PRIORITY_ROLES)) {
 			$itemprofile[] = array('label' => Yii::t('site', $user_role), 'url' => array('/site/setrole/', 'role' => $user_role));
 		}
@@ -57,7 +60,9 @@ switch ($role){
 			array('label'=>Yii::t('site','Fields lists'), 'url'=>array('/catalog/admin')),
 			array('label'=>Yii::t('site','Delivery'), 'url'=>array('/project/emails')),
 		));
-		$items[] = $menuprofile;
+		if(count($itemprofile)<2)
+			$itemprofile[] = array('label'=>Yii::t('site','Logout'), 'url'=>array('/user/logout'));
+		$items[] = array('label'=>Yii::t('site','My profile'), 'url'=>array('#'), 'items' => $itemprofile);
 		break;
     case 'Manager':
         $items[] = array('label'=>Yii::t('site','Users'), 'url'=>array('/user/admin'));

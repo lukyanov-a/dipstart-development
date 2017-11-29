@@ -26,7 +26,7 @@ class AdminController extends Controller {
 				'users'=>UserModule::getAdmins(),
 			),*/
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('view','admin','delete','create','update'),
+				'actions'=>array('view','admin','delete','create','update', 'settings'),
 				'users'=>array('@'),
 			),
 			array('deny',  // deny all users
@@ -216,7 +216,25 @@ class AdminController extends Controller {
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
-	
+
+	public function actionSettings()
+	{
+		$model = ProfileSetting::model()->findByAttributes(array('user_id'=>Yii::app()->user->id));
+		if(!$model) {
+			$model = new ProfileSetting();
+			$model->user_id = Yii::app()->user->id;
+		}
+
+		if(isset($_POST['ProfileSetting'])) {
+			$settings = $_POST['ProfileSetting'];
+			$model->attributes = $settings;
+			if($model->save()) {
+				$this->refresh();
+			}
+		}
+
+		$this->render('settings',array('model'=>$model));
+	}
 	/**
 	 * Performs the AJAX validation.
 	 * @param CModel the model to be validated

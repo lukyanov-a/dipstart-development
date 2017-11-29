@@ -901,7 +901,7 @@ class ZakazController extends Controller {
 		} else {
 			$order->technicalspec = $val;
 		}
-
+		$order->technicalspec_date = date("Y-m-d H:i:s");
 		$order->save();
 
 		if ($val)
