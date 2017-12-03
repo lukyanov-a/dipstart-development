@@ -13,7 +13,6 @@ if($role=='Admin')
 	$itemprofile[] = array('label'=>Yii::t('site','Settings'), 'url'=>array('/user/admin/settings'));
 if(count($user_roles = User::model()->getUserRoleArr())>1) {
 	foreach ($user_roles as $user_role) {
-		var_dump($user_role);
 		if(in_array($user_role, User::model()->PRIORITY_ROLES)) {
 			$itemprofile[] = array('label' => Yii::t('site', $user_role), 'url' => array('/site/setrole/', 'role' => $user_role));
 		}
