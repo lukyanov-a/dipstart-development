@@ -116,7 +116,7 @@ class NotificationCommand extends CConsoleCommand {
         $user = User::model()->findByPk($to);
         if($user && $user->phone_number) {
             $title = $this->getTitle($role);
-            include_once "../extensions/yiichat/smsc_api.php";
+            include_once __DIR__."/../extensions/yiichat/smsc_api.php";
             send_sms(str_replace(['+', '-'], '', $user->phone_number), $title);
         }
     }

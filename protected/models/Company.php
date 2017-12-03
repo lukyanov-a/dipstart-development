@@ -72,6 +72,18 @@ class Company extends CActiveRecord {
 	}
 	public static function setActive($company) {
 		self::$orgz = $company;
+		Yii::app()->language = $company->language;
+		User::model()->refreshMetaData();
+		AuthAssignment::model()->refreshMetaData();
+		ProfileField::model()->refreshMetaData();
+		Profile::model()->refreshMetaData();
+		Zakaz::model()->refreshMetaData();
+		ZakazParts::model()->refreshMetaData();
+		Events::model()->refreshMetaData();
+		Templates::model()->refreshMetaData();
+		Emails::model()->refreshMetaData();
+		Payment::model()->refreshMetaData();
+		ProfileSetting::model()->refreshMetaData();
 	}
 	public static function getCompany() {
 		if(!self::$orgz) self::$orgz = self::search_by_domain($_SERVER['SERVER_NAME']);

@@ -9,16 +9,6 @@ class EventsCommand extends CConsoleCommand {
 		
 		foreach($companies as $company) {
 			Company::setActive($company);
-			Yii::app()->language = Company::getLanguage();
-			User::model()->refreshMetaData();
-			AuthAssignment::model()->refreshMetaData();
-			ProfileField::model()->refreshMetaData();
-			Profile::model()->refreshMetaData();
-			Zakaz::model()->refreshMetaData();
-			ZakazParts::model()->refreshMetaData();
-			Events::model()->refreshMetaData();
-			Templates::model()->refreshMetaData();
-			Emails::model()->refreshMetaData();
 			self::executor();
 			self::manager();
 			self::send_deffered_emails();
