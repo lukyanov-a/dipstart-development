@@ -82,6 +82,11 @@ if(!empty($filters)) {
 			'value' => 'CHtml::link(UHtml::markSearch($data,"email"),array("admin/update","id"=>$data->id))',
 			//'value'=>'CHtml::link(UHtml::markSearch($data,"email"), "mailto:".$data->email)',
 		),
+		array(
+			'name'=>'phone_number',
+			'type'=>'raw',
+			'value' => 'CHtml::link(UHtml::markSearch($data,"phone_number"),array("admin/update","id"=>$data->id))',
+		),
 		'create_at',
 		'lastvisit_at',
 		array(

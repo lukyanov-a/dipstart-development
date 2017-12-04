@@ -26,6 +26,8 @@ class Payment extends CActiveRecord {
 	const OUTCOMING_WEBMASTER = 2;
 	const OUTCOMING_CUSTOMER  = 3; // Refound
 	const OUTCOMING_PARTNER_FOR_EXECUTOR = 4;
+	const OUTCOMING_MANAGER   = 5;
+	const OUTCOMING_CORRECTOR = 6;
 	
 	// Payment statuses
 	const FREE = 0;
@@ -98,6 +100,8 @@ class Payment extends CActiveRecord {
 			self::OUTCOMING_EXECUTOR  => ProjectModule::t('Outcoming to executor'),
 			self::OUTCOMING_WEBMASTER => ProjectModule::t('Outcoming to webmaster'),
 			self::OUTCOMING_CUSTOMER  => ProjectModule::t('Outcoming refound'),
+			self::OUTCOMING_MANAGER   => ProjectModule::t('Outcoming to administrator'),
+			self::OUTCOMING_CORRECTOR => ProjectModule::t('Outcoming to corrector'),
 		);
 	}
     public function performType() {

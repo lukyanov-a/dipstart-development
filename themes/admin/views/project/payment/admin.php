@@ -240,7 +240,7 @@ if(!empty($filters)) { ?>
 <div id="out" style="display: none;">
 	<h3><?=ProjectModule::t('Pay for all')?></h3>
 	<?php
-	$provider = $model->search(array(1,2,3,4));
+	$provider = $model->search(array(1,2,3,4,5,6));
 	$this->widget('zii.widgets.grid.CGridView', array(
 		'id'=>'buh_transaction_out',
 		'dataProvider' => $provider,
@@ -302,7 +302,8 @@ if(!empty($filters)) { ?>
 				}
 			),
 			array(
-				'name' => 'profileUser.AuthAssignment.AuthItem.description',
+				'name' => 'payment_type',
+				'value' => '$data->performType()',
 			),
 			array(
 				'name' => 'summ',
