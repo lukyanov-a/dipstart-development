@@ -85,9 +85,14 @@ class ZarplataController extends Controller
             $val = $_POST['employee'];
             $user_id = $_POST['users_id'];
 
+			$buh = new Payment;
             if($val=='Corrector') {
                 $summ = $this->calculate($user_id, true);
-            } else $summ = $this->calculateManeger($user_id, true);
+				$buh->payment_type = Payment::OUTCOMING_CORRECTOR;
+            } else {
+				$summ = $this->calculateManeger($user_id, true);
+				$buh->payment_type = Payment::OUTCOMING_MANAGER;
+			}
             $award = 0;
             if(isset($_POST['award']) && !empty($_POST['award'])) {
                 $award = (int)$_POST['award'];
@@ -97,13 +102,11 @@ class ZarplataController extends Controller
             $user = User::model()->with('profile')->findByPk($user_id);
             $manag = User::model()->findByPk(Yii::app()->user->id);
 
-            $buh = new Payment;
             $buh->approve = 0;
             $buh->receive_date = date('Y-m-d H:i:s');
             $buh->theme = Yii::t('site','Payment for actions');
             $buh->user = $user->email;
             $buh->summ = $summ;
-            $buh->payment_type = Payment::OUTCOMING_EXECUTOR;
             $buh->manager = $manag->email;
             $buh->save();
 

@@ -265,6 +265,8 @@ return array(
 	'Outcoming to executor' => 'Исходящий исполнителю',
 	'Outcoming to webmaster' => 'Исходящий web-мастеру',
 	'Outcoming refound' => 'Исходящий возврат',
+	'Outcoming to administrator' => 'Исходящий администратору',
+	'Outcoming to corrector' => 'Исходящий тех.руку',
 	'No data' => 'Нет данных',
 	'Incomming' => 'Входящие',
 	'Outgouing' => 'Исходящие',
