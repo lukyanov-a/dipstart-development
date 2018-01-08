@@ -7,17 +7,17 @@
 			array(
 				'name' => 'id',
 				'type'=>'raw',
-				'value' => 'CHtml::link(CHtml::encode($data->id),array("admin/update","id"=>$data->id))',
+				'value' => 'CHtml::link(CHtml::encode($data->id),array("/project/zakaz/update","id"=>$data->id))',
 			),
 			array(
 				'name' => 'title',
 				'type'=>'raw',
-				'value' => 'CHtml::link(UHtml::markSearch($data,"title"),array("admin/update","id"=>$data->id))',
+				'value' => 'CHtml::link(UHtml::markSearch($data,"title"),array("/project/zakaz/update","id"=>$data->id))',
 			),
 			array(
 				'name'=>'status',
 				'type'=>'raw',
-				'value' => 'CHtml::link(UHtml::markSearch($data,"status"),array("admin/update","id"=>$data->id))',
+				'value' => 'CHtml::link(UHtml::markSearch($data,"status"),array("/project/zakaz/update","id"=>$data->id))',
 			),
 		),
 	)); ?>
