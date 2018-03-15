@@ -2,7 +2,7 @@
 <?php
 function echoTree($trees, $childs, $node, $n = 0){
 	echo '<li><a href="'.Yii::app()->createUrl('/project/chat',array('orderId'=>$node)).'">'.$node.': '.$trees[$node].'</a>';
-	if(count($childs[$node])) foreach($childs[$node] as $child) {
+	if(is_array($childs[$node]) && count($childs[$node])) foreach($childs[$node] as $child) {
 		echo '<ul>';
 		echoTree($trees, $childs, $child, $n + 1);
 		echo '</ul>';
