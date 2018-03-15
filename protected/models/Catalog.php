@@ -111,7 +111,7 @@ class Catalog extends CActiveRecord {
 				$tree[$item->id] = $item->cat_name;
 			}
 		}
-		if (count($tree) == 0) {
+		if (!is_array($tree) || count($tree) == 0) {
 			throw new Exception('Error: one of lists is empty.');
 		}
 		return $tree;

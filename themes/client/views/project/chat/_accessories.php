@@ -13,7 +13,7 @@
 	</div>
 
 	<?php
-		if (count($buttonTemplates))
+		if (is_array($buttonTemplates) && count($buttonTemplates))
 		{
 	?>
 			<div class="message-buttons">

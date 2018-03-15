@@ -180,7 +180,8 @@ class CHttpCacheFilter extends CFilter
 	 */
 	protected function send304Header()
 	{
-		header('HTTP/1.1 304 Not Modified');
+		$httpVersion=Yii::app()->request->getHttpVersion();
+		header("HTTP/$httpVersion 304 Not Modified");
 	}
 
 	/**
@@ -201,6 +202,7 @@ class CHttpCacheFilter extends CFilter
 	/**
 	 * Generates a quoted string out of the seed
 	 * @param mixed $seed Seed for the ETag
+	 * @return string Quoted string serving as ETag
 	 */
 	protected function generateEtag($seed)
 	{

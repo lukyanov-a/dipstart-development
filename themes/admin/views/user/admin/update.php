@@ -88,7 +88,7 @@ $this->widget('zii.widgets.CMenu', array(
 			<?php //echo CHtml::link(UserModule::t('Edit assignments'), $this->createAbsoluteUrl('/rights/assignment/user',array('id'=>$model->id))).'<br /><br />'; ?>
 		</div>
 	<div>
-<? } ?>
+<?php } ?>
 <?php
 	if ($model->isSalesManager() || $model->isAdmin()) {
 		?>
@@ -101,7 +101,7 @@ $this->widget('zii.widgets.CMenu', array(
 			echo $form->errorSummary($profile); ?>
             <span>
                 <?php echo $form->labelEx($profile, 'manager_informed'); ?>:&nbsp;
-				<?//=Tools::hint($hints['Zakaz_manager_informed'], 'hint-block __manager_informed')?>
+				<?php//=Tools::hint($hints['Zakaz_manager_informed'], 'hint-block __manager_informed')?>
             </span>
             <?php
             $this->widget('ext.juidatetimepicker.EJuiDateTimePicker', array(

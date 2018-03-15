@@ -196,7 +196,7 @@ $customer = $model->user;
 				echo $author->phone_number; ?></p></div><?php } ?>
 			<?php } else { ?>
 				<div class="name"><p><?=ProjectModule::t('Executor is not assigned')?></p></div>
-			<? } ?>
+			<?php } ?>
         </div>
         
     </div>

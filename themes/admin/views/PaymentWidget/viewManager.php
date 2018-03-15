@@ -85,7 +85,7 @@
 		</td>
 		</table>
 	</div>
-	<? //if($model->to_receive>0){ ?>
+<?php //if($model->to_receive>0){ ?>
 	<div class="confirm-the-payment">
 		<span><?=ProjectModule::t('Confirm payment from client:')?></span>
 		<button class="btn instant-send-buttons send_managers_approve bg-green"><img src="<?=Yii::app()->theme->baseUrl?>\images\ok.png" title="<?=ProjectModule::t('Confirm')?>"></button>

@@ -4,7 +4,7 @@
 		<i><svg height="16" version="1.1" width="16" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: relative;"><desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphael 2.1.0</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs><path fill="none" stroke="#000000" d="M0,0L16,16M16,0L0,16" stroke-width="3" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path></svg></i>
 	</a>
 	<nav class="mobile">
-		<? $this->widget('application.extensions.booster.widgets.TbMenu',array(
+		<?php $this->widget('application.extensions.booster.widgets.TbMenu',array(
 			'items'=> $this->menu,
 			'type'=>'nav',
 			'htmlOptions'=>array('class'=>'userMenu'),
@@ -36,7 +36,7 @@
 		<?php } ?>
 		<div class="clear"></div>
 		<div id="control-menu">
-			<? $this->widget('application.extensions.booster.widgets.TbMenu',array(
+			<?php $this->widget('application.extensions.booster.widgets.TbMenu',array(
 				'items'=> $this->menu,
 				'type'=>'tabs',
 				'htmlOptions'=>array('class'=>'userMenu'),

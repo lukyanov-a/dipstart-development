@@ -30,7 +30,7 @@ if(!$isGuest) Yii::app()->clientScript->registerScriptFile('/js/chat.js');
 				$attr = array('name' => 'salary', 'class' => 'btn btn-primary','id'=>'salary-to-chat');
 				echo  CHtml::submitButton(ProjectModule::t('Take order'), $attr);
 				CHtml::endForm();
-				?></div><?
+				?></div><?php
 		}
 		
 		if ($order->is_active) {
@@ -70,7 +70,7 @@ if(!$isGuest) Yii::app()->clientScript->registerScriptFile('/js/chat.js');
 				<?php
 				$this->renderPartial('_accessories',array('order'=>$order, 'orderId'=>$orderId, 'buttonTemplates'=>$buttonTemplates, 'role'=>'Author'));
 				?>
-			</div><?
+			</div><?php
 		}
 		else
 		{
