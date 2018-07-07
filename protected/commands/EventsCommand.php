@@ -1,8 +1,8 @@
 <?php
 class EventsCommand extends CConsoleCommand {
 	
-	const INTERVAL = 5; // »ÌÚÂ‚‡Î Á‡ÔÛÒÍ‡ ÒÍËÔÚ‡ ‚ ÏËÌÛÚ‡ı
-	const EMAILS_COUNT = 100; // ŒÚÔ‡‚ÎˇÂÏ 100 ÔËÒÂÏ Á‡ ‡Á
+	const INTERVAL = 5; // –ò–Ω—Ç–µ—Ä–≤–∞–ª –∑–∞–ø—É—Å–∫–∞ —Å–∫—Ä–∏–ø—Ç–∞ –≤ –º–∏–Ω—É—Ç–∞—Ö
+	const EMAILS_COUNT = 100; // –û—Ç–ø—Ä–∞–≤–ª—è–µ–º 100 –ø–∏—Å–µ–º –∑–∞ —Ä–∞–∑
 	
     public function run($args) {
 		$companies = Company::model()->findAll('frozen=:p',array(':p'=>'0'));
@@ -11,17 +11,17 @@ class EventsCommand extends CConsoleCommand {
 			Company::setActive($company);
 			self::executor();
 			self::manager();
-			self::send_deffered_emails();
+			self::send_deferred_emails();
 		}
     }
 			
-	// —Ó·˚ÚËÂ Û ËÒÔÓÎÌËÚÂÎˇ - ÓÚÔ‡‚ÎˇÂÚ ¯‡·ÎÓÌ Ì‡ ÂÏ‡ËÎ Û‚Â‰ÓÏÎÂÌËÂ Ó· ˝ÚÓÏ (·ÂÂÏ ËÁ ÒÔ‡‚Ó˜ÌËÍ‡)
+	// –°–æ–±—ã—Ç–∏–µ —É –∏—Å–ø–æ–ª–Ω–∏—Ç–µ–ª—è - –æ—Ç–ø—Ä–∞–≤–ª—è–µ—Ç —à–∞–±–ª–æ–Ω –Ω–∞ –µ–º–∞–∏–ª —É–≤–µ–¥–æ–º–ª–µ–Ω–∏–µ –æ–± —ç—Ç–æ–º (–±–µ—Ä–µ–º –∏–∑ —Å–ø—Ä–∞–≤–æ—á–Ω–∏–∫–∞)
 	public function executor() {
 		$usersModel = User::model()->findAllNotificationExecutors();
 		if (is_array($usersModel))
 			foreach ($usersModel as $user) {
 				foreach ($user->zakaz_executor as $zakaz) {
-					if(isset($user->profile)) $time = explode(':', $user->profile->notification_time); // ‚ÂÏˇ X, Á‡ ÍÓÚÓÓÂ Ì‡‰Ó Û‚Â‰ÓÏÎˇÚ¸ (ÍÓÎË˜ÂÒÚ‚Ó ˜‡ÒÓ‚ Ë ÏËÌÛÚ), ÙÓÏ‡Ú "5;48"
+					if(isset($user->profile)) $time = explode(':', $user->profile->notification_time); // –≤—Ä–µ–º—è X, –∑–∞ –∫–æ—Ç–æ—Ä–æ–µ –Ω–∞–¥–æ —É–≤–µ–¥–æ–º–ª—è—Ç—å (–∫–æ–ª–∏—á–µ—Å—Ç–≤–æ —á–∞—Å–æ–≤ –∏ –º–∏–Ω—É—Ç), —Ñ–æ—Ä–º–∞—Ç "5;48"
 					else $time[0] = 0;
 					if (count($time)<2) $time[1] = 0;
 					$date = date('Y-m-d H:i',strtotime($zakaz->author_informed));
@@ -41,7 +41,7 @@ class EventsCommand extends CConsoleCommand {
 					
 					// Send message executor, when completion of the point
 					foreach ($zakaz->parts as $stage) {
-						if(isset($user->profile)) $time = explode(':', $user->profile->notification_time); // ‚ÂÏˇ X, Á‡ ÍÓÚÓÓÂ Ì‡‰Ó Û‚Â‰ÓÏÎˇÚ¸ (ÍÓÎË˜ÂÒÚ‚Ó ˜‡ÒÓ‚ Ë ÏËÌÛÚ), ÙÓÏ‡Ú "5;48"
+						if(isset($user->profile)) $time = explode(':', $user->profile->notification_time); // –≤—Ä–µ–º—è X, –∑–∞ –∫–æ—Ç–æ—Ä–æ–µ –Ω–∞–¥–æ —É–≤–µ–¥–æ–º–ª—è—Ç—å (–∫–æ–ª–∏—á–µ—Å—Ç–≤–æ —á–∞—Å–æ–≤ –∏ –º–∏–Ω—É—Ç), —Ñ–æ—Ä–º–∞—Ç "5;48"
 						else $time[0] = 0;
 						if (count($time)<2) $time[1] = 0;
 						$date = date('Y-m-d H:i',strtotime($stage->date));
@@ -73,24 +73,24 @@ class EventsCommand extends CConsoleCommand {
 		}
 	}
 	
-	//—ÓÁ‰‡ÂÚ ÒÓ·˚ÚËÂ Û ÏÂÌÂ‰ÊÂ‡ ÍÓ„‰‡ Ì‡ÒÚÛÔËÎÓ ‚ÂÏˇ
+	//–°–æ–∑–¥–∞–µ—Ç —Å–æ–±—ã—Ç–∏–µ —É –º–µ–Ω–µ–¥–∂–µ—Ä–∞ –∫–æ–≥–¥–∞ –Ω–∞—Å—Ç—É–ø–∏–ª–æ –≤—Ä–µ–º—è
 	public function manager() {
 		Yii::import('application.modules.project.components.EventHelper');
-		// ƒ‡Ú‡ ËÌÙÓÏËÓ‚‡ÌËˇ ‡‰ÏËÌËÒÚ‡ÚÓ‡
+		// –î–∞—Ç–∞ –∏–Ω—Ñ–æ—Ä–º–∏—Ä–æ–≤–∞–Ω–∏—è –∞–¥–º–∏–Ω–∏—Å—Ç—Ä–∞—Ç–æ—Ä–∞
 		$projectsModel = Zakaz::model()->findAll('status<>:status', array(':status'=>5));
 		$this->processEventItems($projectsModel, 'manager_informed', 'managerInformed');
 		
-		// ” ˜‡ÒÚË Á‡Í‡Á‡ ÌÂÁ‡‚Â¯ÂÌÌÓ„Ó Á‡Í‡Á‡
+		// –£ —á–∞—Å—Ç–∏ –∑–∞–∫–∞–∑–∞ –Ω–µ–∑–∞–≤–µ—Ä—à–µ–Ω–Ω–æ–≥–æ –∑–∞–∫–∞–∑–∞
 		$projectsPartsModel = ZakazParts::model()->findAllByAttributes(array('status_id'=>'1'));
 		$this->processEventItems($projectsPartsModel, 'date', 'stageExpired', 'proj_id');
 
-		// ƒ‡Ú‡ ËÌÙÓÏËÓ‚‡ÌËˇ ÏÂÌÂ‰ÊÂ‡
+		// –î–∞—Ç–∞ –∏–Ω—Ñ–æ—Ä–º–∏—Ä–æ–≤–∞–Ω–∏—è –º–µ–Ω–µ–¥–∂–µ—Ä–∞
 		$profileModel = Profile::model()->findAll();
 		$this->processEventItems($profileModel, 'manager_informed', 'salesManagerInformed', 'user_id');
 	}
 	
-	//ŒÚÔ‡‚ÎˇÂÚ n ÔËÒÂÏ ËÁ ÒÔËÒÍ‡ ‰Îˇ ‡ÒÒ˚ÎÍË
-	public function send_deffered_emails(){
+	//–û—Ç–ø—Ä–∞–≤–ª—è–µ—Ç n –ø–∏—Å–µ–º –∏–∑ —Å–ø–∏—Å–∫–∞ –¥–ª—è —Ä–∞—Å—Å—ã–ª–∫–∏
+	public function send_deferred_emails(){
 		$emails = Emails::model()->sending_round(self::EMAILS_COUNT)->findAll();
 		foreach($emails as $email){
 			if($email->send()) $email->delete();

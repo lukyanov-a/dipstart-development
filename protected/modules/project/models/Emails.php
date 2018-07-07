@@ -8,6 +8,8 @@
  * @property integer $dt
  */
 
+use PHPMailer\PHPMailer\PHPMailer;
+
 class Emails extends CActiveRecord {
 
 	// типы уведомлений (системных сообщений)
@@ -76,6 +78,8 @@ class Emails extends CActiveRecord {
 	
 	public 	$from_id;
 	public 	$to_id;
+
+	private $_PHPMailer;
 	
 	public function tableName() {
 		return Company::getId().'_Emails';
@@ -164,17 +168,60 @@ class Emails extends CActiveRecord {
 	{
 		return parent::model($className);
 	}
-	
-	public function send(){
-		$subject='=?UTF-8?B?'.base64_encode($this->subject).'?=';
-		$support = Company::getSupportEmail();
-		if (strlen($support) < 2) $support = 'no-reply@admintrix.com';
-		$from = '=?UTF-8?B?'.base64_encode(Company::getName()).'?= <'.$support.'>';
-		$headers =
-			"MIME-Version: 1.0\r\n".
-			"Content-Type: text/html; charset=UTF-8\r\n".
-			"From: $from\r\n";
-		return mail( $this->to, $subject, $this->body,$headers);
+
+	private function getPHPMailer()
+    {
+        if (!isset($this->_PHPMailer)) {
+            $mailer = new PHPMailer();
+            $mailer->CharSet = 'UTF-8';
+            $mailer->isSMTP();
+            $mailer->SMTPAuth = true;
+            $mailer->isHTML(true);
+            $this->_PHPMailer = $mailer;
+        }
+        return $this->_PHPMailer;
+    }
+
+    private function sendByPHPMailer()
+    {
+        $mailer = $this->getPHPMailer();
+        $server = SmtpServer::getActual();
+        if (isset($server)) {
+            $mailer->Host = $server->address;
+            $mailer->Port = $server->port;
+            $mailer->Username = $server->login;
+            $mailer->Password = $server->password;
+            if ($server->secure)
+                $mailer->SMTPSecure = 'tls'; // Enable TLS encryption, `ssl` also accepted
+            else
+                $mailer->SMTPSecure = '';
+
+            $mailer->setFrom($server->login, Company::getName());
+            $mailer->addAddress($this->to);
+            $mailer->Subject = $this->subject;
+            $mailer->Body    = $this->body;
+            $result =  $mailer->send();
+            $server->counter += 1;
+            $server->save();
+            return $result;
+        } else return false;
+    }
+
+	public function send()
+    {
+        if (isset(Yii::app()->params['use_smtp']) && Yii::app()->params['use_smtp']) {
+            $this->sendByPHPMailer();
+        } else {
+            $subject = '=?UTF-8?B?' . base64_encode($this->subject) . '?=';
+            $support = Company::getSupportEmail();
+            if (strlen($support) < 2) $support = 'no-reply@admintrix.com';
+            $from = '=?UTF-8?B?' . base64_encode(Company::getName()) . '?= <' . $support . '>';
+            $headers =
+                "MIME-Version: 1.0\r\n" .
+                "Content-Type: text/html; charset=UTF-8\r\n" .
+                "From: $from\r\n";
+            return mail($this->to, $subject, $this->body, $headers);
+        }
 	}
 	
     public function sendTo($to, $subject, $body, $type_id = 0, $deffer = false)
@@ -296,16 +343,5 @@ class Emails extends CActiveRecord {
 			$this->save();
 		else
 			$this->send();
-		/*if (strlen($this->support) < 2) $this->support = 'no-reply@'.$_SERVER['SERVER_NAME'];
-
-		$subject='=?UTF-8?B?'.base64_encode(Yii::t('site', $subject)).'?=';
-		$from = '=?UTF-8?B?'.base64_encode($this->company).'?= <'.$this->support.'>';
-		$headers =
-			"MIME-Version: 1.0\r\n".
-			"Content-Type: text/html; charset=UTF-8\r\n".
-			"From: $from\r\n";
-			
-		$result = mail( $to, $subject,$body,$headers);
-		*/
 	}			
 }

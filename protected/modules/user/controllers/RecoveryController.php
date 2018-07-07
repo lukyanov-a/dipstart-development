@@ -75,11 +75,11 @@ class RecoveryController extends Controller
 						$email->to_id = $form->user_id; //  = $user->id;
 						
 						$rec   = Templates::model()->findAll("`type_id`='$type_id'");
-						$id = Campaign::getId();
-						$email->campaign = Campaign::getName();
+						//$id = Company::getId();
+						$email->campaign = Company::getName();
 						$email->name = $user->full_name;
 						$email->login= $user->username;
-						$email->password= $soucePassword;
+						//$email->password= $soucePassword;
 						
 						$email->page_psw = $activation_url;
 					

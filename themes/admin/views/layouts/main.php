@@ -57,6 +57,7 @@ switch ($role){
 			array('label'=>Yii::t('site','Profile fields settings'), 'url'=>array('/user/profileField/admin')),
 			array('label'=>Yii::t('site','Rights'), 'url'=>array('/rights')),
 			array('label'=>Yii::t('site','Fields lists'), 'url'=>array('/catalog/admin')),
+            array('label'=>Yii::t('site','SMTP-servers'), 'url'=>array('/smtpServers')),
 			array('label'=>Yii::t('site','Delivery'), 'url'=>array('/project/emails')),
 		));
 		if(count($itemprofile)<2)

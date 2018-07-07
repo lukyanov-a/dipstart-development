@@ -50,7 +50,7 @@ Yii::app()->clientScript->registerScriptFile('/js/common-masonry.js', CClientScr
 							</div>
 							<a href="#" class="dell-step"><?=Yii::t('site','Delete step')?></a>
 						</div>
-					<? }
+					<?php }
 				} else { ?>
 					<div class="step form-item">
 						<div>
