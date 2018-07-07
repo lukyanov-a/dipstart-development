@@ -148,6 +148,7 @@ return array(
 	// using Yii::app()->params['paramName']
 	'params'=>array(
 		'rpswd' => 'rpswd',
+        'use_smtp' => true,
 		// this is used in contact page
 		//'adminEmail'=>'info@dipstart.ru',
 		//'supportEmail'=>'ekomixds@mail.ru',
