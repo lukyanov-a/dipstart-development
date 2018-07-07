@@ -10,7 +10,7 @@
  * @property string  $login    логин
  * @property string  $password пароль
  * @property integer $limit    писем в час
- * @property integer $start    начало текущего диапозона
+ * @property string  $start    начало текущего диапозона
  * @property integer $counter  писем отправлено
  */
 
@@ -128,9 +128,19 @@ class SmtpServer extends CActiveRecord
     public static function getActual()
     {
         $model = self::$_actual;
-        if (isset($model) && $model->counter < $model->limit)
+        if (isset($model) && ($model->counter < $model->limit || time() > strtotime($model->start) + 1*60*60))
             return $model;
         else
             return self::$_actual = self::model()->find('start + INTERVAL 1 HOUR < NOW() OR counter < `limit`');
+    }
+
+    public function increaseCounter()
+    {
+        if (time() > strtotime($this->start) + 1*60*60) {
+            $this->start = date('Y-m-d H:i:s');
+            $this->counter = 0;
+        }
+        $this->counter += 1;
+        $this->save();
     }
 }

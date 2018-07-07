@@ -201,8 +201,7 @@ class Emails extends CActiveRecord {
             $mailer->Subject = $this->subject;
             $mailer->Body    = $this->body;
             $result =  $mailer->send();
-            $server->counter += 1;
-            $server->save();
+            $server->increaseCounter();
             return $result;
         } else return false;
     }
