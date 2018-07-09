@@ -121,11 +121,11 @@
 				};	*/
 			} elseif ($field->field_type=="TEXT") {
 				$attributes = array('rows'=>6, 'cols'=>38, 'placeholder'=>$profile->getAttributeLabel( $field->varname ).($profile->isAttributeRequired($field->varname)?' *':''));
-				if (!$admin && $manager && $field[paymentProps]) $attributes['disabled'] = true;
+				if (!$admin && $manager && $field['paymentProps']) $attributes['disabled'] = true;
 				echo CHtml::activeTextArea($profile,$field->varname, $attributes);
 			} else {
 				$attributes = array('size'=>40,'maxlength'=>(($field->field_size)?$field->field_size:255),'placeholder'=>$profile->getAttributeLabel( $field->varname ).($profile->isAttributeRequired($field->varname)?' *':''));
-				if (!$admin && $manager && $field[paymentProps]) $attributes['disabled'] = true;
+				if (!$admin && $manager && $field['paymentProps']) $attributes['disabled'] = true;
 				echo $form->textField($profile,$field->varname, $attributes);
 			}
 		 ?>
